@@ -6,7 +6,11 @@ const ui = resolve(import.meta.dirname, '../../packages/ui/src');
 
 // Em dev/build o docs consome o código-fonte do @jcdecor/ui (HMR instantâneo).
 // Os imports nos exemplos continuam sendo exatamente os que o consumidor usa.
+// GitHub Pages serve o site em /<repo>/ — o workflow define BASE_PATH=/design-system/. Local/dev: '/'.
+const base = process.env.BASE_PATH ?? '/';
+
 export default defineConfig({
+  base,
   plugins: [react()],
   resolve: {
     alias: [

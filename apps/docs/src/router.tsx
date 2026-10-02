@@ -20,4 +20,7 @@ export const router = createBrowserRouter([
       { path: '*', Component: NotFound },
     ],
   },
-]);
+], {
+  // Vite injeta o base path (ex.: /design-system/ no GitHub Pages)
+  basename: import.meta.env.BASE_URL.replace(/\/$/, '') || '/',
+});
