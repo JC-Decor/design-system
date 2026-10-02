@@ -92,7 +92,7 @@ export function DocsShell() {
             </ActionIcon>
           </Tooltip>
           <Tooltip label="Repositório">
-            <ActionIcon component="a" href="https://github.com/" target="_blank" size="lg" className={`${classes.headerIcon} ${classes.headerExtra}`} aria-label="Repositório">
+            <ActionIcon component="a" href="https://github.com/JC-Decor/design-system" target="_blank" size="lg" className={`${classes.headerIcon} ${classes.headerExtra}`} aria-label="Repositório">
               <IconBrandGithub size={20} />
             </ActionIcon>
           </Tooltip>
