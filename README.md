@@ -36,11 +36,17 @@ npm login
 npm run release              # build + publish
 ```
 
-## Deploy da documentação (Railway)
+## Documentação (GitHub Pages)
 
-O `Dockerfile` faz o build do docs e serve os arquivos estáticos com Caddy (fallback SPA, porta `$PORT`). Basta criar um serviço no Railway apontando para este repositório — o `railway.json` já configura o builder.
+A documentação é publicada em **https://jc-decor.github.io/design-system/** a cada push na `main`, pelo workflow
+[`.github/workflows/docs.yml`](.github/workflows/docs.yml): roda testes e typecheck, gera o build com
+`BASE_PATH=/design-system/` e publica no GitHub Pages. Para disparar manualmente, use **Actions → Docs (GitHub Pages) → Run workflow**.
+
+Para testar o build de produção localmente com o mesmo caminho base:
 
 ```bash
-docker build -t jcdecor-ds-docs .
-docker run -p 8080:8080 jcdecor-ds-docs
+BASE_PATH=/design-system/ npm run build -w docs
+BASE_PATH=/design-system/ npm run preview -w docs   # → http://localhost:4173/design-system/
 ```
+
+O build copia `index.html` para `404.html`, então links diretos (ex.: `/design-system/mantine/button`) funcionam mesmo sem rewrite no servidor.
