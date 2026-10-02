@@ -1,0 +1,120 @@
+/* Navigation — Anchor, Breadcrumbs, Burger, NavLink, Pagination, Stepper, TableOfContents, Tabs, Tree */
+
+/* ---------- Tabs ---------- */
+.tabs {
+  --tab-border-color: var(--ds-border-soft);
+  --tab-hover-color: var(--ds-surface-2);
+}
+.tab {
+  font-weight: 500;
+  color: var(--ds-text-2);
+}
+/* Texto primário só nas variantes sem preenchimento: em `pills` a aba ativa já tem fundo Horizon. */
+.tabs:not([data-variant='pills']) .tab[data-active] {
+  color: var(--ds-primary);
+}
+.tabs[data-variant='pills'] .tab[data-active] {
+  color: var(--tab-color);
+}
+:root[data-mantine-color-scheme='dark'] .tabs[data-variant='pills'] .tab[data-active] {
+  color: var(--mantine-color-dark-8);
+}
+
+/* ---------- Anchor ---------- */
+.anchor {
+  color: var(--ds-link);
+  font-weight: 500;
+}
+
+/* ---------- Burger ---------- */
+.burger {
+  --burger-color: var(--ds-text);
+}
+
+/* ---------- NavLink ---------- */
+.navLink {
+  border-radius: var(--ds-radius-sm);
+  font-weight: 500;
+}
+.navLink[data-active] {
+  font-weight: 600;
+}
+:root[data-mantine-color-scheme='dark'] .navLink[data-variant='filled'][data-active] {
+  color: var(--mantine-color-dark-8);
+}
+@media (hover: hover) {
+  .navLink:hover:not([data-active]) {
+    background-color: var(--ds-surface-2);
+  }
+}
+
+/* ---------- Pagination ---------- */
+.paginationControl:not([data-active]) {
+  border-color: var(--ds-border-soft);
+  background-color: var(--ds-surface);
+  color: var(--ds-text);
+}
+@media (hover: hover) {
+  .paginationControl:not([data-active]):hover:not(:disabled, [data-disabled]) {
+    background-color: var(--ds-surface-2);
+  }
+}
+.paginationControl[data-active] {
+  font-weight: 600;
+}
+/* No escuro o preenchimento é o tom 400 (claro): texto escuro para manter contraste ≥ 4,5:1. */
+:root[data-mantine-color-scheme='dark'] .paginationControl[data-active] {
+  color: var(--mantine-color-dark-8);
+}
+
+/* ---------- Stepper ---------- */
+.stepper {
+  --stepper-outline-color: var(--ds-border-soft);
+}
+.stepIcon:not([data-completed]) {
+  color: var(--ds-text-2);
+}
+:root[data-mantine-color-scheme='dark'] .stepIcon,
+:root[data-mantine-color-scheme='dark'] .stepCompletedIcon {
+  --stepper-icon-color: var(--mantine-color-dark-8);
+}
+.stepLabel {
+  font-weight: 600;
+  color: var(--ds-text);
+}
+.stepDescription {
+  color: var(--ds-text-3);
+}
+
+/* ---------- TableOfContents ---------- */
+.tocControl:not([data-active]) {
+  color: var(--ds-text-2);
+}
+@media (hover: hover) {
+  .tocControl:not([data-active]):not([data-variant='none']):hover {
+    background-color: var(--ds-surface-2);
+    color: var(--ds-text);
+  }
+}
+.tocControl[data-active] {
+  font-weight: 500;
+}
+
+/* ---------- Tree ---------- */
+.tree {
+  --tree-line-color: var(--ds-border-soft);
+}
+.treeLabel {
+  border-radius: var(--ds-radius-sm);
+  transition: background-color 120ms ease;
+}
+@media (hover: hover) {
+  .treeLabel:hover:not([data-selected]) {
+    background-color: var(--ds-surface-2);
+  }
+}
+.treeLabel[data-selected] {
+  background-color: var(--ds-primary-soft);
+  color: var(--ds-primary);
+  font-weight: 500;
+}

@@ -1,0 +1,20 @@
+import { Stack } from '@jcdecor/ui';
+import { ChatMessage, type ChatUser } from '@jcdecor/ui/chat';
+
+const ana: ChatUser = {
+  id: 'ana',
+  name: 'Ana · Atendimento JC Decor',
+  avatar: 'https://i.pravatar.cc/80?img=47',
+};
+
+export default function Demo() {
+  return (
+    <Stack gap="md">
+      <ChatMessage system>Ana entrou na conversa</ChatMessage>
+      <ChatMessage author={ana} createdAt={new Date(2026, 9, 2, 11, 0)}>
+        Oi! Vou assumir seu atendimento a partir de agora.
+      </ChatMessage>
+      <ChatMessage system>Atendimento transferido para o setor de Instalação</ChatMessage>
+    </Stack>
+  );
+}

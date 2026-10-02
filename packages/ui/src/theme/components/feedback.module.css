@@ -1,0 +1,82 @@
+/* Feedback — Alert, EmptyState, Loader, Notification, Progress, RingProgress, SemiCircleProgress, Skeleton */
+
+/* ---------- Alert ---------- */
+.alert {
+  border-radius: var(--ds-radius);
+}
+.alertTitle {
+  font-weight: 600;
+}
+/* Corpo em --ds-text (o Mantine usa preto/branco puros); filled e white mantêm a cor própria. */
+.alertMessage:not([data-variant='filled'], [data-variant='white']) {
+  color: var(--ds-text);
+}
+
+/* Filled no escuro: o fundo é o tom 400 (claro), então o texto passa a ser escuro (≥ 4,5:1). */
+:root[data-mantine-color-scheme='dark'] .alert[data-variant='filled'] .alertWrapper {
+  --alert-color: var(--mantine-color-dark-8);
+}
+
+/* ---------- Notification ---------- */
+.notification {
+  background-color: var(--ds-surface);
+  box-shadow: var(--ds-shadow-md);
+  border: 1px solid var(--ds-border-soft);
+}
+.notificationTitle {
+  font-weight: 600;
+  color: var(--ds-text);
+}
+.notificationDescription {
+  color: var(--ds-text-2);
+}
+/* No escuro o ícone fica sobre o tom 400 da cor: texto escuro para contraste. */
+:root[data-mantine-color-scheme='dark'] .notificationIcon {
+  color: var(--mantine-color-dark-8);
+}
+
+/* ---------- Progress ---------- */
+:root[data-mantine-color-scheme] .progress {
+  background-color: var(--ds-surface-2);
+  box-shadow: inset 0 0 0 1px var(--ds-border-soft);
+}
+.progressLabel {
+  font-weight: 600;
+}
+:root[data-mantine-color-scheme='dark'] .progressLabel {
+  color: var(--mantine-color-dark-8);
+}
+
+/* ---------- RingProgress / SemiCircleProgress ---------- */
+:root[data-mantine-color-scheme] .ringCurve {
+  --rp-curve-root-color: var(--ds-border-soft);
+}
+:root[data-mantine-color-scheme] .semiCircle {
+  --scp-empty-segment-color: var(--ds-border-soft);
+}
+.semiCircleLabel {
+  font-weight: 600;
+  color: var(--ds-text);
+}
+
+/* ---------- Skeleton ---------- */
+:root[data-mantine-color-scheme='light'] .skeleton[data-visible]::after {
+  background-color: var(--mantine-color-gray-2);
+}
+:root[data-mantine-color-scheme='dark'] .skeleton[data-visible]::after {
+  background-color: var(--mantine-color-dark-4);
+}
+
+/* ---------- EmptyState ---------- */
+:root[data-mantine-color-scheme] .emptyIndicator[data-with-background] {
+  --empty-state-indicator-default-bg: var(--ds-surface-2);
+}
+:root[data-mantine-color-scheme='dark'] .emptyState[data-variant='filled'] .emptyIndicator {
+  color: var(--mantine-color-dark-8);
+}
+.emptyTitle {
+  color: var(--ds-text);
+}
+.emptyDescription {
+  color: var(--ds-text-2);
+}

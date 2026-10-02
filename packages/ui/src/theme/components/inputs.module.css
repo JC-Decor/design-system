@@ -1,0 +1,206 @@
+/* Inputs — Input/InputWrapper (base de todos os campos), Checkbox, Radio, Switch, SegmentedControl… */
+.input {
+  --input-bd: var(--ds-border);
+  --input-bd-focus: var(--ds-primary);
+  background-color: var(--ds-surface);
+  color: var(--ds-text);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.input:focus,
+.input:focus-within {
+  border-color: var(--ds-primary);
+  box-shadow: 0 0 0 3px var(--ds-primary-soft);
+}
+.input[data-error] {
+  border-color: var(--ds-error);
+}
+.input[data-error]:focus,
+.input[data-error]:focus-within {
+  box-shadow: 0 0 0 3px var(--ds-error-bg);
+}
+[data-success] > .input {
+  border-color: var(--ds-success);
+}
+[data-success] > .input:focus,
+[data-success] > .input:focus-within {
+  box-shadow: 0 0 0 3px var(--ds-success-bg);
+}
+.input[data-variant='unstyled'],
+.input[data-variant='unstyled']:focus,
+.input[data-variant='unstyled']:focus-within {
+  --input-bd: transparent;
+  border-color: transparent;
+  background-color: transparent;
+  box-shadow: none;
+}
+.input::placeholder {
+  color: var(--ds-text-3);
+}
+.label {
+  font-size: var(--type-subheadline-sm);
+  font-weight: 500;
+  color: var(--ds-text-2);
+  margin-bottom: 4px;
+}
+.description {
+  color: var(--ds-text-3);
+}
+.segmentedRoot {
+  background-color: var(--ds-surface-2);
+}
+.segmentedIndicator {
+  box-shadow: var(--ds-shadow-sm);
+}
+.segmentedLabel {
+  font-weight: 500;
+}
+
+/* NativeSelect — seta neutra e opções do menu nativo nas cores do tema (no escuro o SO usaria branco) */
+.nativeSelect option,
+.nativeSelect optgroup {
+  background-color: var(--ds-surface);
+  color: var(--ds-text);
+}
+.nativeSelectSection {
+  color: var(--ds-text-3);
+}
+
+/* Checkbox / Radio — borda desmarcada 3:1 */
+[data-mantine-color-scheme] .checkInput:not([data-checked]):not(:checked):not([data-indeterminate]):not(:disabled):not([data-disabled]):not([data-error]) {
+  border-color: var(--ds-border);
+}
+/* Checkbox.Card / Radio.Card marcados: borda primária */
+[data-mantine-color-scheme] .selectCard[data-with-border] {
+  border-color: var(--ds-border-soft);
+  background-color: var(--ds-surface);
+  transition: border-color 0.15s, background-color 0.15s;
+}
+[data-mantine-color-scheme] .selectCard[data-with-border][data-checked] {
+  border-color: var(--ds-primary);
+  background-color: var(--ds-primary-soft);
+}
+
+/* Switch — no escuro o trilho desligado (dark-5) some na superfície: usa --ds-border (3:1) */
+[data-mantine-color-scheme='dark'] .switchTrack {
+  --switch-bg: var(--ds-border);
+  --switch-disabled-color: var(--ds-surface-2);
+}
+
+/* Chip — outline marcado ganha o fundo suave da cor (--chip-bg vem do resolver light, ver inputs.ts) */
+.chipLabel {
+  font-weight: 500;
+}
+[data-variant='outline'] > .chipLabel[data-checked]:not([data-disabled]) {
+  background-color: var(--chip-bg);
+}
+@media (hover: hover) {
+  [data-variant='outline'] > .chipLabel[data-checked]:not([data-disabled]):hover {
+    background-color: var(--chip-hover);
+  }
+}
+
+/* Fieldset como card */
+[data-mantine-color-scheme] .fieldset[data-variant='default'] {
+  border-color: var(--ds-border-soft);
+  background-color: var(--ds-surface);
+}
+[data-mantine-color-scheme] .fieldset[data-variant='filled'] {
+  border-color: var(--ds-border-soft);
+  background-color: var(--ds-surface-2);
+}
+.fieldsetLegend {
+  font-size: var(--type-subheadline-sm);
+  font-weight: 600;
+  color: var(--ds-text);
+  padding-inline: 4px;
+}
+.fieldset[data-variant='unstyled'] .fieldsetLegend {
+  padding-inline: 0;
+}
+
+/* PinInput */
+.pinInput {
+  font-weight: 600;
+}
+
+/* Slider / RangeSlider — trilho soft, thumb branco com borda primária nos dois temas, balão Obsidian */
+[data-mantine-color-scheme] .sliderRoot {
+  --slider-track-bg: var(--ds-border-soft);
+}
+[data-mantine-color-scheme] .sliderThumb {
+  color: var(--slider-color);
+  border-color: var(--slider-color);
+  background-color: var(--mantine-color-white);
+  box-shadow: var(--ds-shadow-sm);
+}
+.sliderThumb:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--ds-primary-soft), var(--ds-shadow-sm);
+}
+[data-mantine-color-scheme] .sliderLabel {
+  background-color: var(--mantine-color-obsidian-6);
+  color: var(--mantine-color-white);
+  font-weight: 600;
+  padding: 2px 8px;
+}
+[data-mantine-color-scheme='dark'] .sliderLabel {
+  background-color: var(--ds-surface-2);
+  color: var(--ds-text);
+  box-shadow: var(--ds-shadow-sm);
+}
+.sliderMarkLabel {
+  color: var(--ds-text-3);
+}
+
+/* AngleSlider */
+[data-mantine-color-scheme] .angleRoot {
+  background-color: var(--ds-surface-2);
+  box-shadow: inset 0 0 0 1px var(--ds-border-soft);
+}
+.angleRoot:focus-within {
+  outline: none;
+  box-shadow: inset 0 0 0 1px var(--ds-primary), 0 0 0 3px var(--ds-primary-soft);
+}
+[data-mantine-color-scheme] .angleThumb::before {
+  background-color: var(--ds-primary);
+}
+.angleLabel {
+  font-weight: 600;
+  color: var(--ds-text);
+}
+
+/* Rating — âmbar electric (claro 4 / escuro 3); vazias em border-soft */
+.rating {
+  --jc-rating-color: var(--mantine-color-electric-4);
+}
+[data-mantine-color-scheme='dark'] .rating {
+  --jc-rating-color: var(--mantine-color-electric-3);
+}
+[data-mantine-color-scheme] .ratingStar:not([data-filled]) {
+  fill: var(--ds-border-soft);
+  stroke: var(--ds-border-soft);
+}
+[data-mantine-color-scheme='dark'] .ratingStar:not([data-filled]) {
+  fill: var(--ds-border);
+  stroke: var(--ds-border);
+}
+
+/* ColorPicker / AlphaSlider / HueSlider */
+.colorSlider,
+.colorSliderOverlay {
+  border-radius: var(--mantine-radius-xs);
+}
+.colorThumb {
+  box-shadow: var(--ds-shadow-sm), 0 0 1px rgba(0, 0, 0, 0.6);
+}
+.colorSlider:focus:focus-visible .colorThumb,
+.colorSaturation:focus:focus-visible .colorThumb {
+  outline-color: var(--ds-primary);
+}
+.colorSwatch {
+  border-radius: var(--mantine-radius-xs);
+}
+.colorSwatch:focus-visible {
+  outline: 2px solid var(--ds-primary);
+  outline-offset: 2px;
+}

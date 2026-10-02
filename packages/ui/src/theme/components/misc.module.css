@@ -1,0 +1,22 @@
+/* Miscellaneous — Paper, Divider, ScrollArea, Marquee… */
+.paper {
+  --paper-border-color: var(--ds-border-soft);
+  background-color: var(--ds-surface);
+  color: var(--ds-text);
+}
+.divider {
+  --divider-color: var(--ds-border-soft);
+}
+
+/* ScrollArea */
+.scrollbar:hover,
+.scrollbar:active {
+  background-color: transparent;
+}
+.scrollThumb,
+.scrollbar:hover > .scrollThumb {
+  background-color: var(--ds-border);
+}
+.scrollbar:active > .scrollThumb {
+  background-color: var(--ds-text-3);
+}

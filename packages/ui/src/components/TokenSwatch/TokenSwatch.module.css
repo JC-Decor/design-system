@@ -1,0 +1,50 @@
+.swatch {
+  width: 150px;
+  border: 1px solid var(--ds-border-soft);
+  border-radius: var(--ds-radius-sm);
+  overflow: hidden;
+  background: var(--ds-surface);
+  padding: 0;
+  text-align: left;
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+.swatch:hover {
+  box-shadow: var(--ds-shadow-md);
+  transform: translateY(-1px);
+}
+.color {
+  height: 72px;
+}
+.info {
+  padding: var(--sp-8) var(--sp-12);
+}
+.name {
+  font-weight: 600;
+  font-size: 13px;
+}
+.hex {
+  font-size: 12px;
+  color: var(--ds-text-3);
+  font-variant-numeric: tabular-nums;
+}
+.ramp {
+  display: flex;
+  border-radius: var(--ds-radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--ds-border-soft);
+}
+.step {
+  flex: 1;
+  height: 44px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 10px;
+  padding: 0 0 3px;
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+}

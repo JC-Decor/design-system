@@ -1,0 +1,48 @@
+/* Base global do DS JC Decor (equivalente ao bloco "Base" do ds.css). */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+::selection {
+  background: var(--dc-electric);
+  color: var(--dc-obsidian);
+}
+:focus-visible {
+  outline-color: var(--ds-primary);
+}
+
+/* Grid do Figma: desktop 12col/24/64 · tablet (<1366) 8col/24/32 · mobile (<768) 4col/16/20.
+   :root:root vence a especificidade das variáveis injetadas pelo MantineProvider. */
+@media (max-width: 1365.98px) {
+  :root:root { --grid-margin: 32px; }
+}
+@media (max-width: 767.98px) {
+  :root:root { --grid-margin: 20px; --grid-gap: 16px; }
+}
+
+/* Utilitários de container/grid do ds.css (opcionais) */
+.ds-container {
+  max-width: var(--grid-max);
+  margin-inline: auto;
+  padding-inline: var(--grid-margin);
+  box-sizing: content-box;
+}
+.ds-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--grid-gap);
+}
+@media (max-width: 1365.98px) {
+  .ds-grid { grid-template-columns: repeat(8, 1fr); }
+}
+@media (max-width: 767.98px) {
+  .ds-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Tooltip dos gráficos (@mantine/charts) sobre a superfície do tema */
+.mantine-ChartTooltip-tooltip {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border-soft);
+  box-shadow: var(--ds-shadow-md);
+  border-radius: var(--ds-radius-sm);
+}

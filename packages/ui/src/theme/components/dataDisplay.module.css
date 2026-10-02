@@ -1,0 +1,109 @@
+/* Data display — Accordion, Avatar, Badge, Card, DataList, Indicator, Kbd, Spoiler, Timeline… */
+.badge {
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* Accordion: divisores suaves, rótulo 600, chevron em texto-3 */
+.accordionItem {
+  --item-border-color: var(--ds-border-soft);
+  --item-filled-color: var(--ds-surface-2);
+}
+.accordionItem[data-active]:where([data-variant='separated']) {
+  background-color: var(--ds-surface);
+}
+.accordionControl {
+  color: var(--ds-text);
+}
+@media (hover: hover) {
+  .accordionControl:where(:not(:disabled, [data-disabled])):hover {
+    background-color: var(--ds-surface-2);
+  }
+}
+.accordionLabel {
+  font-weight: 600;
+  font-size: var(--type-subheadline-rg);
+}
+.accordionChevron {
+  color: var(--ds-text-3);
+}
+.accordionContent {
+  color: var(--ds-text-2);
+  font-size: var(--type-subheadline-sm);
+  line-height: 1.6;
+}
+
+/* Avatar.Group: o anel acompanha a superfície (cards/painéis), não o fundo da página */
+.avatar:where([data-within-group]) {
+  border-color: var(--ds-surface);
+  background: var(--ds-surface);
+}
+
+/* DataList: divisor suave, rótulo texto-3, valor texto */
+.dataList[data-with-divider] > * {
+  border-color: var(--ds-border-soft);
+}
+.dataListLabel {
+  color: var(--ds-text-3);
+}
+.dataListValue {
+  color: var(--ds-text);
+  font-weight: 500;
+}
+
+/* Indicator: anel na cor da superfície, contador com peso 600 */
+.indicator {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.indicator:where([data-with-border]) {
+  border-color: var(--ds-surface);
+}
+
+/* Kbd: tecla em surface-2 com borda da marca */
+.kbd {
+  font-family: var(--mantine-font-family-monospace);
+  font-weight: 600;
+  color: var(--ds-text-2);
+  background-color: var(--ds-surface-2);
+  border-color: var(--ds-border-soft);
+  border-bottom-color: var(--ds-border);
+  border-radius: 6px;
+}
+
+/* Spoiler: controle como link da marca */
+.spoilerControl {
+  color: var(--ds-link);
+  font-weight: 600;
+  font-size: var(--type-subheadline-sm);
+}
+
+/* Timeline: trilho suave, marcador sobre a superfície */
+.timeline {
+  --tl-color: var(--mantine-primary-color-filled);
+}
+.timelineItem {
+  --item-border-color: var(--ds-border-soft);
+}
+.timelineBullet {
+  background-color: var(--ds-surface);
+  border-color: var(--ds-border-soft);
+  color: var(--ds-text-3);
+}
+.timelineBullet:where([data-active]) {
+  border-color: var(--tli-color, var(--tl-color));
+}
+.timelineBullet:where([data-active][data-with-child]) {
+  background-color: var(--tli-color, var(--tl-color));
+  color: var(--tl-icon-color, var(--mantine-color-white));
+}
+.timelineTitle {
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--ds-text);
+}
+/* No escuro o primário (horizon.4) é claro: ícone escuro nos marcadores sem cor própria */
+:where([data-mantine-color-scheme='dark']) .timeline:not([style*='--tl-color']) .timelineItem:not([style*='--tli-color']) .timelineBullet:where([data-active][data-with-child]) {
+  color: var(--mantine-primary-color-contrast);
+}

@@ -1,0 +1,208 @@
+.header {
+  background: var(--dc-obsidian) !important;
+  border: 0 !important;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-16);
+  padding-inline: var(--sp-16) var(--sp-16);
+  color: #fff;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-8);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 18px;
+  white-space: nowrap;
+}
+.logo {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--dc-electric);
+  color: var(--dc-obsidian);
+  font-size: 13px;
+  font-weight: 800;
+}
+.dsLabel {
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--dc-obsidian-200);
+  padding-inline-start: var(--sp-8);
+  border-inline-start: 1px solid rgba(255, 255, 255, 0.24);
+}
+@media (max-width: 30em) {
+  .dsLabel { display: none; }
+}
+.version {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--dc-electric);
+  border: 1px solid rgba(247, 215, 89, 0.4);
+  border-radius: 99px;
+  padding: 1px 8px;
+}
+.search {
+  margin-inline-start: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-8);
+  width: 260px;
+  padding: 7px 10px 7px 12px;
+  border-radius: var(--ds-radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--dc-obsidian-300);
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+.search:hover {
+  border-color: rgba(255, 255, 255, 0.32);
+}
+.search kbd {
+  margin-inline-start: auto;
+  font-family: inherit;
+  font-size: 11px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 0 5px;
+}
+.headerIcon {
+  color: #fff !important;
+}
+.headerIcon:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+.navbar {
+  padding: var(--sp-16) var(--sp-12) var(--sp-40);
+}
+.groupLabel {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ds-text-3);
+  padding: var(--sp-16) var(--sp-12) var(--sp-4);
+}
+.groupToggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 6px 12px;
+  border-radius: var(--ds-radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ds-text);
+}
+.groupToggle:hover {
+  background: var(--ds-surface-2);
+}
+.groupCount {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ds-text-3);
+  background: var(--ds-surface-2);
+  border-radius: 99px;
+  padding: 0 6px;
+}
+.groupChevron {
+  margin-inline-start: auto;
+  color: var(--ds-text-3);
+  transition: transform 0.15s;
+}
+.groupChevron[data-open] {
+  transform: rotate(90deg);
+}
+.navLink {
+  border-radius: var(--ds-radius-sm);
+  padding: 6px 12px;
+  font-size: 14px;
+}
+.main {
+  display: flex;
+  justify-content: center;
+  gap: var(--sp-48);
+  padding: var(--sp-40) clamp(16px, 3vw, 48px) 0;
+  max-width: 1480px;
+  margin-inline: auto;
+}
+.content {
+  flex: 1;
+  min-width: 0;
+  max-width: 1120px;
+}
+.toc {
+  width: 220px;
+  flex-shrink: 0;
+  position: sticky;
+  top: calc(var(--app-shell-header-height) + var(--sp-40));
+  align-self: flex-start;
+  max-height: calc(100vh - 140px);
+  overflow: auto;
+}
+.tocTitle {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ds-text-3);
+  margin-bottom: var(--sp-8);
+}
+.pager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-16);
+  margin: var(--sp-48) 0 var(--sp-64);
+}
+.pagerLink {
+  display: block;
+  padding: var(--sp-16);
+  border: 1px solid var(--ds-border-soft);
+  border-radius: var(--ds-radius);
+  background: var(--ds-surface);
+  text-decoration: none;
+  color: var(--ds-text);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.pagerLink:hover {
+  border-color: var(--ds-primary);
+  box-shadow: var(--ds-shadow-sm);
+}
+.pagerLink small {
+  display: block;
+  color: var(--ds-text-3);
+  font-size: 12px;
+  margin-bottom: 2px;
+}
+.pagerLink strong {
+  font-weight: 600;
+}
+@media (max-width: 75em) {
+  .toc {
+    display: none;
+  }
+}
+@media (max-width: 48em) {
+  .main {
+    padding: var(--sp-24) var(--sp-16) 0;
+  }
+  .pager {
+    grid-template-columns: 1fr;
+  }
+  .headerExtra {
+    display: none;
+  }
+  .search {
+    width: auto;
+  }
+  .search span,
+  .search kbd {
+    display: none;
+  }
+}

@@ -1,0 +1,49 @@
+/* Layout — AppShell, Container, Grid, Splitter… */
+.appShellMain {
+  background-color: var(--ds-bg);
+}
+.appShellNavbar,
+.appShellAside {
+  background-color: var(--ds-surface);
+  border-color: var(--ds-border-soft);
+}
+.appShellHeader,
+.appShellFooter {
+  background-color: var(--ds-surface);
+  border-color: var(--ds-border-soft);
+}
+
+/* Container: xl = --grid-max (1224px) */
+.container {
+  --container-size-xl: var(--grid-max);
+}
+
+/* Splitter: a linha usava o fundo da página (--mantine-color-body), invisível sobre superfícies */
+.splitter {
+  --splitter-handle-color: var(--ds-border-soft);
+}
+.splitterHandle {
+  transition: background-color 120ms ease;
+}
+.splitterHandle:where([data-active], :focus-visible) {
+  background-color: var(--ds-primary);
+}
+@media (hover: hover) {
+  .splitterHandle:hover {
+    background-color: var(--ds-border);
+  }
+  .splitterHandle:hover .splitterThumb {
+    color: var(--ds-text-2);
+  }
+}
+.splitterThumb {
+  background-color: var(--ds-surface);
+  border: 1px solid var(--ds-border-soft);
+  box-shadow: var(--ds-shadow-sm);
+  color: var(--ds-text-3);
+}
+.splitterHandle:where([data-active], :focus-visible) .splitterThumb {
+  border-color: var(--ds-primary);
+  color: var(--ds-primary);
+  box-shadow: 0 0 0 2px var(--ds-primary-soft);
+}

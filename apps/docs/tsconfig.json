@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["vite/client"],
+    "noUnusedLocals": false,
+    "paths": {
+      "@jcdecor/ui": ["../../packages/ui/src/index.ts"],
+      "@jcdecor/ui/chat": ["../../packages/ui/src/chat.ts"],
+      "@jcdecor/ui/charts": ["../../packages/ui/src/charts.ts"],
+      "@jcdecor/ui/brand": ["../../packages/ui/src/brand.ts"],
+      "@jcdecor/ui/tokens": ["../../packages/ui/src/tokens.ts"]
+    }
+  },
+  "include": ["src", "vite.config.ts", "../../packages/ui/src/css-modules.d.ts"]
+}

@@ -1,0 +1,55 @@
+/* Buttons — Button, ActionIcon, CloseButton, CopyButton, FileButton, UnstyledButton */
+.button {
+  font-weight: 600;
+  line-height: 1.5;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s, box-shadow 0.15s;
+}
+.button:where(:disabled:not([data-loading]), [data-disabled]:not([data-loading])) {
+  background: var(--button-bg, var(--mantine-primary-color-filled));
+  color: var(--button-color, var(--mantine-color-white));
+  border: var(--button-bd, 1px solid transparent);
+  opacity: 0.45;
+}
+
+/* ActionIcon: tamanhos em passos de 4/8px; `input-*` igual às alturas dos campos da marca */
+.actionIcon {
+  --ai-size-xs: 24px;
+  --ai-size-sm: 28px;
+  --ai-size-md: 32px;
+  --ai-size-lg: 40px;
+  --ai-size-xl: 48px;
+  --ai-size-input-xs: 28px;
+  --ai-size-input-sm: 32px;
+  --ai-size-input-md: 40px;
+  --ai-size-input-lg: 48px;
+  --ai-size-input-xl: 56px;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+/* Desabilitado como no Button: mantém a cor da variante, 45% de opacidade */
+.actionIcon:where(:disabled:not([data-loading]), [data-disabled]:not([data-loading])) {
+  background: var(--ai-bg);
+  color: var(--ai-color);
+  border: var(--ai-bd);
+  opacity: 0.45;
+}
+.actionIcon:where([data-variant='default']) {
+  border-color: var(--ds-border-soft);
+}
+
+/* CloseButton: ícone texto-2; hover translúcido (funciona sobre surface, primary-soft, alertas…) */
+.closeButton {
+  color: var(--ds-text-2);
+  transition: background-color 0.15s, color 0.15s;
+}
+@media (hover: hover) {
+  .closeButton:where(:not([data-disabled], :disabled)):hover {
+    color: var(--ds-text);
+  }
+  .closeButton:where([data-variant='subtle'], :not([data-variant])):where(:not([data-disabled], :disabled)):hover {
+    background-color: color-mix(in srgb, var(--ds-text) 8%, transparent);
+  }
+}
+.closeButton:focus-visible {
+  outline: 2px solid var(--ds-primary);
+  outline-offset: 1px;
+}
