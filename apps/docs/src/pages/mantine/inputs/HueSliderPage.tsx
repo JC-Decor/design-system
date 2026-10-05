@@ -3,8 +3,11 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { useFramework } from '../../../kit/framework';
 
 export default function HueSliderPage() {
+  // No Vue o valor controlado é o `modelValue` (v-model); a chave remonta o playground ao trocar de framework.
+  const { framework } = useFramework();
   return (
     <DocPage
       kicker="Mantine · Inputs"
@@ -16,12 +19,13 @@ export default function HueSliderPage() {
     >
       <Section title="Playground">
         <Configurator
+          key={framework}
           component={HueSlider}
           name="HueSlider"
           previewWidth={320}
           baseProps={{ 'aria-label': 'Matiz' }}
           controls={[
-            { prop: 'value', type: 'number', initialValue: 210, min: 0, max: 360 },
+            { prop: framework === 'vue' ? 'modelValue' : 'value', type: 'number', initialValue: 210, min: 0, max: 360 },
             { prop: 'size', type: 'size', initialValue: 'md' },
           ]}
         />
@@ -45,8 +49,8 @@ export default function HueSliderPage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'value', type: 'number', required: true, description: 'Matiz de 0 a 360.' },
-            { name: 'onChange / onChangeEnd', type: '(value: number) => void', description: 'Durante e ao fim do arraste.' },
+            { name: 'value', vueName: 'v-model', type: 'number', required: true, description: 'Matiz de 0 a 360.' },
+            { name: 'onChange / onChangeEnd', vueName: '@change / @change-end', type: '(value: number) => void', description: 'Durante e ao fim do arraste.' },
             { name: 'size', type: 'MantineSize', default: 'md', description: 'Altura do slider.' },
             { name: 'focusable', type: 'boolean', default: 'true', description: 'Permite foco e setas do teclado.' },
           ]}

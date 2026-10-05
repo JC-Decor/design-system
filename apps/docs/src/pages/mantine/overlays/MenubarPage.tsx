@@ -41,8 +41,8 @@ export default function MenubarPage() {
         <PropsTable
           rows={[
             { name: 'trigger', type: "'click' | 'hover'", default: 'click', description: 'Como o primeiro menu é aberto.' },
-            { name: 'openIndex', type: 'number | null', description: 'Índice do menu aberto (controlado).' },
-            { name: 'onOpenChange', type: '(index: number | null) => void', description: 'Chamado quando o menu aberto muda.' },
+            { name: 'openIndex', vueName: 'v-model:openIndex', type: 'number | null', description: 'Índice do menu aberto (controlado).' },
+            { name: 'onOpenChange', only: 'react', type: '(index: number | null) => void', description: 'Chamado quando o menu aberto muda.' },
             { name: 'loop', type: 'boolean', default: 'true', description: 'Setas ←/→ voltam do último para o primeiro menu.' },
             { name: 'position', type: 'FloatingPosition', default: 'bottom-start', description: 'Posição dos dropdowns.' },
           ]}

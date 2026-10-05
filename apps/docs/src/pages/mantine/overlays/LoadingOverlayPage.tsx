@@ -42,7 +42,7 @@ export default function LoadingOverlayPage() {
             { name: 'visible', type: 'boolean', description: 'Mostra o overlay.' },
             { name: 'zIndex', type: 'number', default: '400', description: 'Diminua (ex.: 10) para não passar por cima de dropdowns da página.' },
             { name: 'overlayProps', type: 'OverlayProps', description: 'Cor, opacidade, blur e radius do véu.' },
-            { name: 'loaderProps', type: 'LoaderProps', description: 'Props do Loader; children substitui o spinner.' },
+            { name: 'loaderProps', type: 'LoaderProps', description: 'Props do Loader; children substitui o spinner.', vueDescription: 'Props do Loader; para trocar o spinner, registre um componente em loaders e escolha-o com type.' },
             { name: 'transitionProps', type: 'TransitionOverride', default: '{ duration: 0 }', description: 'Animação de entrada/saída.' },
           ]}
         />

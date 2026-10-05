@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import FieldsetPreviewVue from '../../../vue-demos/fieldset/FieldsetPreview.vue';
 
 function FieldsetPreview(props: React.ComponentProps<typeof Fieldset>) {
   return (
@@ -26,6 +27,7 @@ export default function FieldsetPage() {
         <Configurator
           component={FieldsetPreview}
           name="Fieldset"
+          vue={{ component: FieldsetPreviewVue }}
           previewWidth={360}
           controls={[
             { prop: 'legend', type: 'string', initialValue: 'Dados pessoais' },
@@ -65,7 +67,7 @@ export default function FieldsetPage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'legend', type: 'ReactNode', description: 'Título do grupo (acessível como nome do grupo).' },
+            { name: 'legend', type: 'ReactNode', vueType: 'string | slot', description: 'Título do grupo (acessível como nome do grupo).' },
             { name: 'variant', type: "'default' | 'filled' | 'unstyled'", default: 'default', description: 'Estilo do contêiner.' },
             { name: 'radius', type: 'MantineRadius', default: 'md', description: 'Raio da borda.' },
             { name: 'disabled', type: 'boolean', default: 'false', description: 'Desabilita todos os controles internos.' },

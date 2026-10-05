@@ -1,4 +1,5 @@
 import { Code, Table, Text } from '@mantine/core';
+import { useFramework } from './framework';
 
 export interface PropRow {
   name: string;
@@ -6,9 +7,25 @@ export interface PropRow {
   default?: string;
   description: React.ReactNode;
   required?: boolean;
+  /** Nome no @jcdecor/vue quando difere (ex.: `onFavoriteChange` → `v-model:favorite`, `onCopy` → `@copy`) */
+  vueName?: string;
+  /** Tipo no Vue quando difere (ex.: ReactNode → `MantineNode | slot #title`) */
+  vueType?: string;
+  /** Descrição no Vue quando difere */
+  vueDescription?: React.ReactNode;
+  /** Linha só existe em um framework */
+  only?: 'react' | 'vue';
 }
 
-export function PropsTable({ rows }: { rows: PropRow[] }) {
+export function PropsTable({ rows: allRows }: { rows: PropRow[] }) {
+  const vue = useFramework().framework === 'vue';
+  const rows = allRows
+    .filter((row) => !row.only || row.only === (vue ? 'vue' : 'react'))
+    .map((row) =>
+      vue
+        ? { ...row, name: row.vueName ?? row.name, type: row.vueType ?? row.type, description: row.vueDescription ?? row.description }
+        : row,
+    );
   return (
     <Table.ScrollContainer minWidth={640} my="md">
       <Table withTableBorder verticalSpacing="sm">

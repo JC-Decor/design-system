@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import GroupPreviewVue from '../../../vue-demos/group/GroupPreview.vue';
 
 function Item({ children }: { children: React.ReactNode }) {
   return (
@@ -35,6 +36,7 @@ export default function GroupPage() {
       <Section title="Playground">
         <Configurator
           component={GroupPreview}
+          vue={{ component: GroupPreviewVue }}
           name="Group"
           previewWidth={340}
           controls={[

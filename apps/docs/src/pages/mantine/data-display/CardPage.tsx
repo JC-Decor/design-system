@@ -4,6 +4,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function CardPage() {
   return (
@@ -33,7 +34,7 @@ export default function CardPage() {
       <Section title="Card de produto">
         <P>
           O <code>Card</code> já vem com <code>withBorder</code>, <code>shadow="sm"</code>, <code>radius="md"</code> (12px) e{' '}
-          <code>padding="lg"</code> (24px) — o equivalente ao <code>.ds-card</code>. Use <code>Card.Section</code> para conteúdo de borda a
+          <code>padding="lg"</code> (24px) — o equivalente ao <code>.ds-card</code>. Use <OnlyFor framework="react"><code>Card.Section</code></OnlyFor><OnlyFor framework="vue"><code>CardSection</code></OnlyFor> para conteúdo de borda a
           borda, como a foto do produto.
         </P>
         <Demo id="card/product" />
@@ -41,7 +42,7 @@ export default function CardPage() {
 
       <Section title="Resumo do pedido">
         <P>
-          <code>Card.Section withBorder inheritPadding</code> cria um cabeçalho separado por divisor, mantendo o padding horizontal do card.
+          <OnlyFor framework="react"><code>Card.Section withBorder inheritPadding</code></OnlyFor><OnlyFor framework="vue"><code>CardSection with-border inherit-padding</code></OnlyFor> cria um cabeçalho separado por divisor, mantendo o padding horizontal do card.
         </P>
         <Demo id="card/order-summary" />
       </Section>

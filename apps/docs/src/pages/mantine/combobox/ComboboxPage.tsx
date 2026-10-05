@@ -1,8 +1,11 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor, useFramework } from '../../../kit/framework';
 
 export default function ComboboxPage() {
+  const vue = useFramework().framework === 'vue';
+
   return (
     <DocPage
       kicker="Mantine · Combobox"
@@ -21,8 +24,8 @@ export default function ComboboxPage() {
 
       <Section title="Botão com busca">
         <P>
-          Qualquer elemento pode ser o alvo. <code>Combobox.Search</code> coloca a busca dentro do dropdown e{' '}
-          <code>withAriaAttributes={'{false}'}</code> evita atributos de combobox no botão.
+          Qualquer elemento pode ser o alvo. <code>{vue ? 'ComboboxSearch' : 'Combobox.Search'}</code> coloca a busca dentro do dropdown e{' '}
+          <code>{vue ? ':with-aria-attributes="false"' : 'withAriaAttributes={false}'}</code> evita atributos de combobox no botão.
         </P>
         <Demo id="combobox/button-search" />
       </Section>
@@ -35,13 +38,17 @@ export default function ComboboxPage() {
         <P>
           O hook guarda o estado do dropdown e a opção ativa: <code>openDropdown</code>, <code>closeDropdown</code>,{' '}
           <code>selectFirstOption</code>, <code>updateSelectedOptionIndex</code>, <code>resetSelectedOption</code> e outros. Navegue com as setas.
+          <OnlyFor framework="vue">
+            {' '}
+            No Vue o store é reativo: <code>combobox.dropdownOpened</code> pode ser lido direto no template.
+          </OnlyFor>
         </P>
         <Demo id="combobox/use-combobox" />
       </Section>
 
       <Section title="No tema JC">
         <P>
-          <code>Combobox.Option</code> usa raio de 8px, hover/teclado em <code>--ds-surface-2</code> e, com <code>active</code>, fundo{' '}
+          <code>{vue ? 'ComboboxOption' : 'Combobox.Option'}</code> usa raio de 8px, hover/teclado em <code>--ds-surface-2</code> e, com <code>active</code>, fundo{' '}
           <code>--ds-primary-soft</code> e texto <code>--ds-primary</code>. Rótulos de grupo usam caption em <code>--ds-text-3</code>; cabeçalho,
           rodapé e busca usam <code>--ds-border-soft</code>.
         </P>
@@ -51,11 +58,11 @@ export default function ComboboxPage() {
         <PropsTable
           rows={[
             { name: 'store', type: 'ComboboxStore', required: true, description: 'Retorno de useCombobox().' },
-            { name: 'onOptionSubmit', type: '(value) => void', description: 'Opção escolhida (clique ou Enter).' },
-            { name: 'Combobox.Target', type: 'component', description: 'Alvo que controla o dropdown e recebe atributos de acessibilidade.' },
-            { name: 'Combobox.Option', type: 'component', description: 'value, active (marcada), disabled.' },
-            { name: 'Combobox.Search / Empty / Group', type: 'component', description: 'Busca interna, estado vazio e grupos.' },
-            { name: 'Combobox.Header / Footer', type: 'component', description: 'Áreas fixas acima/abaixo das opções.' },
+            { name: 'onOptionSubmit', vueName: '@option-submit', type: '(value) => void', description: 'Opção escolhida (clique ou Enter).' },
+            { name: 'Combobox.Target', vueName: 'ComboboxTarget', type: 'component', description: 'Alvo que controla o dropdown e recebe atributos de acessibilidade.' },
+            { name: 'Combobox.Option', vueName: 'ComboboxOption', type: 'component', description: 'value, active (marcada), disabled.' },
+            { name: 'Combobox.Search / Empty / Group', vueName: 'ComboboxSearch / ComboboxEmpty / ComboboxGroup', type: 'component', description: 'Busca interna, estado vazio e grupos.' },
+            { name: 'Combobox.Header / Footer', vueName: 'ComboboxHeader / ComboboxFooter', type: 'component', description: 'Áreas fixas acima/abaixo das opções.' },
           ]}
         />
       </Section>

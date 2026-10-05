@@ -39,7 +39,7 @@ export default function DialogPage() {
         <PropsTable
           rows={[
             { name: 'opened', type: 'boolean', required: true, description: 'Estado de abertura.' },
-            { name: 'onClose', type: '() => void', description: 'Chamado pelo botão fechar.' },
+            { name: 'onClose', vueName: '@close', type: '() => void', vueType: 'evento', description: 'Chamado pelo botão fechar.' },
             { name: 'withCloseButton', type: 'boolean', default: 'false', description: 'Mostra o X no canto.' },
             { name: 'size', type: 'MantineSize | number', default: 'md', description: 'Largura (md = 340px).' },
             { name: 'position', type: 'AffixPosition', default: '{ bottom: 30, right: 30 }', description: 'Canto da viewport.' },

@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 const sugestoes = ['Piso vinílico', 'Papel de parede', 'Painel ripado', 'Grama sintética', 'Cortina blackout', 'Tatame', 'Carpete'];
 
@@ -49,8 +50,14 @@ export default function AutocompletePage() {
 
       <Section title="Dados assíncronos">
         <P>
-          Consulte a API com debounce e mostre um <code>Loader</code>. Passe <code>filter={'{({ options }) => options}'}</code> para não filtrar
-          de novo o que a API já filtrou.
+          Consulte a API com debounce e mostre um <code>Loader</code>. Passe{' '}
+          <OnlyFor framework="react">
+            <code>filter={'{({ options }) => options}'}</code>
+          </OnlyFor>
+          <OnlyFor framework="vue">
+            <code>:filter="({'{ options }'}) =&gt; options"</code>
+          </OnlyFor>{' '}
+          para não filtrar de novo o que a API já filtrou.
         </P>
         <Demo id="autocomplete/async" />
       </Section>
@@ -66,10 +73,10 @@ export default function AutocompletePage() {
         <PropsTable
           rows={[
             { name: 'data', type: 'ComboboxStringData', description: 'Sugestões (strings ou grupos).' },
-            { name: 'value / onChange', type: 'string', description: 'Texto do campo.' },
+            { name: 'value / onChange', vueName: 'v-model', type: 'string', description: 'Texto do campo.' },
             { name: 'limit', type: 'number', description: 'Máximo de sugestões exibidas.' },
             { name: 'filter', type: 'OptionsFilter', description: 'Filtro personalizado das sugestões.' },
-            { name: 'renderOption', type: '(input) => ReactNode', description: 'Renderização personalizada.' },
+            { name: 'renderOption', type: '(input) => ReactNode', vueName: 'renderOption / #renderOption', vueType: '(input) => VNode | slot { option }', description: 'Renderização personalizada.' },
             { name: 'clearable', type: 'boolean', default: 'false', description: 'Botão de limpar.' },
           ]}
         />

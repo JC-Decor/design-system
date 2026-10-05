@@ -38,7 +38,9 @@ export default function ConversationListPage() {
             {
               name: 'onSelect',
               type: '(conversation: Conversation) => void',
+              vueName: '@select',
               description: 'Chamado ao clicar em uma conversa.',
+              vueDescription: 'Emitido ao clicar em uma conversa.',
             },
             {
               name: 'searchable',
@@ -55,6 +57,7 @@ export default function ConversationListPage() {
             {
               name: 'empty',
               type: 'ReactNode',
+              vueType: 'MantineNode | slot #empty',
               default: "'Nenhuma conversa encontrada'",
               description: 'Conteúdo quando a lista (ou a busca) está vazia.',
             },

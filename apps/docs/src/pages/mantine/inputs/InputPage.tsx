@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function InputPage() {
   return (
@@ -33,6 +34,10 @@ export default function InputPage() {
       <Section title="Com Input.Wrapper">
         <P>
           <code>Input</code> não tem label próprio: envolva-o em <code>Input.Wrapper</code> para ganhar label, descrição e erro com o estilo do DS.
+          <OnlyFor framework="vue">
+            {' '}
+            No Vue as partes são exportações próprias: <code>InputWrapper</code>, <code>InputPlaceholder</code>, <code>InputLabel</code>…
+          </OnlyFor>
         </P>
         <Demo id="input/basic" />
       </Section>
@@ -70,8 +75,8 @@ export default function InputPage() {
           rows={[
             { name: 'component', type: 'ElementType', default: "'input'", description: 'Elemento renderizado (input, button, select…).' },
             { name: 'variant', type: "'default' | 'filled' | 'unstyled'", default: 'default', description: 'Estilo visual do campo.' },
-            { name: 'error', type: 'boolean | ReactNode', description: 'Pinta a borda de erro e ativa aria-invalid.' },
-            { name: 'leftSection / rightSection', type: 'ReactNode', description: 'Conteúdo nas laterais do campo.' },
+            { name: 'error', type: 'boolean | ReactNode', vueType: 'boolean | string', description: 'Pinta a borda de erro e ativa aria-invalid.' },
+            { name: 'leftSection / rightSection', vueName: '#leftSection / #rightSection', type: 'ReactNode', vueType: 'slot (ou prop)', description: 'Conteúdo nas laterais do campo.' },
             { name: 'pointer', type: 'boolean', description: 'Cursor de clique (para component="button").' },
           ]}
         />

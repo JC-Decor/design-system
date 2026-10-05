@@ -48,12 +48,12 @@ export default function CascaderPage() {
         <PropsTable
           rows={[
             { name: 'data', type: 'CascaderOption[]', required: true, description: 'Árvore de opções.' },
-            { name: 'value / onChange', type: 'string[] | null', description: 'Caminho da raiz até o nó.' },
+            { name: 'value / onChange', vueName: 'v-model', type: 'string[] | null', description: 'Caminho da raiz até o nó.' },
             { name: 'changeOnSelect', type: 'boolean', default: 'false', description: 'Permite escolher níveis intermediários.' },
             { name: 'expandTrigger', type: "'click' | 'hover'", default: "'click'", description: 'Como a próxima coluna abre.' },
             { name: 'searchable', type: 'boolean', default: 'false', description: 'Busca pelos caminhos.' },
             { name: 'withColumns', type: 'boolean', default: 'true', description: 'Colunas ou lista plana.' },
-            { name: 'separator / formatValue', type: 'ReactNode / fn', description: 'Como o caminho aparece no campo.' },
+            { name: 'separator / formatValue', type: 'ReactNode / fn', vueType: 'string | slot #separator / fn', description: 'Como o caminho aparece no campo.' },
             { name: 'maxDisplayedLevels', type: 'number', default: '3', description: 'Colunas visíveis lado a lado.' },
           ]}
         />

@@ -1,11 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Alert, Anchor, Button, Group, List, Table } from '@jcdecor/ui';
-import { IconAlertTriangle, IconBrandVue, IconExternalLink } from '@tabler/icons-react';
+import { IconAlertTriangle, IconBrandVue } from '@tabler/icons-react';
+import { useFramework } from '../../kit/framework';
 import { DocPage, Section, P } from '../../kit/DocPage';
 import { CodeBlock } from '../../kit/CodeBlock';
 
-/** O playground Vue é outro app, publicado ao lado do docs em <base>/vue/ (não é rota do react-router). */
-const playgroundHref = `${import.meta.env.BASE_URL}vue/`;
 
 const differences: [string, string, string][] = [
   ['Conteúdo (ReactNode)', '<ContentCard title={<b>Oi</b>} />', 'prop title (texto/VNode) ou slot #title — o slot vence'],
@@ -19,6 +18,8 @@ const differences: [string, string, string][] = [
 ];
 
 export default function VuePage() {
+  const { setFramework } = useFramework();
+  const navigate = useNavigate();
   return (
     <DocPage
       kicker="Começando"
@@ -31,13 +32,18 @@ export default function VuePage() {
       }
     >
       <Group mt="lg">
-        <Button component="a" href={playgroundHref} leftSection={<IconBrandVue size={18} />} rightSection={<IconExternalLink size={16} />}>
-          Abrir o playground Vue
+        <Button leftSection={<IconBrandVue size={18} />} onClick={() => { setFramework('vue'); navigate('/componentes/kpi-card'); }}>
+          Ver os exemplos em Vue
         </Button>
         <Button component="a" variant="outline" href="https://mantine-vue.dev/" target="_blank" rel="noreferrer">
           Docs do Mantine Vue
         </Button>
       </Group>
+
+      <Alert icon={<IconBrandVue />} title="Toda a documentação vale para Vue" mt="lg">
+        Use o seletor <b>React | Vue</b> no topo: cada exemplo, código e playground do site passa a ser o Vue equivalente. A escolha
+        fica salva; links com <code>?fw=vue</code> já abrem no Vue.
+      </Alert>
 
       <Section title="1. Instale os pacotes">
         <P>Requer Vue 3.5+ e Mantine Vue 3.5+ como peer dependencies.</P>

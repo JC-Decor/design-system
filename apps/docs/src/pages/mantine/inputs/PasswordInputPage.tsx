@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function PasswordInputPage() {
   return (
@@ -42,7 +43,9 @@ export default function PasswordInputPage() {
 
       <Section title="Visibilidade sincronizada">
         <P>
-          Controle <code>visible</code> e <code>onVisibilityChange</code> para que “Nova senha” e “Confirme a senha” mostrem/ocultem juntos.
+          Controle{' '}
+          <OnlyFor framework="react"><code>visible</code> e <code>onVisibilityChange</code></OnlyFor>
+          <OnlyFor framework="vue">a visibilidade com <code>v-model:visible</code></OnlyFor> para que “Nova senha” e “Confirme a senha” mostrem/ocultem juntos.
         </P>
         <Demo id="password-input/synced" />
       </Section>
@@ -62,11 +65,11 @@ export default function PasswordInputPage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'visible', type: 'boolean', description: 'Visibilidade controlada.' },
+            { name: 'visible', vueName: 'v-model:visible', type: 'boolean', description: 'Visibilidade controlada.' },
             { name: 'defaultVisible', type: 'boolean', default: 'false', description: 'Visibilidade inicial (não controlado).' },
-            { name: 'onVisibilityChange', type: '(visible: boolean) => void', description: 'Chamado ao clicar no botão de olho.' },
-            { name: 'visibilityToggleIcon', type: 'FC<{ reveal: boolean }>', description: 'Ícone customizado do botão.' },
-            { name: 'error', type: 'ReactNode', description: 'Mensagem de erro.' },
+            { name: 'onVisibilityChange', vueName: '@update:visible', type: '(visible: boolean) => void', description: 'Chamado ao clicar no botão de olho.' },
+            { name: 'visibilityToggleIcon', type: 'FC<{ reveal: boolean }>', vueType: 'Component | slot #visibilityToggleIcon="{ reveal }"', description: 'Ícone customizado do botão.' },
+            { name: 'error', type: 'ReactNode', vueType: 'string | slot', description: 'Mensagem de erro.' },
           ]}
         />
       </Section>

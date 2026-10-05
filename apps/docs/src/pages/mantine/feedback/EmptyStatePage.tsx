@@ -1,5 +1,7 @@
 import { EmptyState } from '@jcdecor/ui';
 import { IconShoppingCart } from '@tabler/icons-react';
+import { IconShoppingCart as IconShoppingCartVue } from '@tabler/icons-vue';
+import { h } from 'vue';
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
@@ -22,6 +24,7 @@ export default function EmptyStatePage() {
           previewWidth={420}
           baseProps={{ icon: <IconShoppingCart /> }}
           codeProps={{ icon: '<IconShoppingCart />' }}
+          vue={{ baseProps: { icon: h(IconShoppingCartVue) } }}
           controls={[
             { prop: 'title', type: 'string', initialValue: 'Seu carrinho está vazio' },
             { prop: 'description', type: 'string', initialValue: 'Explore as coleções de pisos, papéis de parede e cortinas.' },
@@ -72,8 +75,8 @@ export default function EmptyStatePage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'icon', type: 'ReactNode', description: 'Ícone ou ilustração do indicador.' },
-            { name: 'title / description', type: 'ReactNode', description: 'Título e texto de apoio.' },
+            { name: 'icon', type: 'ReactNode', vueType: 'VNode | slot #icon', description: 'Ícone ou ilustração do indicador.' },
+            { name: 'title / description', type: 'ReactNode', vueType: 'string | slot #title / #description', description: 'Título e texto de apoio.' },
             { name: 'variant', type: "'light' | 'filled'", description: 'Indicador com fundo colorido. Sem variante, ícone em tom suave.' },
             { name: 'color', type: 'MantineColor', default: "'horizon'", description: 'Cor do indicador nas variantes.' },
             { name: 'withIndicatorBackground', type: 'boolean', default: 'false', description: 'Círculo neutro atrás do ícone.' },

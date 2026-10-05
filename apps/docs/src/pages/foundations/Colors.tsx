@@ -2,6 +2,7 @@ import { Group, Stack, Text, Tag, TokenSwatch, ColorRamp, SimpleGrid, Box, Table
 import { brand, ramps, semantic } from '@jcdecor/ui/tokens';
 import { DocPage, Section, P } from '../../kit/DocPage';
 import { CodeBlock } from '../../kit/CodeBlock';
+import { useFramework } from '../../kit/framework';
 
 const anchors: { key: keyof typeof brand; name: string; role: string }[] = [
   { key: 'horizon', name: 'Horizon', role: 'Ação: botões, links, preços' },
@@ -47,6 +48,7 @@ const contrastRows: [string, string, string][] = [
 ];
 
 export default function Colors() {
+  const vue = useFramework().framework === 'vue';
   return (
     <DocPage
       kicker="Fundamentos"
@@ -155,17 +157,17 @@ export default function Colors() {
 
       <Section title="Como usar">
         <CodeBlock
-          code={`// Props de cor do Mantine: nome da cor + índice (6 = tom 600)
+          code={`${vue ? '<!-- Props de cor do Mantine: nome da cor + índice (6 = tom 600) -->' : '// Props de cor do Mantine: nome da cor + índice (6 = tom 600)'}
 <Button color="evergreen">Confirmar</Button>
 <Text c="horizon.7">Texto azul</Text>
 <Box bg="electric.0">Fundo amarelo bem suave</Box>
 
-// Tokens semânticos (adaptam ao tema escuro)
+${vue ? '<!-- Tokens semânticos (adaptam ao tema escuro) -->' : '// Tokens semânticos (adaptam ao tema escuro)'}
 <Text c="var(--ds-text-2)">Corpo</Text>
 <Paper bg="var(--ds-surface-2)" />
 
 // Em JS (ex.: canvas, e-mail)
-import { brand, ramps } from '@jcdecor/ui/tokens';
+import { brand, ramps } from '${vue ? '@jcdecor/vue/tokens' : '@jcdecor/ui/tokens'}';
 brand.horizon;      // '#2663EB'
 ramps.horizon[700]; // '#0F4ACF'`}
         />

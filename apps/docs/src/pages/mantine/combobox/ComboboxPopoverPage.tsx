@@ -1,8 +1,11 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { useFramework } from '../../../kit/framework';
 
 export default function ComboboxPopoverPage() {
+  const vue = useFramework().framework === 'vue';
+
   return (
     <DocPage
       kicker="Mantine · Combobox"
@@ -14,7 +17,7 @@ export default function ComboboxPopoverPage() {
     >
       <Section title="Ordenação">
         <P>
-          Envolva o alvo com <code>ComboboxPopover.Target</code>. O componente cuida do estado, teclado e acessibilidade — sem precisar de{' '}
+          Envolva o alvo com <code>{vue ? 'ComboboxPopoverTarget' : 'ComboboxPopover.Target'}</code>. O componente cuida do estado, teclado e acessibilidade — sem precisar de{' '}
           <code>useCombobox</code>.
         </P>
         <Demo id="combobox-popover/basic" />
@@ -38,7 +41,7 @@ export default function ComboboxPopoverPage() {
           rows={[
             { name: 'data', type: 'ComboboxData', description: 'Opções ou grupos.' },
             { name: 'multiple', type: 'boolean', default: 'false', description: 'Valor vira string[].' },
-            { name: 'value / onChange', type: 'string | null | string[]', description: 'Valor controlado.' },
+            { name: 'value / onChange', vueName: 'v-model', type: 'string | null | string[]', description: 'Valor controlado.' },
             { name: 'allowDeselect', type: 'boolean', default: 'true', description: 'Clicar na marcada desmarca (modo simples).' },
             { name: 'checkIconPosition', type: "'left' | 'right'", default: "'left'", description: 'Posição do ícone de marcado.' },
             { name: 'comboboxProps', type: 'ComboboxProps', description: 'width, position, offset…' },
@@ -49,7 +52,7 @@ export default function ComboboxPopoverPage() {
       <Section title="Boas práticas">
         <P>
           No Mantine 9.6 o modo <code>searchable</code> traz o placeholder fixo "Search..." em inglês. Para listas com busca em pt-BR,
-          use <code>Combobox</code> com <code>Combobox.Search</code> (veja a página do Combobox).
+          use <code>Combobox</code> com <code>{vue ? 'ComboboxSearch' : 'Combobox.Search'}</code> (veja a página do Combobox).
         </P>
       </Section>
     </DocPage>

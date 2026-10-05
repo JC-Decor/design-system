@@ -5,6 +5,7 @@ import { DocPage, Section, P } from '../../kit/DocPage';
 import { Demo } from '../../kit/Demo';
 import { CodeBlock } from '../../kit/CodeBlock';
 import { PropsTable } from '../../kit/PropsTable';
+import { useFramework } from '../../kit/framework';
 
 const weightName: Record<number, string> = { 400: 'Regular', 500: 'Medium', 600: 'SemiBold', 700: 'Bold' };
 
@@ -21,6 +22,7 @@ const kebab = (s: string) => s.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCas
 const tokens = Object.keys(typography) as TypographyToken[];
 
 export default function Typography() {
+  const vue = useFramework().framework === 'vue';
   return (
     <DocPage
       kicker="Fundamentos"
@@ -30,7 +32,7 @@ export default function Typography() {
       <Section title="Escala tipográfica">
         <P>
           Tamanhos em px; quando há dois valores (<code>desktop/mobile</code>) o estilo é fluido. Os valores vêm de <code>typography</code> em{' '}
-          <code>@jcdecor/ui/tokens</code>.
+          <code>{vue ? '@jcdecor/vue/tokens' : '@jcdecor/ui/tokens'}</code>.
         </P>
         <Stack gap={0} mt="md">
           {tokens.map((token) => {
@@ -105,7 +107,8 @@ export default function Typography() {
 
       <Section title="Em JS">
         <CodeBlock
-          code={`import { typography } from '@jcdecor/ui/tokens';
+          language="ts"
+          code={`import { typography } from '${vue ? '@jcdecor/vue/tokens' : '@jcdecor/ui/tokens'}';
 
 typography.headlineLg;
 // { size: 'clamp(26px, 0.9vw + 21px, 32px)', weight: 600, lineHeight: 1.25, letterSpacing: '-0.01em', px: '32/26', … }`}

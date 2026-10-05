@@ -1,6 +1,7 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function BoxPage() {
   return (
@@ -22,7 +23,8 @@ export default function BoxPage() {
 
       <Section title="Elemento polimórfico">
         <P>
-          A prop <code>component</code> troca o elemento renderizado (<code>a</code>, <code>section</code>, <code>Link</code> do React Router…),
+          A prop <code>component</code> troca o elemento renderizado (<code>a</code>, <code>section</code>,{' '}
+          <OnlyFor framework="react"><code>Link</code> do React Router…</OnlyFor><OnlyFor framework="vue"><code>RouterLink</code> do vue-router…</OnlyFor>),
           mantendo as style props.
         </P>
         <Demo id="box/component" />

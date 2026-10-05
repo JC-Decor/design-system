@@ -1,6 +1,7 @@
 import { DocPage, Section, P } from '../../kit/DocPage';
 import { Demo } from '../../kit/Demo';
 import { PropsTable } from '../../kit/PropsTable';
+import { OnlyFor } from '../../kit/framework';
 
 export default function BarPage() {
   return (
@@ -28,7 +29,11 @@ export default function BarPage() {
       <Section title="Horizontal">
         <P>
           <code>orientation="vertical"</code> desenha barras horizontais, melhor para rótulos
-          longos. Ajuste a largura do eixo com <code>yAxisProps</code>.
+          longos.{' '}
+          <OnlyFor framework="react">
+            Ajuste a largura do eixo com <code>yAxisProps</code>.
+          </OnlyFor>
+          <OnlyFor framework="vue">O eixo se ajusta sozinho à largura dos rótulos.</OnlyFor>
         </P>
         <Demo id="bar/horizontal" />
       </Section>
@@ -75,27 +80,34 @@ export default function BarPage() {
             },
             {
               name: 'h',
+              vueName: 'height',
               type: 'number | string',
               default: '280',
               description: 'Altura do gráfico.',
+              vueDescription: 'Altura do gráfico (h é aceito como alias).',
             },
             {
               name: 'gridAxis',
               type: "'x' | 'y' | 'xy' | 'none'",
               default: "'y'",
               description: 'Linhas de grade.',
+              only: 'react',
             },
             {
               name: 'barProps',
               type: 'BarProps',
               default: '{ radius: 4 }',
               description: 'Props do Bar do recharts.',
+              vueType: 'ChartOptionProps | ((series) => ChartOptionProps)',
+              vueDescription:
+                'Opções da série bar do ECharts; radius (ou borderRadius) define o raio da ponta (0 em stacked/percent).',
             },
             {
               name: 'valueFormatter',
               type: '(value: number) => string',
               default: 'ptBRValueFormatter',
               description: 'Formatação dos valores.',
+              vueDescription: 'Formatação dos valores no tooltip e no eixo de valores.',
             },
           ]}
         />

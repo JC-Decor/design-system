@@ -44,7 +44,7 @@ export default function IndicatorPage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'label', type: 'React.ReactNode', description: 'Conteúdo do indicador (ex.: contagem).' },
+            { name: 'label', vueName: 'label / #label', type: 'React.ReactNode', vueType: 'MantineNode | slot', description: 'Conteúdo do indicador (ex.: contagem).' },
             { name: 'size', type: 'number | string', default: '10', description: 'Altura (e largura mínima) do indicador.' },
             { name: 'position', type: "'top-end' | 'bottom-end' | 'middle-start' | …", default: "'top-end'", description: 'Posição relativa ao filho.' },
             { name: 'offset', type: 'number', default: '0', description: 'Desloca o indicador para dentro (útil em avatares circulares).' },

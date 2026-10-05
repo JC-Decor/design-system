@@ -1,6 +1,7 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function OverflowListPage() {
   return (
@@ -14,7 +15,8 @@ export default function OverflowListPage() {
     >
       <Section title="Tags do produto">
         <P>
-          <code>renderItem</code> desenha cada item e <code>renderOverflow</code> recebe os itens que não couberam. O cálculo acompanha a largura
+          <OnlyFor framework="react"><code>renderItem</code> desenha cada item e <code>renderOverflow</code> recebe os itens que não couberam.</OnlyFor>
+          <OnlyFor framework="vue">O slot <code>#item</code> desenha cada item e <code>#overflow</code> recebe os itens que não couberam (ou use as props <code>renderItem</code> / <code>renderOverflow</code>).</OnlyFor> O cálculo acompanha a largura
           do contêiner — arraste o canto do painel para ver.
         </P>
         <Demo id="overflow-list/tags" />
@@ -38,8 +40,8 @@ export default function OverflowListPage() {
         <PropsTable
           rows={[
             { name: 'data', type: 'T[]', required: true, description: 'Itens a exibir.' },
-            { name: 'renderItem', type: '(item, index) => ReactNode', required: true, description: 'Renderiza um item.' },
-            { name: 'renderOverflow', type: '(items) => ReactNode', required: true, description: 'Renderiza o resumo dos itens ocultos.' },
+            { name: 'renderItem', type: '(item, index) => ReactNode', required: true, description: 'Renderiza um item.', vueName: '#item / renderItem', vueType: 'slot { item, index } | (item, index) => VNodeChild' },
+            { name: 'renderOverflow', type: '(items) => ReactNode', required: true, description: 'Renderiza o resumo dos itens ocultos.', vueName: '#overflow / renderOverflow', vueType: 'slot { items } | (items) => VNodeChild' },
             { name: 'maxRows', type: 'number', default: '1', description: 'Número de linhas visíveis.' },
             { name: 'maxVisibleItems', type: 'number', default: 'Infinity', description: 'Limite de itens visíveis, mesmo com espaço.' },
             { name: 'collapseFrom', type: "'start' | 'end'", default: "'end'", description: 'De onde os itens são recolhidos.' },

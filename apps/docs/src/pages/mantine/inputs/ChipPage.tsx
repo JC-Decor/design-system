@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function ChipPage() {
   return (
@@ -33,6 +34,10 @@ export default function ChipPage() {
       <Section title="Grupos">
         <P>
           <code>Chip.Group multiple</code> trabalha com <code>string[]</code>; sem <code>multiple</code>, com uma única <code>string</code>.
+          <OnlyFor framework="vue">
+            {' '}
+            No Vue o grupo é o componente <code>ChipGroup</code>, com <code>v-model</code>.
+          </OnlyFor>
         </P>
         <Demo id="chip/groups" />
       </Section>
@@ -58,10 +63,10 @@ export default function ChipPage() {
         <PropsTable
           rows={[
             { name: 'value', type: 'string', description: 'Valor dentro de Chip.Group.' },
-            { name: 'checked / defaultChecked / onChange', type: 'boolean', description: 'Uso isolado.' },
+            { name: 'checked / defaultChecked / onChange', vueName: 'v-model / defaultChecked / @change', type: 'boolean', description: 'Uso isolado.' },
             { name: 'variant', type: "'outline' | 'filled' | 'light'", default: 'outline', description: 'Estilo do estado marcado.' },
-            { name: 'icon', type: 'ReactNode', description: 'Substitui o ✓ do estado marcado.' },
-            { name: 'Chip.Group multiple', type: 'boolean', default: 'false', description: 'Permite vários selecionados.' },
+            { name: 'icon', vueName: '#icon', type: 'ReactNode', vueType: 'slot', description: 'Substitui o ✓ do estado marcado.' },
+            { name: 'Chip.Group multiple', vueName: 'ChipGroup multiple', type: 'boolean', default: 'false', description: 'Permite vários selecionados.' },
           ]}
         />
       </Section>

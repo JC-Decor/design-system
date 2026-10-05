@@ -1,6 +1,7 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function ScrollAreaPage() {
   return (
@@ -29,7 +30,8 @@ export default function ScrollAreaPage() {
 
       <Section title="Autosize">
         <P>
-          <code>ScrollArea.Autosize</code> cresce com o conteúdo até <code>mah</code> e só então passa a rolar — ideal para listas de itens do
+          <OnlyFor framework="react"><code>ScrollArea.Autosize</code></OnlyFor>
+          <OnlyFor framework="vue"><code>ScrollAreaAutosize</code></OnlyFor> cresce com o conteúdo até <code>mah</code> e só então passa a rolar — ideal para listas de itens do
           carrinho.
         </P>
         <Demo id="scroll-area/autosize" />
@@ -37,7 +39,8 @@ export default function ScrollAreaPage() {
 
       <Section title="Carregamento sob demanda">
         <P>
-          <code>onBottomReached</code> dispara ao chegar ao fim — use para carregar mais itens.
+          <OnlyFor framework="react"><code>onBottomReached</code></OnlyFor>
+          <OnlyFor framework="vue"><code>@bottom-reached</code></OnlyFor> dispara ao chegar ao fim — use para carregar mais itens.
         </P>
         <Demo id="scroll-area/infinite" />
       </Section>
@@ -59,7 +62,7 @@ export default function ScrollAreaPage() {
             { name: 'scrollbarSize', type: 'number | string', default: '12', description: 'Espessura da barra.' },
             { name: 'offsetScrollbars', type: "boolean | 'x' | 'y' | 'present'", description: 'Reserva espaço para as barras.' },
             { name: 'viewportRef', type: 'Ref<HTMLDivElement>', description: 'Ref do viewport (scroll programático).' },
-            { name: 'onBottomReached', type: '() => void', description: 'Chamado ao rolar até o fim.' },
+            { name: 'onBottomReached', vueName: '@bottom-reached', type: '() => void', description: 'Chamado ao rolar até o fim.', vueDescription: 'Emitido ao rolar até o fim.' },
           ]}
         />
       </Section>

@@ -35,9 +35,9 @@ export default function SpoilerPage() {
         <PropsTable
           rows={[
             { name: 'maxHeight', type: 'number', default: '100', description: 'Altura máxima (px) quando recolhido.' },
-            { name: 'showLabel', type: 'React.ReactNode', required: true, description: 'Rótulo para expandir.' },
-            { name: 'hideLabel', type: 'React.ReactNode', required: true, description: 'Rótulo para recolher.' },
-            { name: 'expanded / onExpandedChange', type: 'boolean / (v) => void', description: 'Modo controlado.' },
+            { name: 'showLabel', vueName: 'showLabel / #showLabel', type: 'React.ReactNode', vueType: 'MantineNode | slot', required: true, description: 'Rótulo para expandir.' },
+            { name: 'hideLabel', vueName: 'hideLabel / #hideLabel', type: 'React.ReactNode', vueType: 'MantineNode | slot', required: true, description: 'Rótulo para recolher.' },
+            { name: 'expanded / onExpandedChange', vueName: 'v-model:expanded', type: 'boolean / (v) => void', vueType: 'boolean', description: 'Modo controlado.' },
             { name: 'transitionDuration', type: 'number', default: '200', description: 'Duração da animação em ms.' },
           ]}
         />

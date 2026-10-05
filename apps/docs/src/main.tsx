@@ -1,3 +1,5 @@
+// Mantine Vue primeiro: os exemplos Vue usam só classes próprias (CSS modules); os globais do React vêm depois e prevalecem
+import '@mantine-vue/core/styles.css';
 import '@mantine/core/styles.css';
 import '@mantine/charts/styles.css';
 import '@mantine/code-highlight/styles.css';
@@ -12,6 +14,7 @@ import { RouterProvider } from 'react-router-dom';
 import { CodeHighlightAdapterProvider, createShikiAdapter } from '@mantine/code-highlight';
 import { Notifications } from '@mantine/notifications';
 import { JcProvider } from '@jcdecor/ui';
+import { FrameworkProvider } from './kit/framework';
 import { router } from './router';
 
 async function loadShiki() {
@@ -25,7 +28,9 @@ createRoot(document.getElementById('root')!).render(
     <JcProvider>
       <CodeHighlightAdapterProvider adapter={shikiAdapter}>
         <Notifications position="top-right" />
-        <RouterProvider router={router} />
+        <FrameworkProvider>
+          <RouterProvider router={router} />
+        </FrameworkProvider>
       </CodeHighlightAdapterProvider>
     </JcProvider>
   </StrictMode>,

@@ -85,10 +85,10 @@ export default function TextInputPage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'label', type: 'ReactNode', description: 'Rótulo visível, ligado ao campo via htmlFor.' },
-            { name: 'description', type: 'ReactNode', description: 'Texto de ajuda abaixo do label.' },
-            { name: 'error', type: 'ReactNode | boolean', description: 'Mensagem de erro; ativa aria-invalid.' },
-            { name: 'leftSection / rightSection', type: 'ReactNode', description: 'Ícone, unidade ou ação dentro do campo.' },
+            { name: 'label', type: 'ReactNode', vueType: 'string | slot', description: 'Rótulo visível, ligado ao campo via htmlFor.' },
+            { name: 'description', type: 'ReactNode', vueType: 'string | slot', description: 'Texto de ajuda abaixo do label.' },
+            { name: 'error', type: 'ReactNode | boolean', vueType: 'string | boolean | slot', description: 'Mensagem de erro; ativa aria-invalid.' },
+            { name: 'leftSection / rightSection', type: 'ReactNode', vueType: 'string | slot #leftSection / #rightSection', description: 'Ícone, unidade ou ação dentro do campo.' },
             { name: 'size', type: 'MantineSize', default: 'md', description: 'Altura e fonte do campo.' },
             { name: 'withAsterisk', type: 'boolean', default: 'false', description: 'Mostra * de obrigatório (não valida sozinho).' },
           ]}

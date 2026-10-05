@@ -60,8 +60,8 @@ export default function SegmentedControlPage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'data', type: 'string[] | { value, label, disabled? }[]', required: true, description: 'Opções.' },
-            { name: 'value / onChange', type: 'string', description: 'Uso controlado.' },
+            { name: 'data', type: 'string[] | { value, label, disabled? }[]', required: true, description: 'Opções.', vueDescription: 'Opções. label aceita texto, VNode ou () => VNode (ícones via h()).' },
+            { name: 'value / onChange', vueName: 'v-model', type: 'string', description: 'Uso controlado.' },
             { name: 'color', type: 'MantineColor', description: 'Preenche o indicador.' },
             { name: 'fullWidth', type: 'boolean', default: 'false', description: 'Ocupa toda a largura.' },
             { name: 'orientation', type: "'horizontal' | 'vertical'", default: 'horizontal', description: 'Direção.' },

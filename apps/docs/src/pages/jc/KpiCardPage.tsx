@@ -53,14 +53,14 @@ export default function KpiCardPage() {
       <Section title="Props">
         <PropsTable
           rows={[
-            { name: 'label', type: 'ReactNode', required: true, description: 'Rótulo em caixa-alta.' },
-            { name: 'value', type: 'ReactNode', required: true, description: 'Valor principal; números são formatados em pt-BR.' },
+            { name: 'label', type: 'ReactNode', vueType: 'MantineNode | slot #label', required: true, description: 'Rótulo em caixa-alta.' },
+            { name: 'value', type: 'ReactNode', vueType: 'MantineNode | slot #value', required: true, description: 'Valor principal; números são formatados em pt-BR.' },
             { name: 'delta', type: 'number', description: 'Variação em p.p. — positiva verde ↑, negativa vermelha ↓.' },
-            { name: 'deltaLabel', type: 'ReactNode', description: 'Texto ao lado da variação.' },
+            { name: 'deltaLabel', type: 'ReactNode', vueType: 'MantineNode | slot #deltaLabel', description: 'Texto ao lado da variação.' },
             { name: 'invertDelta', type: 'boolean', default: 'false', description: 'Inverte as cores (queda = bom).' },
             { name: 'colorValue', type: 'boolean', default: 'false', description: 'Pinta o valor com a cor da variação.' },
-            { name: 'icon', type: 'ReactNode', description: 'Ícone no canto superior direito.' },
-            { name: 'chart', type: 'ReactNode', description: 'Slot para Sparkline/mini-gráfico.' },
+            { name: 'icon', type: 'ReactNode', vueType: 'MantineNode | slot #icon', description: 'Ícone no canto superior direito.' },
+            { name: 'chart', type: 'ReactNode', vueType: 'MantineNode | slot #chart', description: 'Slot para Sparkline/mini-gráfico.', vueDescription: <>Sparkline/mini-gráfico, normalmente via slot <code>#chart</code>.</> },
             { name: 'loading', type: 'boolean', default: 'false', description: 'Mostra skeleton no lugar do valor.' },
           ]}
         />

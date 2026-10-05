@@ -52,7 +52,7 @@ export default function HighlightPage() {
         <PropsTable
           rows={[
             { name: 'highlight', type: 'string | string[]', required: true, description: 'Termo(s) a destacar.' },
-            { name: 'children', type: 'string', required: true, description: 'Texto completo (apenas string).' },
+            { name: 'children', vueName: 'slot padrão', type: 'string', required: true, description: 'Texto completo (apenas string).' },
             { name: 'color', type: 'MantineColor', default: "'electric'", description: 'Cor do destaque.' },
             { name: 'highlightStyles', type: 'CSSProperties', description: 'Estilos extras dos trechos destacados.' },
             { name: 'wholeWord', type: 'boolean', default: 'false', description: 'Destaca só palavras inteiras.' },

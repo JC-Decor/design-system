@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function MaskInputPage() {
   return (
@@ -59,6 +60,10 @@ export default function MaskInputPage() {
         <P>
           <code>onChangeRaw</code> entrega só os caracteres digitados (sem pontuação), pronto para enviar à API. <code>onComplete</code> dispara quando
           todos os espaços estão preenchidos — momento ideal para buscar o endereço pelo CEP.
+          <OnlyFor framework="vue">
+            {' '}
+            No Vue, são os eventos <code>@change-raw</code> e <code>@complete</code>.
+          </OnlyFor>
         </P>
         <Demo id="mask-input/raw-value" />
       </Section>
@@ -79,8 +84,8 @@ export default function MaskInputPage() {
             { name: 'mask', type: 'string | (string | RegExp)[]', required: true, description: 'Padrão da máscara.' },
             { name: 'tokens', type: 'Record<string, RegExp>', description: 'Adiciona ou substitui tokens.' },
             { name: 'modify', type: '(value) => Partial<options>', description: 'Troca máscara/opções a cada tecla.' },
-            { name: 'onChangeRaw', type: '(raw, masked) => void', description: 'Valor sem a máscara.' },
-            { name: 'onComplete', type: '(masked, raw) => void', description: 'Todos os espaços preenchidos.' },
+            { name: 'onChangeRaw', vueName: '@change-raw', type: '(raw, masked) => void', description: 'Valor sem a máscara.' },
+            { name: 'onComplete', vueName: '@complete', type: '(masked, raw) => void', description: 'Todos os espaços preenchidos.' },
             { name: 'alwaysShowMask', type: 'boolean', default: 'false', description: 'Mostra a máscara mesmo vazio.' },
             { name: 'slotChar', type: 'string | null', default: '"_"', description: 'Caractere dos espaços vazios.' },
           ]}

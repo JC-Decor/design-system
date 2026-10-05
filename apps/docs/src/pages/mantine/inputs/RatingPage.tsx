@@ -61,12 +61,12 @@ export default function RatingPage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'value / defaultValue', type: 'number', description: 'Nota atual.' },
-            { name: 'onChange', type: '(value: number) => void', description: 'Ao escolher uma nota.' },
+            { name: 'value / defaultValue', vueName: 'v-model / defaultValue', type: 'number', description: 'Nota atual.' },
+            { name: 'onChange', vueName: '@change', type: '(value: number) => void', description: 'Ao escolher uma nota.' },
             { name: 'fractions', type: 'number', default: '1', description: 'Divisões por estrela (2 = meia).' },
             { name: 'count', type: 'number', default: '5', description: 'Quantidade de símbolos.' },
             { name: 'readOnly', type: 'boolean', default: 'false', description: 'Somente exibição.' },
-            { name: 'emptySymbol / fullSymbol', type: 'ReactNode | (value) => ReactNode', description: 'Símbolos customizados.' },
+            { name: 'emptySymbol / fullSymbol', type: 'ReactNode | (value) => ReactNode', vueType: 'slot #emptySymbol="{ value }" / #fullSymbol', description: 'Símbolos customizados.' },
             { name: 'getSymbolLabel', type: '(index) => string', description: 'Label acessível de cada símbolo.' },
           ]}
         />

@@ -58,8 +58,8 @@ export default function BlockquotePage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'cite', type: 'React.ReactNode', description: 'Autor/fonte da citação.' },
-            { name: 'icon', type: 'React.ReactNode', description: 'Ícone no canto superior esquerdo.' },
+            { name: 'cite', vueName: 'cite / #cite', type: 'React.ReactNode', vueType: 'MantineNode | slot', description: 'Autor/fonte da citação.' },
+            { name: 'icon', vueName: 'icon / #icon', type: 'React.ReactNode', vueType: 'MantineNode | slot', description: 'Ícone no canto superior esquerdo.' },
             { name: 'iconSize', type: 'number | string', default: '40', description: 'Tamanho do selo do ícone.' },
             { name: 'color', type: 'MantineColor', default: "'horizon'", description: 'Cor da borda e do fundo.' },
             { name: 'radius', type: 'MantineRadius | number', default: "'sm'", description: 'Raio dos cantos à direita.' },

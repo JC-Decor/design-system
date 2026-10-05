@@ -60,9 +60,9 @@ export default function NativeSelectPage() {
         <PropsTable
           rows={[
             { name: 'data', type: 'string[] | { label, value }[] | { group, items }[]', description: 'Opções da lista.' },
-            { name: 'value / onChange', type: 'string / ChangeEvent', description: 'Uso controlado (evento nativo).' },
-            { name: 'rightSection', type: 'ReactNode', description: 'Substitui a seta padrão.' },
-            { name: 'error', type: 'ReactNode', description: 'Mensagem de erro.' },
+            { name: 'value / onChange', type: 'string / ChangeEvent', description: 'Uso controlado (evento nativo).', vueName: 'v-model', vueType: 'string', vueDescription: 'Uso controlado (recebe o valor selecionado).' },
+            { name: 'rightSection', type: 'ReactNode', vueType: 'string | slot', description: 'Substitui a seta padrão.' },
+            { name: 'error', type: 'ReactNode', vueType: 'string | slot', description: 'Mensagem de erro.' },
           ]}
         />
       </Section>

@@ -1,6 +1,7 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function TransitionPage() {
   return (
@@ -14,8 +15,9 @@ export default function TransitionPage() {
     >
       <Section title="Uso básico">
         <P>
-          <code>mounted</code> controla a presença no DOM; <code>children</code> é uma função que recebe os estilos da animação e deve aplicá-los no
-          elemento.
+          <code>mounted</code> controla a presença no DOM;{' '}
+          <OnlyFor framework="react"><code>children</code> é uma função que recebe os estilos da animação e deve aplicá-los no elemento.</OnlyFor>
+          <OnlyFor framework="vue">o slot padrão recebe os estilos da animação (<code>{'<template #default="styles">'}</code>) e deve aplicá-los no elemento com <code>:style</code>.</OnlyFor>
         </P>
         <Demo id="transition/basic" />
       </Section>
@@ -43,7 +45,8 @@ export default function TransitionPage() {
             { name: 'timingFunction', type: 'string', default: "'ease'", description: 'Easing CSS.' },
             { name: 'enterDelay / exitDelay', type: 'number', description: 'Atraso antes de entrar/sair.' },
             { name: 'keepMounted', type: 'boolean', default: 'false', description: 'Mantém no DOM quando oculto.' },
-            { name: 'onEnter / onExited…', type: '() => void', description: 'Callbacks do ciclo da animação.' },
+            { name: 'onEnter / onExited…', vueName: '@enter / @entered / @exit / @exited', type: '() => void', description: 'Callbacks do ciclo da animação.', vueDescription: 'Eventos do ciclo da animação.' },
+            { name: '#default', type: '(styles: CSSProperties) => VNodeChild', only: 'vue', description: 'Slot com escopo: recebe os estilos da animação.', required: true },
           ]}
         />
       </Section>

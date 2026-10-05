@@ -1,6 +1,7 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function DataListPage() {
   return (
@@ -14,7 +15,7 @@ export default function DataListPage() {
     >
       <Section title="Especificações do produto">
         <P>
-          Cada <code>DataList.Item</code> combina um <code>ItemLabel</code> (dt) e um <code>ItemValue</code> (dd). <code>withDivider</code>{' '}
+          Cada <OnlyFor framework="react"><code>DataList.Item</code></OnlyFor><OnlyFor framework="vue"><code>DataListItem</code></OnlyFor> combina um <OnlyFor framework="react"><code>ItemLabel</code></OnlyFor><OnlyFor framework="vue"><code>DataListItemLabel</code></OnlyFor> (dt) e um <OnlyFor framework="react"><code>ItemValue</code></OnlyFor><OnlyFor framework="vue"><code>DataListItemValue</code></OnlyFor> (dd). <code>withDivider</code>{' '}
           separa as linhas e <code>labelWidth</code> alinha os valores em coluna.
         </P>
         <Demo id="data-list/specs" />

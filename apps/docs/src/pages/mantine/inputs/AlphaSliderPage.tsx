@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function AlphaSliderPage() {
   return (
@@ -20,6 +21,7 @@ export default function AlphaSliderPage() {
           name="AlphaSlider"
           previewWidth={320}
           baseProps={{ value: 0.6, 'aria-label': 'Opacidade' }}
+          vue={{ baseProps: { modelValue: 0.6, 'aria-label': 'Opacidade' } }}
           controls={[
             { prop: 'color', type: 'string', initialValue: '#2F3E46' },
             { prop: 'size', type: 'size', initialValue: 'md' },
@@ -29,7 +31,11 @@ export default function AlphaSliderPage() {
 
       <Section title="Controlado">
         <P>
-          <code>value</code> vai de 0 a 1. Combine com um ColorSwatch para mostrar o resultado.
+          <code>value</code>{' '}
+          <OnlyFor framework="vue">
+            (<code>v-model</code>)
+          </OnlyFor>{' '}
+          vai de 0 a 1. Combine com um ColorSwatch para mostrar o resultado.
         </P>
         <Demo id="alpha-slider/basic" />
       </Section>
@@ -49,8 +55,8 @@ export default function AlphaSliderPage() {
         <PropsTable
           rows={[
             { name: 'color', type: 'string', required: true, description: 'Cor base exibida no gradiente.' },
-            { name: 'value', type: 'number', required: true, description: 'Transparência de 0 a 1.' },
-            { name: 'onChange / onChangeEnd', type: '(value: number) => void', description: 'Durante e ao fim do arraste.' },
+            { name: 'value', vueName: 'v-model', type: 'number', required: true, description: 'Transparência de 0 a 1.' },
+            { name: 'onChange / onChangeEnd', vueName: '@change / @change-end', type: '(value: number) => void', description: 'Durante e ao fim do arraste.' },
             { name: 'size', type: 'MantineSize', default: 'md', description: 'Altura do slider.' },
           ]}
         />

@@ -1,6 +1,7 @@
 import { DocPage, Section, P } from '../../kit/DocPage';
 import { Demo } from '../../kit/Demo';
 import { PropsTable } from '../../kit/PropsTable';
+import { OnlyFor } from '../../kit/framework';
 
 export default function ChatHeaderPage() {
   return (
@@ -14,8 +15,14 @@ export default function ChatHeaderPage() {
     >
       <Section title="ChatHeader">
         <P>
-          <code>online</code> adiciona o ponto verde ao avatar. Use <code>actions</code> para ligar,
-          transferir ou encerrar o atendimento.
+          <code>online</code> adiciona o ponto verde ao avatar. Use{' '}
+          <OnlyFor framework="react">
+            <code>actions</code>
+          </OnlyFor>
+          <OnlyFor framework="vue">
+            o slot <code>#actions</code>
+          </OnlyFor>{' '}
+          para ligar, transferir ou encerrar o atendimento.
         </P>
         <Demo id="chat-header/usage" />
       </Section>
@@ -30,7 +37,14 @@ export default function ChatHeaderPage() {
 
       <Section title="Botão voltar">
         <P>
-          Com <code>onBack</code>, o cabeçalho mostra uma seta de voltar{' '}
+          Com{' '}
+          <OnlyFor framework="react">
+            <code>onBack</code>
+          </OnlyFor>
+          <OnlyFor framework="vue">
+            um listener <code>@back</code>
+          </OnlyFor>
+          , o cabeçalho mostra uma seta de voltar{' '}
           <b>apenas em telas pequenas</b> (até 48em) — use junto com <code>mobileView</code> do{' '}
           <code>ChatLayout</code>. Reduza a janela para ver o botão.
         </P>
@@ -51,8 +65,19 @@ export default function ChatHeaderPage() {
         </P>
         <PropsTable
           rows={[
-            { name: 'title', type: 'ReactNode', required: true, description: 'Nome da conversa.' },
-            { name: 'subtitle', type: 'ReactNode', description: 'Status, “digitando…”, setor…' },
+            {
+              name: 'title',
+              type: 'ReactNode',
+              vueType: 'MantineNode | slot #title',
+              required: true,
+              description: 'Nome da conversa.',
+            },
+            {
+              name: 'subtitle',
+              type: 'ReactNode',
+              vueType: 'MantineNode | slot #subtitle',
+              description: 'Status, “digitando…”, setor…',
+            },
             { name: 'avatar', type: 'string', description: 'URL da foto.' },
             { name: 'avatarName', type: 'string', description: 'Nome para iniciais do avatar.' },
             {
@@ -61,8 +86,20 @@ export default function ChatHeaderPage() {
               default: 'false',
               description: 'Indicador verde de presença.',
             },
-            { name: 'actions', type: 'ReactNode', description: 'Ações à direita.' },
-            { name: 'onBack', type: '() => void', description: 'Exibe botão voltar no mobile.' },
+            {
+              name: 'actions',
+              type: 'ReactNode',
+              vueType: 'MantineNode | slot #actions',
+              description: 'Ações à direita.',
+            },
+            {
+              name: 'onBack',
+              type: '() => void',
+              vueName: '@back',
+              vueType: '() => void',
+              description: 'Exibe botão voltar no mobile.',
+              vueDescription: 'Emitido no clique do botão voltar. Com listener, o botão aparece no mobile.',
+            },
           ]}
         />
         <P>

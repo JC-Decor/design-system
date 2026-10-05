@@ -2,12 +2,12 @@
 
 Design System da **JC Decor** para React: tema, tokens e componentes construídos sobre o [Mantine 9](https://mantine.dev).
 
-- 🎨 Paleta da marca (Horizon, Obsidian, Electric, Evergreen) em rampas OKLCH com contraste WCAG AA validado, tipografia Poppins, spacing, raios e sombras
-- 🌗 Tema claro (padrão) e escuro, com variáveis CSS `--ds-*` semânticas
-- 🧩 Todo o Mantine reexportado já temado, mais componentes da marca: `KpiCard`, `Tag`, `PromoBanner`, `TopNav`, `DataTable`, `ProductCard`, `PriceTag`…
-- 💬 `@jcdecor/ui/chat`: bolhas, conversa, composer, lista de conversas e layout de atendimento
-- 🛡️ Logos e ilustrações da marca como componentes SVG recoloríveis, com variações para fundo claro e escuro
-- 📊 `@jcdecor/ui/charts`: gráficos do `@mantine/charts` na paleta da marca, em pt-BR
+- Paleta da marca (Horizon, Obsidian, Electric, Evergreen) em rampas OKLCH com contraste WCAG AA validado, tipografia Poppins, spacing, raios e sombras
+- Tema claro (padrão) e escuro, com variáveis CSS `--ds-*` semânticas
+- Todo o Mantine reexportado já temado, mais componentes da marca: `KpiCard`, `Tag`, `PromoBanner`, `TopNav`, `DataTable`, `ProductCard`, `PriceTag`…
+- `@jcdecor/ui/chat`: bolhas, conversa, composer, lista de conversas e layout de atendimento
+- Logos e ilustrações da marca como componentes SVG recoloríveis, com variações para fundo claro e escuro
+- `@jcdecor/ui/charts`: gráficos do `@mantine/charts` na paleta da marca, em pt-BR
 
 ### Logo
 

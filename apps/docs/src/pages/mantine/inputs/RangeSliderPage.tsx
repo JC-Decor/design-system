@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function RangeSliderPage() {
   return (
@@ -20,6 +21,7 @@ export default function RangeSliderPage() {
           name="RangeSlider"
           previewWidth={360}
           baseProps={{ defaultValue: [25, 75], thumbFromLabel: 'Mínimo', thumbToLabel: 'Máximo' }}
+          vue={{ baseProps: { defaultValue: [25, 75], thumbLabel: ['Mínimo', 'Máximo'] } }}
           controls={[
             { prop: 'color', type: 'color', initialValue: 'horizon' },
             { prop: 'size', type: 'size', initialValue: 'md' },
@@ -56,11 +58,11 @@ export default function RangeSliderPage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'value / defaultValue', type: '[number, number]', description: 'Intervalo selecionado.' },
-            { name: 'onChange / onChangeEnd', type: '(value: [number, number]) => void', description: 'Durante / ao soltar.' },
+            { name: 'value / defaultValue', vueName: 'v-model / defaultValue', type: '[number, number]', description: 'Intervalo selecionado.' },
+            { name: 'onChange / onChangeEnd', vueName: '@change / @change-end', type: '(value: [number, number]) => void', description: 'Durante / ao soltar.' },
             { name: 'min / max / step', type: 'number', default: '0 / 100 / 1', description: 'Limites e passo.' },
             { name: 'minRange / maxRange', type: 'number', default: '10 / ∞', description: 'Distância mínima/máxima entre os thumbs.' },
-            { name: 'thumbFromLabel / thumbToLabel', type: 'string', description: 'aria-label de cada thumb.' },
+            { name: 'thumbFromLabel / thumbToLabel', vueName: 'thumbLabel', type: 'string', vueType: '[string, string]', description: 'aria-label de cada thumb.' },
             { name: 'pushOnOverlap', type: 'boolean', default: 'true', description: 'Empurra o outro thumb ao encostar.' },
           ]}
         />
@@ -68,7 +70,8 @@ export default function RangeSliderPage() {
 
       <Section title="Boas práticas">
         <P>
-          Sempre nomeie os thumbs (<code>thumbFromLabel</code>/<code>thumbToLabel</code>) e mostre os valores em texto. Use <code>onChangeEnd</code>{' '}
+          Sempre nomeie os thumbs (<OnlyFor framework="react"><code>thumbFromLabel</code>/<code>thumbToLabel</code></OnlyFor><OnlyFor framework="vue"><code>thumbLabel</code></OnlyFor>) e mostre os valores em texto. Use{' '}
+          <OnlyFor framework="react"><code>onChangeEnd</code></OnlyFor><OnlyFor framework="vue"><code>@change-end</code></OnlyFor>{' '}
           para recarregar a lista de produtos só quando o cliente soltar o thumb.
         </P>
       </Section>

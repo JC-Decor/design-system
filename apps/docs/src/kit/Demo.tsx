@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import type { Component as VueComponent } from 'vue';
 import { Box, Paper, SegmentedControl, Group, Text } from '@mantine/core';
-import { IconCode, IconEye } from '@tabler/icons-react';
+import { IconBrandReact, IconBrandVue, IconCode, IconEye } from '@tabler/icons-react';
 import { CodeBlock } from './CodeBlock';
 import { demos } from './demos';
+import { useFramework } from './framework';
+import { VueMount } from './VueMount';
 import classes from './kit.module.css';
 
 export interface DemoProps {
@@ -17,10 +20,26 @@ export interface DemoProps {
 export function Demo({ id, title, description, defaultView = 'preview' }: DemoProps) {
   const demo = demos[id];
   const [showCode, setShowCode] = useState(defaultView === 'code');
+  const { framework } = useFramework();
+  const [vueDemo, setVueDemo] = useState<{ Component: VueComponent; code: string } | null>(null);
+  const wantsVue = framework === 'vue' && !!demo?.vue;
+
+  useEffect(() => {
+    let active = true;
+    if (wantsVue) demo!.vue!().then((loaded) => active && setVueDemo(loaded));
+    return () => {
+      active = false;
+    };
+  }, [wantsVue, demo]);
+
   if (!demo) {
     return <Text c="red">Demo não encontrado: {id}</Text>;
   }
-  const { Component, code, meta } = demo;
+  const { Component, meta } = demo;
+  const showVue = wantsVue && vueDemo !== null;
+  const code = showVue ? vueDemo.code : demo.code;
+  // Vue escolhido mas este exemplo ainda não tem versão .vue: mostra o React e avisa
+  const missingVue = framework === 'vue' && !demo.vue;
 
   return (
     <Box my="lg">
@@ -46,10 +65,14 @@ export function Demo({ id, title, description, defaultView = 'preview' }: DemoPr
           p={meta.withoutPadding ? 0 : 'lg'}
         >
           <Box w="100%" maw={meta.maxWidth} mx={meta.centered ? 'auto' : undefined}>
-            <Component />
+            {showVue ? <VueMount component={vueDemo.Component} /> : wantsVue ? null : <Component />}
           </Box>
         </Box>
-        <Group className={classes.demoBar} justify="flex-end" px="sm" py={6}>
+        <Group className={classes.demoBar} justify="space-between" px="sm" py={6}>
+          <Group gap={6} fz="xs" c="var(--ds-text-3)">
+            {showVue ? <IconBrandVue size={14} /> : <IconBrandReact size={14} />}
+            {showVue ? 'Vue' : missingVue ? 'React (exemplo Vue em breve)' : 'React'}
+          </Group>
           <SegmentedControl
             size="xs"
             value={showCode ? 'code' : 'preview'}
@@ -62,7 +85,7 @@ export function Demo({ id, title, description, defaultView = 'preview' }: DemoPr
         </Group>
         {showCode && (
           <Box className={classes.code}>
-            <CodeBlock code={code} />
+            <CodeBlock code={code} language={showVue ? 'vue' : 'tsx'} />
           </Box>
         )}
       </Paper>

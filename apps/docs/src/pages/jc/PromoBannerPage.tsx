@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../kit/DocPage';
 import { Demo } from '../../kit/Demo';
 import { Configurator } from '../../kit/Configurator';
 import { PropsTable } from '../../kit/PropsTable';
+import { OnlyFor } from '../../kit/framework';
 
 export default function PromoBannerPage() {
   return (
@@ -51,8 +52,15 @@ export default function PromoBannerPage() {
 
       <Section title="Botão de fechar">
         <P>
-          Com <code>withCloseButton</code> o banner se esconde sozinho e chama <code>onClose</code>. O estado é interno: para lembrar a
-          escolha entre visitas, salve em <code>onClose</code> (ex.: localStorage) e não renderize o banner.
+          <OnlyFor framework="react">
+            Com <code>withCloseButton</code> o banner se esconde sozinho e chama <code>onClose</code>. O estado é interno: para lembrar a
+            escolha entre visitas, salve em <code>onClose</code> (ex.: localStorage) e não renderize o banner.
+          </OnlyFor>
+          <OnlyFor framework="vue">
+            Com <code>with-close-button</code> o banner se esconde sozinho e emite <code>@close</code>. Para controlar a visibilidade (ou
+            mostrar de novo), use <code>v-model:opened</code>; para lembrar a escolha entre visitas, salve no <code>@close</code> (ex.:
+            localStorage).
+          </OnlyFor>
         </P>
         <Demo id="promo-banner/close" />
       </Section>
@@ -61,11 +69,12 @@ export default function PromoBannerPage() {
         <PropsTable
           rows={[
             { name: 'variant', type: "'horizon' | 'electric' | 'obsidian'", default: "'horizon'", description: 'Esquema de cores.' },
-            { name: 'children', type: 'ReactNode', description: 'Texto do banner. <strong> recebe a cor de destaque.' },
-            { name: 'highlight', type: 'ReactNode', description: 'Trecho destacado ao final (ex.: cupom).' },
-            { name: 'icon', type: 'ReactNode', description: 'Ícone à esquerda do texto.' },
+            { name: 'children', vueName: '#default', type: 'ReactNode', vueType: 'slot', description: 'Texto do banner. <strong> recebe a cor de destaque.' },
+            { name: 'highlight', type: 'ReactNode', vueType: 'MantineNode | slot #highlight', description: 'Trecho destacado ao final (ex.: cupom).' },
+            { name: 'icon', type: 'ReactNode', vueType: 'MantineNode | slot #icon', description: 'Ícone à esquerda do texto.' },
             { name: 'withCloseButton', type: 'boolean', default: 'false', description: 'Exibe o botão de fechar.' },
-            { name: 'onClose', type: '() => void', description: 'Chamado ao fechar o banner.' },
+            { name: 'onClose', vueName: '@close', type: '() => void', vueType: '() => void', description: 'Chamado ao fechar o banner.', vueDescription: 'Emitido ao clicar no botão de fechar.' },
+            { name: 'v-model:opened', type: 'boolean', only: 'vue', description: <>Visibilidade controlada (opcional). Ao fechar, emite <code>update:opened</code> com <code>false</code>; volte para <code>true</code> para mostrar de novo.</> },
             { name: 'radius', type: 'MantineRadius', description: 'Arredonda os cantos. Sem valor = full-bleed.' },
           ]}
         />

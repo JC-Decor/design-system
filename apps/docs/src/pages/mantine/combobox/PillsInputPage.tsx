@@ -1,8 +1,11 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { useFramework } from '../../../kit/framework';
 
 export default function PillsInputPage() {
+  const vue = useFramework().framework === 'vue';
+
   return (
     <DocPage
       kicker="Mantine · Combobox"
@@ -14,16 +17,16 @@ export default function PillsInputPage() {
     >
       <Section title="Uso básico">
         <P>
-          <code>PillsInput</code> desenha a caixa do input; dentro dele, <code>Pill.Group</code> organiza as pills e{' '}
-          <code>PillsInput.Field</code> é o campo de texto.
+          <code>PillsInput</code> desenha a caixa do input; dentro dele, <code>{vue ? 'PillGroup' : 'Pill.Group'}</code> organiza as pills e{' '}
+          <code>{vue ? 'PillsInputField' : 'PillsInput.Field'}</code> é o campo de texto.
         </P>
         <Demo id="pills-input/basic" />
       </Section>
 
       <Section title="Com Combobox">
         <P>
-          Um MultiSelect próprio: busca, marcação com ícone, Backspace remove a última pill. Use <code>Combobox.DropdownTarget</code> no
-          PillsInput e <code>Combobox.EventsTarget</code> no campo.
+          Um MultiSelect próprio: busca, marcação com ícone, Backspace remove a última pill. Use <code>{vue ? 'ComboboxDropdownTarget' : 'Combobox.DropdownTarget'}</code> no
+          PillsInput e <code>{vue ? 'ComboboxEventsTarget' : 'Combobox.EventsTarget'}</code> no campo.
         </P>
         <Demo id="pills-input/combobox" />
       </Section>
@@ -36,8 +39,8 @@ export default function PillsInputPage() {
         <PropsTable
           rows={[
             { name: 'PillsInput', type: 'InputBase', description: 'Aceita label, description, error, size, radius, pointer.' },
-            { name: 'PillsInput.Field', type: 'input', description: "Campo de texto; type=\"hidden\" quando só deve receber eventos." },
-            { name: 'Pill.Group', type: 'div', description: 'Agrupa as pills com espaçamento por tamanho.' },
+            { name: 'PillsInput.Field', vueName: 'PillsInputField', type: 'input', description: "Campo de texto; type=\"hidden\" quando só deve receber eventos." },
+            { name: 'Pill.Group', vueName: 'PillGroup', type: 'div', description: 'Agrupa as pills com espaçamento por tamanho.' },
           ]}
         />
       </Section>

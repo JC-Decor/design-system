@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../kit/DocPage';
 import { Demo } from '../../kit/Demo';
 import { Configurator } from '../../kit/Configurator';
 import { PropsTable } from '../../kit/PropsTable';
+import { OnlyFor } from '../../kit/framework';
 
 export default function PageHeaderPage() {
   return (
@@ -37,7 +38,8 @@ export default function PageHeaderPage() {
       <Section title="Breadcrumbs">
         <P>
           Itens com <code>href</code> viram links; o último item, sem <code>href</code>, representa a página atual. Para usar o{' '}
-          <code>Link</code> do react-router, passe-o em <code>linkComponent</code>.
+          <OnlyFor framework="react"><code>Link</code> do react-router, passe-o em <code>linkComponent</code>.</OnlyFor>
+          <OnlyFor framework="vue"><code>RouterLink</code> do vue-router, passe-o em <code>:link-component="RouterLink"</code>.</OnlyFor>
         </P>
         <Demo id="page-header/breadcrumbs" />
       </Section>
@@ -50,12 +52,12 @@ export default function PageHeaderPage() {
       <Section title="Props">
         <PropsTable
           rows={[
-            { name: 'title', type: 'ReactNode', required: true, description: 'Título da página (<h1>).' },
-            { name: 'kicker', type: 'ReactNode', description: 'Sobretítulo em caixa-alta.' },
-            { name: 'description', type: 'ReactNode', description: 'Texto de apoio (subheadline-large, até 640px).' },
-            { name: 'actions', type: 'ReactNode', description: 'Botões à direita do título.' },
+            { name: 'title', type: 'ReactNode', vueType: 'MantineNode | slot #title', required: true, description: 'Título da página (<h1>).' },
+            { name: 'kicker', type: 'ReactNode', vueType: 'MantineNode | slot #kicker', description: 'Sobretítulo em caixa-alta.' },
+            { name: 'description', type: 'ReactNode', vueType: 'MantineNode | slot #description', description: 'Texto de apoio (subheadline-large, até 640px).' },
+            { name: 'actions', type: 'ReactNode', vueType: 'MantineNode | slot #actions', description: 'Botões à direita do título.' },
             { name: 'breadcrumbs', type: 'PageHeaderBreadcrumb[]', description: '{ label, href? } — itens sem href são texto.' },
-            { name: 'linkComponent', type: 'React.ElementType', default: "'a'", description: 'Componente dos links do breadcrumb (recebe href e to).' },
+            { name: 'linkComponent', type: 'React.ElementType', vueType: 'string | Component', default: "'a'", description: 'Componente dos links do breadcrumb (recebe href e to).', vueDescription: <>Componente dos links do breadcrumb, ex.: <code>RouterLink</code> do vue-router (recebe <code>to</code> e <code>href</code>).</> },
             { name: 'size', type: "'headline' | 'display'", default: "'headline'", description: 'headline-large ou display-small no título.' },
             { name: '...BoxProps', type: 'BoxProps', description: 'Style props do Box. Margem inferior padrão: mb="xl".' },
           ]}

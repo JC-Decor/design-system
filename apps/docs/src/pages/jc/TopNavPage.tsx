@@ -2,6 +2,27 @@ import { DocPage, Section, P } from '../../kit/DocPage';
 import { Demo } from '../../kit/Demo';
 import { CodeBlock } from '../../kit/CodeBlock';
 import { PropsTable } from '../../kit/PropsTable';
+import { OnlyFor } from '../../kit/framework';
+
+const vueRouterCode = `<script setup lang="ts">
+import { computed } from 'vue';
+import { RouterLink, useRoute } from 'vue-router';
+import { TopNav, ThemeToggle } from '@jcdecor/vue';
+
+const route = useRoute();
+const links = computed(() =>
+  [
+    { label: 'Painéis', href: '/paineis' },
+    { label: 'Design System', href: '/design-system' },
+  ].map((link) => ({ ...link, active: route.path.startsWith(link.href) })),
+);
+</script>
+
+<template>
+  <TopNav :link-component="RouterLink" :links="links">
+    <template #rightSection><ThemeToggle color="gray.0" /></template>
+  </TopNav>
+</template>`;
 
 const routerCode = `import { Link, useLocation } from 'react-router';
 import { TopNav, ThemeToggle } from '@jcdecor/ui';
@@ -46,6 +67,7 @@ export default function TopNavPage() {
         <Demo id="top-nav/brand" />
       </Section>
 
+      <OnlyFor framework="react">
       <Section title="Com react-router">
         <P>
           Passe o <code>Link</code> do roteador em <code>linkComponent</code>: links e marca recebem <code>to</code> (e <code>href</code>)
@@ -53,22 +75,32 @@ export default function TopNavPage() {
         </P>
         <CodeBlock code={routerCode} />
       </Section>
+      </OnlyFor>
+      <OnlyFor framework="vue">
+      <Section title="Com vue-router">
+        <P>
+          Passe o <code>RouterLink</code> em <code>:link-component</code>: links e marca recebem <code>to</code> (e <code>href</code>) a
+          partir de <code>href</code>/<code>brand-href</code>. Calcule <code>active</code> a partir da rota atual.
+        </P>
+        <CodeBlock code={vueRouterCode} language="vue" />
+      </Section>
+      </OnlyFor>
 
       <Section title="Mobile">
         <P>
           Abaixo de 640px os links são escondidos e um <code>Burger</code> abre a lista em um <code>Collapse</code> logo abaixo da barra;
-          clicar em um link fecha o menu. Desative com <code>collapseOnMobile={'{false}'}</code>.
+          clicar em um link fecha o menu. Desative com <OnlyFor framework="react"><code>collapseOnMobile={'{false}'}</code></OnlyFor><OnlyFor framework="vue"><code>:collapse-on-mobile="false"</code></OnlyFor>.
         </P>
       </Section>
 
       <Section title="Props">
         <PropsTable
           rows={[
-            { name: 'brand', type: 'ReactNode', default: "'JC Decor'", description: 'Marca à esquerda (sempre renderizada como link).' },
-            { name: 'brandHref', type: 'string', default: "'/'", description: 'Destino do link da marca.' },
-            { name: 'links', type: 'TopNavLink[]', default: '[]', description: '{ label, href?, active?, onClick? } — sem href vira <button>.' },
-            { name: 'linkComponent', type: 'React.ElementType', default: "'a'", description: 'Componente dos links (ex.: Link do react-router), recebe to/href.' },
-            { name: 'rightSection', type: 'ReactNode', description: 'Conteúdo à direita (ThemeToggle, avatar, botões).' },
+            { name: 'brand', type: 'ReactNode', vueType: 'MantineNode | slot #brand', default: '<JcLogo variant="dark" />', description: 'Marca à esquerda (renderizada como link, exceto com brandHref={null}).', vueDescription: <>Marca à esquerda (renderizada como link, exceto com <code>:brand-href="null"</code>).</> },
+            { name: 'brandHref', type: 'string | null', default: "'/'", description: 'Destino do link da marca; null renderiza a marca como texto.' },
+            { name: 'links', type: 'TopNavLink[]', default: '[]', description: '{ label, href?, active?, onClick? } — sem href vira <button>.', vueDescription: '{ label, href?, active?, onClick? } — sem href vira <button>. onClick é uma função no próprio objeto do link.' },
+            { name: 'linkComponent', type: 'React.ElementType', vueType: 'string | Component', default: "'a'", description: 'Componente dos links (ex.: Link do react-router), recebe to/href.', vueDescription: 'Componente dos links (ex.: RouterLink do vue-router), recebe to/href.' },
+            { name: 'rightSection', type: 'ReactNode', vueType: 'MantineNode | slot #rightSection', description: 'Conteúdo à direita (ThemeToggle, avatar, botões).' },
             { name: 'collapseOnMobile', type: 'boolean', default: 'true', description: 'Esconde os links em telas pequenas e mostra um hambúrguer.' },
           ]}
         />

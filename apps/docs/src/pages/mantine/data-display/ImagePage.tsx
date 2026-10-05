@@ -50,7 +50,7 @@ export default function ImagePage() {
 
       <Section title="No tema JC">
         <PropsTable
-          rows={[{ name: 'radius', type: 'defaultProps', default: "'md'", description: '12px, igual ao Card. Use radius={0} dentro de Card.Section.' }]}
+          rows={[{ name: 'radius', type: 'defaultProps', default: "'md'", description: '12px, igual ao Card. Use radius={0} dentro de Card.Section.', vueDescription: '12px, igual ao Card. Use :radius="0" dentro de CardSection.' }]}
         />
       </Section>
 

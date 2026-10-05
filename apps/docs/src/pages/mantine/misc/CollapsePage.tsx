@@ -1,6 +1,7 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function CollapsePage() {
   return (
@@ -15,7 +16,8 @@ export default function CollapsePage() {
       <Section title="Uso básico">
         <P>
           No Mantine 9 o estado é a prop <code>expanded</code> (antes <code>in</code>). Combine com <code>useDisclosure</code> de{' '}
-          <code>@mantine/hooks</code> e informe <code>aria-expanded</code> no gatilho.
+          <OnlyFor framework="react"><code>@mantine/hooks</code></OnlyFor>
+          <OnlyFor framework="vue"><code>@mantine-vue/hooks</code> (retorna um <code>Ref</code>)</OnlyFor> e informe <code>aria-expanded</code> no gatilho.
         </P>
         <Demo id="collapse/basic" />
       </Section>

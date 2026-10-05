@@ -1,6 +1,11 @@
-import { useMemo, useState } from 'react';
+import { isValidElement, useMemo, useState } from 'react';
+import type { Component as VueComponent } from 'vue';
+import * as vueCore from '@jcdecor/vue';
+import * as vueBrand from '@jcdecor/vue/brand';
 import { Box, Group, NumberInput, Paper, SegmentedControl, Select, Stack, Switch, Text, TextInput, ColorSwatch, Tooltip, UnstyledButton, CheckIcon } from '@mantine/core';
 import { CodeBlock } from './CodeBlock';
+import { toVueImport, useFramework } from './framework';
+import { VueMount } from './VueMount';
 import classes from './kit.module.css';
 
 export type ConfiguratorControl =
@@ -27,7 +32,55 @@ export interface ConfiguratorProps {
   /** Wrapper da prévia (ex.: largura) */
   previewWidth?: number;
   centered?: boolean;
+  /**
+   * Versão Vue da prévia. Por padrão usa o componente de mesmo `name` do pacote Vue equivalente a `importFrom`
+   * (`@jcdecor/ui` → `@jcdecor/vue`), com as mesmas props. Passe quando a prévia React é um wrapper próprio
+   * ou quando `baseProps` tem elementos React: `component` recebe o estado dos controles como props.
+   */
+  vue?: {
+    component?: VueComponent;
+    baseProps?: Record<string, unknown>;
+    /** Slots fixos exibidos no código Vue (ex.: { leftSection: '<IconHeart :size="18" />' }) */
+    codeSlots?: Record<string, string>;
+    /** Props fixas exibidas no código Vue, já em sintaxe de template (ex.: { ':data': "['A', 'B']" }) */
+    codeProps?: Record<string, string>;
+  };
 }
+
+// chat/charts ficam de fora de propósito: importá-los aqui puxaria o ECharts para o bundle principal do docs.
+// Playgrounds desses módulos passam `vue.component`.
+const vueModules: Record<string, Record<string, unknown>> = {
+  '@jcdecor/ui': vueCore,
+  '@jcdecor/ui/brand': vueBrand,
+};
+
+const kebab = (prop: string) => (prop.startsWith('aria-') || prop.startsWith('data-') ? prop : prop.replace(/[A-Z]/g, (c) => `-${c.toLowerCase()}`));
+
+function serializeVue(prop: string, value: unknown) {
+  const name = kebab(prop);
+  if (value === true) return name;
+  if (typeof value === 'string') return `${name}="${value}"`;
+  return `:${name}="${JSON.stringify(value).replace(/"/g, "'")}"`;
+}
+
+/**
+ * Converte os `codeProps` JSX do React para template Vue: elementos viram slots, strings literais
+ * viram atributos e expressões viram bindings (`:prop`).
+ */
+function codePropsToVue(codeProps: Record<string, string>) {
+  const attrs: string[] = [];
+  const slots: Record<string, string> = {};
+  for (const [prop, jsx] of Object.entries(codeProps)) {
+    if (jsx.trim().startsWith('<')) slots[prop] = jsx.replace(/size=\{(\d+)\}/g, ':size="$1"');
+    else if (/^"[^"]*"$/.test(jsx)) attrs.push(`${kebab(prop)}=${jsx}`);
+    else attrs.push(`:${kebab(prop)}="${jsx.replace(/"/g, "'")}"`);
+  }
+  return { attrs, slots };
+}
+
+/** Remove valores que só existem no React (elementos JSX, handlers de evento React). */
+const vueSafeProps = (props: Record<string, unknown>) =>
+  Object.fromEntries(Object.entries(props).filter(([key, value]) => !isValidElement(value) && !(key.startsWith('on') && typeof value === 'function')));
 
 const SIZES = ['xs', 'sm', 'md', 'lg', 'xl'];
 const BRAND_COLORS = ['horizon', 'evergreen', 'electric', 'obsidian', 'danger', 'gray'];
@@ -42,7 +95,8 @@ function serialize(prop: string, value: unknown) {
 }
 
 /** Playground no estilo do site do Mantine: controles → prévia + código gerado. */
-export function Configurator({ component: Component, name, importFrom = '@jcdecor/ui', controls, baseProps = {}, codeProps = {}, previewWidth, centered = true }: ConfiguratorProps) {
+export function Configurator({ component: Component, name, importFrom = '@jcdecor/ui', controls, baseProps = {}, codeProps = {}, previewWidth, centered = true, vue }: ConfiguratorProps) {
+  const { framework } = useFramework();
   const initial = useMemo(() => Object.fromEntries(controls.map((c) => [c.prop, c.initialValue])), [controls]);
   const [state, setState] = useState<Record<string, any>>(initial);
   const set = (prop: string, value: unknown) => setState((s) => ({ ...s, [prop]: value }));
@@ -58,14 +112,39 @@ export function Configurator({ component: Component, name, importFrom = '@jcdeco
   const childrenText = typeof children === 'string' ? children : undefined;
   const open = attrs.length > 2 ? `<${name}\n  ${attrs.join('\n  ')}\n` : `<${name}${attrs.length ? ' ' + attrs.join(' ') : ''}`;
   const jsx = childrenText !== undefined ? `${open}>${childrenText}</${name}>` : `${open}${attrs.length > 2 ? '' : ' '}/>`;
-  const code = `import { ${name} } from '${importFrom}';\n\nfunction Demo() {\n  return ${jsx.includes('\n') ? '(\n    ' + jsx.split('\n').join('\n    ') + '\n  )' : jsx};\n}`;
+  const reactCode = `import { ${name} } from '${importFrom}';\n\nfunction Demo() {\n  return ${jsx.includes('\n') ? '(\n    ' + jsx.split('\n').join('\n    ') + '\n  )' : jsx};\n}`;
+
+  // ── Vue ──
+  const VueComponent = (vue?.component ?? vueModules[importFrom]?.[name]) as VueComponent | undefined;
+  const useVue = framework === 'vue' && !!VueComponent;
+  const vueProps = useMemo(
+    () => ({ ...vueSafeProps(vue?.baseProps ?? baseProps), ...(vue?.component ? state : rest) }),
+    [vue, baseProps, state, rest],
+  );
+  const converted = codePropsToVue(codeProps);
+  const vueAttrs = [
+    ...(vue?.codeProps ? Object.entries(vue.codeProps).map(([p, v]) => `${p}=${v.startsWith('"') ? v : `"${v}"`}`) : converted.attrs),
+    ...changed.filter(([, v]) => v !== false && v !== '').map(([p, v]) => serializeVue(p, v)),
+  ];
+  const vueSlots = Object.entries(vue?.codeSlots ?? converted.slots).map(([slot, content]) => `<template #${slot}>${content}</template>`);
+  const inner = [...vueSlots, ...(childrenText !== undefined ? [childrenText] : [])];
+  const vueOpen = vueAttrs.length > 2 ? `<${name}\n    ${vueAttrs.join('\n    ')}\n  ` : `<${name}${vueAttrs.length ? ' ' + vueAttrs.join(' ') : ''}`;
+  const vueTag = inner.length
+    ? `${vueOpen}>${inner.length > 1 || vueSlots.length ? '\n    ' + inner.join('\n    ') + '\n  ' : inner[0]}</${name}>`
+    : `${vueOpen}${vueAttrs.length > 2 ? '' : ' '}/>`;
+  const vueCode = `<script setup lang="ts">\nimport { ${name} } from '${toVueImport(importFrom)}';\n</script>\n\n<template>\n  ${vueTag}\n</template>`;
+  const code = useVue ? vueCode : reactCode;
 
   return (
     <Paper withBorder radius="md" className={classes.demo} my="lg">
       <div className={classes.configurator}>
         <Box className={classes.preview} data-centered={centered || undefined} p="xl">
           <Box w={previewWidth ?? undefined} maw="100%">
-            <Component {...baseProps} {...state} />
+            {useVue ? (
+              <VueMount component={VueComponent!} props={vueProps} slots={childrenText !== undefined && !vue?.component ? { default: childrenText } : undefined} />
+            ) : (
+              <Component {...baseProps} {...state} />
+            )}
           </Box>
         </Box>
         <Stack className={classes.controls} gap="sm" p="md">
@@ -122,7 +201,7 @@ export function Configurator({ component: Component, name, importFrom = '@jcdeco
         </Stack>
       </div>
       <Box className={classes.code}>
-        <CodeBlock code={code} />
+        <CodeBlock code={code} language={useVue ? 'vue' : 'tsx'} />
       </Box>
     </Paper>
   );

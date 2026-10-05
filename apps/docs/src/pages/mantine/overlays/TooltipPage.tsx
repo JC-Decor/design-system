@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import TooltipPreviewVue from '../../../vue-demos/tooltip/TooltipPreview.vue';
 
 function TooltipPreview(props: Omit<TooltipProps, 'children'>) {
   return (
@@ -25,6 +26,7 @@ export default function TooltipPage() {
       <Section title="Playground">
         <Configurator
           component={TooltipPreview}
+          vue={{ component: TooltipPreviewVue }}
           name="Tooltip"
           controls={[
             { prop: 'label', type: 'string', initialValue: 'Parcele em até 10x sem juros' },
@@ -73,7 +75,7 @@ export default function TooltipPage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'label', type: 'ReactNode', required: true, description: 'Conteúdo do tooltip.' },
+            { name: 'label', type: 'ReactNode', vueType: 'string | slot #label', required: true, description: 'Conteúdo do tooltip.' },
             { name: 'position', type: 'FloatingPosition', default: 'top', description: 'Posição em relação ao alvo.' },
             { name: 'openDelay / closeDelay', type: 'number', default: '0', description: 'Atrasos em ms.' },
             { name: 'multiline', type: 'boolean', default: 'false', description: 'Quebra linhas; combine com w.' },

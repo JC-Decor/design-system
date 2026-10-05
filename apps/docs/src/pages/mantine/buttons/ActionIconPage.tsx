@@ -4,8 +4,12 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { useFramework } from '../../../kit/framework';
+import ActionIconPreviewVue from '../../../vue-demos/action-icon/ActionIconPreview.vue';
 
 export default function ActionIconPage() {
+  const vue = useFramework().framework === 'vue';
+
   return (
     <DocPage
       kicker="Mantine · Buttons"
@@ -21,6 +25,7 @@ export default function ActionIconPage() {
           name="ActionIcon"
           baseProps={{ children: <IconHeart size={18} />, 'aria-label': 'Favoritar' }}
           codeProps={{ 'aria-label': '"Favoritar"' }}
+          vue={{ component: ActionIconPreviewVue }}
           controls={[
             { prop: 'variant', type: 'select', data: ['subtle', 'filled', 'outline', 'accent', 'light', 'default', 'transparent'], initialValue: 'subtle' },
             { prop: 'color', type: 'color', initialValue: 'horizon' },
@@ -48,7 +53,7 @@ export default function ActionIconPage() {
       </Section>
 
       <Section title="Grupo">
-        <P><code>ActionIcon.Group</code> e <code>ActionIcon.GroupSection</code> montam controles segmentados, como o seletor de quantidade.</P>
+        <P><code>{vue ? 'ActionIconGroup' : 'ActionIcon.Group'}</code> e <code>{vue ? 'ActionIconGroupSection' : 'ActionIcon.GroupSection'}</code> montam controles segmentados, como o seletor de quantidade.</P>
         <Demo id="action-icon/group" />
       </Section>
 

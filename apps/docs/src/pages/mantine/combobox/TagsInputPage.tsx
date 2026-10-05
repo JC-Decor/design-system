@@ -55,7 +55,7 @@ export default function TagsInputPage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'value / onChange', type: 'string[]', description: 'Tags controladas.' },
+            { name: 'value / onChange', vueName: 'v-model', type: 'string[]', description: 'Tags controladas.' },
             { name: 'data', type: 'ComboboxStringData', description: 'Sugestões opcionais.' },
             { name: 'splitChars', type: 'string[]', default: "[',']", description: 'Caracteres que separam tags ao digitar/colar.' },
             { name: 'maxTags', type: 'number', description: 'Limite de tags.' },

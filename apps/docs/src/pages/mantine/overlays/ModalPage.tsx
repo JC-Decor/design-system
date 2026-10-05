@@ -59,8 +59,8 @@ import { useDisclosure } from '@mantine/hooks';`}
         <PropsTable
           rows={[
             { name: 'opened', type: 'boolean', required: true, description: 'Estado de abertura.' },
-            { name: 'onClose', type: '() => void', required: true, description: 'Chamado no Esc, no clique fora e no botão fechar.' },
-            { name: 'title', type: 'ReactNode', description: 'Título no cabeçalho; também vira o aria-labelledby.' },
+            { name: 'onClose', vueName: '@close', type: '() => void', vueType: 'evento', required: true, description: 'Chamado no Esc, no clique fora e no botão fechar.' },
+            { name: 'title', type: 'ReactNode', vueType: 'string | slot #title', description: 'Título no cabeçalho; também vira o aria-labelledby.' },
             { name: 'size', type: "MantineSize | string | number", default: 'md', description: 'Largura do conteúdo.' },
             { name: 'fullScreen', type: 'boolean', default: 'false', description: 'Ocupa a viewport inteira.' },
             { name: 'closeOnClickOutside', type: 'boolean', default: 'true', description: 'Desative em formulários com risco de perda de dados.' },

@@ -58,7 +58,7 @@ export default function PillPage() {
             { name: 'variant', type: "'default' | 'contrast'", default: "'default'", description: 'Neutra ou primária.' },
             { name: 'size', type: 'MantineSize', default: "'sm'", description: 'Altura e fonte.' },
             { name: 'withRemoveButton', type: 'boolean', default: 'false', description: 'Exibe o botão de remover.' },
-            { name: 'onRemove', type: '() => void', description: 'Chamado ao clicar em remover.' },
+            { name: 'onRemove', vueName: '@remove', type: '() => void', description: 'Chamado ao clicar em remover.' },
             { name: 'removeButtonProps', type: 'object', description: 'Props do botão (ex.: aria-label).' },
           ]}
         />

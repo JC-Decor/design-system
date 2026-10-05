@@ -1,6 +1,7 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function TimelinePage() {
   return (
@@ -22,7 +23,7 @@ export default function TimelinePage() {
 
       <Section title="Cores por status">
         <P>
-          Cada <code>Timeline.Item</code> aceita <code>color</code>. Para Electric use o tom 300 (<code>color="electric.3"</code>) com o ícone em navy
+          Cada <OnlyFor framework="react"><code>Timeline.Item</code></OnlyFor><OnlyFor framework="vue"><code>TimelineItem</code></OnlyFor> aceita <code>color</code>. Para Electric use o tom 300 (<code>color="electric.3"</code>) com o ícone em navy
           (<code>var(--mantine-color-obsidian-6)</code>) para manter o contraste.
         </P>
         <Demo id="timeline/status" />

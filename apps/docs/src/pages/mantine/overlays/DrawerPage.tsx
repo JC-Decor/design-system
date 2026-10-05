@@ -47,10 +47,10 @@ import { useDisclosure } from '@mantine/hooks';`}
         <PropsTable
           rows={[
             { name: 'opened', type: 'boolean', required: true, description: 'Estado de abertura.' },
-            { name: 'onClose', type: '() => void', required: true, description: 'Fecha no Esc, clique fora e botão fechar.' },
+            { name: 'onClose', vueName: '@close', type: '() => void', vueType: 'evento', required: true, description: 'Fecha no Esc, clique fora e botão fechar.' },
             { name: 'position', type: "'left' | 'right' | 'top' | 'bottom'", default: 'left', description: 'Borda de onde o painel entra.' },
             { name: 'size', type: 'MantineSize | string | number', default: 'md', description: 'Largura (laterais) ou altura (topo/base).' },
-            { name: 'title', type: 'ReactNode', description: 'Título do cabeçalho.' },
+            { name: 'title', type: 'ReactNode', vueType: 'string | slot #title', description: 'Título do cabeçalho.' },
             { name: 'offset', type: 'number | string', default: '0', description: 'Distância da borda; com radius cria um painel "flutuante".' },
           ]}
         />

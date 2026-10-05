@@ -67,6 +67,8 @@ export default function ChatMessagePage() {
             {
               name: 'children',
               type: 'ReactNode',
+              vueName: '#default',
+              vueType: 'slot',
               description: 'Conteúdo da bolha. Vazio = só anexos.',
             },
             {

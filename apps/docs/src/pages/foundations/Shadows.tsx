@@ -3,6 +3,7 @@ import { semantic } from '@jcdecor/ui/tokens';
 import { DocPage, Section, P } from '../../kit/DocPage';
 import { CodeBlock } from '../../kit/CodeBlock';
 import { PropsTable } from '../../kit/PropsTable';
+import { useFramework } from '../../kit/framework';
 
 const shadows = [
   { name: 'sm', cssVar: '--ds-shadow-sm', value: semantic.light.shadowSm, usage: 'Cards em repouso (padrão do Card)' },
@@ -19,6 +20,7 @@ const radii = [
 ];
 
 export default function Shadows() {
+  const vue = useFramework().framework === 'vue';
   return (
     <DocPage
       kicker="Fundamentos"
@@ -77,7 +79,7 @@ export default function Shadows() {
 
       <Section title="Como usar">
         <CodeBlock
-          code={`// Props do Mantine
+          code={`${vue ? '<!-- Props do Mantine (template Vue) -->' : '// Props do Mantine'}
 <Paper shadow="md" radius="lg" p="lg">…</Paper>
 <Button radius="xl">Pílula</Button>
 

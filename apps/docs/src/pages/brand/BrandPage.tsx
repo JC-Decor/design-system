@@ -5,6 +5,9 @@ import { Demo } from '../../kit/Demo';
 import { Configurator } from '../../kit/Configurator';
 import { PropsTable } from '../../kit/PropsTable';
 import { CodeBlock } from '../../kit/CodeBlock';
+import { useFramework } from '../../kit/framework';
+import { VueMount } from '../../kit/VueMount';
+import BrandOverviewVue from '../../vue-demos/brand/BrandOverview.vue';
 
 const COLORS = ['horizon', 'obsidian', 'electric', 'evergreen', 'danger', 'gray'];
 
@@ -19,31 +22,41 @@ const overview = [
 const svgProps = [
   { name: 'size', type: 'number | string', default: 'varia', description: 'Altura do SVG; a largura segue a proporção.' },
   { name: 'title', type: 'string', description: 'Nome acessível (role="img"). Sem title o SVG é decorativo (aria-hidden).' },
-  { name: '…BoxProps', type: 'style props', description: 'm, p, c, className, style, onClick… como qualquer componente Mantine.' },
+  {
+    name: '…BoxProps',
+    type: 'style props',
+    description: 'm, p, c, className, style, onClick… como qualquer componente Mantine.',
+    vueDescription: 'm, p, c, class, style, @click… como qualquer componente Mantine.',
+  },
 ];
 
 export default function BrandPage() {
+  const { framework } = useFramework();
   return (
     <DocPage
       kicker="Marca"
       title="Logos e ilustrações"
       source="jc"
       sourcePath="packages/ui/src/brand"
-      description="Logos e ilustrações da JC Decor como componentes React (SVG inline): nítidos em qualquer tamanho, recoloríveis com cores do tema e prontos para o tema claro e o escuro."
+      description={`Logos e ilustrações da JC Decor como componentes ${framework === 'vue' ? 'Vue' : 'React'} (SVG inline): nítidos em qualquer tamanho, recoloríveis com cores do tema e prontos para o tema claro e o escuro.`}
       importCode={`import { JcLogo, JcLogoAlt, SpartanHelmet, GreekFrame, Collaborator } from '@jcdecor/ui';
 // ou, só a marca: import { JcLogo } from '@jcdecor/ui/brand';`}
     >
       <Section title="Visão geral">
-        <SimpleGrid type="container" cols={{ base: 2, '560px': 5 }} spacing="md" mt="md">
-          {overview.map((item) => (
-            <Paper key={item.name} withBorder p="md" h={130}>
-              <Stack align="center" justify="space-between" h="100%">
-                <Stack justify="center" style={{ flex: 1 }}>{item.node}</Stack>
-                <Text fz="xs" fw={600} ff="monospace">{item.name}</Text>
-              </Stack>
-            </Paper>
-          ))}
-        </SimpleGrid>
+        {framework === 'vue' ? (
+          <VueMount component={BrandOverviewVue} />
+        ) : (
+          <SimpleGrid type="container" cols={{ base: 2, '560px': 5 }} spacing="md" mt="md">
+            {overview.map((item) => (
+              <Paper key={item.name} withBorder p="md" h={130}>
+                <Stack align="center" justify="space-between" h="100%">
+                  <Stack justify="center" style={{ flex: 1 }}>{item.node}</Stack>
+                  <Text fz="xs" fw={600} ff="monospace">{item.name}</Text>
+                </Stack>
+              </Paper>
+            ))}
+          </SimpleGrid>
+        )}
         <P>
           Todas as cores aceitam nome do tema (<code>horizon</code>), tom (<code>electric.3</code>), qualquer cor CSS (<code>#fff</code>,{' '}
           <code>currentColor</code>, <code>var(--ds-text)</code>) ou ficam no padrão, que troca sozinho entre claro e escuro pelas variáveis{' '}
@@ -140,7 +153,7 @@ export default function BrandPage() {
           rows={[
             { name: 'color', type: 'MantineColor | string', default: 'var(--jc-art-primary)', description: 'Cor da grega e dos anéis.' },
             { name: 'fill', type: 'MantineColor | string', description: 'Fundo do círculo interno.' },
-            { name: 'children', type: 'ReactNode', description: 'Conteúdo centralizado (área útil ≈ 79% do diâmetro).' },
+            { name: 'children', vueName: '#default', type: 'ReactNode', vueType: 'slot', description: 'Conteúdo centralizado (área útil ≈ 79% do diâmetro).' },
             { name: 'size', type: 'number | string', default: '96', description: 'Largura e altura.' },
           ]}
         />

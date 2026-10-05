@@ -3,8 +3,11 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { useFramework } from '../../../kit/framework';
 
 export default function CloseButtonPage() {
+  const vue = useFramework().framework === 'vue';
+
   return (
     <DocPage
       kicker="Mantine · Buttons"
@@ -30,7 +33,7 @@ export default function CloseButtonPage() {
       </Section>
 
       <Section title="Variações">
-        <P>Troque o ícone com <code>icon</code>; <code>variant="transparent"</code> remove o fundo do hover.</P>
+        <P>Troque o ícone com <code>{vue ? '#icon' : 'icon'}</code>; <code>variant="transparent"</code> remove o fundo do hover.</P>
         <Demo id="close-button/basic" />
       </Section>
 
@@ -60,7 +63,7 @@ export default function CloseButtonPage() {
             { name: 'aria-label', type: 'string', required: true, description: 'Ex.: "Fechar aviso", "Limpar busca".' },
             { name: 'size', type: 'MantineSize | number', default: "'md'", description: 'Tamanho do botão.' },
             { name: 'iconSize', type: 'number | string', description: 'Tamanho do X.' },
-            { name: 'icon', type: 'ReactNode', description: 'Ícone personalizado.' },
+            { name: 'icon', type: 'ReactNode', vueType: 'VNode | slot #icon', description: 'Ícone personalizado.' },
             { name: 'variant', type: "'subtle' | 'transparent'", default: "'subtle'", description: 'Com ou sem fundo no hover.' },
           ]}
         />

@@ -6,7 +6,7 @@ Monorepo (npm workspaces):
 | --- | --- |
 | `packages/ui` | Biblioteca **`@jcdecor/ui`** (React: tema Mantine + componentes), publicada no npm |
 | `packages/vue` | Biblioteca **`@jcdecor/vue`** (Vue 3: mesmo DS sobre o Mantine Vue), publicada no npm |
-| `apps/docs` | Site de documentação (Vite + React Router), com exemplos ao vivo, código e playground |
+| `apps/docs` | Site de documentação (Vite + React Router) com seletor **React \| Vue**: exemplos ao vivo, código e playground nos dois frameworks |
 | `apps/vue-playground` | Vitrine viva do `@jcdecor/vue`, publicada junto com o docs em `/vue/` |
 
 ## Desenvolvimento
@@ -27,7 +27,7 @@ npm run build        # build das libs (packages/*/dist) + docs com o playground 
 - **Variantes de cor** (accent, outline, light/tags): `packages/ui/src/theme/variantColorResolver.ts`.
 - **Componentes JC**: `packages/ui/src/components/<Nome>/`, chat em `src/chat/`, gráficos em `src/charts/`.
 - **Vue (`packages/vue`)**: tokens, formatação, CSS modules, caminhos SVG da marca e utilitários do chat são **cópias geradas** de `packages/ui/src` (cabeçalho `@generated`). Edite sempre no `packages/ui` e rode `npm run sync -w @jcdecor/vue`; o teste `test/shared.test.ts` falha se as cópias ficarem desatualizadas. Tema, componentes, chat e gráficos têm implementação Vue própria com a mesma API (slots/eventos/v-model no lugar de ReactNode/callbacks).
-- **Docs**: cada exemplo é um arquivo `apps/docs/src/demos/<pasta>/<nome>.demo.tsx` (o código exibido é o próprio arquivo); páginas em `apps/docs/src/pages/`, menu em `apps/docs/src/nav.ts`.
+- **Docs**: cada exemplo tem duas versões lado a lado — `<nome>.demo.tsx` (React) e `<nome>.demo.vue` (Vue); o seletor React | Vue no topo escolhe qual é montada e exibida. `npm run vue-coverage -w docs` lista exemplos ainda sem versão Vue. Cada exemplo é um arquivo `apps/docs/src/demos/<pasta>/<nome>.demo.tsx` (o código exibido é o próprio arquivo); páginas em `apps/docs/src/pages/`, menu em `apps/docs/src/nav.ts`.
 
 ## Publicando no npm
 

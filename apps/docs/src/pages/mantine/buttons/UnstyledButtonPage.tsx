@@ -31,8 +31,8 @@ export default function UnstyledButtonPage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'component', type: 'ElementType', default: "'button'", description: 'Renderiza como outro elemento (a, Link…).' },
-            { name: 'children', type: 'ReactNode', description: 'Conteúdo clicável.' },
+            { name: 'component', type: 'ElementType', vueType: 'string | Component', default: "'button'", description: 'Renderiza como outro elemento (a, Link…).' },
+            { name: 'children', vueName: 'default slot', type: 'ReactNode', vueType: 'slot', description: 'Conteúdo clicável.' },
           ]}
         />
       </Section>

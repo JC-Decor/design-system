@@ -54,7 +54,7 @@ export default function JsonInputPage() {
         <PropsTable
           rows={[
             { name: 'formatOnBlur', type: 'boolean', default: 'false', description: 'Formata o JSON ao perder o foco.' },
-            { name: 'validationError', type: 'ReactNode', description: 'Erro exibido quando o JSON é inválido.' },
+            { name: 'validationError', type: 'ReactNode', vueType: 'string | VNode', description: 'Erro exibido quando o JSON é inválido.' },
             { name: 'indentSpaces', type: 'number', default: '2', description: 'Indentação da formatação.' },
             { name: 'serialize / deserialize', type: 'function', description: 'Substituem JSON.stringify/parse.' },
             { name: 'autosize / minRows / maxRows', type: 'boolean / number', description: 'Herdados de Textarea.' },

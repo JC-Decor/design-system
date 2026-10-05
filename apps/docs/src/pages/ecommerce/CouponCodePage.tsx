@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../kit/DocPage';
 import { Demo } from '../../kit/Demo';
 import { Configurator } from '../../kit/Configurator';
 import { PropsTable } from '../../kit/PropsTable';
+import { OnlyFor } from '../../kit/framework';
 
 export default function CouponCodePage() {
   return (
@@ -33,7 +34,10 @@ export default function CouponCodePage() {
       </Section>
 
       <Section title="Callback ao copiar">
-        <P><code>onCopy</code> recebe o código copiado — use para feedback extra ou analytics.</P>
+        <P>
+          <OnlyFor framework="react"><code>onCopy</code> recebe</OnlyFor>
+          <OnlyFor framework="vue">O evento <code>@copy</code> traz</OnlyFor> o código copiado — use para feedback extra ou analytics.
+        </P>
         <Demo id="coupon-code/on-copy" />
       </Section>
 
@@ -45,10 +49,10 @@ export default function CouponCodePage() {
         <PropsTable
           rows={[
             { name: 'code', type: 'string', required: true, description: 'Código do cupom (exibido e copiado).' },
-            { name: 'description', type: 'ReactNode', description: 'Benefício acima do código (ex.: "5% OFF na 1ª compra").' },
+            { name: 'description', type: 'ReactNode', vueName: 'description / #description', vueType: 'MantineNode | slot', description: 'Benefício acima do código (ex.: "5% OFF na 1ª compra").' },
             { name: 'copyLabel', type: 'string', default: "'Copiar'", description: 'Texto do botão.' },
             { name: 'copiedLabel', type: 'string', default: "'Copiado!'", description: 'Texto do botão após copiar.' },
-            { name: 'onCopy', type: '(code: string) => void', description: 'Chamado ao copiar.' },
+            { name: 'onCopy', vueName: '@copy', type: '(code: string) => void', description: 'Chamado ao copiar.', vueDescription: 'Emitido ao copiar, com o código.' },
             { name: '...BoxProps', type: 'BoxProps', description: 'Style props do Box.' },
           ]}
         />

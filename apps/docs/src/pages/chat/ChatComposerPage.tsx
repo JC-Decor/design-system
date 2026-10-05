@@ -1,6 +1,7 @@
 import { DocPage, Section, P } from '../../kit/DocPage';
 import { Demo } from '../../kit/Demo';
 import { PropsTable } from '../../kit/PropsTable';
+import { OnlyFor } from '../../kit/framework';
 
 export default function ChatComposerPage() {
   return (
@@ -14,7 +15,13 @@ export default function ChatComposerPage() {
     >
       <Section title="Uso">
         <P>
-          <code>onSend</code> recebe <code>{'{ text, files }'}</code> com o texto já sem espaços nas
+          <OnlyFor framework="react">
+            <code>onSend</code> recebe
+          </OnlyFor>
+          <OnlyFor framework="vue">
+            O evento <code>@send</code> emite
+          </OnlyFor>{' '}
+          <code>{'{ text, files }'}</code> com o texto já sem espaços nas
           pontas; o campo é limpo em seguida.
         </P>
         <Demo id="chat-composer/usage" />
@@ -30,15 +37,27 @@ export default function ChatComposerPage() {
 
       <Section title="Controlado">
         <P>
-          Use <code>value</code> + <code>onChange</code> para limitar caracteres, salvar rascunhos
-          ou inserir textos prontos.
+          Use{' '}
+          <OnlyFor framework="react">
+            <code>value</code> + <code>onChange</code>
+          </OnlyFor>
+          <OnlyFor framework="vue">
+            <code>v-model</code>
+          </OnlyFor>{' '}
+          para limitar caracteres, salvar rascunhos ou inserir textos prontos.
         </P>
         <Demo id="chat-composer/controlled" />
       </Section>
 
       <Section title="Respostas rápidas">
         <P>
-          <code>leftSection</code> recebe elementos extras à esquerda do campo — aqui um menu de
+          <OnlyFor framework="react">
+            <code>leftSection</code> recebe
+          </OnlyFor>
+          <OnlyFor framework="vue">
+            O slot <code>#leftSection</code> recebe
+          </OnlyFor>{' '}
+          elementos extras à esquerda do campo — aqui um menu de
           respostas rápidas, combinado com atalhos acima.
         </P>
         <Demo id="chat-composer/quick-replies" />
@@ -54,10 +73,18 @@ export default function ChatComposerPage() {
             {
               name: 'onSend',
               type: '(payload: { text: string; files: File[] }) => void',
+              vueName: '@send',
               required: true,
               description: 'Chamado ao enviar (Enter ou botão).',
+              vueDescription: 'Emitido ao enviar (Enter ou botão). O campo é limpo em seguida.',
             },
-            { name: 'value', type: 'string', description: 'Valor controlado.' },
+            {
+              name: 'value',
+              type: 'string',
+              vueName: 'v-model',
+              description: 'Valor controlado.',
+              vueDescription: 'Texto controlado (modelValue + update:modelValue). Sem v-model, o campo é não controlado.',
+            },
             {
               name: 'defaultValue',
               type: 'string',
@@ -66,6 +93,7 @@ export default function ChatComposerPage() {
             {
               name: 'onChange',
               type: '(value: string) => void',
+              only: 'react',
               description: 'Chamado a cada alteração.',
             },
             {
@@ -96,6 +124,7 @@ export default function ChatComposerPage() {
             {
               name: 'leftSection',
               type: 'ReactNode',
+              vueType: 'MantineNode | slot #leftSection',
               description: 'Elementos à esquerda (respostas rápidas, emojis…).',
             },
             {

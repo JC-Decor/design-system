@@ -79,10 +79,10 @@ export default function ButtonPage() {
             { name: 'variant', type: "'filled' | 'outline' | 'accent' | 'subtle' | 'light' | …", default: "'filled'", description: 'Hierarquia visual do botão.' },
             { name: 'color', type: 'MantineColor', default: "'horizon'", description: 'Cor do tema.' },
             { name: 'size', type: 'MantineSize', default: "'md'", description: 'xs 28 · sm 32 · md 40 · lg 48 · xl 56px.' },
-            { name: 'leftSection / rightSection', type: 'ReactNode', description: 'Ícones antes/depois do texto.' },
+            { name: 'leftSection / rightSection', type: 'ReactNode', vueType: 'string | slot #leftSection / #rightSection', description: 'Ícones antes/depois do texto.' },
             { name: 'loading', type: 'boolean', default: 'false', description: 'Mostra Loader e bloqueia cliques.' },
             { name: 'fullWidth', type: 'boolean', default: 'false', description: 'Ocupa toda a largura.' },
-            { name: 'component', type: 'ElementType', description: 'Renderiza como link (a, Link do router…).' },
+            { name: 'component', type: 'ElementType', vueType: 'string | Component', description: 'Renderiza como link (a, Link do router…).' },
           ]}
         />
       </Section>

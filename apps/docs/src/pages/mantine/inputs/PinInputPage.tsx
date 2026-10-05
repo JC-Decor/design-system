@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function PinInputPage() {
   return (
@@ -35,7 +36,7 @@ export default function PinInputPage() {
       <Section title="Código por SMS">
         <P>
           <code>type="number"</code> abre o teclado numérico e <code>oneTimeCode</code> ativa o preenchimento automático do código recebido por SMS
-          (iOS/Android). <code>onComplete</code> dispara quando todas as caixas estão preenchidas.
+          (iOS/Android). <OnlyFor framework="react"><code>onComplete</code></OnlyFor><OnlyFor framework="vue"><code>@complete</code></OnlyFor> dispara quando todas as caixas estão preenchidas.
         </P>
         <Demo id="pin-input/otp" />
       </Section>
@@ -58,6 +59,8 @@ export default function PinInputPage() {
           Cada caixa é um <code>Input</code>, então herda borda, foco Horizon com anel <code>--ds-primary-soft</code> e erro em{' '}
           <code>--ds-error</code>. O DS adiciona tamanho padrão <code>md</code>, texto em peso 600 e o estado <code>success</code> com borda{' '}
           <code>--ds-success</code>.
+          <OnlyFor framework="vue">{' '}O <code>PinInput</code> do Mantine Vue ainda não tem a prop <code>success</code>: aplique a borda com{' '}
+            <code>{`:styles="{ input: { borderColor: 'var(--ds-success)' } }"`}</code>.</OnlyFor>
         </P>
       </Section>
 
@@ -66,11 +69,11 @@ export default function PinInputPage() {
           rows={[
             { name: 'length', type: 'number', default: '4', description: 'Quantidade de caixas.' },
             { name: 'type', type: "'alphanumeric' | 'number' | RegExp", default: 'alphanumeric', description: 'Caracteres aceitos.' },
-            { name: 'value / onChange', type: 'string', description: 'Uso controlado.' },
-            { name: 'onComplete', type: '(value: string) => void', description: 'Todas as caixas preenchidas.' },
+            { name: 'value / onChange', vueName: 'v-model', type: 'string', description: 'Uso controlado.' },
+            { name: 'onComplete', vueName: '@complete', type: '(value: string) => void', description: 'Todas as caixas preenchidas.' },
             { name: 'oneTimeCode', type: 'boolean', default: 'false', description: 'autocomplete="one-time-code".' },
             { name: 'mask', type: 'boolean', default: 'false', description: 'Oculta os caracteres (PIN).' },
-            { name: 'error / success', type: 'boolean', description: 'Estados de validação.' },
+            { name: 'error / success', type: 'boolean', description: 'Estados de validação.', vueName: 'error', vueDescription: 'Estado de erro (success ainda não existe no Mantine Vue — use styles).' },
             { name: 'ariaLabel', type: 'string', description: 'Nome acessível das caixas.' },
           ]}
         />

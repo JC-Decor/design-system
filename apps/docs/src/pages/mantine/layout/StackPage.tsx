@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import StackPreviewVue from '../../../vue-demos/stack/StackPreview.vue';
 
 function StackPreview(props: StackProps) {
   return (
@@ -29,6 +30,7 @@ export default function StackPage() {
       <Section title="Playground">
         <Configurator
           component={StackPreview}
+          vue={{ component: StackPreviewVue }}
           name="Stack"
           previewWidth={260}
           controls={[

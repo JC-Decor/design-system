@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function NumberInputPage() {
   return (
@@ -35,7 +36,9 @@ export default function NumberInputPage() {
       <Section title="Formato brasileiro">
         <P>
           Use <code>decimalSeparator=","</code> e <code>thousandSeparator="."</code> para o padrão pt-BR, com <code>prefix</code>/<code>suffix</code>{' '}
-          para moeda e unidades. O valor recebido em <code>onChange</code> continua sendo um <code>number</code>.
+          para moeda e unidades. O valor recebido em{' '}
+          <OnlyFor framework="react"><code>onChange</code></OnlyFor>
+          <OnlyFor framework="vue"><code>v-model</code></OnlyFor> continua sendo um <code>number</code>.
         </P>
         <Demo id="number-input/formats" />
       </Section>

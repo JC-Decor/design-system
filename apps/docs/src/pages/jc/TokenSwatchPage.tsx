@@ -1,6 +1,7 @@
 import { DocPage, Section, P } from '../../kit/DocPage';
 import { Demo } from '../../kit/Demo';
 import { PropsTable } from '../../kit/PropsTable';
+import { OnlyFor } from '../../kit/framework';
 
 export default function TokenSwatchPage() {
   return (
@@ -29,7 +30,10 @@ export default function TokenSwatchPage() {
       </Section>
 
       <Section title="A partir dos tokens">
-        <P>Monte as amostras direto de <code>@jcdecor/ui/tokens</code> para que a documentação nunca fique desatualizada.</P>
+        <P>
+          Monte as amostras direto de <OnlyFor framework="react"><code>@jcdecor/ui/tokens</code></OnlyFor>
+          <OnlyFor framework="vue"><code>@jcdecor/vue/tokens</code></OnlyFor> para que a documentação nunca fique desatualizada.
+        </P>
         <Demo id="token-swatch/from-tokens" />
       </Section>
 

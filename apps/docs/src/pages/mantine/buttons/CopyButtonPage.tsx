@@ -38,7 +38,7 @@ export default function CopyButtonPage() {
           rows={[
             { name: 'value', type: 'string', required: true, description: 'Texto copiado.' },
             { name: 'timeout', type: 'number', default: '1000', description: 'Tempo (ms) em que copied fica true.' },
-            { name: 'children', type: '({ copied, copy }) => ReactNode', required: true, description: 'Função que renderiza o botão.' },
+            { name: 'children', vueName: 'default slot', type: '({ copied, copy }) => ReactNode', vueType: 'v-slot="{ copied, copy }"', required: true, description: 'Função que renderiza o botão.', vueDescription: 'Slot com escopo que renderiza o botão.' },
           ]}
         />
       </Section>

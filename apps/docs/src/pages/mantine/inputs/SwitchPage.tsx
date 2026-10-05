@@ -60,11 +60,11 @@ export default function SwitchPage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'checked / defaultChecked', type: 'boolean', description: 'Estado controlado / inicial.' },
-            { name: 'onChange', type: '(event) => void', description: 'Use event.currentTarget.checked.' },
-            { name: 'label / description', type: 'ReactNode', description: 'Textos ao lado do interruptor.' },
-            { name: 'onLabel / offLabel', type: 'ReactNode', description: 'Texto dentro do trilho.' },
-            { name: 'thumbIcon', type: 'ReactNode', description: 'Ícone dentro do thumb.' },
+            { name: 'checked / defaultChecked', vueName: 'v-model / defaultChecked', type: 'boolean', description: 'Estado controlado / inicial.' },
+            { name: 'onChange', type: '(event) => void', description: 'Use event.currentTarget.checked.', only: 'react' },
+            { name: 'label / description', type: 'ReactNode', vueType: 'string | slot', description: 'Textos ao lado do interruptor.' },
+            { name: 'onLabel / offLabel', type: 'ReactNode', vueType: 'string | slot', description: 'Texto dentro do trilho.' },
+            { name: 'thumbIcon', type: 'ReactNode', vueType: 'slot #thumbIcon', description: 'Ícone dentro do thumb.' },
             { name: 'labelPosition', type: "'left' | 'right'", default: 'right', description: 'Lado do label.' },
           ]}
         />

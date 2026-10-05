@@ -3,8 +3,17 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor, useFramework } from '../../../kit/framework';
+import { VueMount } from '../../../kit/VueMount';
+import { Notifications as VueNotifications } from '@mantine-vue/notifications';
+import '@mantine-vue/notifications/styles.css';
+
+const vueNotificationsProps = { position: 'top-right' };
 
 export default function NotificationPage() {
+  const { framework } = useFramework();
+  const vue = framework === 'vue';
+
   return (
     <DocPage
       kicker="Mantine · Feedback"
@@ -12,9 +21,16 @@ export default function NotificationPage() {
       source="mantine"
       mantineName="notification"
       description="Card de notificação para confirmações passageiras: produto adicionado, cupom inválido, relatório exportado."
-      importCode={`import { Notification } from '@jcdecor/ui';
-import { notifications } from '@mantine/notifications';`}
+      importCode={
+        vue
+          ? `import { Notification } from '@jcdecor/vue';
+import { notifications } from '@mantine-vue/notifications';`
+          : `import { Notification } from '@jcdecor/ui';
+import { notifications } from '@mantine/notifications';`
+      }
     >
+      {/* No modo Vue, os exemplos chamam o notifications do Mantine Vue: monta o <Notifications /> dele uma vez na página. */}
+      {vue && <VueMount component={VueNotifications} props={vueNotificationsProps} />}
       <Section title="Playground">
         <Configurator
           component={Notification}
@@ -43,9 +59,17 @@ import { notifications } from '@mantine/notifications';`}
 
       <Section title="Com notifications.show">
         <P>
-          No app, dispare notificações com <code>notifications.show()</code> de <code>@mantine/notifications</code>. O{' '}
-          <code>&lt;Notifications /&gt;</code> precisa estar montado uma vez na raiz (já está no <code>JcProvider</code> desta documentação).
+          No app, dispare notificações com <code>notifications.show()</code> de{' '}
+          <code>{vue ? '@mantine-vue/notifications' : '@mantine/notifications'}</code>. O <code>&lt;Notifications /&gt;</code> precisa estar
+          montado uma vez na raiz (já está no <code>JcProvider</code> desta documentação).
         </P>
+        <OnlyFor framework="vue">
+          <P>
+            No Vue, instale <code>@mantine-vue/notifications</code>, importe <code>@mantine-vue/notifications/styles.css</code> e coloque{' '}
+            <code>&lt;Notifications /&gt;</code> dentro do <code>JcProvider</code>, no componente raiz. Ícones e conteúdo rico em{' '}
+            <code>notifications.show()</code> são VNodes: <code>icon: h(IconCheck, {'{ size: 18 }'})</code>.
+          </P>
+        </OnlyFor>
         <Demo id="notification/show" />
       </Section>
 
@@ -68,10 +92,10 @@ import { notifications } from '@mantine/notifications';`}
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'title', type: 'ReactNode', description: 'Título da notificação.' },
-            { name: 'children / message', type: 'ReactNode', description: 'Texto (children no componente, message em notifications.show).' },
+            { name: 'title', type: 'ReactNode', vueType: 'string | slot #title', description: 'Título da notificação.' },
+            { name: 'children / message', vueName: 'default slot / message', type: 'ReactNode', vueType: 'slot / string | VNode', description: 'Texto (children no componente, message em notifications.show).', vueDescription: 'Texto (slot padrão no componente, message em notifications.show).' },
             { name: 'color', type: 'MantineColor', default: "'horizon'", description: 'Cor da barra ou do ícone.' },
-            { name: 'icon', type: 'ReactNode', description: 'Ícone no lugar da barra lateral.' },
+            { name: 'icon', type: 'ReactNode', vueType: 'slot #icon / VNode em notifications.show', description: 'Ícone no lugar da barra lateral.' },
             { name: 'loading', type: 'boolean', default: 'false', description: 'Mostra um loader no lugar do ícone.' },
             { name: 'withCloseButton', type: 'boolean', default: 'true', description: 'Botão de fechar.' },
             { name: 'autoClose', type: 'number | false', default: '4000', description: 'notifications.show: tempo até fechar sozinha.' },

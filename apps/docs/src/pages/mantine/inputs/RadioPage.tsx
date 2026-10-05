@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function RadioPage() {
   return (
@@ -39,7 +40,9 @@ export default function RadioPage() {
 
       <Section title="Cards">
         <P>
-          <code>Radio.Card</code> transforma toda a área em alvo de clique — ideal para opções de frete e pagamento.
+          <OnlyFor framework="react"><code>Radio.Card</code></OnlyFor><OnlyFor framework="vue"><code>RadioCard</code></OnlyFor> transforma toda a área em alvo de clique — ideal para opções de frete e pagamento.
+          <OnlyFor framework="vue">{' '}No Vue as partes são exportações próprias: <code>RadioGroup</code> (com <code>v-model</code>), <code>RadioCard</code> e{' '}
+            <code>RadioIndicator</code>.</OnlyFor>
         </P>
         <Demo id="radio/cards" />
       </Section>
@@ -63,10 +66,10 @@ export default function RadioPage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'Radio.Group value / onChange', type: 'string', description: 'Valor selecionado do grupo.' },
+            { name: 'Radio.Group value / onChange', vueName: 'RadioGroup v-model', type: 'string', description: 'Valor selecionado do grupo.' },
             { name: 'value', type: 'string', required: true, description: 'Valor da opção.' },
-            { name: 'label / description', type: 'ReactNode', description: 'Textos da opção.' },
-            { name: 'error', type: 'ReactNode', description: 'Erro (no Radio.Group, para o conjunto).' },
+            { name: 'label / description', type: 'ReactNode', vueType: 'string | slot', description: 'Textos da opção.' },
+            { name: 'error', type: 'ReactNode', vueType: 'string | slot', description: 'Erro (no Radio.Group, para o conjunto).', vueDescription: 'Erro (no RadioGroup, para o conjunto).' },
             { name: 'size', type: 'MantineSize', default: 'sm', description: 'Tamanho do círculo e do texto.' },
           ]}
         />

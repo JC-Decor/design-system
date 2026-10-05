@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function TablePage() {
   return (
@@ -33,7 +34,7 @@ export default function TablePage() {
 
       <Section title="Listrada, com bordas e rolagem">
         <P>
-          <code>striped</code> usa <code>--ds-surface-2</code>. Em telas pequenas, envolva em <code>Table.ScrollContainer</code> com uma{' '}
+          <code>striped</code> usa <code>--ds-surface-2</code>. Em telas pequenas, envolva em <OnlyFor framework="react"><code>Table.ScrollContainer</code></OnlyFor><OnlyFor framework="vue"><code>TableScrollContainer</code></OnlyFor> com uma{' '}
           <code>minWidth</code>.
         </P>
         <Demo id="table/striped" />

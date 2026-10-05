@@ -1,9 +1,10 @@
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { Link, NavLink as RouterNavLink, Outlet, useLocation, useNavigate, useNavigation } from 'react-router-dom';
-import { ActionIcon, AppShell, Burger, Center, Collapse, Group, Loader, NavLink, ScrollArea, TableOfContents, ThemeToggle, Tooltip, Progress, UnstyledButton } from '@jcdecor/ui';
+import { ActionIcon, AppShell, Burger, SegmentedControl, Center, Collapse, Group, Loader, NavLink, ScrollArea, TableOfContents, ThemeToggle, Tooltip, Progress, UnstyledButton } from '@jcdecor/ui';
 import { Spotlight, spotlight, type SpotlightActionGroupData } from '@mantine/spotlight';
 import { useDisclosure, useHotkeys } from '@mantine/hooks';
-import { IconBrandGithub, IconBrandNpm, IconChevronRight, IconSearch } from '@tabler/icons-react';
+import { IconBrandGithub, IconBrandNpm, IconBrandReact, IconBrandVue, IconChevronRight, IconSearch } from '@tabler/icons-react';
+import { useFramework, type Framework } from '../kit/framework';
 import { JcLogo } from '@jcdecor/ui';
 import { allPages, navigation } from '../nav';
 import classes from './DocsShell.module.css';
@@ -47,6 +48,7 @@ export function DocsShell() {
   const navigate = useNavigate();
   const navigationState = useNavigation();
   const reinitToc = useRef<() => void>(() => {});
+  const { framework, setFramework } = useFramework();
   useHotkeys([['mod+K', () => spotlight.open()]]);
 
   useEffect(() => {
@@ -86,8 +88,19 @@ export function DocsShell() {
           <kbd>Ctrl K</kbd>
         </button>
         <Group gap={4} wrap="nowrap">
+          <SegmentedControl
+            size="xs"
+            className={classes.frameworkSwitch}
+            value={framework}
+            onChange={(value) => setFramework(value as Framework)}
+            aria-label="Framework dos exemplos"
+            data={[
+              { value: 'react', label: <Group gap={4} wrap="nowrap"><IconBrandReact size={14} />React</Group> },
+              { value: 'vue', label: <Group gap={4} wrap="nowrap"><IconBrandVue size={14} />Vue</Group> },
+            ]}
+          />
           <Tooltip label="npm">
-            <ActionIcon component="a" href="https://www.npmjs.com/package/@jcdecor/ui" target="_blank" size="lg" className={`${classes.headerIcon} ${classes.headerExtra}`} aria-label="npm">
+            <ActionIcon component="a" href={`https://www.npmjs.com/package/@jcdecor/${framework === 'vue' ? 'vue' : 'ui'}`} target="_blank" size="lg" className={`${classes.headerIcon} ${classes.headerExtra}`} aria-label="npm">
               <IconBrandNpm size={20} />
             </ActionIcon>
           </Tooltip>

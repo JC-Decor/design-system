@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../kit/DocPage';
 import { Demo } from '../../kit/Demo';
 import { Configurator } from '../../kit/Configurator';
 import { PropsTable } from '../../kit/PropsTable';
+import { OnlyFor } from '../../kit/framework';
 
 export default function TagPage() {
   return (
@@ -55,7 +56,10 @@ export default function TagPage() {
       </Section>
 
       <Section title="Ícone customizado">
-        <P>Passe qualquer nó em <code>leftSection</code> para substituir o ícone padrão.</P>
+        <P>
+          Passe qualquer nó em <OnlyFor framework="react"><code>leftSection</code></OnlyFor>
+          <OnlyFor framework="vue">no slot <code>#leftSection</code></OnlyFor> para substituir o ícone padrão.
+        </P>
         <Demo id="tag/custom-icon" />
       </Section>
 
@@ -69,7 +73,7 @@ export default function TagPage() {
             { name: 'tone', type: "'primary' | 'success' | 'warn' | 'error' | 'neutral'", default: "'primary'", description: 'Tom semântico (ds-tag-*).' },
             { name: 'variant', type: "'light' | 'filled' | 'outline' | 'dot'", default: "'light'", description: 'Estilo do selo.' },
             { name: 'withIcon', type: 'boolean', default: 'false', description: 'Mostra o ícone padrão do tom. Ignorado se leftSection for passado.' },
-            { name: 'leftSection', type: 'ReactNode', description: 'Ícone/conteúdo à esquerda (substitui o ícone padrão).' },
+            { name: 'leftSection', type: 'ReactNode', vueType: 'MantineNode | slot #leftSection', description: 'Ícone/conteúdo à esquerda (substitui o ícone padrão).' },
             { name: 'size', type: 'MantineSize', default: "'md'", description: 'Tamanho do Badge.' },
             { name: '...BadgeProps', type: 'BadgeProps', description: 'Demais props do Badge (radius, rightSection, fullWidth…), exceto color e variant.' },
           ]}

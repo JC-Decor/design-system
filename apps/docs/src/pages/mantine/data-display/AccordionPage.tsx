@@ -1,6 +1,7 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function AccordionPage() {
   return (
@@ -14,7 +15,7 @@ export default function AccordionPage() {
     >
       <Section title="FAQ de entrega e troca">
         <P>
-          Cada <code>Accordion.Item</code> precisa de um <code>value</code> único. Com <code>defaultValue</code> o primeiro item já abre
+          Cada <OnlyFor framework="react"><code>Accordion.Item</code></OnlyFor><OnlyFor framework="vue"><code>AccordionItem</code></OnlyFor> precisa de um <code>value</code> único. Com <code>defaultValue</code> o primeiro item já abre
           expandido — útil quando há uma resposta mais procurada.
         </P>
         <Demo id="accordion/faq" />
@@ -30,7 +31,7 @@ export default function AccordionPage() {
 
       <Section title="Ícones e múltiplos abertos">
         <P>
-          Use <code>icon</code> no <code>Accordion.Control</code> para reforçar o tema de cada seção e <code>multiple</code> para permitir
+          Use <code>icon</code> no <OnlyFor framework="react"><code>Accordion.Control</code></OnlyFor><OnlyFor framework="vue"><code>AccordionControl</code></OnlyFor> para reforçar o tema de cada seção e <code>multiple</code> para permitir
           vários itens abertos (o <code>defaultValue</code> passa a ser um array).
         </P>
         <Demo id="accordion/icons" />
@@ -53,7 +54,7 @@ export default function AccordionPage() {
           rows={[
             { name: 'variant', type: "'default' | 'contained' | 'filled' | 'separated'", default: "'default'", description: 'Estilo visual dos itens.' },
             { name: 'multiple', type: 'boolean', default: 'false', description: 'Permite mais de um item aberto.' },
-            { name: 'defaultValue / value', type: 'string | string[] | null', description: 'Item(ns) aberto(s), não controlado / controlado.' },
+            { name: 'defaultValue / value', vueName: 'defaultValue / v-model', type: 'string | string[] | null', description: 'Item(ns) aberto(s), não controlado / controlado.' },
             { name: 'chevronPosition', type: "'left' | 'right'", default: "'right'", description: 'Posição do chevron.' },
             { name: 'transitionDuration', type: 'number', default: '200', description: 'Duração da animação em ms.' },
             { name: 'order', type: '2 | 3 | 4 | 5 | 6', description: 'Envolve cada controle em um heading (h2–h6) para leitores de tela.' },

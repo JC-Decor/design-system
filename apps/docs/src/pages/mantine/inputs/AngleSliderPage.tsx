@@ -53,12 +53,12 @@ export default function AngleSliderPage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'value / defaultValue', type: 'number', description: 'Ângulo em graus.' },
-            { name: 'onChange / onChangeEnd', type: '(value: number) => void', description: 'Durante e ao fim do arraste.' },
+            { name: 'value / defaultValue', vueName: 'v-model / defaultValue', type: 'number', description: 'Ângulo em graus.' },
+            { name: 'onChange / onChangeEnd', vueName: '@change / @change-end', type: '(value: number) => void', description: 'Durante e ao fim do arraste.' },
             { name: 'size', type: 'number', default: '60', description: 'Diâmetro em px.' },
             { name: 'step', type: 'number', default: '1', description: 'Passo do valor.' },
             { name: 'marks', type: '{ value, label? }[]', description: 'Marcas na borda.' },
-            { name: 'formatLabel', type: '(value) => ReactNode', description: 'Formata o label central.' },
+            { name: 'formatLabel', type: '(value) => ReactNode', vueType: '(value) => VNodeChild', description: 'Formata o label central.' },
           ]}
         />
       </Section>

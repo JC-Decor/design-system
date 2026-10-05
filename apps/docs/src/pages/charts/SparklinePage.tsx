@@ -1,6 +1,7 @@
 import { DocPage, Section, P } from '../../kit/DocPage';
 import { Demo } from '../../kit/Demo';
 import { PropsTable } from '../../kit/PropsTable';
+import { OnlyFor } from '../../kit/framework';
 
 export default function SparklinePage() {
   return (
@@ -34,8 +35,14 @@ export default function SparklinePage() {
 
       <Section title="Em tabelas">
         <P>
-          Dentro de um <code>DataTable</code>, use <code>render</code> na coluna. Para KPIs, passe o
-          Sparkline no slot <code>chart</code> do <code>KpiCard</code>.
+          <OnlyFor framework="react">
+            Dentro de um <code>DataTable</code>, use <code>render</code> na coluna.
+          </OnlyFor>
+          <OnlyFor framework="vue">
+            Dentro de um <code>DataTable</code>, use o slot <code>#cell-&lt;coluna&gt;</code> (ou{' '}
+            <code>render</code> na coluna).
+          </OnlyFor>{' '}
+          Para KPIs, passe o Sparkline no slot <code>chart</code> do <code>KpiCard</code>.
         </P>
         <Demo id="sparkline/table" />
       </Section>
@@ -55,7 +62,21 @@ export default function SparklinePage() {
               default: "chartPalette[0]",
               description: 'Cor da linha e do preenchimento.',
             },
-            { name: 'h', type: 'number | string', default: '48', description: 'Altura.' },
+            {
+              name: 'h',
+              vueName: 'height',
+              type: 'number | string',
+              default: '48',
+              description: 'Altura.',
+              vueDescription: 'Altura (h é aceito como alias).',
+            },
+            {
+              name: 'width',
+              type: 'number | string',
+              default: "'100%'",
+              description: 'Largura.',
+              only: 'vue',
+            },
             {
               name: 'curveType',
               type: 'AreaChartCurveType',
@@ -79,6 +100,7 @@ export default function SparklinePage() {
               type: 'boolean',
               default: 'true',
               description: 'Preenchimento em degradê (Mantine).',
+              vueDescription: 'Preenche a área sob a linha (com fillOpacity); false deixa só a linha.',
             },
             {
               name: 'trendColors',

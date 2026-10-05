@@ -1,6 +1,7 @@
 import { DocPage, Section, P } from '../../kit/DocPage';
 import { Demo } from '../../kit/Demo';
 import { PropsTable } from '../../kit/PropsTable';
+import { OnlyFor } from '../../kit/framework';
 
 export default function ChatThreadPage() {
   return (
@@ -44,8 +45,15 @@ export default function ChatThreadPage() {
 
       <Section title="Conteúdo customizado">
         <P>
-          <code>renderContent</code> controla o conteúdo de cada bolha — aqui números de pedido
-          viram links.
+          <OnlyFor framework="react">
+            <code>renderContent</code> controla o conteúdo de cada bolha — aqui números de pedido
+            viram links.
+          </OnlyFor>
+          <OnlyFor framework="vue">
+            O slot <code>#content="{'{ message }'}"</code> controla o conteúdo de cada bolha — aqui
+            números de pedido viram links. Também existe a prop <code>renderContent</code> (função
+            que devolve VNodes); o slot tem prioridade.
+          </OnlyFor>
         </P>
         <Demo id="chat-thread/render-content" />
       </Section>
@@ -97,12 +105,21 @@ export default function ChatThreadPage() {
             {
               name: 'empty',
               type: 'ReactNode',
+              vueType: 'MantineNode | slot #empty',
               description: 'Conteúdo exibido quando não há mensagens.',
             },
             {
               name: 'renderContent',
               type: '(message: ChatMessageData) => ReactNode',
+              vueType: '(message: ChatMessageData) => VNodeChild',
               description: 'Renderização customizada do conteúdo da bolha.',
+              vueDescription: 'Renderização customizada do conteúdo da bolha (prefira o slot #content).',
+            },
+            {
+              name: '#content',
+              type: 'slot',
+              only: 'vue',
+              description: 'Conteúdo customizado de cada bolha; recebe { message }. Tem prioridade sobre renderContent.',
             },
             {
               name: 'h',

@@ -2,12 +2,12 @@
 
 Design System da **JC Decor** para Vue 3: tema, tokens e componentes construídos sobre o [Mantine Vue](https://mantine-vue.dev) (porte comunitário do Mantine). É o irmão do [`@jcdecor/ui`](../ui) (React): mesmos tokens, mesmo CSS, mesmos nomes de componentes.
 
-- 🎨 Paleta da marca em rampas OKLCH com contraste WCAG AA, Poppins, spacing, raios e sombras (tokens compartilhados com o React)
-- 🌗 Tema claro (padrão) e escuro, lembrado no localStorage, com variáveis CSS `--ds-*`
-- 🧩 Todo o `@mantine-vue/core` reexportado já temado, mais `KpiCard`, `Tag`, `PromoBanner`, `TopNav`, `DataTable`, `ProductCard`, `PriceTag`…
-- 💬 `@jcdecor/vue/chat`: bolhas, conversa, composer, lista de conversas e layout de atendimento
-- 📊 `@jcdecor/vue/charts`: gráficos do `@mantine-vue/charts` (ECharts) na paleta da marca, em pt-BR, claro/escuro
-- 🛡️ `@jcdecor/vue/brand`: logos e ilustrações SVG recoloríveis
+- Paleta da marca em rampas OKLCH com contraste WCAG AA, Poppins, spacing, raios e sombras (tokens compartilhados com o React)
+- Tema claro (padrão) e escuro, lembrado no localStorage, com variáveis CSS `--ds-*`
+- Todo o `@mantine-vue/core` reexportado já temado, mais `KpiCard`, `Tag`, `PromoBanner`, `TopNav`, `DataTable`, `ProductCard`, `PriceTag`…
+- `@jcdecor/vue/chat`: bolhas, conversa, composer, lista de conversas e layout de atendimento
+- `@jcdecor/vue/charts`: gráficos do `@mantine-vue/charts` (ECharts) na paleta da marca, em pt-BR, claro/escuro
+- `@jcdecor/vue/brand`: logos e ilustrações SVG recoloríveis
 
 ## Instalação
 
@@ -65,4 +65,4 @@ const favorite = ref(false);
 - `DataTable` aceita `#cell-<coluna>="{ row, index }"` além de `column.render`.
 - Gráficos usam ECharts (canvas): as cores da marca são convertidas para hex e trocam sozinhas com o tema; a altura é `height` (`h` é aceito como alias).
 
-Documentação: https://jc-decor.github.io/design-system/instalacao-vue · Playground: https://jc-decor.github.io/design-system/vue/
+Documentação: https://jc-decor.github.io/design-system/instalacao-vue — escolha **Vue** no seletor do topo para ver todos os exemplos, códigos e playgrounds em Vue.

@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function CheckboxPage() {
   return (
@@ -34,6 +35,11 @@ export default function CheckboxPage() {
       <Section title="Grupo">
         <P>
           <code>Checkbox.Group</code> controla um <code>string[]</code> e fornece label, descrição e erro para o conjunto.
+          <OnlyFor framework="vue">
+            {' '}
+            No Vue as partes são exportações próprias: <code>CheckboxGroup</code> (com <code>v-model</code>), <code>CheckboxCard</code> e{' '}
+            <code>CheckboxIndicator</code>.
+          </OnlyFor>
         </P>
         <Demo id="checkbox/group" />
       </Section>
@@ -69,10 +75,10 @@ export default function CheckboxPage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'checked / defaultChecked', type: 'boolean', description: 'Estado controlado / inicial.' },
+            { name: 'checked / defaultChecked', vueName: 'v-model / defaultChecked', type: 'boolean', description: 'Estado controlado / inicial.' },
             { name: 'indeterminate', type: 'boolean', description: 'Estado parcial (traço).' },
-            { name: 'label / description', type: 'ReactNode', description: 'Textos ao lado da caixa (clicáveis).' },
-            { name: 'error', type: 'ReactNode', description: 'Mensagem de erro.' },
+            { name: 'label / description', type: 'ReactNode', vueType: 'string | slot', description: 'Textos ao lado da caixa (clicáveis).' },
+            { name: 'error', type: 'ReactNode', vueType: 'string | slot', description: 'Mensagem de erro.' },
             { name: 'size', type: 'MantineSize', default: 'sm', description: 'Tamanho da caixa e do texto.' },
             { name: 'radius', type: 'MantineRadius', default: 'xs', description: 'Raio da caixa.' },
           ]}

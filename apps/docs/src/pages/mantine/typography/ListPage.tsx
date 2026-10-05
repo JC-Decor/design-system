@@ -1,6 +1,7 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function ListPage() {
   return (
@@ -21,7 +22,7 @@ export default function ListPage() {
 
       <Section title="Com ícones">
         <P>
-          <code>icon</code> no List aplica a todos os itens; no <code>List.Item</code>, substitui só aquele. Use <code>center</code> para
+          <code>icon</code> no List aplica a todos os itens; no <OnlyFor framework="react"><code>List.Item</code></OnlyFor><OnlyFor framework="vue"><code>ListItem</code></OnlyFor>, substitui só aquele. Use <code>center</code> para
           alinhar o ícone ao texto.
         </P>
         <Demo id="list/icons" />
@@ -48,7 +49,7 @@ export default function ListPage() {
         <PropsTable
           rows={[
             { name: 'type', type: "'ordered' | 'unordered'", default: "'unordered'", description: 'ol ou ul.' },
-            { name: 'icon', type: 'React.ReactNode', description: 'Substitui o marcador.' },
+            { name: 'icon', vueName: 'icon / #icon', type: 'React.ReactNode', vueType: 'MantineNode | slot', description: 'Substitui o marcador.' },
             { name: 'spacing', type: 'MantineSpacing', default: "'xs'", description: 'Espaço entre itens.' },
             { name: 'size', type: 'MantineSize', default: "'md'", description: 'Tamanho da fonte.' },
             { name: 'center', type: 'boolean', default: 'false', description: 'Centraliza o ícone verticalmente.' },

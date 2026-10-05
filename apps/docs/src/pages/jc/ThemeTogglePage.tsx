@@ -1,6 +1,7 @@
 import { DocPage, Section, P } from '../../kit/DocPage';
 import { Demo } from '../../kit/Demo';
 import { PropsTable } from '../../kit/PropsTable';
+import { OnlyFor } from '../../kit/framework';
 
 export default function ThemeTogglePage() {
   return (
@@ -23,7 +24,10 @@ export default function ThemeTogglePage() {
       </Section>
 
       <Section title="Lendo o tema atual">
-        <P>Use <code>useComputedColorScheme</code> do Mantine para reagir ao tema em outros componentes.</P>
+        <P>
+          Use <code>useComputedColorScheme</code> do Mantine para reagir ao tema em outros componentes.
+          <OnlyFor framework="vue"> No Vue o composable retorna um <code>Ref</code> (exportado também pelo <code>@jcdecor/vue</code>).</OnlyFor>
+        </P>
         <Demo id="theme-toggle/hook" />
       </Section>
 

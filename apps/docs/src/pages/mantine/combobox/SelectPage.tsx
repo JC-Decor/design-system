@@ -3,10 +3,13 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor, useFramework } from '../../../kit/framework';
 
 const categorias = ['Pisos vinílicos', 'Papel de parede', 'Painéis ripados', 'Grama sintética', 'Cortinas', 'Tatames', 'Carpetes'];
 
 export default function SelectPage() {
+  const vue = useFramework().framework === 'vue';
+
   return (
     <DocPage
       kicker="Mantine · Combobox"
@@ -50,7 +53,7 @@ export default function SelectPage() {
 
       <Section title="Valor padrão e limpar">
         <P>
-          Use <code>allowDeselect={'{false}'}</code> quando sempre deve haver um valor (ordenação) e <code>clearable</code> quando o campo é
+          Use <code>{vue ? ':allow-deselect="false"' : 'allowDeselect={false}'}</code> quando sempre deve haver um valor (ordenação) e <code>clearable</code> quando o campo é
           um filtro opcional.
         </P>
         <Demo id="select/clearable" />
@@ -64,12 +67,16 @@ export default function SelectPage() {
       <Section title="Opções personalizadas">
         <P>
           <code>renderOption</code> recebe a opção e o estado <code>checked</code>. Ideal para mostrar ícone da categoria e contagem de produtos.
+          <OnlyFor framework="vue">
+            {' '}
+            No Vue, use o slot com escopo <code>#renderOption="{'{ option, checked }'}"</code>.
+          </OnlyFor>
         </P>
         <Demo id="select/render-option" />
       </Section>
 
       <Section title="Carregamento assíncrono">
-        <P>Carregue os dados ao abrir o dropdown e mostre um <code>Loader</code> na seção direita enquanto a requisição acontece.</P>
+        <P>Carregue os dados ao abrir o dropdown (<code>{vue ? '@dropdown-open' : 'onDropdownOpen'}</code>) e mostre um <code>Loader</code> na seção direita enquanto a requisição acontece.</P>
         <Demo id="select/async" />
       </Section>
 
@@ -90,12 +97,12 @@ export default function SelectPage() {
         <PropsTable
           rows={[
             { name: 'data', type: 'ComboboxData', description: 'Opções: strings, { value, label, disabled } ou { group, items }.' },
-            { name: 'value / onChange', type: 'string | null', description: 'Valor controlado; onChange recebe (value, option).' },
+            { name: 'value / onChange', vueName: 'v-model / @change', type: 'string | null', description: 'Valor controlado; onChange recebe (value, option).', vueDescription: 'Valor controlado; @change recebe (value, option).' },
             { name: 'searchable', type: 'boolean', default: 'false', description: 'Permite filtrar digitando.' },
             { name: 'clearable', type: 'boolean', default: 'false', description: 'Mostra o botão de limpar quando há valor.' },
             { name: 'allowDeselect', type: 'boolean', default: 'true', description: 'Clicar na opção marcada remove a seleção.' },
-            { name: 'nothingFoundMessage', type: 'ReactNode', description: 'Mensagem quando a busca não encontra nada.' },
-            { name: 'renderOption', type: '(input) => ReactNode', description: 'Renderização personalizada de cada opção.' },
+            { name: 'nothingFoundMessage', type: 'ReactNode', vueType: 'string | slot #nothingFound', description: 'Mensagem quando a busca não encontra nada.' },
+            { name: 'renderOption', vueName: 'renderOption / #renderOption', type: '(input) => ReactNode', vueType: '(input) => VNode | slot { option, checked }', description: 'Renderização personalizada de cada opção.' },
             { name: 'comboboxProps', type: 'ComboboxProps', description: 'Props do Combobox/Popover (posição, largura, portal…).' },
           ]}
         />

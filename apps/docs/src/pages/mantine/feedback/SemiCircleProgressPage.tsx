@@ -65,7 +65,7 @@ export default function SemiCircleProgressPage() {
             { name: 'filledSegmentColor', type: 'MantineColor', default: "'horizon'", description: 'Cor do segmento preenchido.' },
             { name: 'emptySegmentColor', type: 'MantineColor', default: '--ds-border-soft', description: 'Cor do segmento vazio.' },
             { name: 'orientation', type: "'up' | 'down'", default: "'up'", description: 'Arco para cima ou para baixo.' },
-            { name: 'label / labelPosition', type: "ReactNode / 'bottom' | 'center'", description: 'Rótulo e sua posição.' },
+            { name: 'label / labelPosition', type: "ReactNode / 'bottom' | 'center'", vueType: "string | slot #label / 'bottom' | 'center'", description: 'Rótulo e sua posição.' },
           ]}
         />
       </Section>

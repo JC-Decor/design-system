@@ -1,6 +1,7 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function FocusTrapPage() {
   return (
@@ -22,7 +23,8 @@ export default function FocusTrapPage() {
 
       <Section title="Foco inicial">
         <P>
-          <code>FocusTrap.InitialFocus</code> marca onde o foco começa — o próximo elemento focável recebe o foco ao ativar.
+          <OnlyFor framework="react"><code>FocusTrap.InitialFocus</code></OnlyFor>
+          <OnlyFor framework="vue"><code>FocusTrapInitialFocus</code></OnlyFor> marca onde o foco começa — o próximo elemento focável recebe o foco ao ativar.
         </P>
         <Demo id="focus-trap/initial-focus" />
       </Section>
@@ -37,7 +39,7 @@ export default function FocusTrapPage() {
         <PropsTable
           rows={[
             { name: 'active', type: 'boolean', default: 'true', description: 'Liga/desliga a captura de foco.' },
-            { name: 'children', type: 'ReactElement', description: 'Um único elemento que aceita ref.', required: true },
+            { name: 'children', vueName: '#default', type: 'ReactElement', vueType: 'slot', description: 'Um único elemento que aceita ref.', vueDescription: 'Um único elemento ou componente (recebe a ref do trap).', required: true },
             { name: 'refProp', type: 'string', default: "'ref'", description: 'Nome da prop de ref do filho.' },
           ]}
         />

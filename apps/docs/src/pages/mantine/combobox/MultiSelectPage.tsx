@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 const categorias = ['Pisos vinílicos', 'Papel de parede', 'Painéis ripados', 'Grama sintética', 'Cortinas', 'Tatames', 'Carpetes'];
 
@@ -53,7 +54,13 @@ export default function MultiSelectPage() {
       </Section>
 
       <Section title="Opções personalizadas">
-        <P>Exemplo com amostras de acabamento. As cores das amostras são dados do produto, não cores de interface.</P>
+        <P>
+          Exemplo com amostras de acabamento. As cores das amostras são dados do produto, não cores de interface.
+          <OnlyFor framework="vue">
+            {' '}
+            No Vue, personalize a opção com o slot <code>#renderOption="{'{ option, checked }'}"</code>.
+          </OnlyFor>
+        </P>
         <Demo id="multi-select/render-option" />
       </Section>
 
@@ -69,13 +76,13 @@ export default function MultiSelectPage() {
         <PropsTable
           rows={[
             { name: 'data', type: 'ComboboxData', description: 'Opções ou grupos.' },
-            { name: 'value / onChange', type: 'string[]', description: 'Valores controlados.' },
+            { name: 'value / onChange', vueName: 'v-model', type: 'string[]', description: 'Valores controlados.' },
             { name: 'maxValues', type: 'number', description: 'Limite de itens selecionados.' },
             { name: 'hidePickedOptions', type: 'boolean', default: 'false', description: 'Remove da lista os itens já escolhidos.' },
             { name: 'searchable', type: 'boolean', default: 'false', description: 'Permite filtrar digitando.' },
             { name: 'clearable', type: 'boolean', default: 'false', description: 'Botão para limpar todos os valores.' },
-            { name: 'renderPill', type: '(props) => ReactNode', description: 'Renderização personalizada das pills.' },
-            { name: 'withPillsReorder', type: 'boolean', default: 'false', description: 'Permite reordenar as pills arrastando (v9).' },
+            { name: 'renderPill', vueName: 'renderPill / #renderPill', type: '(props) => ReactNode', vueType: '(props) => VNode | slot', description: 'Renderização personalizada das pills.' },
+            { name: 'withPillsReorder', type: 'boolean', default: 'false', description: 'Permite reordenar as pills arrastando (v9).', only: 'react' },
           ]}
         />
       </Section>

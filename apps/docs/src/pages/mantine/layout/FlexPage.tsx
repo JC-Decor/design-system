@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import FlexPreviewVue from '../../../vue-demos/flex/FlexPreview.vue';
 
 function Item({ children, h }: { children: React.ReactNode; h?: number }) {
   return (
@@ -35,6 +36,7 @@ export default function FlexPage() {
       <Section title="Playground">
         <Configurator
           component={FlexPreview}
+          vue={{ component: FlexPreviewVue }}
           name="Flex"
           previewWidth={340}
           controls={[

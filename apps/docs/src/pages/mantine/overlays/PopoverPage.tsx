@@ -51,7 +51,7 @@ export default function PopoverPage() {
             { name: 'width', type: "number | 'target'", description: 'Largura do dropdown.' },
             { name: 'withArrow', type: 'boolean', default: 'false', description: 'Mostra a seta.' },
             { name: 'trapFocus', type: 'boolean', default: 'false', description: 'Prende o foco no dropdown.' },
-            { name: 'opened / onChange', type: 'boolean / (opened) => void', description: 'Modo controlado.' },
+            { name: 'opened / onChange', vueName: 'v-model:opened', type: 'boolean / (opened) => void', vueType: 'boolean', description: 'Modo controlado.' },
             { name: 'closeOnClickOutside', type: 'boolean', default: 'true', description: 'Fecha ao clicar fora.' },
           ]}
         />

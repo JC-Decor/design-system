@@ -60,7 +60,7 @@ export default function DividerPage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'label', type: 'ReactNode', description: 'Conteúdo exibido sobre a linha (só horizontal).' },
+            { name: 'label', type: 'ReactNode', vueType: 'MantineNode | slot #label', description: 'Conteúdo exibido sobre a linha (só horizontal).' },
             { name: 'labelPosition', type: "'left' | 'center' | 'right'", default: "'left'", description: 'Posição do rótulo.' },
             { name: 'orientation', type: "'horizontal' | 'vertical'", default: "'horizontal'", description: 'Direção.' },
             { name: 'variant', type: "'solid' | 'dashed' | 'dotted'", default: "'solid'", description: 'Estilo da linha.' },

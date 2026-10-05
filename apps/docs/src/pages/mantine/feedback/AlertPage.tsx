@@ -64,12 +64,12 @@ export default function AlertPage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'title', type: 'ReactNode', description: 'Título do alerta, em peso 600.' },
-            { name: 'icon', type: 'ReactNode', description: 'Ícone à esquerda (use ícones Tabler de status).' },
+            { name: 'title', type: 'ReactNode', vueType: 'string | slot #title', description: 'Título do alerta, em peso 600.' },
+            { name: 'icon', type: 'ReactNode', vueType: 'VNode | slot #icon', description: 'Ícone à esquerda (use ícones Tabler de status).' },
             { name: 'color', type: 'MantineColor', default: "'horizon'", description: 'Cor semântica do alerta.' },
             { name: 'variant', type: "'light' | 'filled' | 'outline' | 'default' | 'transparent' | 'white'", default: "'light'", description: 'Estilo visual.' },
             { name: 'withCloseButton', type: 'boolean', default: 'false', description: 'Mostra o botão de fechar.' },
-            { name: 'onClose / closeButtonLabel', type: '() => void / string', description: 'Ação e rótulo acessível do botão de fechar.' },
+            { name: 'onClose / closeButtonLabel', vueName: '@close / closeButtonLabel', type: '() => void / string', description: 'Ação e rótulo acessível do botão de fechar.' },
           ]}
         />
       </Section>

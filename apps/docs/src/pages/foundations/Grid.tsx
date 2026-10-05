@@ -4,6 +4,7 @@ import { DocPage, Section, P } from '../../kit/DocPage';
 import { Demo } from '../../kit/Demo';
 import { CodeBlock } from '../../kit/CodeBlock';
 import { PropsTable } from '../../kit/PropsTable';
+import { useFramework } from '../../kit/framework';
 
 const layouts = [
   { name: 'Mobile', key: 'mobile', width: grid.breakpoints.mobile, cols: 4, gap: 16, margin: 20 },
@@ -34,6 +35,7 @@ function GridPreview({ cols, gap, margin, width }: { cols: number; gap: number; 
 }
 
 export default function Grid() {
+  const vue = useFramework().framework === 'vue';
   return (
     <DocPage
       kicker="Fundamentos"
@@ -67,7 +69,7 @@ export default function Grid() {
 
       <Section title="Container da marca">
         <P>
-          A classe global <code>.ds-container</code> (incluída em <code>@jcdecor/ui/styles.css</code>) centraliza o conteúdo em até 1224px usando a variável <code>--grid-margin</code>, que é
+          A classe global <code>.ds-container</code> (incluída em <code>{vue ? '@jcdecor/vue/styles.css' : '@jcdecor/ui/styles.css'}</code>) centraliza o conteúdo em até 1224px usando a variável <code>--grid-margin</code>, que é
           responsiva: 64px no desktop (≥ 1366px), 32px no tablet (≥ 768px) e 20px no mobile. A classe <code>.ds-grid</code> faz o mesmo para
           12 → 8 → 4 colunas. O <code>Container</code> do Mantine também funciona com{' '}
           <code>size={'{1224}'}</code>.
@@ -99,9 +101,16 @@ export default function Grid() {
           ]}
         />
         <CodeBlock
-          code={`<SimpleGrid cols={{ base: 1, sm: 2, md: 4 }} spacing={{ base: 'md', sm: 'lg' }}>
+          language={vue ? 'vue' : 'tsx'}
+          code={
+            vue
+              ? `<SimpleGrid :cols="{ base: 1, sm: 2, md: 4 }" :spacing="{ base: 'md', sm: 'lg' }">
+  <ProductCard v-for="p in produtos" :key="p.id" v-bind="p" />
+</SimpleGrid>`
+              : `<SimpleGrid cols={{ base: 1, sm: 2, md: 4 }} spacing={{ base: 'md', sm: 'lg' }}>
   {produtos.map((p) => <ProductCard key={p.id} {...p} />)}
-</SimpleGrid>`}
+</SimpleGrid>`
+          }
         />
       </Section>
     </DocPage>

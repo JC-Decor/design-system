@@ -61,7 +61,7 @@ export default function TextareaPage() {
             { name: 'minRows / maxRows', type: 'number', description: 'Limites de linhas com autosize.' },
             { name: 'resize', type: "'none' | 'vertical' | 'both'", default: 'none', description: 'Permite redimensionar arrastando.' },
             { name: 'maxLength', type: 'number', description: 'Limite nativo de caracteres.' },
-            { name: 'error', type: 'ReactNode', description: 'Mensagem de erro.' },
+            { name: 'error', type: 'ReactNode', vueType: 'string | slot', description: 'Mensagem de erro.' },
           ]}
         />
       </Section>

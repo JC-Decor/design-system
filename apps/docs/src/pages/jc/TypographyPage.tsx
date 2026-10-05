@@ -66,8 +66,8 @@ export default function TypographyPage() {
         <PropsTable
           rows={[
             { name: 'size', type: "'lg' | 'md' | 'sm'", default: "'sm' (Display) · 'md'", description: 'Degrau da escala. Disponível em Display, Headline e Subheadline.' },
-            { name: 'component', type: 'React.ElementType', description: 'Troca a tag/elemento renderizado sem mudar o visual.' },
-            { name: 'children', type: 'ReactNode', description: 'Conteúdo do texto.' },
+            { name: 'component', type: 'React.ElementType', vueType: 'string | Component', description: 'Troca a tag/elemento renderizado sem mudar o visual.' },
+            { name: 'children', vueName: '#default', type: 'ReactNode', vueType: 'slot', description: 'Conteúdo do texto.' },
             { name: '...TextProps', type: 'TextProps', description: 'Todas as props do Text do Mantine (style props, truncate, lineClamp…), exceto size.' },
           ]}
         />

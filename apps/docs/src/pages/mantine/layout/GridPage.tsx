@@ -4,6 +4,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import GridPreviewVue from '../../../vue-demos/grid/GridPreview.vue';
 
 function GridPreview(props: GridProps) {
   return (
@@ -32,6 +33,7 @@ export default function GridPage() {
       <Section title="Playground">
         <Configurator
           component={GridPreview}
+          vue={{ component: GridPreviewVue }}
           name="Grid"
           previewWidth={340}
           controls={[

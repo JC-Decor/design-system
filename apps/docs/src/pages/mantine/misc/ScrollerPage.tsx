@@ -42,7 +42,7 @@ export default function ScrollerPage() {
             { name: 'edgeGradientColor', type: 'string', default: 'body', description: 'Cor do gradiente sob os controles.' },
             { name: 'draggable', type: 'boolean', default: 'true', description: 'Permite rolar arrastando com o mouse.' },
             { name: 'showStartControl / showEndControl', type: 'boolean', default: 'false', description: 'Mantém os controles sempre visíveis.' },
-            { name: 'startControlIcon / endControlIcon', type: 'ReactNode', description: 'Ícones customizados.' },
+            { name: 'startControlIcon / endControlIcon', type: 'ReactNode', vueType: 'MantineNode | slot #startControlIcon / #endControlIcon', description: 'Ícones customizados.' },
           ]}
         />
       </Section>

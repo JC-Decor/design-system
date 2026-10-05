@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import SimpleGridPreviewVue from '../../../vue-demos/simple-grid/SimpleGridPreview.vue';
 
 function SimpleGridPreview(props: SimpleGridProps) {
   return (
@@ -29,6 +30,7 @@ export default function SimpleGridPage() {
       <Section title="Playground">
         <Configurator
           component={SimpleGridPreview}
+          vue={{ component: SimpleGridPreviewVue }}
           name="SimpleGrid"
           previewWidth={340}
           controls={[

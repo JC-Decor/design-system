@@ -1,6 +1,7 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function PortalPage() {
   return (
@@ -23,6 +24,7 @@ export default function PortalPage() {
       <Section title="Destino customizado">
         <P>
           Passe um elemento ou seletor em <code>target</code> para renderizar em outro lugar da página.
+          <OnlyFor framework="vue"> No Vue, capture o elemento de destino com <code>rootRef</code> (ou uma template ref) e renderize o Portal só depois que ele existir.</OnlyFor>
         </P>
         <Demo id="portal/target" />
       </Section>

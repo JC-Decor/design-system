@@ -50,13 +50,13 @@ export default function ContentCardPage() {
       <Section title="Props">
         <PropsTable
           rows={[
-            { name: 'kicker', type: 'ReactNode', description: 'Sobretítulo em caixa-alta (Kicker).' },
-            { name: 'title', type: 'ReactNode', description: 'Título do card (headline-small).' },
-            { name: 'children', type: 'ReactNode', description: 'Corpo do card, na cor texto-2.' },
-            { name: 'image', type: 'string | ReactNode', description: 'URL da imagem de capa ou nó customizado.' },
+            { name: 'kicker', type: 'ReactNode', vueType: 'MantineNode | slot #kicker', description: 'Sobretítulo em caixa-alta (Kicker).' },
+            { name: 'title', type: 'ReactNode', vueType: 'MantineNode | slot #title', description: 'Título do card (headline-small).' },
+            { name: 'children', vueName: '#default', type: 'ReactNode', vueType: 'slot', description: 'Corpo do card, na cor texto-2.' },
+            { name: 'image', type: 'string | ReactNode', vueType: 'string | MantineNode | slot #image', description: 'URL da imagem de capa ou nó customizado.' },
             { name: 'imageAlt', type: 'string', default: "''", description: 'Texto alternativo da imagem (quando image é URL).' },
             { name: 'imageHeight', type: 'number', default: '180', description: 'Altura da imagem de capa em px.' },
-            { name: 'actions', type: 'ReactNode', description: 'Botões/links no rodapé.' },
+            { name: 'actions', type: 'ReactNode', vueType: 'MantineNode | slot #actions', description: 'Botões/links no rodapé.', vueDescription: <>Botões/links no rodapé. Use o slot <code>#actions</code> para componentes.</> },
             { name: '...CardProps', type: 'CardProps', description: 'Props do Card do Mantine (padding, radius, shadow, withBorder…).' },
           ]}
         />

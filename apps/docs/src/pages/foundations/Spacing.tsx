@@ -3,12 +3,14 @@ import { spacing } from '@jcdecor/ui/tokens';
 import { DocPage, Section, P } from '../../kit/DocPage';
 import { Demo } from '../../kit/Demo';
 import { PropsTable } from '../../kit/PropsTable';
+import { useFramework } from '../../kit/framework';
 
 const steps = Object.keys(spacing)
   .map(Number)
   .sort((a, b) => a - b) as (keyof typeof spacing)[];
 
 export default function Spacing() {
+  const vue = useFramework().framework === 'vue';
   return (
     <DocPage
       kicker="Fundamentos"
@@ -18,7 +20,7 @@ export default function Spacing() {
       <Section title="Escala">
         <P>
           Cada passo vira a variável <code>--sp-N</code> (ex.: <code>--sp-24</code>) e está disponível em JS via <code>spacing</code> de{' '}
-          <code>@jcdecor/ui/tokens</code>.
+          <code>{vue ? '@jcdecor/vue/tokens' : '@jcdecor/ui/tokens'}</code>.
         </P>
         <Stack gap={6} mt="md">
           {steps.map((step) => (

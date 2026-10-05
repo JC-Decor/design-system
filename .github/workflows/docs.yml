@@ -34,8 +34,8 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
-      - name: Build do docs + playground Vue (em /vue/)
-        run: npm run build:pages
+      - name: Build do docs (exemplos React e Vue)
+        run: npm run build -w docs
         env:
           BASE_PATH: /${{ github.event.repository.name }}/
 

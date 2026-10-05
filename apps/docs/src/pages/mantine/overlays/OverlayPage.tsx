@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import OverlayPreviewVue from '../../../vue-demos/overlay/OverlayPreview.vue';
 
 function OverlayPreview(props: OverlayProps) {
   return (
@@ -29,6 +30,7 @@ export default function OverlayPage() {
       <Section title="Playground">
         <Configurator
           component={OverlayPreview}
+          vue={{ component: OverlayPreviewVue }}
           name="Overlay"
           previewWidth={360}
           controls={[

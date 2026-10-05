@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../kit/DocPage';
 import { Demo } from '../../kit/Demo';
 import { CodeBlock } from '../../kit/CodeBlock';
 import { PropsTable } from '../../kit/PropsTable';
+import { toVueImport, useFramework } from '../../kit/framework';
 
 const typesCode = `import type { ChatMessageData, ChatUser, Conversation } from '@jcdecor/ui/chat';
 
@@ -58,6 +59,7 @@ const pieces: [string, string, string][] = [
 ];
 
 export default function ChatOverviewPage() {
+  const vue = useFramework().framework === 'vue';
   return (
     <DocPage
       kicker="Chat"
@@ -83,7 +85,7 @@ export default function ChatOverviewPage() {
             <Table.Thead>
               <Table.Tr>
                 <Table.Th>Componente</Table.Th>
-                <Table.Th>Slot no ChatLayout</Table.Th>
+                <Table.Th>{vue ? 'Slot do ChatLayout' : 'Slot no ChatLayout'}</Table.Th>
                 <Table.Th>Função</Table.Th>
               </Table.Tr>
             </Table.Thead>
@@ -93,7 +95,9 @@ export default function ChatOverviewPage() {
                   <Table.Td>
                     <Code fw={600}>{name}</Code>
                   </Table.Td>
-                  <Table.Td>{slot ? <Code>{slot}</Code> : '—'}</Table.Td>
+                  <Table.Td>
+                    {slot ? <Code>{vue ? `#${slot === 'children' ? 'default' : slot}` : slot}</Code> : '—'}
+                  </Table.Td>
                   <Table.Td fz="sm">{text}</Table.Td>
                 </Table.Tr>
               ))}
@@ -120,7 +124,7 @@ export default function ChatOverviewPage() {
           <code>ChatUser</code>) por <code>authorId</code>. O<code> ChatThread</code> decide sozinho
           o lado de cada bolha comparando <code>authorId</code> com <code>currentUserId</code>.
         </P>
-        <CodeBlock code={typesCode} />
+        <CodeBlock code={vue ? toVueImport(typesCode) : typesCode} language="ts" />
         <PropsTable
           rows={[
             {
@@ -160,18 +164,27 @@ export default function ChatOverviewPage() {
             {
               name: 'children',
               type: 'ReactNode',
+              vueName: '#default',
+              vueType: 'slot',
               required: true,
               description: 'Área das mensagens — normalmente um <ChatThread />.',
             },
             {
               name: 'sidebar',
               type: 'ReactNode',
+              vueType: 'MantineNode | slot #sidebar',
               description: 'Coluna esquerda (ConversationList). Omita para um chat único.',
             },
-            { name: 'header', type: 'ReactNode', description: 'Normalmente um <ChatHeader />.' },
+            {
+              name: 'header',
+              type: 'ReactNode',
+              vueType: 'MantineNode | slot #header',
+              description: 'Normalmente um <ChatHeader />.',
+            },
             {
               name: 'composer',
               type: 'ReactNode',
+              vueType: 'MantineNode | slot #composer',
               description: 'Normalmente um <ChatComposer />.',
             },
             {

@@ -1,8 +1,11 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { useFramework } from '../../../kit/framework';
 
 export default function FileButtonPage() {
+  const vue = useFramework().framework === 'vue';
+
   return (
     <DocPage
       kicker="Mantine · Buttons"
@@ -14,7 +17,16 @@ export default function FileButtonPage() {
     >
       <Section title="Uma foto">
         <P>
-          <code>children</code> é uma função que recebe as props do gatilho; espalhe-as no seu <code>Button</code>. Restrinja os tipos com{' '}
+          {vue ? (
+            <>
+              O slot padrão recebe as props do gatilho (<code>v-slot="props"</code>); repasse-as com <code>v-bind="props"</code> no seu{' '}
+              <code>Button</code>.
+            </>
+          ) : (
+            <>
+              <code>children</code> é uma função que recebe as props do gatilho; espalhe-as no seu <code>Button</code>.
+            </>
+          )} Restrinja os tipos com{' '}
           <code>accept</code>.
         </P>
         <Demo id="file-button/basic" />
@@ -22,7 +34,7 @@ export default function FileButtonPage() {
 
       <Section title="Várias fotos e reset">
         <P>
-          Com <code>multiple</code>, <code>onChange</code> recebe <code>File[]</code>. Use <code>resetRef</code> para limpar o input e permitir
+          Com <code>multiple</code>, <code>{vue ? 'v-model' : 'onChange'}</code> recebe <code>File[]</code>. Use <code>resetRef</code> para limpar o input e permitir
           escolher o mesmo arquivo de novo.
         </P>
         <Demo id="file-button/multiple" />
@@ -35,11 +47,11 @@ export default function FileButtonPage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'onChange', type: '(file: File | null | File[]) => void', required: true, description: 'Arquivo(s) escolhido(s).' },
-            { name: 'children', type: '(props) => ReactNode', required: true, description: 'Renderiza o gatilho.' },
+            { name: 'onChange', vueName: 'v-model', vueType: 'File | null | File[]', type: '(file: File | null | File[]) => void', required: true, description: 'Arquivo(s) escolhido(s).' },
+            { name: 'children', vueName: 'default slot', type: '(props) => ReactNode', vueType: 'v-slot="props"', required: true, description: 'Renderiza o gatilho.' },
             { name: 'accept', type: 'string', description: 'Tipos aceitos, ex.: "image/png,image/jpeg".' },
             { name: 'multiple', type: 'boolean', default: 'false', description: 'Permite vários arquivos.' },
-            { name: 'resetRef', type: 'Ref<() => void>', description: 'Função para limpar o input.' },
+            { name: 'resetRef', type: 'Ref<() => void>', vueType: '(reset: () => void) => void', description: 'Função para limpar o input.', vueDescription: 'Recebe a função que limpa o input.' },
             { name: 'capture', type: "'user' | 'environment'", description: 'No celular, abre direto a câmera.' },
           ]}
         />

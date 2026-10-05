@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function FileInputPage() {
   return (
@@ -42,7 +43,13 @@ export default function FileInputPage() {
 
       <Section title="Vários arquivos">
         <P>
-          Com <code>multiple</code> o valor é um <code>File[]</code>. Use <code>valueComponent</code> para mostrar cada arquivo como um Pill.
+          Com <code>multiple</code> o valor é um <code>File[]</code>.{' '}
+          <OnlyFor framework="react">
+            Use <code>valueComponent</code> para mostrar cada arquivo como um Pill.
+          </OnlyFor>
+          <OnlyFor framework="vue">
+            Use o slot <code>#value</code> para mostrar cada arquivo como um Pill.
+          </OnlyFor>
         </P>
         <Demo id="file-input/multiple" />
       </Section>
@@ -63,9 +70,9 @@ export default function FileInputPage() {
           rows={[
             { name: 'accept', type: 'string', description: 'Tipos MIME/extensões aceitos.' },
             { name: 'multiple', type: 'boolean', default: 'false', description: 'Permite vários arquivos (valor File[]).' },
-            { name: 'value / onChange', type: 'File | File[] | null', description: 'Uso controlado.' },
+            { name: 'value / onChange', vueName: 'v-model', type: 'File | File[] | null', description: 'Uso controlado.' },
             { name: 'clearable', type: 'boolean', default: 'false', description: 'Botão para remover a seleção.' },
-            { name: 'valueComponent', type: 'FC<{ value }>', description: 'Renderização customizada do valor.' },
+            { name: 'valueComponent', vueName: '#value', type: 'FC<{ value }>', vueType: 'slot { value }', description: 'Renderização customizada do valor.' },
             { name: 'capture', type: "boolean | 'user' | 'environment'", description: 'Abre a câmera no celular.' },
           ]}
         />

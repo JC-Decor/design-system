@@ -56,8 +56,8 @@ export default function RingProgressPage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'sections', type: '{ value, color, tooltip? }[]', required: true, description: 'Seções do anel (soma até 100).' },
-            { name: 'label', type: 'ReactNode', description: 'Conteúdo no centro do anel.' },
+            { name: 'sections', type: '{ value, color, tooltip? }[]', required: true, description: 'Seções do anel (soma até 100).', vueDescription: 'Seções do anel (soma até 100). No Mantine Vue, tooltip (string) vira só o aria-label da seção — não abre um Tooltip no hover.' },
+            { name: 'label', type: 'ReactNode', vueType: 'string | slot #label', description: 'Conteúdo no centro do anel.' },
             { name: 'size', type: 'number', default: '120', description: 'Largura e altura em px.' },
             { name: 'thickness', type: 'number', default: 'size / 10', description: 'Espessura do anel em px.' },
             { name: 'roundCaps', type: 'boolean', default: 'false', description: 'Pontas arredondadas.' },

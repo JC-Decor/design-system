@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+    "types": ["vite/client"],
+    "noUnusedLocals": false,
+    "paths": {
+      "@jcdecor/vue": ["../../packages/vue/src/index.ts"],
+      "@jcdecor/vue/chat": ["../../packages/vue/src/chat.ts"],
+      "@jcdecor/vue/charts": ["../../packages/vue/src/charts.ts"],
+      "@jcdecor/vue/brand": ["../../packages/vue/src/brand.ts"],
+      "@jcdecor/vue/tokens": ["../../packages/vue/src/tokens.ts"]
+    }
+  },
+  "include": ["src/demos/**/*.vue", "src/vue-demos/**/*", "../../packages/vue/src/css-modules.d.ts"]
+}

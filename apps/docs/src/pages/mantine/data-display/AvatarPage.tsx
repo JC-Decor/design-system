@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function AvatarPage() {
   return (
@@ -54,7 +55,7 @@ export default function AvatarPage() {
 
       <Section title="Grupo de atendentes">
         <P>
-          <code>Avatar.Group</code> sobrepõe os avatares; combine com <code>Tooltip.Group</code> para mostrar o nome de cada atendente.
+          <OnlyFor framework="react"><code>Avatar.Group</code></OnlyFor><OnlyFor framework="vue"><code>AvatarGroup</code></OnlyFor> sobrepõe os avatares; combine com <OnlyFor framework="react"><code>Tooltip.Group</code></OnlyFor><OnlyFor framework="vue"><code>TooltipGroup</code></OnlyFor> para mostrar o nome de cada atendente.
         </P>
         <Demo id="avatar/group" />
       </Section>
@@ -68,7 +69,7 @@ export default function AvatarPage() {
           rows={[
             { name: 'color', type: 'defaultProps', default: "'horizon'", description: 'Cor primária da marca.' },
             { name: 'radius', type: 'defaultProps', default: "'xl'", description: 'Circular. Use radius="sm" para logos de marcas e lojas.' },
-            { name: 'Avatar.Group', type: 'classNames', description: 'O anel entre avatares usa --ds-surface, para combinar com cards e painéis (em vez do fundo da página).' },
+            { name: 'Avatar.Group', vueName: 'AvatarGroup', type: 'classNames', description: 'O anel entre avatares usa --ds-surface, para combinar com cards e painéis (em vez do fundo da página).' },
           ]}
         />
       </Section>

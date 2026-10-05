@@ -2,6 +2,7 @@ import { Anchor, Box, Group, Text, Title } from '@mantine/core';
 import { Kicker, Subheadline, Tag } from '@jcdecor/ui';
 import { IconBrandGithub, IconPackage } from '@tabler/icons-react';
 import { CodeBlock } from './CodeBlock';
+import { toVueImport, useFramework } from './framework';
 import classes from './kit.module.css';
 
 export interface DocPageProps {
@@ -24,16 +25,21 @@ const sourceTag = {
   mantine: <Tag tone="neutral">Mantine · temado</Tag>,
   chat: <Tag tone="success">@jcdecor/ui/chat</Tag>,
   charts: <Tag tone="warn">@jcdecor/ui/charts</Tag>,
+  vueChat: <Tag tone="success">@jcdecor/vue/chat</Tag>,
+  vueCharts: <Tag tone="warn">@jcdecor/vue/charts</Tag>,
+  vueMantine: <Tag tone="neutral">Mantine Vue · temado</Tag>,
 };
 
 export function DocPage({ kicker, title, description, importCode, source, mantineName, sourcePath, children }: DocPageProps) {
+  const { framework } = useFramework();
+  const vue = framework === 'vue';
   return (
     <article className={classes.page}>
       <header className={classes.pageHeader}>
         {kicker && <Kicker>{kicker}</Kicker>}
         <Group gap="sm" align="center" mt={6}>
           <Title order={1} fz="var(--type-headline-lg)">{title}</Title>
-          {source && sourceTag[source]}
+          {source && sourceTag[vue ? ({ chat: 'vueChat', charts: 'vueCharts', mantine: 'vueMantine', jc: 'jc' } as const)[source] : source]}
         </Group>
         {description && (
           <Subheadline component="div" size="lg" c="var(--ds-text-2)" mt="sm" maw={720}>
@@ -43,20 +49,20 @@ export function DocPage({ kicker, title, description, importCode, source, mantin
         {(mantineName || sourcePath) && (
           <Group gap="lg" mt="md">
             {mantineName && (
-              <Anchor href={`https://mantine.dev/core/${mantineName}/`} target="_blank" fz="sm">
-                <Group gap={4}><IconPackage size={16} /> Docs do Mantine</Group>
+              <Anchor href={vue ? `https://mantine-vue.dev/core/${mantineName}/` : `https://mantine.dev/core/${mantineName}/`} target="_blank" fz="sm">
+                <Group gap={4}><IconPackage size={16} /> {vue ? 'Docs do Mantine Vue' : 'Docs do Mantine'}</Group>
               </Anchor>
             )}
             {sourcePath && (
               <Group gap={4} fz="sm" c="var(--ds-text-3)">
-                <IconBrandGithub size={16} /> {sourcePath}
+                <IconBrandGithub size={16} /> {vue ? sourcePath.replace('packages/ui/', 'packages/vue/') : sourcePath}
               </Group>
             )}
           </Group>
         )}
         {importCode && (
           <Box mt="md">
-            <CodeBlock code={importCode} />
+            <CodeBlock code={vue ? toVueImport(importCode) : importCode} language={vue ? 'ts' : 'tsx'} />
           </Box>
         )}
       </header>

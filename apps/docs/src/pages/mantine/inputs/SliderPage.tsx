@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function SliderPage() {
   return (
@@ -65,13 +66,13 @@ export default function SliderPage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'value / defaultValue / onChange', type: 'number', description: 'Valor do slider.' },
+            { name: 'value / defaultValue / onChange', vueName: 'v-model / defaultValue', type: 'number', description: 'Valor do slider.' },
             { name: 'min / max / step', type: 'number', default: '0 / 100 / 1', description: 'Intervalo e passo.' },
             { name: 'marks', type: '{ value, label? }[]', description: 'Marcas sob o trilho.' },
-            { name: 'label', type: 'ReactNode | (value) => ReactNode | null', description: 'Balão do valor; null oculta.' },
+            { name: 'label', type: 'ReactNode | (value) => ReactNode | null', vueType: '(value) => string | null | slot #label="{ value }"', description: 'Balão do valor; null oculta.' },
             { name: 'labelAlwaysOn', type: 'boolean', default: 'false', description: 'Mantém o balão visível.' },
             { name: 'thumbLabel', type: 'string', description: 'aria-label do thumb.' },
-            { name: 'onChangeEnd', type: '(value) => void', description: 'Ao soltar (ideal para filtros).' },
+            { name: 'onChangeEnd', vueName: '@change-end', type: '(value) => void', description: 'Ao soltar (ideal para filtros).' },
           ]}
         />
       </Section>
@@ -79,7 +80,7 @@ export default function SliderPage() {
       <Section title="Boas práticas">
         <P>
           Passe <code>thumbLabel</code> para dar nome ao controle (o slider aceita setas, Home/End). Quando o valor exato importa, ofereça também um
-          NumberInput. Em filtros, aplique a busca em <code>onChangeEnd</code>, não a cada movimento.
+          NumberInput. Em filtros, aplique a busca em <OnlyFor framework="react"><code>onChangeEnd</code></OnlyFor><OnlyFor framework="vue"><code>@change-end</code></OnlyFor>, não a cada movimento.
         </P>
       </Section>
     </DocPage>

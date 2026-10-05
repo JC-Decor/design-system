@@ -35,8 +35,8 @@ export default function ActionBarPage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'opened', type: 'boolean', required: true, description: 'Visibilidade — normalmente selecao.length > 0.' },
-            { name: 'onClose', type: '() => void', description: 'Chamado pelo CloseButton e pelo Esc (com closeOnEscape).' },
+            { name: 'opened', vueName: 'opened / v-model:opened', type: 'boolean', required: true, description: 'Visibilidade — normalmente selecao.length > 0.' },
+            { name: 'onClose', vueName: '@close', type: '() => void', vueType: 'evento', description: 'Chamado pelo CloseButton e pelo Esc (com closeOnEscape).' },
             { name: 'closeOnEscape', type: 'boolean', default: 'false', description: 'Fecha com a tecla Esc.' },
             { name: 'position', type: 'AffixPosition', default: '{ bottom: 30, left: 0, right: 0 }', description: 'Posição fixa na viewport.' },
             { name: 'aria-label', type: 'string', default: "'Actions'", description: 'Rótulo do grupo de ações — traduza para pt-BR.' },

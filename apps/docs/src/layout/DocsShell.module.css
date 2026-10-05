@@ -206,3 +206,19 @@
     display: none;
   }
 }
+
+/* Seletor React × Vue na barra navy */
+.frameworkSwitch {
+  background: rgba(255, 255, 255, 0.08);
+  margin-right: 8px;
+
+  & :global(.mantine-SegmentedControl-label) {
+    color: rgba(255, 255, 255, 0.75);
+  }
+  & :global(.mantine-SegmentedControl-label[data-active]) {
+    color: var(--dc-obsidian);
+  }
+  & :global(.mantine-SegmentedControl-indicator) {
+    background: #fff;
+  }
+}

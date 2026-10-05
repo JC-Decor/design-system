@@ -2,6 +2,7 @@ import { DocPage, Section, P } from '../../kit/DocPage';
 import { CodeBlock } from '../../kit/CodeBlock';
 import { Demo } from '../../kit/Demo';
 import { PropsTable } from '../../kit/PropsTable';
+import { OnlyFor } from '../../kit/framework';
 
 export default function Theming() {
   return (
@@ -43,7 +44,33 @@ export default function Theming() {
       </Section>
 
       <Section title="Estendendo o tema">
-        <P>Passe overrides ao <code>JcProvider</code> — eles são mesclados sobre o tema da marca com <code>mergeThemeOverrides</code>.</P>
+        <OnlyFor framework="react">
+          <P>Passe overrides ao <code>JcProvider</code> — eles são mesclados sobre o tema da marca com <code>mergeThemeOverrides</code>.</P>
+        </OnlyFor>
+        <OnlyFor framework="vue">
+          <P>Passe overrides na prop <code>theme</code> do <code>JcProvider</code> — eles são mesclados (deep merge) sobre o tema da marca.</P>
+          <CodeBlock
+            language="vue"
+            code={`<script setup lang="ts">
+import { JcProvider } from '@jcdecor/vue';
+
+const theme = {
+  defaultRadius: 'md',
+  components: {
+    Button: { defaultProps: { size: 'sm' } },
+    KpiCard: { classNames: { value: 'meu-kpi-valor' } },
+  },
+};
+</script>
+
+<template>
+  <JcProvider :theme="theme">
+    <RouterView />
+  </JcProvider>
+</template>`}
+          />
+        </OnlyFor>
+        <OnlyFor framework="react">
         <CodeBlock
           code={`import { JcProvider, Button } from '@jcdecor/ui';
 
@@ -59,19 +86,38 @@ export default function Theming() {
   <App />
 </JcProvider>`}
         />
+        </OnlyFor>
         <P>Os componentes JC também aceitam Styles API (<code>classNames</code>, <code>styles</code>, <code>vars</code>) e podem ser configurados via <code>theme.components</code>, como qualquer componente do Mantine.</P>
         <Demo id="theming/styles-api" title="Styles API em um componente JC" />
       </Section>
 
       <Section title="Tema escuro">
         <P>
-          Use o <code>ThemeToggle</code> ou o hook <code>useMantineColorScheme</code>. Para forçar um tema (ex.: painel interno sempre escuro), use{' '}
-          <code>{'<JcProvider forceColorScheme="dark">'}</code>.
+          Use o <code>ThemeToggle</code> ou o hook <code>useMantineColorScheme</code>
+          <OnlyFor framework="vue"> (composable do <code>@jcdecor/vue</code>)</OnlyFor>. Para forçar um tema (ex.: painel interno sempre escuro), use{' '}
+          <OnlyFor framework="react"><code>{'<JcProvider forceColorScheme="dark">'}</code></OnlyFor>
+          <OnlyFor framework="vue"><code>{'<JcProvider force-color-scheme="dark">'}</code></OnlyFor>.
         </P>
       </Section>
 
       <Section title="Usando sem o JcProvider">
         <P>Se o projeto já tem um MantineProvider, passe o tema e o resolver diretamente:</P>
+        <OnlyFor framework="vue">
+          <CodeBlock
+            language="vue"
+            code={`<script setup lang="ts">
+import { MantineProvider } from '@mantine-vue/core';
+import { jcTheme, jcCssVariablesResolver } from '@jcdecor/vue';
+</script>
+
+<template>
+  <MantineProvider :theme="jcTheme" :css-variables-resolver="jcCssVariablesResolver">
+    <RouterView />
+  </MantineProvider>
+</template>`}
+          />
+        </OnlyFor>
+        <OnlyFor framework="react">
         <CodeBlock
           code={`import { MantineProvider } from '@mantine/core';
 import { jcTheme, jcCssVariablesResolver } from '@jcdecor/ui';
@@ -80,6 +126,7 @@ import { jcTheme, jcCssVariablesResolver } from '@jcdecor/ui';
   <App />
 </MantineProvider>`}
         />
+        </OnlyFor>
       </Section>
     </DocPage>
   );
