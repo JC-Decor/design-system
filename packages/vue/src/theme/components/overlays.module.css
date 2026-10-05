@@ -1,0 +1,83 @@
+/* @generated sincronizado de packages/ui/src/theme/components/overlays.module.css — edite lá e rode `npm run sync -w @jcdecor/vue` */
+/* Overlays — Modal, Drawer, Menu, Popover, HoverCard, Tooltip, Dialog, Menubar, ActionBar, FloatingWindow */
+
+/* Superfície flutuante compartilhada (Popover, Menu, HoverCard, Menubar).
+   A cor da borda vai na variável para que a seta (`withArrow`) acompanhe. */
+.dropdown {
+  --popover-border-color: var(--ds-border-soft);
+  background-color: var(--ds-surface);
+  border-color: var(--ds-border-soft);
+  box-shadow: var(--ds-shadow-md);
+}
+/* Itens de menu: hover em surface-2; no escuro o vermelho de perigo sobe para o tom 400 (contraste AA sobre a superfície). */
+.menuItem {
+  --menu-item-hover: var(--ds-surface-2);
+}
+:where([data-mantine-color-scheme='dark']) .menuItem {
+  --mantine-color-danger-6: var(--dc-danger-400);
+}
+.menuLabel {
+  color: var(--ds-text-3);
+  font-size: var(--type-disclaimer);
+  font-weight: 600;
+}
+.menuDivider {
+  border-color: var(--ds-border-soft);
+}
+
+/* Menubar: alvos com hover/aberto em surface-2 e texto da marca. */
+.menubarRoot {
+  gap: 2px;
+}
+.menubarTarget {
+  color: var(--ds-text);
+  font-weight: 500;
+  border-radius: var(--ds-radius-sm);
+}
+.menubarTarget:where(:hover, :focus-visible, [data-expanded]):where(:not(:disabled, [data-disabled])) {
+  background-color: var(--ds-surface-2);
+}
+.menubarTarget:where([data-expanded]) {
+  color: var(--ds-primary);
+}
+
+/* Superfícies "janela" (Dialog, ActionBar, FloatingWindow). */
+.floatingSurface {
+  background-color: var(--ds-surface);
+  border-color: var(--ds-border-soft);
+  box-shadow: var(--ds-shadow-lg);
+}
+.actionBarDivider {
+  background-color: var(--ds-border-soft);
+}
+
+.modalContent {
+  background-color: var(--ds-surface);
+}
+.modalHeader {
+  background-color: var(--ds-surface);
+}
+.modalTitle {
+  font-size: var(--type-headline-sm);
+  font-weight: 600;
+}
+
+/* Tooltip: Obsidian/branco no claro, Obsidian 50/Obsidian no escuro. Usa fallback das variáveis para que `color` continue funcionando. */
+.tooltip {
+  background-color: var(--tooltip-bg, var(--dc-obsidian));
+  color: var(--tooltip-color, var(--dc-white));
+  font-size: var(--type-disclaimer);
+  font-weight: 500;
+}
+:where([data-mantine-color-scheme='dark']) .tooltip {
+  background-color: var(--tooltip-bg, var(--dc-obsidian-50));
+  color: var(--tooltip-color, var(--dc-obsidian));
+}
+
+/* No escuro a superfície flutuante tem o mesmo tom dos cards: a borda sobe um degrau para separar as camadas. */
+:where([data-mantine-color-scheme='dark']) .dropdown,
+:where([data-mantine-color-scheme='dark']) .floatingSurface {
+  --popover-border-color: color-mix(in srgb, var(--ds-border) 55%, var(--ds-border-soft));
+  border-color: color-mix(in srgb, var(--ds-border) 55%, var(--ds-border-soft));
+}
+

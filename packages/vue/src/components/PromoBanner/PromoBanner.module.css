@@ -1,0 +1,40 @@
+/* @generated sincronizado de packages/ui/src/components/PromoBanner/PromoBanner.module.css — edite lá e rode `npm run sync -w @jcdecor/vue` */
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-8);
+  padding: var(--sp-12) var(--sp-20);
+  font-weight: 600;
+  font-size: var(--type-subheadline-rg);
+  line-height: 1.4;
+  text-align: center;
+  position: relative;
+  background: var(--banner-bg);
+  color: var(--banner-color);
+}
+.root[data-closable] {
+  padding-inline: var(--sp-40);
+}
+.root[data-radius] {
+  border-radius: var(--banner-radius);
+}
+.root :where(strong),
+.highlight {
+  color: var(--banner-highlight);
+  font-weight: 700;
+}
+.content {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-8);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.close {
+  position: absolute;
+  right: var(--sp-8);
+  top: 50%;
+  transform: translateY(-50%);
+  color: inherit;
+}

@@ -1,0 +1,109 @@
+{
+  "name": "@jcdecor/vue",
+  "version": "0.1.0",
+  "description": "Design System JC Decor — tema, tokens e componentes Vue 3 sobre Mantine Vue.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JC-Decor/design-system.git",
+    "directory": "packages/vue"
+  },
+  "homepage": "https://github.com/JC-Decor/design-system#readme",
+  "bugs": {
+    "url": "https://github.com/JC-Decor/design-system/issues"
+  },
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./chat": {
+      "types": "./dist/chat.d.ts",
+      "import": "./dist/chat.js"
+    },
+    "./charts": {
+      "types": "./dist/charts.d.ts",
+      "import": "./dist/charts.js"
+    },
+    "./brand": {
+      "types": "./dist/brand.d.ts",
+      "import": "./dist/brand.js"
+    },
+    "./tokens": {
+      "types": "./dist/tokens.d.ts",
+      "import": "./dist/tokens.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "jcdecor",
+    "design-system",
+    "mantine",
+    "mantine-vue",
+    "vue"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "sync": "node scripts/sync-shared.mjs",
+    "build": "vite build && vue-tsc -p tsconfig.build.json",
+    "dev": "vite build --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "vue-tsc --noEmit",
+    "prepublishOnly": "npm run build && npm run test"
+  },
+  "peerDependencies": {
+    "@mantine-vue/charts": ">=3.5.0",
+    "@mantine-vue/core": ">=3.5.0",
+    "@mantine-vue/hooks": ">=3.5.0",
+    "@mantine-vue/utils": ">=3.5.0",
+    "echarts": ">=6.0.0",
+    "vue": ">=3.5.0",
+    "vue-echarts": ">=8.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@mantine-vue/charts": {
+      "optional": true
+    },
+    "echarts": {
+      "optional": true
+    },
+    "vue-echarts": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "@tabler/icons-vue": "^3.49.0"
+  },
+  "devDependencies": {
+    "@mantine-vue/charts": "3.5.0",
+    "@mantine-vue/core": "3.5.0",
+    "@mantine-vue/hooks": "3.5.0",
+    "@mantine-vue/notifications": "3.5.0",
+    "@mantine-vue/store": "3.5.0",
+    "@mantine-vue/utils": "3.5.0",
+    "@testing-library/vue": "^8.1.0",
+    "@vitejs/plugin-vue": "^6.0.9",
+    "@vue/test-utils": "^2.4.6",
+    "echarts": "^6.0.0",
+    "postcss": "^8.5.0",
+    "postcss-preset-mantine": "^1.18.0",
+    "vue": "^3.5.22",
+    "vue-echarts": "^8.0.1",
+    "vue-tsc": "^3.1.0"
+  }
+}

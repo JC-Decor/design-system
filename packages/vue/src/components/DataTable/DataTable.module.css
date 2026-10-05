@@ -1,0 +1,54 @@
+/* @generated sincronizado de packages/ui/src/components/DataTable/DataTable.module.css — edite lá e rode `npm run sync -w @jcdecor/vue` */
+.wrapper {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border-soft);
+  border-radius: var(--ds-radius);
+  overflow: hidden;
+}
+.wrapper[data-plain] {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.sortButton {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+}
+.sortButton:hover,
+.sortButton[data-sorted] {
+  color: var(--ds-text);
+}
+.sortButton:focus-visible {
+  outline: 2px solid var(--ds-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+.row[data-clickable] {
+  cursor: pointer;
+}
+.row[data-clickable]:focus-visible {
+  outline: 2px solid var(--ds-primary);
+  outline-offset: -2px;
+}
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-12);
+  padding: var(--sp-12);
+  border-top: 1px solid var(--ds-border-soft);
+  font-size: var(--type-disclaimer);
+  color: var(--ds-text-3);
+  flex-wrap: wrap;
+}

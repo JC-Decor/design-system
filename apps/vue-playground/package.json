@@ -1,0 +1,29 @@
+{
+  "name": "vue-playground",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "@jcdecor/vue": "*",
+    "@mantine-vue/charts": "3.5.0",
+    "@mantine-vue/core": "3.5.0",
+    "@mantine-vue/hooks": "3.5.0",
+    "@mantine-vue/utils": "3.5.0",
+    "@tabler/icons-vue": "^3.49.0",
+    "echarts": "^6.0.0",
+    "vue": "^3.5.22",
+    "vue-echarts": "^8.0.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.9",
+    "postcss": "^8.5.0",
+    "postcss-preset-mantine": "^1.18.0",
+    "vue-tsc": "^3.1.0"
+  }
+}

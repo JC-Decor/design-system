@@ -1,0 +1,121 @@
+/* @generated sincronizado de packages/ui/src/theme/components/combobox.module.css — edite lá e rode `npm run sync -w @jcdecor/vue` */
+/* Combobox — Select, MultiSelect, Autocomplete, TagsInput, Pill, Cascader, TreeSelect… */
+
+/* Dropdown: mesma superfície dos popovers da marca (também no escuro) */
+.dropdown {
+  background-color: var(--ds-surface);
+  border-color: var(--ds-border-soft);
+  box-shadow: var(--ds-shadow-md);
+}
+
+/*
+ * Opções
+ * - hover / navegação por teclado ([data-combobox-selected]) → surface-2 (no Mantine: azul sólido + branco)
+ * - opção marcada ([data-combobox-active] / [data-checked]) → primary-soft + texto primary
+ */
+.option {
+  border-radius: var(--ds-radius-sm);
+  color: var(--ds-text);
+  transition: background-color 0.1s, color 0.1s;
+}
+.option:where([data-combobox-selected]),
+.option:where(:not([data-combobox-disabled])):hover {
+  background-color: var(--ds-surface-2);
+  color: var(--ds-text);
+}
+.option:where([data-combobox-active], [data-checked]) {
+  background-color: var(--ds-primary-soft);
+  color: var(--ds-primary);
+  font-weight: 500;
+}
+.option:where([data-combobox-active], [data-checked]):where([data-combobox-selected], :hover) {
+  background-color: var(--ds-tag-primary-hover);
+  color: var(--ds-primary);
+}
+/* Seta de expandir do TreeSelect: não fica branca na opção navegada */
+.option:where([data-combobox-selected]) :where([data-expanded], [role='button']) {
+  color: var(--ds-text-3);
+}
+
+/* Rótulo de grupo: caption 600 em texto-3, divisor suave */
+.groupLabel {
+  color: var(--ds-text-3);
+  font-size: var(--type-disclaimer);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.groupLabel::after {
+  background-color: var(--ds-border-soft);
+}
+
+.empty {
+  color: var(--ds-text-3);
+}
+
+/* Busca, cabeçalho e rodapé: divisores suaves e fundo da superfície */
+.search,
+.search:focus {
+  background-color: var(--ds-surface);
+  border-color: var(--ds-border-soft);
+}
+.header,
+.footer {
+  border-color: var(--ds-border-soft);
+  color: var(--ds-text-2);
+}
+
+/* Pills (MultiSelect, TagsInput, TreeSelect, Pill) — tag neutra da marca */
+.pill {
+  background-color: var(--ds-tag-neutral-bg);
+  color: var(--ds-tag-neutral-color);
+  font-weight: 500;
+}
+.pill:where([data-variant='contrast']) {
+  background-color: var(--ds-tag-primary-bg);
+  color: var(--ds-tag-primary-color);
+}
+.pill:where([data-disabled], :has(button:disabled)) {
+  opacity: 0.6;
+}
+.pillRemove {
+  color: inherit;
+}
+.pillRemove:where(:not(:disabled)):hover {
+  background-color: var(--ds-tag-neutral-hover);
+}
+.pill:where([data-variant='contrast']) .pillRemove:where(:not(:disabled)):hover {
+  background-color: var(--ds-tag-primary-hover);
+}
+
+/* Cascader: coluna em navegação em primary-soft (não azul sólido), trilha em surface-2 */
+.cascaderColumn {
+  border-inline-end-color: var(--ds-border-soft);
+}
+.cascaderColumn:where([data-last]) {
+  border-inline-end-color: transparent;
+}
+.cascaderOption {
+  border-radius: var(--ds-radius-sm);
+  color: var(--ds-text);
+}
+.cascaderOption:where(:not([data-disabled], [data-active])):hover,
+.cascaderOption:where([data-in-path]) {
+  background-color: var(--ds-surface-2);
+}
+.cascaderOption:where([data-active]),
+.cascaderOption:where([data-active]):hover {
+  background-color: var(--ds-primary-soft);
+  color: var(--ds-primary);
+  font-weight: 500;
+}
+.cascaderOption:where([data-selected]:not([data-active])) {
+  color: var(--ds-primary);
+  font-weight: 500;
+}
+.cascaderOverflow {
+  color: var(--ds-text-3);
+  border-inline-end-color: var(--ds-border-soft);
+}
+.cascaderOverflow:hover {
+  background-color: var(--ds-surface-2);
+}

@@ -1,0 +1,172 @@
+/* @generated sincronizado de packages/ui/src/theme/components/typography.module.css — edite lá e rode `npm run sync -w @jcdecor/vue` */
+/* Typography — Table, Title, Text, Code, Blockquote, List, Mark, Highlight, Typography */
+.table {
+  --table-border-color: var(--ds-border-soft);
+  --table-highlight-on-hover-color: var(--ds-surface-2);
+  --table-striped-color: var(--ds-surface-2);
+  font-size: var(--type-subheadline-sm);
+}
+.th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--ds-text-3);
+  font-size: var(--type-disclaimer);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.thead .tr {
+  border-bottom: 2px solid var(--ds-border);
+}
+.title {
+  color: var(--ds-text);
+}
+
+/* Code: superfície 2, borda suave, mono levemente menor que o texto ao redor */
+.code {
+  background-color: var(--code-bg, var(--ds-surface-2));
+  color: var(--ds-text);
+  border: 1px solid var(--ds-border-soft);
+  border-radius: 6px;
+  font-size: 0.875em;
+  padding: 1px 6px;
+}
+.code[data-block] {
+  border-radius: var(--ds-radius-sm);
+  padding: var(--mantine-spacing-md);
+  font-size: var(--type-subheadline-sm);
+  line-height: 1.6;
+}
+
+/* Blockquote: borda primária e fundo primary-soft (cores da marca nos dois temas) */
+.blockquote {
+  color: var(--ds-text);
+  font-size: var(--type-subheadline-lg);
+  line-height: 1.55;
+  padding: var(--mantine-spacing-lg) var(--mantine-spacing-xl);
+}
+.blockquoteIcon {
+  background-color: var(--ds-surface);
+}
+.blockquoteCite {
+  color: var(--ds-text-3);
+  opacity: 1;
+  font-size: var(--type-subheadline-sm);
+  font-style: normal;
+  font-weight: 500;
+}
+
+/* Mark / Highlight */
+.mark {
+  color: var(--ds-text);
+  border-radius: 3px;
+  padding-inline: 0.1em;
+}
+
+/* List: marcadores na cor primária */
+.list {
+  color: var(--ds-text);
+}
+.listItem::marker {
+  color: var(--ds-primary);
+  font-weight: 600;
+}
+.listItemIcon {
+  color: var(--ds-primary);
+}
+
+/* Typography: rich text (posts, políticas) com os tokens da marca */
+.typography {
+  color: var(--ds-text-2);
+  line-height: 1.6;
+}
+.typography :where(h1, h2, h3, h4, h5, h6) {
+  color: var(--ds-text);
+  font-weight: 600;
+}
+.typography :where(a) {
+  color: var(--ds-link);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  text-underline-offset: 3px;
+}
+.typography :where(a):hover {
+  text-decoration-color: currentColor;
+}
+.typography :where(strong, b) {
+  color: var(--ds-text);
+  font-weight: 600;
+}
+.typography :where(ul, ol) :where(li)::marker {
+  color: var(--ds-primary);
+  font-weight: 600;
+}
+.typography :where(li) + :where(li) {
+  margin-top: var(--mantine-spacing-xs);
+}
+.typography :where(code) {
+  background-color: var(--ds-surface-2);
+  color: var(--ds-text);
+  border: 1px solid var(--ds-border-soft);
+  border-radius: 6px;
+  font-size: 0.875em;
+}
+.typography :where(pre) {
+  background-color: var(--ds-surface-2);
+  border: 1px solid var(--ds-border-soft);
+  border-radius: var(--ds-radius-sm);
+  padding: var(--mantine-spacing-md);
+}
+.typography :where(pre) :where(code) {
+  border: 0;
+  font-size: var(--type-subheadline-sm);
+}
+.typography :where(kbd) {
+  color: var(--ds-text-2);
+  background-color: var(--ds-surface-2);
+  border-color: var(--ds-border-soft);
+  border-bottom-color: var(--ds-border);
+}
+.typography :where(mark) {
+  background-color: var(--dc-electric-200);
+  color: var(--ds-text);
+}
+.typography :where(blockquote) {
+  background-color: var(--ds-primary-soft);
+  border-inline-start: 3px solid var(--ds-primary);
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
+  color: var(--ds-text);
+}
+.typography :where(hr) {
+  border-color: var(--ds-border-soft);
+}
+.typography :where(table) {
+  --table-border-color: var(--ds-border-soft);
+}
+.typography :where(table) :where(th) {
+  color: var(--ds-text-3);
+  font-size: var(--type-disclaimer);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.typography :where(table) :where(thead th) {
+  border-bottom: 2px solid var(--ds-border);
+}
+.typography :where(table) :where(td) {
+  color: var(--ds-text);
+}
+.typography :where(details) {
+  --details-border-color: var(--ds-border-soft);
+  --details-summary-hover: var(--ds-surface-2);
+}
+.typography :where(details) :where(summary) {
+  color: var(--ds-text);
+}
+.typography :where(img) {
+  border-radius: var(--ds-radius);
+}
+:where([data-mantine-color-scheme='dark']) .typography :where(mark) {
+  background-color: color-mix(in srgb, var(--dc-electric-300) 32%, transparent);
+}
