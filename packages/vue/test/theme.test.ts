@@ -1,5 +1,5 @@
 import { h, nextTick } from 'vue';
-import { Button, NativeSelect, NumberInput, NumberFormatter, RollingNumber, Select, Table, Timeline, TimelineItem, Tag, Kicker, Headline, jcTheme, useMantineColorScheme, COLOR_SCHEME_STORAGE_KEY, JcProvider } from '../src';
+import { Autocomplete, Button, MultiSelect, NativeSelect, NumberInput, NumberFormatter, RollingNumber, Select, Table, TagsInput, Timeline, TimelineItem, TreeSelect, Tag, Kicker, Headline, jcTheme, useMantineColorScheme, COLOR_SCHEME_STORAGE_KEY, JcProvider } from '../src';
 import { render, screen } from './render';
 import { render as tlRender } from '@testing-library/vue';
 import { defineComponent } from 'vue';
@@ -142,6 +142,22 @@ describe('mais correções do Mantine Vue 3.5', () => {
   it('RollingNumber mantém o separador de milhar do tema', () => {
     const { container } = render(() => h(RollingNumber, { value: 12480 }));
     expect(container.textContent?.replace(/\s/g, '')).toContain('12.480');
+  });
+
+  it('comboboxes usam size md do tema (o Mantine Vue cai em sm quando size não vem nos attrs)', () => {
+    const { container } = render(() => [
+      h(MultiSelect, { data: ['A'], label: 'M' }),
+      h(MultiSelect, { data: ['A'], label: 'Pequeno', size: 'xs' }),
+      h(TagsInput, { label: 'T' }),
+      h(Autocomplete, { data: ['A'], label: 'A' }),
+      h(TreeSelect, { data: [], label: 'Tr' }),
+    ]);
+    const [multi, multiXs] = container.querySelectorAll('.mantine-MultiSelect-wrapper');
+    expect(multi?.getAttribute('data-size')).toBe('md');
+    expect(multiXs?.getAttribute('data-size')).toBe('xs');
+    expect(container.querySelector('.mantine-TagsInput-wrapper')?.getAttribute('data-size')).toBe('md');
+    expect(container.querySelector('.mantine-Autocomplete-wrapper')?.getAttribute('data-size')).toBe('md');
+    expect(container.querySelector('.mantine-TreeSelect-wrapper')?.getAttribute('data-size')).toBe('md');
   });
 
   it('Timeline conta itens gerados por v-for (Fragment) para o `active`', () => {

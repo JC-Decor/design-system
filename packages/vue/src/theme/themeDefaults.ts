@@ -1,20 +1,24 @@
 import { Comment, Fragment, defineComponent, h, type Slots, type VNode } from 'vue';
 import {
+  Autocomplete as MAutocomplete,
   Card as MCard,
   Cascader as MCascader,
   CheckboxIndicator as MCheckboxIndicator,
   Combobox as MCombobox,
   FileInput as MFileInput,
   FloatingWindow as MFloatingWindow,
+  MultiSelect as MMultiSelect,
   NumberFormatter as MNumberFormatter,
   NativeSelect as MNativeSelect,
   NumberInput as MNumberInput,
   PillsInput as MPillsInput,
   RollingNumber as MRollingNumber,
+  TagsInput as MTagsInput,
   Timeline as MTimeline,
   Select as MSelect,
   Table as MTable,
   Tooltip as MTooltip,
+  TreeSelect as MTreeSelect,
   useMantineTheme,
 } from '@mantine-vue/core';
 
@@ -47,12 +51,18 @@ export function withThemeDefaults<C>(
   return Wrapped as unknown as C;
 }
 
+/**
+ * Comboboxes que leem `attrs.size ?? 'sm'` (e não o tema): sem `size` explícito o campo ou o
+ * dropdown fica em sm, enquanto o tema pede md.
+ */
+export const Autocomplete: typeof MAutocomplete = withThemeDefaults(MAutocomplete, 'Autocomplete');
 export const Card: typeof MCard = withThemeDefaults(MCard, 'Card');
 export const Cascader: typeof MCascader = withThemeDefaults(MCascader, 'Cascader');
 export const CheckboxIndicator: typeof MCheckboxIndicator = withThemeDefaults(MCheckboxIndicator, 'CheckboxIndicator');
 export const Combobox: typeof MCombobox = withThemeDefaults(MCombobox, 'Combobox');
 export const FileInput: typeof MFileInput = withThemeDefaults(MFileInput, 'FileInput');
 export const FloatingWindow: typeof MFloatingWindow = withThemeDefaults(MFloatingWindow, 'FloatingWindow');
+export const MultiSelect: typeof MMultiSelect = withThemeDefaults(MMultiSelect, 'MultiSelect');
 export const NumberFormatter: typeof MNumberFormatter = withThemeDefaults(MNumberFormatter, 'NumberFormatter', (props) => {
   const scale = props.decimalScale ?? props['decimal-scale'];
   return scale === undefined ? {} : { value: roundTo(props.value, scale) };
@@ -73,6 +83,8 @@ const has = (props: Record<string, any>, name: string, kebab: string) => props[n
 export const Select: typeof MSelect = withThemeDefaults(MSelect, 'Select', (props) =>
   isOn(props.searchable) ? {} : { readonly: true },
 );
+export const TagsInput: typeof MTagsInput = withThemeDefaults(MTagsInput, 'TagsInput');
+export const TreeSelect: typeof MTreeSelect = withThemeDefaults(MTreeSelect, 'TreeSelect');
 
 type NativeOption = string | { value: string; disabled?: boolean } | { group: string; items: NativeOption[] };
 const firstValue = (data: NativeOption[] = []): string | undefined => {

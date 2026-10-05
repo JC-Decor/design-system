@@ -8,12 +8,14 @@ export * from '@mantine-vue/core';
 export { Transition as MantineTransition } from '@mantine-vue/core';
 // Versões que respeitam o defaultProps do tema (contornam padrões fixos do Mantine Vue 3.5; ver themeDefaults.ts)
 export {
+  Autocomplete,
   Card,
   Cascader,
   CheckboxIndicator,
   Combobox,
   FileInput,
   FloatingWindow,
+  MultiSelect,
   NativeSelect,
   NumberFormatter,
   NumberInput,
@@ -21,8 +23,10 @@ export {
   RollingNumber,
   Select,
   Table,
+  TagsInput,
   Timeline,
   Tooltip,
+  TreeSelect,
   withThemeDefaults,
 } from './theme/themeDefaults';
 

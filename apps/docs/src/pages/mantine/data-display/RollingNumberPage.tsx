@@ -19,8 +19,6 @@ export default function RollingNumberPage() {
           component={RollingNumber}
           name="RollingNumber"
           baseProps={{ fz: 'var(--type-headline-md)', fw: 700 }}
-          // Mantine Vue 3.5: `thousandSeparator` (string | boolean) vira `false` quando omitido e ignora o tema — passe explícito
-          vue={{ baseProps: { fz: 'var(--type-headline-md)', fw: 700, thousandSeparator: '.' }, codeProps: { 'thousand-separator': '.' } }}
           controls={[
             { prop: 'value', type: 'number', initialValue: 12480.5, step: 1000 },
             { prop: 'prefix', type: 'string', initialValue: 'R$ ' },
@@ -48,7 +46,7 @@ export default function RollingNumberPage() {
       <Section title="No tema JC">
         <PropsTable
           rows={[
-            { name: 'thousandSeparator', type: 'defaultProps', default: "'.'", description: 'Milhar com ponto (pt-BR).', vueDescription: 'Milhar com ponto (pt-BR). No Mantine Vue 3.5 o padrão do tema não é aplicado: passe thousand-separator="." explicitamente.' },
+            { name: 'thousandSeparator', type: 'defaultProps', default: "'.'", description: 'Milhar com ponto (pt-BR).' },
             { name: 'decimalSeparator', type: 'defaultProps', default: "','", description: 'Decimal com vírgula (pt-BR).' },
           ]}
         />

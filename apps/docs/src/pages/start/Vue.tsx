@@ -161,7 +161,8 @@ const favorite = ref(false);
             <List.Item>
               Alguns componentes fixam padrões que vencem o tema (ex.: <code>size="sm"</code> no NumberInput, <code>withBorder</code> no Card).
               O DS exporta versões que respeitam o <code>defaultProps</code> do tema: Card, NumberInput, FileInput, PillsInput, Combobox,
-              Cascader, Table, Tooltip, NumberFormatter, CheckboxIndicator e FloatingWindow.
+              Cascader, Select, MultiSelect, TagsInput, Autocomplete, TreeSelect, Table, Tooltip, NumberFormatter, RollingNumber,
+              NativeSelect, CheckboxIndicator, FloatingWindow e Timeline.
             </List.Item>
             <List.Item>
               Gráficos em canvas não leem variáveis CSS: os wrappers convertem a paleta da marca para hex e trocam as cores ao
