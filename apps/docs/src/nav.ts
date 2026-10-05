@@ -22,6 +22,7 @@ export const navigation: NavGroup[] = [
       p('/', 'Introdução', () => import('./pages/start/Intro')),
       p('/instalacao', 'Instalação', () => import('./pages/start/Install'), ['npm', 'setup', 'provider']),
       p('/tema', 'Tema & customização', () => import('./pages/start/Theming'), ['createTheme', 'override', 'dark mode']),
+      p('/instalacao-vue', 'Vue (@jcdecor/vue)', () => import('./pages/start/Vue'), ['vue', 'mantine-vue', 'nuxt', 'playground', 'slots', 'v-model']),
     ],
   },
   {

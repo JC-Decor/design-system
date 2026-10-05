@@ -23,6 +23,10 @@ export default defineConfig({
     ],
     dedupe: ['react', 'react-dom', '@mantine/core', '@mantine/hooks'],
   },
+  // Em dev, /vue/ abre o playground Vue (rode `npm run dev:vue` em paralelo); no build ele é copiado para dist/vue.
+  server: {
+    proxy: { '/vue/': { target: 'http://localhost:5180', ws: true } },
+  },
   build: {
     chunkSizeWarningLimit: 1500,
   },

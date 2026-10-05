@@ -16,7 +16,7 @@ import { router } from './router';
 
 async function loadShiki() {
   const { createHighlighter } = await import('shiki');
-  return createHighlighter({ langs: ['tsx', 'bash', 'css', 'json', 'html'], themes: [] });
+  return createHighlighter({ langs: ['tsx', 'ts', 'vue', 'bash', 'css', 'json', 'html'], themes: [] });
 }
 const shikiAdapter = createShikiAdapter(loadShiki);
 

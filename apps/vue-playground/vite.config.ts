@@ -22,6 +22,7 @@ export default defineConfig({
     ],
     dedupe: ['vue', '@mantine-vue/core', '@mantine-vue/hooks'],
   },
+  server: { port: 5180, strictPort: true },
   build: {
     chunkSizeWarningLimit: 2000,
   },

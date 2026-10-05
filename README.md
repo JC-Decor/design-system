@@ -4,17 +4,20 @@ Monorepo (npm workspaces):
 
 | Pasta | O que é |
 | --- | --- |
-| `packages/ui` | Biblioteca **`@jcdecor/ui`** (tema Mantine + componentes), publicada no npm |
+| `packages/ui` | Biblioteca **`@jcdecor/ui`** (React: tema Mantine + componentes), publicada no npm |
+| `packages/vue` | Biblioteca **`@jcdecor/vue`** (Vue 3: mesmo DS sobre o Mantine Vue), publicada no npm |
 | `apps/docs` | Site de documentação (Vite + React Router), com exemplos ao vivo, código e playground |
+| `apps/vue-playground` | Vitrine viva do `@jcdecor/vue`, publicada junto com o docs em `/vue/` |
 
 ## Desenvolvimento
 
 ```bash
 npm install
 npm run dev          # docs em http://localhost:5173, consumindo o código-fonte da lib (HMR)
-npm test             # testes da lib (vitest)
+npm run dev:vue      # playground Vue em http://localhost:5180/vue/ (também acessível pelo docs em /vue/)
+npm test             # testes das duas libs (vitest)
 npm run typecheck
-npm run build        # build da lib (packages/ui/dist) + docs (apps/docs/dist)
+npm run build        # build das libs (packages/*/dist) + docs com o playground Vue em apps/docs/dist/vue
 ```
 
 ### Onde mexer
@@ -23,6 +26,7 @@ npm run build        # build da lib (packages/ui/dist) + docs (apps/docs/dist)
 - **Visual dos componentes Mantine**: `packages/ui/src/theme/theme.ts` + `overrides.module.css`.
 - **Variantes de cor** (accent, outline, light/tags): `packages/ui/src/theme/variantColorResolver.ts`.
 - **Componentes JC**: `packages/ui/src/components/<Nome>/`, chat em `src/chat/`, gráficos em `src/charts/`.
+- **Vue (`packages/vue`)**: tokens, formatação, CSS modules, caminhos SVG da marca e utilitários do chat são **cópias geradas** de `packages/ui/src` (cabeçalho `@generated`). Edite sempre no `packages/ui` e rode `npm run sync -w @jcdecor/vue`; o teste `test/shared.test.ts` falha se as cópias ficarem desatualizadas. Tema, componentes, chat e gráficos têm implementação Vue própria com a mesma API (slots/eventos/v-model no lugar de ReactNode/callbacks).
 - **Docs**: cada exemplo é um arquivo `apps/docs/src/demos/<pasta>/<nome>.demo.tsx` (o código exibido é o próprio arquivo); páginas em `apps/docs/src/pages/`, menu em `apps/docs/src/nav.ts`.
 
 ## Publicando no npm
@@ -33,7 +37,7 @@ Requer acesso ao escopo `@jcdecor` no npm (crie a organização `jcdecor` em npm
 npm run changeset            # descreva a mudança
 npx changeset version        # gera versão + CHANGELOG
 npm login
-npm run release              # build + publish
+npm run release              # build das duas libs + publish (changesets publica as que mudaram)
 ```
 
 ## Documentação (GitHub Pages)
