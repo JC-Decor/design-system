@@ -8,8 +8,13 @@
       "@jcdecor/ui/chat": ["../../packages/ui/src/chat.ts"],
       "@jcdecor/ui/charts": ["../../packages/ui/src/charts.ts"],
       "@jcdecor/ui/brand": ["../../packages/ui/src/brand.ts"],
-      "@jcdecor/ui/tokens": ["../../packages/ui/src/tokens.ts"]
+      "@jcdecor/ui/tokens": ["../../packages/ui/src/tokens.ts"],
+      "@jcdecor/vue": ["../../packages/vue/src/index.ts"],
+      "@jcdecor/vue/chat": ["../../packages/vue/src/chat.ts"],
+      "@jcdecor/vue/charts": ["../../packages/vue/src/charts.ts"],
+      "@jcdecor/vue/brand": ["../../packages/vue/src/brand.ts"],
+      "@jcdecor/vue/tokens": ["../../packages/vue/src/tokens.ts"]
     }
   },
-  "include": ["src", "vite.config.ts", "../../packages/ui/src/css-modules.d.ts"]
+  "include": ["src", "vite.config.ts", "../../packages/ui/src/css-modules.d.ts", "../../packages/vue/src/css-modules.d.ts"]
 }
