@@ -5,14 +5,14 @@ export const meta = { centered: true, maxWidth: 360 };
 <script setup lang="ts">
 // Em templates Vue, <Transition> é sempre o nativo do Vue: o do Mantine é exportado como MantineTransition.
 import { ref } from 'vue';
-import { Button, Paper, Select, Stack, Text, MantineTransition, type MantineTransition } from '@jcdecor/vue';
+import { Button, Paper, Select, Stack, Text, MantineTransition } from '@jcdecor/vue';
 
-const transitions: MantineTransition[] = [
+const transitions = [
   'fade', 'fade-up', 'fade-down', 'fade-left', 'fade-right', 'scale', 'scale-y', 'scale-x', 'pop', 'pop-top-left',
   'pop-bottom-right', 'slide-up', 'slide-down', 'skew-up', 'rotate-left',
-];
+] as const;
 
-const transition = ref<MantineTransition>('fade-up');
+const transition = ref<(typeof transitions)[number]>('fade-up');
 const mounted = ref(true);
 </script>
 
