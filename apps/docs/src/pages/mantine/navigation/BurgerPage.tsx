@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function BurgerPage() {
   return (
@@ -30,8 +31,15 @@ export default function BurgerPage() {
 
       <Section title="Uso">
         <P>
-          O Burger é controlado: guarde o estado com <code>useDisclosure</code> de <code>@mantine/hooks</code> e passe <code>opened</code> e{' '}
-          <code>onClick</code>. Sempre informe um <code>aria-label</code>.
+          <OnlyFor framework="react">
+            O Burger é controlado: guarde o estado com <code>useDisclosure</code> de <code>@mantine/hooks</code> e passe <code>opened</code> e{' '}
+            <code>onClick</code>.
+          </OnlyFor>
+          <OnlyFor framework="vue">
+            O Burger é controlado: guarde o estado com <code>useDisclosure</code> de <code>@mantine-vue/hooks</code> e passe{' '}
+            <code>:opened</code> e <code>@click</code>.
+          </OnlyFor>{' '}
+          Sempre informe um <code>aria-label</code>.
         </P>
         <Demo id="burger/usage" />
       </Section>

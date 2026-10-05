@@ -1,6 +1,7 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function TreePage() {
   return (
@@ -15,14 +16,22 @@ export default function TreePage() {
       <Section title="Categorias do catálogo">
         <P>
           Os dados são uma lista de <code>{'{ label, value, children }'}</code>, com <code>value</code> único. Personalize cada nó com{' '}
-          <code>renderNode</code> e espalhe <code>elementProps</code> no elemento raiz para manter clique, foco e estado selecionado.
+          <OnlyFor framework="react">
+            <code>renderNode</code> e espalhe <code>elementProps</code> no elemento raiz
+          </OnlyFor>
+          <OnlyFor framework="vue">
+            o slot <code>#node</code> e aplique <code>v-bind="elementProps"</code> no elemento raiz
+          </OnlyFor>{' '}
+          para manter clique, foco e estado selecionado.
         </P>
         <Demo id="tree/categories" />
       </Section>
 
       <Section title="Filtro com checkboxes">
         <P>
-          O hook <code>useTree</code> controla expansão, seleção e marcação. Com <code>Checkbox.Indicator</code> e{' '}
+          O hook <code>useTree</code> controla expansão, seleção e marcação. Com{' '}
+          <OnlyFor framework="react"><code>Checkbox.Indicator</code></OnlyFor>
+          <OnlyFor framework="vue"><code>CheckboxIndicator</code></OnlyFor> e{' '}
           <code>tree.isNodeIndeterminate</code>, marcar um pai marca todos os filhos e o pai fica parcial quando só alguns estão marcados.
         </P>
         <Demo id="tree/checkboxes" />
@@ -49,7 +58,7 @@ export default function TreePage() {
           rows={[
             { name: 'data', type: 'TreeNodeData[]', required: true, description: 'Nós da árvore: label, value e children.' },
             { name: 'tree', type: 'TreeController', description: 'Instância de useTree para controlar o estado.' },
-            { name: 'renderNode', type: '(payload) => ReactNode', description: 'Renderização personalizada de cada nó.' },
+            { name: 'renderNode', type: '(payload) => ReactNode', description: 'Renderização personalizada de cada nó.', vueName: '#node', vueType: 'slot (payload)', vueDescription: 'Slot com a renderização personalizada de cada nó (a prop renderNode também existe).' },
             { name: 'selectOnClick', type: 'boolean', default: 'false', description: 'Seleciona o nó ao clicar.' },
             { name: 'expandOnClick', type: 'boolean', default: 'true', description: 'Expande/recolhe o nó ao clicar.' },
             { name: 'levelOffset', type: 'MantineSpacing', default: "'lg'", description: 'Recuo de cada nível.' },

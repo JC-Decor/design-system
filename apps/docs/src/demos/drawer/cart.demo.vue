@@ -18,6 +18,7 @@ interface CartItem {
 }
 
 const brl = (value: number) => value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+const photoUrl = (seed: string) => `https://picsum.photos/seed/${seed}/160/160`;
 
 const [opened, { open, close }] = useDisclosure(false);
 const items = ref<CartItem[]>([
@@ -37,7 +38,7 @@ const remove = (id: string) => {
   <Drawer :opened="opened" :title="`Seu carrinho (${count})`" position="right" size="md" @close="close">
     <Stack gap="md">
       <Group v-for="item in items" :key="item.id" wrap="nowrap" align="flex-start">
-        <Image :src="`https://picsum.photos/seed/${item.seed}/160/160`" :w="64" :h="64" radius="sm" alt="" />
+        <Image :src="photoUrl(item.seed)" :w="64" :h="64" radius="sm" alt="" />
         <Stack :gap="4" :style="{ flex: 1 }">
           <Text fz="sm" :fw="600" :lh="1.3">{{ item.name }}</Text>
           <Text fz="xs" c="var(--ds-text-3)">{{ item.variant }}</Text>

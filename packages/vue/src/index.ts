@@ -1,7 +1,11 @@
 import './styles/global.css';
+import './styles/vue-fixes.css';
 
 // Tudo do Mantine Vue core, para importar de um só lugar: `import { Button, Tag } from '@jcdecor/vue'`
 export * from '@mantine-vue/core';
+// Em templates Vue, `<Transition>` é sempre o built-in do Vue (o compilador ignora o import).
+// Use `<MantineTransition>` para o componente do Mantine (mounted, transition, duration…).
+export { Transition as MantineTransition } from '@mantine-vue/core';
 // Versões que respeitam o defaultProps do tema (contornam padrões fixos do Mantine Vue 3.5; ver themeDefaults.ts)
 export {
   Card,
@@ -10,10 +14,14 @@ export {
   Combobox,
   FileInput,
   FloatingWindow,
+  NativeSelect,
   NumberFormatter,
   NumberInput,
   PillsInput,
+  RollingNumber,
+  Select,
   Table,
+  Timeline,
   Tooltip,
   withThemeDefaults,
 } from './theme/themeDefaults';

@@ -3,8 +3,11 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { useFramework } from '../../../kit/framework';
 
 export default function ProgressPage() {
+  const vue = useFramework().framework === 'vue';
+
   return (
     <DocPage
       kicker="Mantine · Feedback"
@@ -40,8 +43,8 @@ export default function ProgressPage() {
 
       <Section title="Seções">
         <P>
-          Com <code>Progress.Root</code> e vários <code>Progress.Section</code> a barra mostra partes de um todo. Use rótulos curtos em{' '}
-          <code>Progress.Label</code> e uma legenda abaixo.
+          Com <code>{vue ? 'ProgressRoot' : 'Progress.Root'}</code> e vários <code>{vue ? 'ProgressSection' : 'Progress.Section'}</code> a barra mostra partes de um todo. Use rótulos curtos em{' '}
+          <code>{vue ? 'ProgressLabel' : 'Progress.Label'}</code> e uma legenda abaixo.
         </P>
         <Demo id="progress/sections" />
       </Section>

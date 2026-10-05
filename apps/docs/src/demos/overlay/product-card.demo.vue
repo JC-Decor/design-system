@@ -7,6 +7,7 @@ import { ref } from 'vue';
 import { Box, Button, Image, Overlay, Stack, Text } from '@jcdecor/vue';
 
 const hovered = ref(false);
+const photo = 'https://picsum.photos/seed/cimento/600/480';
 </script>
 
 <template>
@@ -17,7 +18,7 @@ const hovered = ref(false);
     @mouseenter="hovered = true"
     @mouseleave="hovered = false"
   >
-    <Image src="https://picsum.photos/seed/cimento/600/480" h="100%" alt="Revestimento Cimento Queimado" />
+    <Image :src="photo" h="100%" alt="Revestimento Cimento Queimado" />
     <Overlay gradient="linear-gradient(180deg, transparent 30%, color-mix(in srgb, var(--dc-obsidian), transparent 15%) 100%)" :z-index="1">
       <Stack justify="flex-end" h="100%" p="md" :gap="4">
         <Text c="var(--dc-white)" :fw="600">Revestimento Cimento Queimado</Text>

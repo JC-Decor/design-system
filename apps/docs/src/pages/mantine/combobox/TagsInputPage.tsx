@@ -3,8 +3,11 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { useFramework } from '../../../kit/framework';
 
 export default function TagsInputPage() {
+  const vue = useFramework().framework === 'vue';
+
   return (
     <DocPage
       kicker="Mantine · Combobox"
@@ -66,7 +69,7 @@ export default function TagsInputPage() {
       </Section>
 
       <Section title="Boas práticas">
-        <P>Normalize as tags (minúsculas, sem espaços extras) no <code>onChange</code> para evitar duplicatas como "Lavável" e "lavável".</P>
+        <P>Normalize as tags (minúsculas, sem espaços extras) no <code>{vue ? '@change' : 'onChange'}</code> para evitar duplicatas como "Lavável" e "lavável".</P>
       </Section>
     </DocPage>
   );

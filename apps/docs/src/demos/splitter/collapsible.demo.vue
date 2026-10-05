@@ -9,7 +9,6 @@ import { Paper, Splitter, SplitterPane, Text } from '@jcdecor/vue';
 <template>
   <Paper :h="260" :radius="0">
     <Splitter h="100%">
-      <!-- No Mantine Vue os tamanhos são sempre em %: o painel de filtros começa com 30% -->
       <SplitterPane :default-size="30" :min="20" :max="45" :collapsible="true" :collapse-threshold="10" p="md">
         <Text :fw="600">Filtros</Text>
         <Text fz="sm" c="var(--ds-text-2)">Arraste até o fim para recolher.</Text>

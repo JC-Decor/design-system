@@ -1,6 +1,7 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function TypographyPage() {
   return (
@@ -23,7 +24,8 @@ export default function TypographyPage() {
       <Section title="Post do blog">
         <P>
           Imagens ficam limitadas à largura do conteúdo. Para HTML de um CMS, use{' '}
-          <code>{'<Typography dangerouslySetInnerHTML={{ __html: html }} />'}</code> — sempre com conteúdo sanitizado.
+          <OnlyFor framework="react"><code>{'<Typography dangerouslySetInnerHTML={{ __html: html }} />'}</code></OnlyFor>
+          <OnlyFor framework="vue"><code>{'<Typography><div v-html="html" /></Typography>'}</code></OnlyFor> — sempre com conteúdo sanitizado.
         </P>
         <Demo id="rich-text/blog" />
       </Section>
@@ -45,7 +47,7 @@ export default function TypographyPage() {
 
       <Section title="Props principais">
         <P>
-          <code>Typography</code> não tem props próprias além das de <code>Box</code> (style props, <code>className</code>,{' '}
+          <code>Typography</code> não tem props próprias além das de <code>Box</code> (style props, <OnlyFor framework="react"><code>className</code></OnlyFor><OnlyFor framework="vue"><code>class</code></OnlyFor>,{' '}
           <code>component</code>) e da Styles API (seletor <code>root</code>).
         </P>
       </Section>

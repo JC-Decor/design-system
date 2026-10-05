@@ -26,7 +26,8 @@ const items = [
   { sku: 'PV-CAR-26', name: 'Piso vinílico Carvalho Natural', seed: 'carvalho', price: 'R$ 249,90', stock: 342, rating: 4.7 },
   { sku: 'PP-FOL-10', name: 'Papel de parede Folhagem', seed: 'folhagem', price: 'R$ 159,90', stock: 0, rating: 4.4 },
 ];
-</script>
+
+const photoUrl = (seed: string) => `https://picsum.photos/seed/${seed}/520/320`;</script>
 
 <template>
   <Table vertical-spacing="sm">
@@ -45,7 +46,7 @@ const items = [
             </HoverCardTarget>
             <HoverCardDropdown p="sm">
               <Stack gap="xs">
-                <Image :src="`https://picsum.photos/seed/${item.seed}/520/320`" :h="120" radius="sm" alt="" />
+                <Image :src="photoUrl(item.seed)" :h="120" radius="sm" alt="" />
                 <Text fz="sm" :fw="600" :lh="1.3">{{ item.name }}</Text>
                 <Group justify="space-between">
                   <Text :fw="700" c="var(--ds-primary)">{{ item.price }}</Text>

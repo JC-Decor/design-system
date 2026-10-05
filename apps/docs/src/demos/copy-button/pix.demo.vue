@@ -12,7 +12,7 @@ const pix = '00020126580014BR.GOV.BCB.PIX0136jcdecor-pagamentos@exemplo.com52040
 <template>
   <Stack gap="sm">
     <Text fz="sm" c="var(--ds-text-2)">Pague R$ 459,90 com Pix copia e cola:</Text>
-    <Textarea :model-value="pix" read-only autosize :min-rows="2" :styles="{ input: { fontFamily: 'monospace' } }" />
+    <Textarea :model-value="pix" readonly autosize :min-rows="2" :styles="{ input: { fontFamily: 'monospace' } }" />
     <CopyButton :value="pix" v-slot="{ copied, copy }">
       <Button full-width color="evergreen" @click="copy">
         <template #leftSection>

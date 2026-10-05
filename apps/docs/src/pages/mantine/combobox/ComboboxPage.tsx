@@ -61,8 +61,8 @@ export default function ComboboxPage() {
             { name: 'onOptionSubmit', vueName: '@option-submit', type: '(value) => void', description: 'Opção escolhida (clique ou Enter).' },
             { name: 'Combobox.Target', vueName: 'ComboboxTarget', type: 'component', description: 'Alvo que controla o dropdown e recebe atributos de acessibilidade.' },
             { name: 'Combobox.Option', vueName: 'ComboboxOption', type: 'component', description: 'value, active (marcada), disabled.' },
-            { name: 'Combobox.Search / Empty / Group', vueName: 'ComboboxSearch / ComboboxEmpty / ComboboxGroup', type: 'component', description: 'Busca interna, estado vazio e grupos.' },
-            { name: 'Combobox.Header / Footer', vueName: 'ComboboxHeader / ComboboxFooter', type: 'component', description: 'Áreas fixas acima/abaixo das opções.' },
+            { name: 'Combobox.Search / Empty / Group', vueName: 'ComboboxSearch / Empty / Group', type: 'component', description: 'Busca interna, estado vazio e grupos.' },
+            { name: 'Combobox.Header / Footer', vueName: 'ComboboxHeader / Footer', type: 'component', description: 'Áreas fixas acima/abaixo das opções.' },
           ]}
         />
       </Section>

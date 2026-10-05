@@ -1,0 +1,10 @@
+/*
+ * Ajustes só do @jcdecor/vue (não sincronizados com o React): diferenças de CSS do Mantine Vue 3.5
+ * em relação ao Mantine React que o tema compartilhado não cobre.
+ */
+
+/* Dentro de <fieldset disabled>, rótulos de seleção ficam esmaecidos como no React */
+fieldset:disabled :is(.mantine-Checkbox-label, .mantine-Radio-label, .mantine-Switch-label, .mantine-Chip-label) {
+  color: var(--mantine-color-disabled-color);
+  cursor: not-allowed;
+}

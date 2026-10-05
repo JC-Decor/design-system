@@ -1,8 +1,11 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { useFramework } from '../../../kit/framework';
 
 export default function LoadingOverlayPage() {
+  const vue = useFramework().framework === 'vue';
+
   return (
     <DocPage
       kicker="Mantine · Overlays"
@@ -22,7 +25,16 @@ export default function LoadingOverlayPage() {
 
       <Section title="Loader personalizado">
         <P>
-          <code>loaderProps.children</code> substitui o spinner — útil para explicar processos mais longos.
+          {vue ? (
+            <>
+              Registre um componente em <code>loaderProps.loaders</code> e escolha-o com <code>type</code> para substituir o spinner — útil para
+              explicar processos mais longos.
+            </>
+          ) : (
+            <>
+              <code>loaderProps.children</code> substitui o spinner — útil para explicar processos mais longos.
+            </>
+          )}
         </P>
         <Demo id="loading-overlay/custom-loader" />
       </Section>

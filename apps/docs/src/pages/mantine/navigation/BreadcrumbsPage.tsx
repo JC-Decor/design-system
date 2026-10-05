@@ -49,8 +49,8 @@ export default function BreadcrumbsPage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'children', type: 'ReactNode', required: true, description: 'Itens da trilha, renderizados na ordem.' },
-            { name: 'separator', type: 'ReactNode', default: "'/'", description: 'Conteúdo exibido entre os itens.' },
+            { name: 'children', type: 'ReactNode', required: true, description: 'Itens da trilha, renderizados na ordem.', vueName: 'default slot', vueType: 'slot' },
+            { name: 'separator', type: 'ReactNode', default: "'/'", description: 'Conteúdo exibido entre os itens.', vueType: 'MantineNode | slot #separator' },
             { name: 'separatorMargin', type: 'MantineSpacing', default: "'xs'", description: 'Espaço horizontal em volta do separador.' },
           ]}
         />

@@ -1,9 +1,12 @@
 import { NavLink } from '@jcdecor/ui';
 import { IconShoppingBag } from '@tabler/icons-react';
+import { IconShoppingBag as IconShoppingBagVue } from '@tabler/icons-vue';
+import { h } from 'vue';
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function NavLinkPage() {
   return (
@@ -22,6 +25,8 @@ export default function NavLinkPage() {
           previewWidth={280}
           baseProps={{ href: '#', leftSection: <IconShoppingBag size={18} />, onClick: (event: React.MouseEvent) => event.preventDefault() }}
           codeProps={{ leftSection: '<IconShoppingBag size={18} />' }}
+          // Sem href no Vue: a prévia não navega (o onClick com preventDefault da prévia React não passa para o Vue)
+          vue={{ baseProps: { leftSection: h(IconShoppingBagVue, { size: 18 }) } }}
           controls={[
             { prop: 'label', type: 'string', initialValue: 'Pedidos' },
             { prop: 'description', type: 'string', initialValue: '' },
@@ -36,7 +41,12 @@ export default function NavLinkPage() {
       <Section title="Menu lateral">
         <P>
           Controle o item ativo com <code>active</code>. Itens com filhos viram grupos expansíveis; ajuste o recuo com <code>childrenOffset</code>.
-          Com React Router, use <code>component={'{Link}'}</code> e <code>to</code>.
+          <OnlyFor framework="react">
+            Com React Router, use <code>component={'{Link}'}</code> e <code>to</code>.
+          </OnlyFor>
+          <OnlyFor framework="vue">
+            Com Vue Router, use <code>:component="RouterLink"</code> e <code>to</code>.
+          </OnlyFor>
         </P>
         <Demo id="nav-link/sidebar" />
       </Section>
@@ -63,13 +73,13 @@ export default function NavLinkPage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'label', type: 'ReactNode', description: 'Texto principal do item.' },
-            { name: 'description', type: 'ReactNode', description: 'Linha secundária abaixo do rótulo.' },
-            { name: 'leftSection / rightSection', type: 'ReactNode', description: 'Ícone à esquerda; contador ou seta à direita.' },
+            { name: 'label', type: 'ReactNode', description: 'Texto principal do item.', vueType: 'MantineNode | slot #label' },
+            { name: 'description', type: 'ReactNode', description: 'Linha secundária abaixo do rótulo.', vueType: 'MantineNode | slot #description' },
+            { name: 'leftSection / rightSection', type: 'ReactNode', description: 'Ícone à esquerda; contador ou seta à direita.', vueType: 'MantineNode | slots #leftSection / #rightSection' },
             { name: 'active', type: 'boolean', default: 'false', description: 'Marca o item como página atual.' },
             { name: 'variant', type: "'light' | 'filled' | 'subtle'", default: "'light'", description: 'Estilo do estado ativo.' },
-            { name: 'children', type: 'ReactNode', description: 'NavLinks filhos (grupo expansível).' },
-            { name: 'defaultOpened / opened', type: 'boolean', description: 'Estado do grupo (não controlado / controlado).' },
+            { name: 'children', type: 'ReactNode', description: 'NavLinks filhos (grupo expansível).', vueName: 'default slot', vueType: 'slot' },
+            { name: 'defaultOpened / opened', type: 'boolean', description: 'Estado do grupo (não controlado / controlado).', vueName: 'default-opened / v-model:opened' },
           ]}
         />
       </Section>

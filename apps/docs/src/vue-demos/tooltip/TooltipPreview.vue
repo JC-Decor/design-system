@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { Button, Tooltip, type FloatingPosition, type MantineRadius } from '@jcdecor/vue';
+import { Button, Tooltip, type MantineRadius, type TooltipProps } from '@jcdecor/vue';
 
 defineProps<{
   label?: string;
-  position?: FloatingPosition;
+  position?: TooltipProps['position'];
   withArrow?: boolean;
   radius?: MantineRadius;
 }>();

@@ -1,8 +1,11 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { useFramework } from '../../../kit/framework';
 
 export default function ActionBarPage() {
+  const vue = useFramework().framework === 'vue';
+
   return (
     <DocPage
       kicker="Mantine · Overlays"
@@ -14,8 +17,8 @@ export default function ActionBarPage() {
     >
       <Section title="Ações em massa na tabela">
         <P>
-          Selecione linhas para a barra aparecer centralizada a 30px da base da viewport. <code>ActionBar.Divider</code> separa grupos e{' '}
-          <code>ActionBar.CloseButton</code> chama <code>onClose</code> — aqui ele limpa a seleção. Com <code>closeOnEscape</code>, <kbd>Esc</kbd> também
+          Selecione linhas para a barra aparecer centralizada a 30px da base da viewport. <code>{vue ? 'ActionBarDivider' : 'ActionBar.Divider'}</code> separa grupos e{' '}
+          <code>{vue ? 'ActionBarCloseButton' : 'ActionBar.CloseButton'}</code> chama <code>{vue ? '@close' : 'onClose'}</code> — aqui ele limpa a seleção. Com <code>closeOnEscape</code>, <kbd>Esc</kbd> também
           limpa.
         </P>
         <Demo id="action-bar/bulk-actions" />

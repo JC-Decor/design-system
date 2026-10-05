@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import AnchorPreviewVue from '../../../vue-demos/anchor/AnchorPreview.vue';
 
 export default function AnchorPage() {
   return (
@@ -18,6 +19,7 @@ export default function AnchorPage() {
         <Configurator
           component={Anchor}
           name="Anchor"
+          vue={{ component: AnchorPreviewVue }}
           baseProps={{ href: '#', onClick: (event: React.MouseEvent) => event.preventDefault() }}
           controls={[
             { prop: 'children', type: 'string', initialValue: 'Ver todos os pisos' },
@@ -59,8 +61,8 @@ export default function AnchorPage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'href', type: 'string', description: 'Destino do link. Com React Router, use component={Link} e to.' },
-            { name: 'component', type: 'ElementType', default: "'a'", description: 'Elemento ou componente renderizado (ex.: Link do roteador).' },
+            { name: 'href', type: 'string', description: 'Destino do link. Com React Router, use component={Link} e to.', vueDescription: 'Destino do link. Com Vue Router, use :component="RouterLink" e to.' },
+            { name: 'component', type: 'ElementType', vueType: 'string | Component', default: "'a'", description: 'Elemento ou componente renderizado (ex.: Link do roteador).' },
             { name: 'underline', type: "'always' | 'hover' | 'not-hover' | 'never'", default: "'hover'", description: 'Quando exibir o sublinhado.' },
             { name: 'size / fz', type: 'MantineSize | string', description: 'Tamanho da fonte.' },
             { name: 'c', type: 'MantineColor', default: '--ds-link', description: 'Cor do texto; evite trocar por cores sem contraste.' },

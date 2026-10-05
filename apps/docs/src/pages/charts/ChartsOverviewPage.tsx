@@ -11,7 +11,13 @@ export default function ChartsOverviewPage() {
       title="Visão geral"
       source="charts"
       sourcePath="packages/ui/src/charts"
-      description="Wrappers finos do @mantine/charts com os padrões JC Decor: paleta da marca aplicada automaticamente, números em pt-BR e curvas suaves."
+      description={
+        <>
+          Wrappers finos do <OnlyFor framework="react">@mantine/charts</OnlyFor>
+          <OnlyFor framework="vue">@mantine-vue/charts (Apache ECharts)</OnlyFor> com os padrões JC
+          Decor: paleta da marca aplicada automaticamente, números em pt-BR e curvas suaves.
+        </>
+      }
       importCode={`import { LineChart, AreaChart, BarChart, DonutChart, PieChart, Sparkline, ChartCard } from '@jcdecor/ui/charts';`}
     >
       <Section title="Instalação">

@@ -1,8 +1,11 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { useFramework } from '../../../kit/framework';
 
 export default function SkeletonPage() {
+  const vue = useFramework().framework === 'vue';
+
   return (
     <DocPage
       kicker="Mantine · Feedback"
@@ -14,7 +17,7 @@ export default function SkeletonPage() {
     >
       <Section title="Card de produto">
         <P>
-          Envolva o conteúdo real com <code>Skeleton visible={'{loading}'}</code>: o tamanho vem do próprio conteúdo e o layout não “pula” quando
+          Envolva o conteúdo real com <code>{vue ? 'Skeleton :visible="loading"' : 'Skeleton visible={loading}'}</code>: o tamanho vem do próprio conteúdo e o layout não “pula” quando
           os dados chegam.
         </P>
         <Demo id="skeleton/product-card" />
@@ -28,7 +31,7 @@ export default function SkeletonPage() {
       <Section title="Formas">
         <P>
           Use <code>radius</code> igual ao do componente final (botões <code>sm</code>, cards <code>md</code>, badges <code>xl</code>).{' '}
-          <code>animate={'{false}'}</code> desliga a pulsação.
+          <code>{vue ? ':animate="false"' : 'animate={false}'}</code> desliga a pulsação.
         </P>
         <Demo id="skeleton/shapes" />
       </Section>

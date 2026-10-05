@@ -21,6 +21,7 @@ export default function CardPage() {
           component={Card}
           name="Card"
           baseProps={{ style: { minWidth: 260 } }}
+          vue={{ baseProps: { style: { minWidth: '260px' } } }}
           controls={[
             { prop: 'shadow', type: 'select', data: ['none', 'xs', 'sm', 'md', 'lg', 'xl'], initialValue: 'sm' },
             { prop: 'radius', type: 'size', initialValue: 'md' },

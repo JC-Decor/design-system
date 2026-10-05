@@ -21,6 +21,11 @@ export default function NativeSelectPage() {
           previewWidth={320}
           baseProps={{ data: ['Relevância', 'Menor preço', 'Maior preço', 'Lançamentos'] }}
           codeProps={{ data: "['Relevância', 'Menor preço', 'Maior preço', 'Lançamentos']" }}
+          // Mantine Vue: sem defaultValue o <select> abre vazio (value undefined → selectedIndex -1)
+          vue={{
+            baseProps: { data: ['Relevância', 'Menor preço', 'Maior preço', 'Lançamentos'], defaultValue: 'Relevância' },
+            codeProps: { ':data': "['Relevância', 'Menor preço', 'Maior preço', 'Lançamentos']", 'default-value': '"Relevância"' },
+          }}
           controls={[
             { prop: 'label', type: 'string', initialValue: 'Ordenar por' },
             { prop: 'description', type: 'string', initialValue: '' },

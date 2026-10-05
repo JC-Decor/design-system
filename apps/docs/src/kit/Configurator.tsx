@@ -9,13 +9,13 @@ import { VueMount } from './VueMount';
 import classes from './kit.module.css';
 
 export type ConfiguratorControl =
-  | { prop: string; type: 'select'; data: string[]; initialValue: string; label?: string }
-  | { prop: string; type: 'segmented'; data: string[]; initialValue: string; label?: string }
-  | { prop: string; type: 'size'; initialValue: string; label?: string }
-  | { prop: string; type: 'boolean'; initialValue: boolean; label?: string }
-  | { prop: string; type: 'string'; initialValue: string; label?: string }
-  | { prop: string; type: 'number'; initialValue: number; label?: string; min?: number; max?: number; step?: number }
-  | { prop: string; type: 'color'; initialValue: string; label?: string; data?: string[] };
+  | { prop: string; type: 'select'; data: string[]; initialValue: string; label?: string; vueProp?: string }
+  | { prop: string; type: 'segmented'; data: string[]; initialValue: string; label?: string; vueProp?: string }
+  | { prop: string; type: 'size'; initialValue: string; label?: string; vueProp?: string }
+  | { prop: string; type: 'boolean'; initialValue: boolean; label?: string; vueProp?: string }
+  | { prop: string; type: 'string'; initialValue: string; label?: string; vueProp?: string }
+  | { prop: string; type: 'number'; initialValue: number; label?: string; vueProp?: string; min?: number; max?: number; step?: number }
+  | { prop: string; type: 'color'; initialValue: string; label?: string; vueProp?: string; data?: string[] };
 
 export interface ConfiguratorProps {
   /** Componente renderizado na prévia */
@@ -115,16 +115,20 @@ export function Configurator({ component: Component, name, importFrom = '@jcdeco
   const reactCode = `import { ${name} } from '${importFrom}';\n\nfunction Demo() {\n  return ${jsx.includes('\n') ? '(\n    ' + jsx.split('\n').join('\n    ') + '\n  )' : jsx};\n}`;
 
   // ── Vue ──
+  // Controles podem ter outro nome de prop no Vue (ex.: `value` controlado → `modelValue`)
+  const toVueProp = (prop: string) => controls.find((c) => c.prop === prop)?.vueProp ?? prop;
+  const renameForVue = (props: Record<string, unknown>) => Object.fromEntries(Object.entries(props).map(([p, v]) => [toVueProp(p), v]));
   const VueComponent = (vue?.component ?? vueModules[importFrom]?.[name]) as VueComponent | undefined;
   const useVue = framework === 'vue' && !!VueComponent;
   const vueProps = useMemo(
-    () => ({ ...vueSafeProps(vue?.baseProps ?? baseProps), ...(vue?.component ? state : rest) }),
+    // `vue.baseProps` é escrito para o Vue (pode ter listeners como onAction); só as props do React são filtradas
+    () => ({ ...(vue?.baseProps ?? vueSafeProps(baseProps)), ...renameForVue(vue?.component ? state : rest) }),
     [vue, baseProps, state, rest],
   );
   const converted = codePropsToVue(codeProps);
   const vueAttrs = [
     ...(vue?.codeProps ? Object.entries(vue.codeProps).map(([p, v]) => `${p}=${v.startsWith('"') ? v : `"${v}"`}`) : converted.attrs),
-    ...changed.filter(([, v]) => v !== false && v !== '').map(([p, v]) => serializeVue(p, v)),
+    ...changed.filter(([, v]) => v !== false && v !== '').map(([p, v]) => serializeVue(toVueProp(p), v)),
   ];
   const vueSlots = Object.entries(vue?.codeSlots ?? converted.slots).map(([slot, content]) => `<template #${slot}>${content}</template>`);
   const inner = [...vueSlots, ...(childrenText !== undefined ? [childrenText] : [])];

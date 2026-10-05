@@ -7,6 +7,7 @@ import { h, ref } from 'vue';
 import { Box, Image, LoadingOverlay, Stack, Switch, Text } from '@jcdecor/vue';
 
 const visible = ref(true);
+const photo = 'https://picsum.photos/seed/janela/600/400';
 
 // Loader próprio: registrado em `loaders` e escolhido pelo `type`
 const PreviewLoader = () =>
@@ -20,7 +21,7 @@ const PreviewLoader = () =>
   <Stack>
     <Box pos="relative" :style="{ borderRadius: 'var(--ds-radius)', overflow: 'hidden' }">
       <LoadingOverlay :visible="visible" :loader-props="{ type: 'preview', loaders: { preview: PreviewLoader } }" />
-      <Image src="https://picsum.photos/seed/janela/600/400" :h="200" alt="Ambiente com cortina" />
+      <Image :src="photo" :h="200" alt="Ambiente com cortina" />
     </Box>
     <Switch v-model="visible" label="Carregando" />
   </Stack>

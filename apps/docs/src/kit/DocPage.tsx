@@ -55,7 +55,7 @@ export function DocPage({ kicker, title, description, importCode, source, mantin
             )}
             {sourcePath && (
               <Group gap={4} fz="sm" c="var(--ds-text-3)">
-                <IconBrandGithub size={16} /> {vue ? sourcePath.replace('packages/ui/', 'packages/vue/') : sourcePath}
+                <IconBrandGithub size={16} /> {vue ? sourcePath.replace('packages/ui/', 'packages/vue/').replace(/\.tsx$/, '.ts') : sourcePath}
               </Group>
             )}
           </Group>

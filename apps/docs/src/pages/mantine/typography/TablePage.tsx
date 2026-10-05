@@ -62,7 +62,7 @@ export default function TablePage() {
       <Section title="Boas práticas">
         <P>
           Alinhe texto à esquerda e números à direita, com o cabeçalho seguindo o alinhamento da coluna. Use o formato brasileiro (
-          <code>127.237</code>, <code>6,6</code>) — <code>toLocaleString('pt-BR')</code> ou os helpers <code>formatNumber</code>/<code>formatCurrency</code> de <code>@jcdecor/ui</code>.
+          <code>127.237</code>, <code>6,6</code>) — <code>toLocaleString('pt-BR')</code> ou os helpers <code>formatNumber</code>/<code>formatCurrency</code> de <OnlyFor framework="react"><code>@jcdecor/ui</code></OnlyFor><OnlyFor framework="vue"><code>@jcdecor/vue</code></OnlyFor>.
         </P>
       </Section>
     </DocPage>

@@ -1,5 +1,5 @@
 import { h, nextTick } from 'vue';
-import { Button, NumberInput, NumberFormatter, Table, Tag, Kicker, Headline, jcTheme, useMantineColorScheme, COLOR_SCHEME_STORAGE_KEY, JcProvider } from '../src';
+import { Button, NativeSelect, NumberInput, NumberFormatter, RollingNumber, Select, Table, Timeline, TimelineItem, Tag, Kicker, Headline, jcTheme, useMantineColorScheme, COLOR_SCHEME_STORAGE_KEY, JcProvider } from '../src';
 import { render, screen } from './render';
 import { render as tlRender } from '@testing-library/vue';
 import { defineComponent } from 'vue';
@@ -108,9 +108,48 @@ describe('padrões do tema vencem os padrões fixos do Mantine Vue', () => {
   });
 });
 
-describe('variante subtle sem cor = Ghost', () => {
-  it('usa texto-2 em vez da cor primária', () => {
-    render(() => h(Button, { variant: 'subtle' }, () => 'Ghost'));
-    expect(screen.getByRole('button', { name: 'Ghost' }).style.getPropertyValue('--button-color')).toBe('var(--ds-text-2)');
+describe('variante subtle sem cor', () => {
+  it('fica na cor primária, como no @jcdecor/ui (o Mantine sempre envia a cor primária ao resolver)', () => {
+    render(() => h(Button, { variant: 'subtle' }, () => 'Sutil'));
+    expect(screen.getByRole('button', { name: 'Sutil' }).style.getPropertyValue('--button-color')).toBe('var(--mantine-color-horizon-light-color)');
+  });
+});
+
+describe('correções de componentes do Mantine Vue 3.5', () => {
+  it('Select não pesquisável tem input readonly nativo; pesquisável continua editável', () => {
+    const { container } = render(() => [h(Select, { data: ['A', 'B'] }), h(Select, { data: ['A'], searchable: true })]);
+    const [fixed, searchable] = container.querySelectorAll('input');
+    expect(fixed.readOnly).toBe(true);
+    expect(searchable.readOnly).toBe(false);
+  });
+
+  it('NativeSelect não controlado começa na primeira opção (não em branco)', () => {
+    const { container } = render(() => [
+      h(NativeSelect, { data: ['Um', 'Dois'] }),
+      h(NativeSelect, { data: [{ value: 'x', label: 'X', disabled: true }, { value: 'y', label: 'Y' }] }),
+      h(NativeSelect, { data: ['Um', 'Dois'], defaultValue: 'Dois' }),
+    ]);
+    expect([...container.querySelectorAll('select')].map((s) => s.value)).toEqual(['Um', 'y', 'Dois']);
+  });
+});
+
+describe('mais correções do Mantine Vue 3.5', () => {
+  it('NumberFormatter arredonda com decimalScale (como o React)', () => {
+    render(() => h(NumberFormatter, { value: -3.45, decimalScale: 1, suffix: '%' }));
+    expect(screen.getByText('-3,5%')).toBeInTheDocument();
+  });
+
+  it('RollingNumber mantém o separador de milhar do tema', () => {
+    const { container } = render(() => h(RollingNumber, { value: 12480 }));
+    expect(container.textContent?.replace(/\s/g, '')).toContain('12.480');
+  });
+
+  it('Timeline conta itens gerados por v-for (Fragment) para o `active`', () => {
+    const items = ['Pedido', 'Pago', 'Enviado'];
+    const { container } = render(() =>
+      h(Timeline, { active: 1 }, () => items.map((title) => h(TimelineItem, { key: title, title }))),
+    );
+    const active = [...container.querySelectorAll('.mantine-Timeline-item')].map((el) => el.hasAttribute('data-active'));
+    expect(active).toEqual([true, true, false]);
   });
 });

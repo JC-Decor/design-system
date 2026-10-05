@@ -5,6 +5,8 @@ export const meta = { centered: true, maxWidth: 360 };
 <script setup lang="ts">
 import { ActionIcon, Affix, Box, Skeleton, Stack, Text } from '@jcdecor/vue';
 import { IconBrandWhatsapp } from '@tabler/icons-vue';
+
+const whatsappUrl = 'https://wa.me/5511999999999';
 </script>
 
 <template>
@@ -30,7 +32,7 @@ import { IconBrandWhatsapp } from '@tabler/icons-vue';
         color="evergreen"
         aria-label="Falar com um consultor pelo WhatsApp"
         component="a"
-        href="https://wa.me/5511999999999"
+        :href="whatsappUrl"
         target="_blank"
         :style="{ boxShadow: 'var(--ds-shadow-lg)' }"
       >

@@ -1,22 +1,21 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { ref, watch } from 'vue';
 import { Button, Group, Paper, Stack, Text } from '@jcdecor/vue';
 import { ChatComposer } from '@jcdecor/vue/chat';
 
 const LIMIT = 280;
 
 const value = ref('Olá! Gostaria de saber as medidas de cortina disponíveis.');
-// v-model com limite: o setter corta o texto antes de guardar
-const message = computed({
-  get: () => value.value,
-  set: (v: string) => (value.value = v.slice(0, LIMIT)),
-});
+// Corta o excedente depois que o campo renderiza, para o textarea voltar ao texto limitado
+watch(value, (v) => {
+  if (v.length > LIMIT) value.value = v.slice(0, LIMIT);
+}, { flush: 'post' });
 </script>
 
 <template>
   <Stack>
     <Paper with-border radius="md" style="overflow: hidden">
-      <ChatComposer v-model="message" />
+      <ChatComposer v-model="value" />
     </Paper>
     <Group justify="space-between">
       <Text fz="sm" :c="value.length >= LIMIT ? 'var(--ds-error)' : 'var(--ds-text-3)'">

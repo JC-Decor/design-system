@@ -5,6 +5,7 @@ export const meta = { centered: true, maxWidth: 380 };
 <script setup lang="ts">
 import { CouponCode } from '@jcdecor/vue';
 import { Notifications, notifications } from '@mantine-vue/notifications';
+import '@mantine-vue/notifications/styles.css';
 
 function onCopy(code: string) {
   notifications.show({ color: 'evergreen', title: 'Cupom copiado', message: `Cole ${code} no carrinho para aplicar o desconto.` });

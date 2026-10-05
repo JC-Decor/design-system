@@ -6,8 +6,11 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { useFramework } from '../../../kit/framework';
 
 export default function EmptyStatePage() {
+  const vue = useFramework().framework === 'vue';
+
   return (
     <DocPage
       kicker="Mantine · Feedback"
@@ -39,7 +42,7 @@ export default function EmptyStatePage() {
       <Section title="Busca sem resultado">
         <P>
           A forma curta usa as props <code>icon</code>, <code>title</code> e <code>description</code>; as ações entram como filhos em{' '}
-          <code>EmptyState.Actions</code>.
+          <code>{vue ? 'EmptyStateActions' : 'EmptyState.Actions'}</code>.
         </P>
         <Demo id="empty-state/search" />
       </Section>
@@ -54,7 +57,7 @@ export default function EmptyStatePage() {
 
       <Section title="Composição e alinhamento">
         <P>
-          Para controle total use as partes <code>EmptyState.Indicator</code>, <code>Title</code>, <code>Description</code> e{' '}
+          Para controle total use as partes <code>{vue ? 'EmptyStateIndicator' : 'EmptyState.Indicator'}</code>, <code>Title</code>, <code>Description</code> e{' '}
           <code>Actions</code>. Com <code>align="left"</code>, o indicador vai para o lado — bom para cards e painéis estreitos.
         </P>
         <Demo id="empty-state/compound" />

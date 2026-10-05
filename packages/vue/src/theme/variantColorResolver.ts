@@ -73,9 +73,7 @@ export const jcVariantColorResolver: VariantColorsResolver = (input) => {
     };
   }
 
-  // O Mantine Vue sempre envia `color: theme.primaryColor` quando o componente não tem cor, então "sem cor"
-  // é a cor primária pelo nome exato. Para um subtle azul de verdade use `color="horizon.6"` ou `color="blue"`.
-  if (variant === 'subtle' && (!input.color || input.color === theme.primaryColor)) {
+  if (variant === 'subtle' && !input.color) {
     return {
       background: 'transparent',
       hover: 'var(--ds-surface-2)',

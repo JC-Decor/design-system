@@ -33,7 +33,10 @@ export default function BarPage() {
           <OnlyFor framework="react">
             Ajuste a largura do eixo com <code>yAxisProps</code>.
           </OnlyFor>
-          <OnlyFor framework="vue">O eixo se ajusta sozinho à largura dos rótulos.</OnlyFor>
+          <OnlyFor framework="vue">
+            O eixo se ajusta sozinho à largura dos rótulos; os eixos aceitam opções do ECharts (
+            <code>:y-axis-props="{'{'} inverse: true {'}'}"</code> mantém a 1ª categoria no topo).
+          </OnlyFor>
         </P>
         <Demo id="bar/horizontal" />
       </Section>

@@ -3,8 +3,11 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { useFramework } from '../../../kit/framework';
 
 export default function AlertPage() {
+  const vue = useFramework().framework === 'vue';
+
   return (
     <DocPage
       kicker="Mantine · Feedback"
@@ -47,7 +50,7 @@ export default function AlertPage() {
 
       <Section title="Com ações e fechar">
         <P>
-          Coloque botões pequenos no corpo do alerta para a próxima ação. Com <code>withCloseButton</code>, passe <code>onClose</code> e um{' '}
+          Coloque botões pequenos no corpo do alerta para a próxima ação. Com <code>withCloseButton</code>, passe <code>{vue ? '@close' : 'onClose'}</code> e um{' '}
           <code>closeButtonLabel</code> em português.
         </P>
         <Demo id="alert/with-actions" />

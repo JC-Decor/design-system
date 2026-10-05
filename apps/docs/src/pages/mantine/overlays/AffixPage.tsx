@@ -1,8 +1,11 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { useFramework } from '../../../kit/framework';
 
 export default function AffixPage() {
+  const vue = useFramework().framework === 'vue';
+
   return (
     <DocPage
       kicker="Mantine · Overlays"
@@ -23,7 +26,7 @@ export default function AffixPage() {
       <Section title="Botão do WhatsApp">
         <P>
           Na loja, o atendimento por WhatsApp fica no canto inferior direito. Para não cobrir a documentação, este exemplo usa{' '}
-          <code>withinPortal={'{false}'}</code> e <code>position: absolute</code> dentro de uma moldura; em produção remova os dois.
+          <code>{vue ? ':within-portal="false"' : 'withinPortal={false}'}</code> e <code>position: absolute</code> dentro de uma moldura; em produção remova os dois.
         </P>
         <Demo id="affix/whatsapp" />
       </Section>

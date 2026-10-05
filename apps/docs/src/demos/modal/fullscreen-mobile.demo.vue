@@ -9,6 +9,7 @@ import { useMediaQuery } from '@mantine-vue/hooks';
 
 const mode = ref<'responsive' | 'always' | null>(null);
 const isMobile = useMediaQuery('(max-width: 48em)');
+const photo = 'https://picsum.photos/seed/sala/800/400';
 </script>
 
 <template>
@@ -20,7 +21,7 @@ const isMobile = useMediaQuery('(max-width: 48em)');
     @close="mode = null"
   >
     <Stack>
-      <Image radius="md" :h="180" src="https://picsum.photos/seed/sala/800/400" alt="Sala com papel de parede" />
+      <Image radius="md" :h="180" :src="photo" alt="Sala com papel de parede" />
       <Text fz="sm" c="var(--ds-text-2)">
         1. Limpe e seque a parede. 2. Aplique a cola com rolo. 3. Posicione a primeira faixa no prumo e alise do centro para as bordas.
       </Text>

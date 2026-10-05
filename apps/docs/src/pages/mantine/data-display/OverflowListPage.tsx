@@ -16,7 +16,7 @@ export default function OverflowListPage() {
       <Section title="Tags do produto">
         <P>
           <OnlyFor framework="react"><code>renderItem</code> desenha cada item e <code>renderOverflow</code> recebe os itens que não couberam.</OnlyFor>
-          <OnlyFor framework="vue">O slot <code>#item</code> desenha cada item e <code>#overflow</code> recebe os itens que não couberam (ou use as props <code>renderItem</code> / <code>renderOverflow</code>).</OnlyFor> O cálculo acompanha a largura
+          <OnlyFor framework="vue">O slot <code>#item</code> (ou a prop <code>renderItem</code>) desenha cada item e <code>renderOverflow</code> recebe os itens que não couberam e devolve um VNode com um elemento raiz, que é medido.</OnlyFor> O cálculo acompanha a largura
           do contêiner — arraste o canto do painel para ver.
         </P>
         <Demo id="overflow-list/tags" />
@@ -41,7 +41,7 @@ export default function OverflowListPage() {
           rows={[
             { name: 'data', type: 'T[]', required: true, description: 'Itens a exibir.' },
             { name: 'renderItem', type: '(item, index) => ReactNode', required: true, description: 'Renderiza um item.', vueName: '#item / renderItem', vueType: 'slot { item, index } | (item, index) => VNodeChild' },
-            { name: 'renderOverflow', type: '(items) => ReactNode', required: true, description: 'Renderiza o resumo dos itens ocultos.', vueName: '#overflow / renderOverflow', vueType: 'slot { items } | (items) => VNodeChild' },
+            { name: 'renderOverflow', type: '(items) => ReactNode', required: true, description: 'Renderiza o resumo dos itens ocultos.', vueType: '(items) => VNode' },
             { name: 'maxRows', type: 'number', default: '1', description: 'Número de linhas visíveis.' },
             { name: 'maxVisibleItems', type: 'number', default: 'Infinity', description: 'Limite de itens visíveis, mesmo com espaço.' },
             { name: 'collapseFrom', type: "'start' | 'end'", default: "'end'", description: 'De onde os itens são recolhidos.' },

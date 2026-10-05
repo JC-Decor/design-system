@@ -17,7 +17,7 @@ export default function TransitionPage() {
         <P>
           <code>mounted</code> controla a presença no DOM;{' '}
           <OnlyFor framework="react"><code>children</code> é uma função que recebe os estilos da animação e deve aplicá-los no elemento.</OnlyFor>
-          <OnlyFor framework="vue">o slot padrão recebe os estilos da animação (<code>{'<template #default="styles">'}</code>) e deve aplicá-los no elemento com <code>:style</code>.</OnlyFor>
+          <OnlyFor framework="vue">o slot padrão recebe os estilos da animação (<code>{'<template #default="styles">'}</code>) e deve aplicá-los no elemento com <code>:style</code>. Como <code>{'<Transition>'}</code> é um componente nativo dos templates Vue, use o do Mantine pelo nome <code>MantineTransition</code>, exportado pelo <code>@jcdecor/vue</code>.</OnlyFor>
         </P>
         <Demo id="transition/basic" />
       </Section>

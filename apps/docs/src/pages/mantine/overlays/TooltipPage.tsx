@@ -4,6 +4,7 @@ import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
 import TooltipPreviewVue from '../../../vue-demos/tooltip/TooltipPreview.vue';
+import { useFramework } from '../../../kit/framework';
 
 function TooltipPreview(props: Omit<TooltipProps, 'children'>) {
   return (
@@ -14,6 +15,8 @@ function TooltipPreview(props: Omit<TooltipProps, 'children'>) {
 }
 
 export default function TooltipPage() {
+  const vue = useFramework().framework === 'vue';
+
   return (
     <DocPage
       kicker="Mantine · Overlays"
@@ -46,14 +49,14 @@ export default function TooltipPage() {
 
       <Section title="Grupo de tooltips">
         <P>
-          <code>Tooltip.Group</code> compartilha os atrasos: depois do primeiro, os vizinhos abrem na hora — ideal para barras de ferramentas.
+          <code>{vue ? 'TooltipGroup' : 'Tooltip.Group'}</code> compartilha os atrasos: depois do primeiro, os vizinhos abrem na hora — ideal para barras de ferramentas.
         </P>
         <Demo id="tooltip/group" />
       </Section>
 
       <Section title="Tooltip que segue o cursor">
         <P>
-          <code>Tooltip.Floating</code> acompanha o mouse; use em áreas grandes como imagens ampliáveis.
+          <code>{vue ? 'TooltipFloating' : 'Tooltip.Floating'}</code> acompanha o mouse; use em áreas grandes como imagens ampliáveis.
         </P>
         <Demo id="tooltip/floating" />
       </Section>
@@ -88,7 +91,7 @@ export default function TooltipPage() {
       <Section title="Boas práticas">
         <P>
           Tooltips são para rótulos curtos — nunca coloque informação essencial ou ações dentro deles (não existem no toque); use Popover se houver
-          conteúdo interativo. Para usuários de teclado, ative <code>{'events={{ hover: true, focus: true, touch: false }}'}</code>. O filho precisa aceitar ref (componentes do Mantine aceitam). Não use em elementos <code>disabled</code> sem um wrapper.
+          conteúdo interativo. Para usuários de teclado, ative <code>{vue ? ':events="{ hover: true, focus: true, touch: false }"' : 'events={{ hover: true, focus: true, touch: false }}'}</code>. O filho precisa aceitar ref (componentes do Mantine aceitam). Não use em elementos <code>disabled</code> sem um wrapper.
         </P>
       </Section>
     </DocPage>

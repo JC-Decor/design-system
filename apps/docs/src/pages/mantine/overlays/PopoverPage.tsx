@@ -1,8 +1,11 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { useFramework } from '../../../kit/framework';
 
 export default function PopoverPage() {
+  const vue = useFramework().framework === 'vue';
+
   return (
     <DocPage
       kicker="Mantine · Overlays"
@@ -21,8 +24,8 @@ export default function PopoverPage() {
 
       <Section title="Formulário de edição">
         <P>
-          Popover controlado (<code>opened</code> + <code>onChange</code>) para editar o preço na própria listagem. Selects internos usam{' '}
-          <code>comboboxProps={'{{ withinPortal: false }}'}</code> para que o clique na lista não conte como “clique fora”.
+          Popover controlado ({vue ? <code>v-model:opened</code> : <><code>opened</code> + <code>onChange</code></>}) para editar o preço na própria listagem. Selects internos usam{' '}
+          <code>{vue ? ':combobox-props="{ withinPortal: false }"' : 'comboboxProps={{ withinPortal: false }}'}</code> para que o clique na lista não conte como “clique fora”.
         </P>
         <Demo id="popover/edit-price" />
       </Section>

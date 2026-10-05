@@ -1,6 +1,7 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 import { CodeBlock } from '../../../kit/CodeBlock';
 
 export default function AppShellPage() {
@@ -32,6 +33,7 @@ export default function AppShellPage() {
       </Section>
 
       <Section title="Estrutura recomendada">
+        <OnlyFor framework="react">
         <CodeBlock
           code={`<AppShell
   header={{ height: 64 }}
@@ -43,11 +45,26 @@ export default function AppShellPage() {
   <AppShell.Main>…</AppShell.Main>
 </AppShell>`}
         />
+        </OnlyFor>
+        <OnlyFor framework="vue">
+          <CodeBlock
+            language="vue"
+            code={`<AppShell
+  :header="{ height: 64 }"
+  :navbar="{ width: 260, breakpoint: 'sm', collapsed: { mobile: !opened } }"
+  padding="lg"
+>
+  <AppShellHeader>…</AppShellHeader>
+  <AppShellNavbar>…</AppShellNavbar>
+  <AppShellMain>…</AppShellMain>
+</AppShell>`}
+          />
+        </OnlyFor>
       </Section>
 
       <Section title="No tema JC">
         <P>
-          O fundo de <code>AppShell.Main</code> usa <code>--ds-bg</code> (cinza-frio da página), enquanto header, navbar, aside e footer usam{' '}
+          O fundo de <OnlyFor framework="react"><code>AppShell.Main</code></OnlyFor><OnlyFor framework="vue"><code>AppShellMain</code></OnlyFor> usa <code>--ds-bg</code> (cinza-frio da página), enquanto header, navbar, aside e footer usam{' '}
           <code>--ds-surface</code> com bordas <code>--ds-border-soft</code> — no tema escuro, os mesmos tokens trocam automaticamente.
         </P>
       </Section>

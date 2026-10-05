@@ -1,8 +1,11 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { useFramework } from '../../../kit/framework';
 
 export default function FloatingWindowPage() {
+  const vue = useFramework().framework === 'vue';
+
   return (
     <DocPage
       kicker="Mantine · Overlays"
@@ -22,7 +25,7 @@ export default function FloatingWindowPage() {
 
       <Section title="Redimensionável">
         <P>
-          Defina <code>dimensions</code> com limites e inclua <code>FloatingWindow.ResizeHandle</code> — ele não tem estilo, então posicione-o no canto.
+          Defina <code>dimensions</code> com limites e inclua <code>{vue ? 'FloatingWindowResizeHandle' : 'FloatingWindow.ResizeHandle'}</code> — ele não tem estilo, então posicione-o no canto.
           O handle também responde às setas do teclado.
         </P>
         <Demo id="floating-window/notes" />

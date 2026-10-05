@@ -3,6 +3,9 @@ import {
   defineComponent,
   h,
   inject,
+  nextTick,
+  onMounted,
+  onUpdated,
   provide,
   ref,
   toValue,
@@ -118,7 +121,15 @@ interface JcChartSpec {
   props?: ComponentObjectPropsOptions;
   themeOptions?: (props: Input) => JcEChartsThemeOptions;
   build: (input: Input, ctx: BuildContext) => Input;
+  /** Ajuste na instância ECharts depois de cada renderização (para o que o Mantine Vue não deixa configurar) */
+  patch?: (instance: EChartsInstance, props: Input) => void;
 }
+
+type EChartsInstance = {
+  getOption: () => { series?: Array<Record<string, unknown>> };
+  setOption: (option: Record<string, unknown>) => void;
+  on: (event: string, handler: () => void) => void;
+};
 
 const camelize = (key: string) => key.replace(/-([a-z])/g, (_match, letter: string) => letter.toUpperCase());
 
@@ -160,6 +171,21 @@ function defineJcChart(name: string, base: Component, spec: JcChartSpec) {
       provide(THEME_KEY, theme);
 
       const chart = ref<Partial<JcChartExposed>>();
+
+      // O vue-echarts recria a instância ao trocar o tema: liga o patch em cada instância nova (uma vez)
+      const patched = new WeakSet<object>();
+      const attachPatch = () => {
+        const instance = spec.patch && (chart.value?.getEchartsInstance?.() as EChartsInstance | undefined);
+        if (!instance || patched.has(instance)) return;
+        patched.add(instance);
+        const run = () => spec.patch!(instance, { ...(props as Input), ...normalizeAttrs(attrs) });
+        instance.on('rendered', run);
+        run();
+      };
+      if (spec.patch) {
+        onMounted(() => nextTick(attachPatch));
+        onUpdated(() => nextTick(attachPatch));
+      }
       expose({
         getEchartsInstance: () => chart.value?.getEchartsInstance?.(),
         resize: () => chart.value?.resize?.(),
@@ -232,6 +258,15 @@ export type AreaChartProps = Omit<MAreaChartProps, 'series'> &
 
 /** Gráfico de área. Padrões: `height` 280, curva `monotone`, traço 2,5, preenchimento 25%, pt-BR. */
 export const AreaChart = defineJcChart('AreaChart', MAreaChart, {
+  props: { fillOpacity: { type: Number, default: undefined } },
+  // Contorna bug do @mantine-vue/charts 3.5: `cartesianOption(…, 'area')` grava `areaStyle: undefined` em toda série
+  // (área sem preenchimento, e o tema não consegue preencher). Aplica o preenchimento na instância, só onde falta.
+  patch: (instance, props) => {
+    const series = instance.getOption().series ?? [];
+    if (!series.some((s) => s.type === 'line' && !s.areaStyle)) return;
+    const opacity = typeof props.fillOpacity === 'number' ? props.fillOpacity : 0.25;
+    instance.setOption({ series: series.map((s) => (s.type === 'line' && !s.areaStyle ? { areaStyle: { opacity } } : {})) });
+  },
   build: (input, ctx) => gridChartProps({ height: 280, curveType: 'monotone', strokeWidth: 2.5, fillOpacity: 0.25 }, input, ctx),
 }) as unknown as DefineSetupFnComponent<AreaChartProps, JcChartEmits>;
 
@@ -280,7 +315,10 @@ function radialProps(defaults: Input, input: Input, { c, t }: BuildContext): Inp
   return {
     // `size` é tipado no Mantine Vue mas não é usado: vira a altura (padrão 160, como no Mantine React)
     height: typeof input.size === 'number' ? input.size : 160,
+    // Como no React: `size` define o quadrado do gráfico (largura também), não só a altura
+    ...(typeof input.size === 'number' && { width: input.size }),
     withTooltip: true,
+    chartLabelFontSize: 14,
     ...defaults,
     ...input,
     valueFormatter: format,

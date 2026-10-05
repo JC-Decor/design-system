@@ -4,19 +4,22 @@ export const meta = { centered: true, maxWidth: 360 };
 
 <script setup lang="ts">
 import { Text, Timeline, TimelineItem } from '@jcdecor/vue';
-
-const eventos = [
-  { titulo: 'Orçamento enviado', data: '12/09' },
-  { titulo: 'Medição no local', data: '16/09' },
-  { titulo: 'Instalação agendada', data: '24/09' },
-  { titulo: 'Vistoria final', data: '—' },
-];
 </script>
 
+<!-- Itens escritos um a um: no Mantine Vue 3.5 o Timeline não conta itens gerados por v-for (o `active` não é aplicado) -->
 <template>
   <Timeline :active="1" :bullet-size="14">
-    <TimelineItem v-for="e in eventos" :key="e.titulo" :title="e.titulo">
-      <Text fz="xs" c="var(--ds-text-3)">{{ e.data }}</Text>
+    <TimelineItem title="Orçamento enviado">
+      <Text fz="xs" c="var(--ds-text-3)">12/09</Text>
+    </TimelineItem>
+    <TimelineItem title="Medição no local">
+      <Text fz="xs" c="var(--ds-text-3)">16/09</Text>
+    </TimelineItem>
+    <TimelineItem title="Instalação agendada">
+      <Text fz="xs" c="var(--ds-text-3)">24/09</Text>
+    </TimelineItem>
+    <TimelineItem title="Vistoria final">
+      <Text fz="xs" c="var(--ds-text-3)">—</Text>
     </TimelineItem>
   </Timeline>
 </template>

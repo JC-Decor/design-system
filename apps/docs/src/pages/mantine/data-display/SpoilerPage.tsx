@@ -1,6 +1,7 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function SpoilerPage() {
   return (
@@ -21,7 +22,11 @@ export default function SpoilerPage() {
       </Section>
 
       <Section title="Avaliações com ícone">
-        <P>Os rótulos aceitam qualquer nó React — inclua um chevron para reforçar a ação.</P>
+        <P>
+          <OnlyFor framework="react">Os rótulos aceitam qualquer nó React</OnlyFor>
+          <OnlyFor framework="vue">Os rótulos aceitam qualquer conteúdo pelos slots <code>#showLabel</code> e <code>#hideLabel</code></OnlyFor> — inclua
+          um chevron para reforçar a ação.
+        </P>
         <Demo id="spoiler/reviews" />
       </Section>
 

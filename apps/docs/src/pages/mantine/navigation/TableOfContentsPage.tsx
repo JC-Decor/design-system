@@ -44,7 +44,7 @@ export default function TableOfContentsPage() {
             { name: 'variant', type: "'light' | 'filled' | 'none'", default: "'filled'", description: 'Estilo do item ativo.' },
             { name: 'size', type: 'MantineSize', default: "'md'", description: 'Fonte e espaçamento dos itens.' },
             { name: 'minDepthToOffset / depthOffset', type: 'number', default: '1 / 20', description: 'Recuo de subtítulos.' },
-            { name: 'reinitializeRef', type: 'RefObject<() => void>', description: 'Relê os títulos quando o conteúdo muda.' },
+            { name: 'reinitializeRef', type: 'RefObject<() => void>', vueType: 'Ref<(() => void) | null>', description: 'Relê os títulos quando o conteúdo muda.' },
           ]}
         />
       </Section>

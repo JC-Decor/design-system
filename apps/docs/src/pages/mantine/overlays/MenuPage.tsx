@@ -1,8 +1,11 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { useFramework } from '../../../kit/framework';
 
 export default function MenuPage() {
+  const vue = useFramework().framework === 'vue';
+
   return (
     <DocPage
       kicker="Mantine · Overlays"
@@ -14,7 +17,7 @@ export default function MenuPage() {
     >
       <Section title="Ações do pedido">
         <P>
-          Agrupe ações com <code>Menu.Label</code> e <code>Menu.Divider</code>, mostre atalhos com <code>Kbd</code> no <code>rightSection</code> e deixe
+          Agrupe ações com <code>{vue ? 'MenuLabel' : 'Menu.Label'}</code> e <code>{vue ? 'MenuDivider' : 'Menu.Divider'}</code>, mostre atalhos com <code>Kbd</code> no <code>rightSection</code> e deixe
           a ação destrutiva por último com <code>color="danger"</code>.
         </P>
         <Demo id="menu/order-actions" />
@@ -22,7 +25,7 @@ export default function MenuPage() {
 
       <Section title="Caixas e opções">
         <P>
-          <code>Menu.CheckboxItem</code> e <code>Menu.RadioItem</code> (novos no Mantine 9) não fecham o menu ao clicar — bons para colunas visíveis e
+          <code>{vue ? 'MenuCheckboxItem' : 'Menu.CheckboxItem'}</code> e <code>{vue ? 'MenuRadioItem' : 'Menu.RadioItem'}</code> (novos no Mantine 9) não fecham o menu ao clicar — bons para colunas visíveis e
           densidade de tabelas.
         </P>
         <Demo id="menu/view-options" />
@@ -30,14 +33,14 @@ export default function MenuPage() {
 
       <Section title="Submenu">
         <P>
-          <code>Menu.Sub</code> abre à direita no hover ou com <kbd>→</kbd>. Use só um nível de profundidade.
+          <code>{vue ? 'MenuSub' : 'Menu.Sub'}</code> abre à direita no hover ou com <kbd>→</kbd>. Use só um nível de profundidade.
         </P>
         <Demo id="menu/submenu" />
       </Section>
 
       <Section title="Menu de contexto">
         <P>
-          <code>Menu.ContextMenu</code> abre o dropdown na posição do cursor com o botão direito (ou toque longo no mobile).
+          <code>{vue ? 'MenuContextMenu' : 'Menu.ContextMenu'}</code> abre o dropdown na posição do cursor com o botão direito (ou toque longo no mobile).
         </P>
         <Demo id="menu/context-menu" />
       </Section>

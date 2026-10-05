@@ -16,6 +16,10 @@ export interface VueMountProps {
  * O esquema de cores segue o do docs; como o Mantine Vue só lê `forceColorScheme` na montagem,
  * trocar o tema remonta o exemplo.
  */
+/** Cada exemplo é um app Vue separado: sem prefixo próprio, `useId()` repetiria ids entre exemplos da mesma página
+ * (classes responsivas do SimpleGrid colidem, `for`/`id` de labels também). */
+let mountCount = 0;
+
 export function VueMount({ component, props, slots }: VueMountProps) {
   const el = useRef<HTMLDivElement>(null);
   const scheme = useComputedColorScheme('light');
@@ -44,6 +48,7 @@ export function VueMount({ component, props, slots }: VueMountProps) {
             ),
         ),
     });
+    app.config.idPrefix = `jcv${++mountCount}`;
     app.mount(target);
     return () => app.unmount();
   }, [component, scheme]);

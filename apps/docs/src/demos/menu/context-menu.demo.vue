@@ -5,6 +5,8 @@ export const meta = { centered: true, maxWidth: 280 };
 <script setup lang="ts">
 import { Group, Image, Menu, MenuContextMenu, MenuDropdown, MenuItem, Paper, Stack, Text } from '@jcdecor/vue';
 import { IconCopy, IconExternalLink, IconHeart, IconShare } from '@tabler/icons-vue';
+
+const photo = 'https://picsum.photos/seed/folhagem/600/400';
 </script>
 
 <template>
@@ -12,7 +14,7 @@ import { IconCopy, IconExternalLink, IconHeart, IconShare } from '@tabler/icons-
     <MenuContextMenu>
       <Paper with-border radius="md" p="sm">
         <Stack gap="xs">
-          <Image src="https://picsum.photos/seed/folhagem/600/400" :h="140" radius="sm" alt="Papel de parede Folhagem" />
+          <Image :src="photo" :h="140" radius="sm" alt="Papel de parede Folhagem" />
           <Group justify="space-between">
             <Text fz="sm" :fw="600">Papel de parede Folhagem</Text>
             <Text fz="sm" :fw="700" c="var(--ds-primary)">R$ 159,90</Text>

@@ -1,8 +1,11 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { useFramework } from '../../../kit/framework';
 
 export default function MenubarPage() {
+  const vue = useFramework().framework === 'vue';
+
   return (
     <DocPage
       kicker="Mantine · Overlays"
@@ -14,7 +17,7 @@ export default function MenubarPage() {
     >
       <Section title="Painel de edição">
         <P>
-          Cada <code>Menubar.Menu</code> aceita as props do <code>Menu</code>. Com o padrão <code>trigger="click"</code>, o primeiro clique abre um
+          Cada <code>{vue ? 'MenubarMenu' : 'Menubar.Menu'}</code> aceita as props do <code>Menu</code>. Com o padrão <code>trigger="click"</code>, o primeiro clique abre um
           menu e, a partir daí, passar o mouse troca entre eles — como em apps desktop. Dentro do dropdown use os itens do <code>Menu</code>, incluindo
           checkbox e radio.
         </P>

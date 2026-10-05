@@ -3,6 +3,7 @@ import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { Configurator } from '../../../kit/Configurator';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function NumberFormatterPage() {
   return (
@@ -70,8 +71,8 @@ export default function NumberFormatterPage() {
       <Section title="Boas práticas">
         <P>
           Use <code>NumberFormatter</code> para valores exibidos e <code>NumberInput</code> para campos editáveis. Em tabelas, alinhe valores à
-          direita com números tabulares. Fora do React, use os helpers <code>formatCurrency</code>/<code>formatNumber</code> de{' '}
-          <code>@jcdecor/ui</code>.
+          direita com números tabulares. Fora <OnlyFor framework="react">do React</OnlyFor><OnlyFor framework="vue">do template</OnlyFor>, use os helpers <code>formatCurrency</code>/<code>formatNumber</code> de{' '}
+          <OnlyFor framework="react"><code>@jcdecor/ui</code></OnlyFor><OnlyFor framework="vue"><code>@jcdecor/vue</code></OnlyFor>.
         </P>
       </Section>
     </DocPage>

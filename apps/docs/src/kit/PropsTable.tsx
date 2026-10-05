@@ -11,6 +11,8 @@ export interface PropRow {
   vueName?: string;
   /** Tipo no Vue quando difere (ex.: ReactNode → `MantineNode | slot #title`) */
   vueType?: string;
+  /** Padrão no Vue quando difere */
+  vueDefault?: string;
   /** Descrição no Vue quando difere */
   vueDescription?: React.ReactNode;
   /** Linha só existe em um framework */
@@ -23,7 +25,7 @@ export function PropsTable({ rows: allRows }: { rows: PropRow[] }) {
     .filter((row) => !row.only || row.only === (vue ? 'vue' : 'react'))
     .map((row) =>
       vue
-        ? { ...row, name: row.vueName ?? row.name, type: row.vueType ?? row.type, description: row.vueDescription ?? row.description }
+        ? { ...row, name: row.vueName ?? row.name, type: row.vueType ?? row.type, default: row.vueDefault ?? row.default, description: row.vueDescription ?? row.description }
         : row,
     );
   return (

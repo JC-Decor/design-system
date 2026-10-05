@@ -99,8 +99,8 @@ export default function GridPage() {
             { name: 'columns', type: 'number', default: '12', description: 'Número total de colunas.' },
             { name: 'grow', type: 'boolean', default: 'false', description: 'Colunas da última linha preenchem o espaço.' },
             { name: 'type', type: "'media' | 'container'", default: "'media'", description: 'Media queries ou container queries.' },
-            { name: 'Grid.Col span', type: "StyleProp<number | 'auto' | 'content'>", default: '12', description: 'Largura da coluna.' },
-            { name: 'Grid.Col offset / order', type: 'StyleProp<number>', description: 'Deslocamento e ordem.' },
+            { name: 'Grid.Col span', vueName: 'GridCol span', type: "StyleProp<number | 'auto' | 'content'>", default: '12', description: 'Largura da coluna.' },
+            { name: 'Grid.Col offset / order', vueName: 'GridCol offset / order', type: 'StyleProp<number>', description: 'Deslocamento e ordem.' },
           ]}
         />
       </Section>

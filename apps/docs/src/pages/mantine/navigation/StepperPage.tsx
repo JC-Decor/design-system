@@ -1,6 +1,7 @@
 import { DocPage, Section, P } from '../../../kit/DocPage';
 import { Demo } from '../../../kit/Demo';
 import { PropsTable } from '../../../kit/PropsTable';
+import { OnlyFor } from '../../../kit/framework';
 
 export default function StepperPage() {
   return (
@@ -14,9 +15,16 @@ export default function StepperPage() {
     >
       <Section title="Checkout">
         <P>
-          O Stepper é controlado por <code>active</code> (índice da etapa atual). <code>Stepper.Completed</code> aparece quando{' '}
-          <code>active</code> passa da última etapa. Com <code>onStepClick</code> o cliente volta para etapas anteriores;{' '}
-          <code>allowNextStepsSelect={'{false}'}</code> impede pular etapas.
+          <OnlyFor framework="react">
+            O Stepper é controlado por <code>active</code> (índice da etapa atual). <code>Stepper.Completed</code> aparece quando{' '}
+            <code>active</code> passa da última etapa. Com <code>onStepClick</code> o cliente volta para etapas anteriores;{' '}
+            <code>allowNextStepsSelect={'{false}'}</code> impede pular etapas.
+          </OnlyFor>
+          <OnlyFor framework="vue">
+            O Stepper é controlado por <code>v-model:active</code> (índice da etapa atual). <code>StepperCompleted</code> aparece quando{' '}
+            <code>active</code> passa da última etapa. Com o <code>v-model:active</code> o clique nas etapas já atualiza o estado, e o
+            cliente volta para etapas anteriores; <code>:allow-next-steps-select="false"</code> impede pular etapas.
+          </OnlyFor>
         </P>
         <Demo id="stepper/checkout" />
       </Section>
@@ -49,14 +57,14 @@ export default function StepperPage() {
       <Section title="Props principais">
         <PropsTable
           rows={[
-            { name: 'active', type: 'number', required: true, description: 'Índice da etapa atual (começa em 0).' },
-            { name: 'onStepClick', type: '(index: number) => void', description: 'Torna as etapas clicáveis.' },
+            { name: 'active', type: 'number', required: true, description: 'Índice da etapa atual (começa em 0).', vueName: 'active / v-model:active' },
+            { name: 'onStepClick', type: '(index: number) => void', description: 'Torna as etapas clicáveis.', vueName: '@step-click', vueType: '(index: number)', vueDescription: 'Emitido ao clicar numa etapa selecionável (com v-model:active o estado já é atualizado).' },
             { name: 'allowNextStepsSelect', type: 'boolean', default: 'true', description: 'Permite clicar em etapas futuras.' },
             { name: 'orientation', type: "'horizontal' | 'vertical'", default: "'horizontal'", description: 'Direção das etapas.' },
             { name: 'labelPosition', type: "'right' | 'bottom'", default: "'right'", description: 'Posição do rótulo em relação ao ícone.' },
             { name: 'size', type: 'MantineSize', default: "'md'", description: 'Tamanho do ícone e do texto.' },
             { name: 'color', type: 'MantineColor', default: "'horizon'", description: 'Cor das etapas concluídas e da atual.' },
-            { name: 'Stepper.Step loading', type: 'boolean', description: 'Mostra um loader no ícone da etapa.' },
+            { name: 'Stepper.Step loading', vueName: 'StepperStep loading', type: 'boolean', description: 'Mostra um loader no ícone da etapa.' },
           ]}
         />
       </Section>
