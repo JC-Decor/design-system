@@ -25,6 +25,9 @@
   gap: var(--sp-16);
 }
 .link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-8);
   color: var(--dc-obsidian-300);
   text-decoration: none;
   font-size: var(--type-subheadline-sm);
@@ -39,6 +42,23 @@
 .link:hover,
 .link[data-active] {
   color: var(--dc-electric);
+}
+.link[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  color: var(--dc-obsidian-300);
+}
+.linkSection {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.linkSection > svg {
+  width: 18px;
+  height: 18px;
+}
+.linkLabel {
+  white-space: nowrap;
 }
 .right {
   margin-inline-start: auto;

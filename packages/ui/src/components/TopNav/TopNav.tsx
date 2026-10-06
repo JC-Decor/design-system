@@ -14,12 +14,20 @@ import { useDisclosure } from '@mantine/hooks';
 import { JcLogo } from '../../brand/Brand';
 import classes from './TopNav.module.css';
 
-export type TopNavStylesNames = 'root' | 'brand' | 'links' | 'link' | 'right' | 'burger' | 'mobileLinks';
+export type TopNavStylesNames = 'root' | 'brand' | 'links' | 'link' | 'linkSection' | 'linkLabel' | 'right' | 'burger' | 'mobileLinks';
 
 export interface TopNavLink {
   label: React.ReactNode;
   href?: string;
   active?: boolean;
+  /** Ícone/conteúdo antes do texto (como `leftSection` do Mantine) */
+  leftSection?: React.ReactNode;
+  /** Conteúdo depois do texto (ex.: contador, chevron) */
+  rightSection?: React.ReactNode;
+  /** Desabilita o link (sem navegação nem `onClick`) */
+  disabled?: boolean;
+  /** Nome acessível, necessário quando o link mostra só um ícone */
+  'aria-label'?: string;
   onClick?: (event: React.MouseEvent) => void;
 }
 
@@ -67,22 +75,37 @@ export const TopNav = factory<TopNavFactory>((_props) => {
 
   const renderLinks = (onNavigate?: () => void) =>
     links!.map((link, index) => {
-      const isButton = !link.href;
+      const isButton = !link.href || link.disabled;
       const Component: React.ElementType = isButton ? 'button' : LinkComponent;
-      const linkProps = isButton ? { type: 'button' } : LinkComponent === 'a' ? { href: link.href } : { to: link.href, href: link.href };
+      const linkProps = isButton
+        ? { type: 'button', disabled: link.disabled || undefined }
+        : LinkComponent === 'a'
+          ? { href: link.href }
+          : { to: link.href, href: link.href };
       return (
         <Component
           key={index}
           {...linkProps}
           {...getStyles('link')}
           data-active={link.active || undefined}
+          data-disabled={link.disabled || undefined}
           aria-current={link.active ? 'page' : undefined}
+          aria-label={link['aria-label']}
           onClick={(event: React.MouseEvent) => {
+            if (link.disabled) return;
             link.onClick?.(event);
             onNavigate?.();
           }}
         >
-          {link.label}
+          {link.leftSection || link.rightSection ? (
+            <>
+              {link.leftSection && <span {...getStyles('linkSection')} data-position="left">{link.leftSection}</span>}
+              {link.label !== undefined && link.label !== null && link.label !== '' && <span {...getStyles('linkLabel')}>{link.label}</span>}
+              {link.rightSection && <span {...getStyles('linkSection')} data-position="right">{link.rightSection}</span>}
+            </>
+          ) : (
+            link.label
+          )}
         </Component>
       );
     });

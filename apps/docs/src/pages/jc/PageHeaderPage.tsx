@@ -55,10 +55,13 @@ export default function PageHeaderPage() {
             { name: 'title', type: 'ReactNode', vueType: 'MantineNode | slot #title', required: true, description: 'Título da página (<h1>).' },
             { name: 'kicker', type: 'ReactNode', vueType: 'MantineNode | slot #kicker', description: 'Sobretítulo em caixa-alta.' },
             { name: 'description', type: 'ReactNode', vueType: 'MantineNode | slot #description', description: 'Texto de apoio (subheadline-large, até 640px).' },
+            { name: 'icon', type: 'ReactNode', vueType: 'MantineNode | slot #icon', description: 'Ícone à esquerda do título (ex.: <IconUsers />), num quadro suave na cor primária. Ajuste com classNames/styles.icon.' },
+            { name: 'iconSize', type: 'number | string', default: '48', description: 'Tamanho do quadro do ícone (variável --page-header-icon-size).' },
             { name: 'actions', type: 'ReactNode', vueType: 'MantineNode | slot #actions', description: 'Botões à direita do título.' },
             { name: 'breadcrumbs', type: 'PageHeaderBreadcrumb[]', description: '{ label, href? } — itens sem href são texto.' },
             { name: 'linkComponent', type: 'React.ElementType', vueType: 'string | Component', default: "'a'", description: 'Componente dos links do breadcrumb (recebe href e to).', vueDescription: <>Componente dos links do breadcrumb, ex.: <code>RouterLink</code> do vue-router (recebe <code>to</code> e <code>href</code>).</> },
             { name: 'size', type: "'headline' | 'display'", default: "'headline'", description: 'headline-large ou display-small no título.' },
+            { name: 'classNames / styles / vars', type: 'Styles API', description: 'Partes: root, breadcrumbs, header, main, icon, body, kicker, title, description, actions. Também configurável em theme.components.PageHeader.' },
             { name: '...BoxProps', type: 'BoxProps', description: 'Style props do Box. Margem inferior padrão: mb="xl".' },
           ]}
         />

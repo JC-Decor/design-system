@@ -77,9 +77,20 @@ const withChildren = (component: string | Component, children: VNodeChild) =>
 
 const renderLinks = (onNavigate?: () => void) =>
   (props.links ?? []).map((link: TopNavLink, index: number) => {
-    const isButton = !link.href;
+    const isButton = !link.href || link.disabled;
     const component = isButton ? 'button' : linkComponent.value;
-    const linkProps = isButton ? { type: 'button' } : hrefProps(link.href!);
+    const linkProps = isButton ? { type: 'button', disabled: link.disabled || undefined } : hrefProps(link.href!);
+    const hasLabel = link.label !== undefined && link.label !== null && link.label !== '';
+    const hasSections = link.leftSection != null || link.rightSection != null;
+    const children = !hasSections ? resolveNode(link.label as MantineNode) : [
+      link.leftSection != null
+        ? h('span', { ...getStyles('linkSection'), 'data-position': 'left' }, [resolveNode(link.leftSection)])
+        : null,
+      hasLabel ? h('span', getStyles('linkLabel'), [resolveNode(link.label as MantineNode)]) : null,
+      link.rightSection != null
+        ? h('span', { ...getStyles('linkSection'), 'data-position': 'right' }, [resolveNode(link.rightSection)])
+        : null,
+    ];
     return h(
       component as any,
       {
@@ -87,13 +98,16 @@ const renderLinks = (onNavigate?: () => void) =>
         ...linkProps,
         ...getStyles('link'),
         'data-active': link.active || undefined,
+        'data-disabled': link.disabled || undefined,
         'aria-current': link.active ? 'page' : undefined,
+        'aria-label': link['aria-label'],
         onClick: (event: MouseEvent) => {
+          if (link.disabled) return;
           link.onClick?.(event);
           onNavigate?.();
         },
       },
-      withChildren(component, resolveNode(link.label as MantineNode)) as any,
+      withChildren(component, children) as any,
     );
   });
 

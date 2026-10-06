@@ -1,7 +1,7 @@
 import type { Component, VNodeChild } from 'vue';
 import type { BoxProps, ClassNames, Factory, MantineNode, Styles, Vars } from '@mantine-vue/core';
 
-export type TopNavStylesNames = 'root' | 'brand' | 'links' | 'link' | 'right' | 'burger' | 'mobileLinks';
+export type TopNavStylesNames = 'root' | 'brand' | 'links' | 'link' | 'linkSection' | 'linkLabel' | 'right' | 'burger' | 'mobileLinks';
 
 export interface TopNavLink {
   /** Texto (ou conteúdo) do link */
@@ -10,6 +10,14 @@ export interface TopNavLink {
   href?: string;
   /** Marca o link da página atual (`data-active` + `aria-current="page"`) */
   active?: boolean;
+  /** Ícone/conteúdo antes do texto (como `leftSection` do Mantine) */
+  leftSection?: MantineNode;
+  /** Conteúdo depois do texto (ex.: contador, chevron) */
+  rightSection?: MantineNode;
+  /** Desabilita o link (sem navegação nem `onClick`) */
+  disabled?: boolean;
+  /** Nome acessível, necessário quando o link mostra só um ícone */
+  'aria-label'?: string;
   /** Chamado no clique (antes de fechar o menu mobile) */
   onClick?: (event: MouseEvent) => void;
 }
@@ -18,7 +26,7 @@ export interface TopNavLink {
 // compilador de SFC não resolve tipos-base vindos de node_modules em `defineProps`.
 /** Props declaradas pelo próprio `TopNav`. Veja `TopNavProps` para o tipo público completo. */
 export interface TopNavOwnProps {
-  /** Classes por parte (`root`, `brand`, `links`, `link`, `right`, `burger`, `mobileLinks`) */
+  /** Classes por parte (`root`, `brand`, `links`, `link`, `linkSection`, `linkLabel`, `right`, `burger`, `mobileLinks`) */
   classNames?: ClassNames<TopNavFactory>;
   /** Estilos inline por parte */
   styles?: Styles<TopNavFactory>;

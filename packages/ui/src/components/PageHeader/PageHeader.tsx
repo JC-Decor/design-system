@@ -1,15 +1,51 @@
-import { Anchor, Box, Breadcrumbs, Group, type BoxProps } from '@mantine/core';
+import {
+  Anchor,
+  Box,
+  Breadcrumbs,
+  factory,
+  rem,
+  useProps,
+  useStyles,
+  type BoxProps,
+  type ElementProps,
+  type Factory,
+  type StylesApiProps,
+} from '@mantine/core';
 import { Kicker, Headline, Subheadline } from '../Typography';
+import classes from './PageHeader.module.css';
 
 export interface PageHeaderBreadcrumb {
   label: React.ReactNode;
   href?: string;
 }
 
-export interface PageHeaderProps extends BoxProps, Omit<React.ComponentProps<'div'>, keyof BoxProps | 'title'> {
+export type PageHeaderStylesNames =
+  | 'root'
+  | 'breadcrumbs'
+  | 'header'
+  | 'main'
+  | 'icon'
+  | 'body'
+  | 'kicker'
+  | 'title'
+  | 'description'
+  | 'actions';
+
+export type PageHeaderCssVariables = {
+  root: '--page-header-icon-size';
+};
+
+export interface PageHeaderProps
+  extends BoxProps,
+    StylesApiProps<PageHeaderFactory>,
+    Omit<ElementProps<'div'>, 'title'> {
   kicker?: React.ReactNode;
   title: React.ReactNode;
   description?: React.ReactNode;
+  /** Ícone à esquerda do título (ex.: `<IconUsers />`), num quadro suave na cor primária */
+  icon?: React.ReactNode;
+  /** Tamanho do quadro do ícone (px ou CSS) @default 48 */
+  iconSize?: number | string;
   /** Botões à direita do título */
   actions?: React.ReactNode;
   breadcrumbs?: PageHeaderBreadcrumb[];
@@ -19,21 +55,46 @@ export interface PageHeaderProps extends BoxProps, Omit<React.ComponentProps<'di
   size?: 'display' | 'headline';
 }
 
-/** Cabeçalho de página: breadcrumbs, kicker, título, descrição e ações. */
-export function PageHeader({
-  kicker,
-  title,
-  description,
-  actions,
-  breadcrumbs,
-  linkComponent = 'a',
-  size = 'headline',
-  ...others
-}: PageHeaderProps) {
+export type PageHeaderFactory = Factory<{
+  props: PageHeaderProps;
+  ref: HTMLDivElement;
+  stylesNames: PageHeaderStylesNames;
+  vars: PageHeaderCssVariables;
+}>;
+
+const defaultProps: Partial<PageHeaderProps> = {
+  linkComponent: 'a',
+  size: 'headline',
+};
+
+/** Cabeçalho de página: breadcrumbs, ícone, kicker, título, descrição e ações. */
+export const PageHeader = factory<PageHeaderFactory>((_props) => {
+  const props = useProps('PageHeader', defaultProps, _props);
+  const {
+    classNames, className, style, styles, unstyled, vars, attributes,
+    kicker, title, description, icon, iconSize, actions, breadcrumbs, linkComponent = 'a', size, ...others
+  } = props;
+
+  const getStyles = useStyles<PageHeaderFactory>({
+    name: 'PageHeader',
+    classes,
+    props,
+    className,
+    style,
+    classNames,
+    styles,
+    unstyled,
+    attributes,
+    vars,
+    varsResolver: (_theme, { iconSize: s }) => ({
+      root: { '--page-header-icon-size': s === undefined ? undefined : typeof s === 'number' ? rem(s) : s },
+    }),
+  });
+
   return (
-    <Box mb="xl" {...others}>
+    <Box {...getStyles('root')} {...others}>
       {breadcrumbs && breadcrumbs.length > 0 && (
-        <Breadcrumbs mb="sm" fz="sm" separatorMargin={6}>
+        <Breadcrumbs {...getStyles('breadcrumbs')} fz="sm" separatorMargin={6}>
           {breadcrumbs.map((crumb, index) =>
             crumb.href ? (
               <Anchor key={index} component={linkComponent as 'a'} href={crumb.href} {...(linkComponent !== 'a' && { to: crumb.href })} fz="sm">
@@ -47,27 +108,36 @@ export function PageHeader({
           )}
         </Breadcrumbs>
       )}
-      <Group justify="space-between" align="flex-end" gap="md" wrap="wrap">
-        <div style={{ flex: '1 1 320px', minWidth: 0 }}>
-          {kicker && <Kicker>{kicker}</Kicker>}
-          {size === 'display' ? (
-            <Headline component="h1" size="lg" fz="var(--type-display-sm)" lh={1.15} mt={8}>
-              {title}
-            </Headline>
-          ) : (
-            <Headline component="h1" size="lg" mt={kicker ? 8 : 0}>
-              {title}
-            </Headline>
+      <div {...getStyles('header')}>
+        <div {...getStyles('main')}>
+          {icon && (
+            <div {...getStyles('icon')} aria-hidden>
+              {icon}
+            </div>
           )}
-          {description && (
-            <Subheadline component="div" size="lg" c="var(--ds-text-2)" maw={640} mt={8}>
-              {description}
-            </Subheadline>
-          )}
+          <div {...getStyles('body')}>
+            {kicker && <Kicker {...getStyles('kicker')}>{kicker}</Kicker>}
+            {size === 'display' ? (
+              <Headline component="h1" size="lg" fz="var(--type-display-sm)" lh={1.15} mt={8} {...getStyles('title')}>
+                {title}
+              </Headline>
+            ) : (
+              <Headline component="h1" size="lg" mt={kicker ? 8 : 0} {...getStyles('title')}>
+                {title}
+              </Headline>
+            )}
+            {description && (
+              <Subheadline component="div" size="lg" c="var(--ds-text-2)" maw={640} mt={8} {...getStyles('description')}>
+                {description}
+              </Subheadline>
+            )}
+          </div>
         </div>
-        {actions && <Group gap="sm">{actions}</Group>}
-      </Group>
+        {actions && <div {...getStyles('actions')}>{actions}</div>}
+      </div>
     </Box>
   );
-}
+});
+
+PageHeader.classes = classes;
 PageHeader.displayName = '@jcdecor/ui/PageHeader';

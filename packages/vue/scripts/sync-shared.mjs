@@ -36,6 +36,7 @@ export const SHARED_FILES = [
   'components/ProductCard/ProductCard.module.css',
   'components/PromoBanner/PromoBanner.module.css',
   'components/TokenSwatch/TokenSwatch.module.css',
+  'components/PageHeader/PageHeader.module.css',
   'components/TopNav/TopNav.module.css',
   'brand/paths.ts',
   'brand/Brand.module.css',
