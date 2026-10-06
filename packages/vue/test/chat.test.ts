@@ -240,3 +240,86 @@ describe('ChatLayout / ChatHeader', () => {
     expect(screen.queryByRole('button', { name: 'Voltar' })).not.toBeInTheDocument();
   });
 });
+
+describe('ChatComposer (resposta em andamento)', () => {
+  it('loading bloqueia o envio, mantém o texto e mostra o botão de interromper', async () => {
+    const onSend = vi.fn();
+    const onStop = vi.fn();
+    render(() =>
+      h(ChatComposer, { onSend, onStop, loading: true }, { rightSection: () => h('span', 'extra') }),
+    );
+    const input = screen.getByRole('textbox');
+    await userEvent.type(input, 'próxima pergunta{Enter}');
+    expect(onSend).not.toHaveBeenCalled();
+    expect(input).toHaveValue('próxima pergunta');
+    expect(input).not.toBeDisabled();
+    expect(screen.queryByRole('button', { name: 'Enviar' })).not.toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Interromper' }));
+    expect(onStop).toHaveBeenCalledTimes(1);
+    expect(screen.getByText('extra')).toBeInTheDocument();
+  });
+
+  it('sendDisabled bloqueia o envio sem desabilitar o campo', async () => {
+    const onSend = vi.fn();
+    render(() => h(ChatComposer, { onSend, sendDisabled: true }));
+    const input = screen.getByRole('textbox');
+    await userEvent.type(input, 'oi{Enter}');
+    expect(onSend).not.toHaveBeenCalled();
+    expect(input).not.toBeDisabled();
+    expect(input).toHaveValue('oi');
+    expect(screen.getByRole('button', { name: 'Enviar' })).toBeDisabled();
+  });
+});
+
+describe('ChatThread (assistente)', () => {
+  it('variant plain, avatar customizado e footer', () => {
+    render(() =>
+      h(
+        ChatThread,
+        {
+          h: 400,
+          currentUserId: 'me',
+          users: [{ id: 'bot', name: 'Assistente' }],
+          messages: [
+            { id: '1', authorId: 'me', text: 'Resuma o pedido', createdAt: base },
+            { id: '2', authorId: 'bot', text: 'Resumo', createdAt: base + min, variant: 'plain' },
+          ],
+        },
+        {
+          avatar: ({ message }: { message: ChatMessageData }) =>
+            message.authorId === 'bot' ? h('span', { 'data-testid': 'bot-avatar' }) : null,
+          footer: () => h('span', 'Buscando arquivos…'),
+        },
+      ),
+    );
+    expect(screen.getByText('Resumo').closest('[data-variant="plain"]')).not.toBeNull();
+    expect(screen.getByText('Resuma o pedido').closest('[data-variant="plain"]')).toBeNull();
+    expect(screen.getByTestId('bot-avatar')).toBeInTheDocument();
+    expect(screen.getByText('Buscando arquivos…')).toBeInTheDocument();
+  });
+});
+
+describe('ConversationList (ações e ícone)', () => {
+  it('slot #actions não seleciona a conversa e #icon substitui o avatar', async () => {
+    const onSelect = vi.fn();
+    const onDelete = vi.fn();
+    render(() =>
+      h(
+        ConversationList,
+        { searchable: false, activeId: '1', onSelect, conversations: [{ id: '1', name: 'Pedido 123' }] },
+        {
+          icon: () => h('span', { 'data-testid': 'icon' }),
+          actions: ({ conversation }: { conversation: { id: string; name: string } }) =>
+            h('button', { type: 'button', onClick: () => onDelete(conversation.id) }, `Excluir ${conversation.name}`),
+        },
+      ),
+    );
+    await userEvent.click(screen.getByRole('button', { name: 'Excluir Pedido 123' }));
+    expect(onDelete).toHaveBeenCalledWith('1');
+    expect(onSelect).not.toHaveBeenCalled();
+    expect(screen.getByTestId('icon')).toBeInTheDocument();
+    expect(screen.getByRole('listitem')).toHaveAttribute('data-active');
+    await userEvent.click(screen.getByText('Pedido 123'));
+    expect(onSelect).toHaveBeenCalledWith(expect.objectContaining({ id: '1' }));
+  });
+});

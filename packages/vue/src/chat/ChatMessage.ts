@@ -22,11 +22,15 @@ export interface ChatMessageProps extends BoxProps {
   position?: GroupPosition;
   /** Mensagem de sistema (centralizada) */
   system?: boolean;
+  /** `plain` = sem bolha e em largura total (respostas de assistente com markdown/tabelas) @default 'bubble' */
+  variant?: 'bubble' | 'plain';
 }
 
 export interface ChatMessageSlots {
   /** Conteúdo da bolha (texto, links, cards…). Sem conteúdo, a bolha não é renderizada. */
   default?: () => VNodeChild;
+  /** Avatar customizado (ex.: ícone do assistente); substitui o avatar do `author` */
+  avatar?: () => VNodeChild;
 }
 
 const statusLabel: Record<ChatMessageStatus, string> = {
@@ -59,6 +63,7 @@ export const ChatMessage = defineComponent({
     attachments: { type: Array as PropType<ChatAttachment[]>, default: undefined },
     position: { type: String as PropType<GroupPosition>, default: 'single' },
     system: { type: Boolean, default: false },
+    variant: { type: String as PropType<'bubble' | 'plain'>, default: 'bubble' },
   },
   setup(props, { slots }) {
     return () => {
@@ -77,7 +82,9 @@ export const ChatMessage = defineComponent({
         ? h(
             'div',
             { class: classes.avatarSlot },
-            props.showAvatar && isLast && author
+            props.showAvatar && (props.variant === 'plain' ? isFirst : isLast) && slots.avatar
+              ? slots.avatar()
+              : props.showAvatar && (props.variant === 'plain' ? isFirst : isLast) && author
               ? [
                   h(Avatar as any, {
                     src: author.avatar,
@@ -142,7 +149,7 @@ export const ChatMessage = defineComponent({
             ])
           : null;
 
-      return h(Box as any, { class: classes.message, mod: { own, position, status } }, () => [
+      return h(Box as any, { class: classes.message, mod: { own, position, status }, 'data-variant': props.variant === 'plain' ? 'plain' : undefined }, () => [
         avatarSlot,
         h('div', { class: classes.bubbleColumn }, [
           props.showAuthor && isFirst && author && !own ? h('div', { class: classes.author }, author.name) : null,

@@ -61,6 +61,18 @@ export default function ConversationListPage() {
               default: "'Nenhuma conversa encontrada'",
               description: 'Conteúdo quando a lista (ou a busca) está vazia.',
             },
+            {
+              name: 'renderIcon',
+              type: '(conversation: Conversation) => ReactNode',
+              vueType: 'slot #icon="{ conversation }"',
+              description: 'Ícone no lugar do avatar com iniciais (ex.: conversas com um assistente).',
+            },
+            {
+              name: 'renderActions',
+              type: '(conversation: Conversation) => ReactNode',
+              vueType: 'slot #actions="{ conversation }"',
+              description: 'Ações por conversa (ex.: menu renomear/excluir), à direita do item; clicar nelas não seleciona a conversa.',
+            },
           ]}
         />
         <P>

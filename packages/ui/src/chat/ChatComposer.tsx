@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ActionIcon, Box, FileButton, Pill, Textarea, Tooltip, type BoxProps } from '@mantine/core';
 import { useUncontrolled } from '@mantine/hooks';
-import { IconPaperclip, IconSend2 } from '@tabler/icons-react';
+import { IconPaperclip, IconPlayerStopFilled, IconSend2 } from '@tabler/icons-react';
 import classes from './Chat.module.css';
 
 export interface ChatComposerSendPayload {
@@ -24,7 +24,19 @@ export interface ChatComposerProps extends Omit<BoxProps, 'onSubmit'> {
   maxRows?: number;
   /** Elementos extras à esquerda (ex.: emoji picker, respostas rápidas) */
   leftSection?: React.ReactNode;
+  /** Elementos extras à direita do campo, antes do botão de enviar (ex.: biblioteca de prompts) */
+  rightSection?: React.ReactNode;
   sendLabel?: string;
+  /**
+   * Uma resposta está em andamento: o envio fica bloqueado (o texto digitado é mantido e o campo
+   * continua editável). Com `onStop`, o botão de enviar vira o botão de interromper.
+   */
+  loading?: boolean;
+  /** Chamado pelo botão de interromper (visível enquanto `loading`) */
+  onStop?: () => void;
+  stopLabel?: string;
+  /** Bloqueia o envio sem desabilitar o campo (ex.: integração ainda não conectada) */
+  sendDisabled?: boolean;
 }
 
 /** Campo de mensagem: Enter envia, Shift+Enter quebra linha, anexos opcionais. */
@@ -39,12 +51,17 @@ export function ChatComposer({
   accept,
   maxRows = 5,
   leftSection,
+  rightSection,
   sendLabel = 'Enviar',
+  loading,
+  onStop,
+  stopLabel = 'Interromper',
+  sendDisabled,
   ...others
 }: ChatComposerProps) {
   const [text, setText] = useUncontrolled({ value, defaultValue, finalValue: '', onChange });
   const [files, setFiles] = useState<File[]>([]);
-  const canSend = !disabled && (text.trim().length > 0 || files.length > 0);
+  const canSend = !disabled && !sendDisabled && !loading && (text.trim().length > 0 || files.length > 0);
 
   const send = () => {
     if (!canSend) return;
@@ -65,7 +82,7 @@ export function ChatComposer({
         </div>
       )}
       <div className={classes.composer}>
-        {leftSection}
+        {leftSection && <div className={classes.composerSection}>{leftSection}</div>}
         {allowAttachments && (
           <FileButton multiple accept={accept} onChange={(selected) => setFiles((f) => [...f, ...(selected ?? [])])} disabled={disabled}>
             {(props) => (
@@ -95,9 +112,18 @@ export function ChatComposer({
           radius="lg"
           aria-label={placeholder}
         />
-        <ActionIcon size={44} radius="xl" variant="filled" onClick={send} disabled={!canSend} aria-label={sendLabel}>
-          <IconSend2 size={20} />
-        </ActionIcon>
+        {rightSection && <div className={classes.composerSection}>{rightSection}</div>}
+        {loading && onStop ? (
+          <Tooltip label={stopLabel}>
+            <ActionIcon size={44} radius="xl" variant="light" color="danger" onClick={onStop} aria-label={stopLabel}>
+              <IconPlayerStopFilled size={18} />
+            </ActionIcon>
+          </Tooltip>
+        ) : (
+          <ActionIcon size={44} radius="xl" variant="filled" onClick={send} disabled={!canSend} aria-label={sendLabel}>
+            <IconSend2 size={20} />
+          </ActionIcon>
+        )}
       </div>
     </Box>
   );

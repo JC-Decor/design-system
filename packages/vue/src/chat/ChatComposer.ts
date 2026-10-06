@@ -1,8 +1,8 @@
-import { computed, defineComponent, h, ref, type DefineSetupFnComponent, type SlotsType, type VNodeChild } from 'vue';
+import { computed, defineComponent, h, ref, type DefineSetupFnComponent, type PropType, type SlotsType, type VNodeChild } from 'vue';
 import { ActionIcon, Box, FileButton, Pill, Textarea, resolveNode, type BoxProps, type MantineNode } from '@mantine-vue/core';
 import { Tooltip } from '../theme/themeDefaults';
 import { useUncontrolled } from '@mantine-vue/hooks';
-import { IconPaperclip, IconSend2 } from '@tabler/icons-vue';
+import { IconPaperclip, IconPlayerStopFilled, IconSend2 } from '@tabler/icons-vue';
 import { nodeProp } from './node';
 import classes from './Chat.module.css';
 
@@ -25,7 +25,17 @@ export interface ChatComposerProps extends BoxProps {
   maxRows?: number;
   /** Elementos extras à esquerda (ex.: emoji picker, respostas rápidas). O slot `#leftSection` tem prioridade. */
   leftSection?: MantineNode;
+  /** Elementos extras à direita do campo, antes do botão de enviar. O slot `#rightSection` tem prioridade. */
+  rightSection?: MantineNode;
   sendLabel?: string;
+  /**
+   * Uma resposta está em andamento: o envio fica bloqueado (o texto digitado é mantido e o campo
+   * continua editável). Com um ouvinte `@stop`, o botão de enviar vira o botão de interromper.
+   */
+  loading?: boolean;
+  stopLabel?: string;
+  /** Bloqueia o envio sem desabilitar o campo (ex.: integração ainda não conectada) */
+  sendDisabled?: boolean;
 }
 
 export type ChatComposerEmits = {
@@ -33,11 +43,15 @@ export type ChatComposerEmits = {
   send: (payload: ChatComposerSendPayload) => void;
   /** `v-model` do texto */
   'update:modelValue': (value: string) => void;
+  /** Botão de interromper (visível enquanto `loading`) */
+  stop: () => void;
 }
 
 export interface ChatComposerSlots {
   /** Elementos extras à esquerda (ex.: emoji picker, respostas rápidas) */
   leftSection?: () => VNodeChild;
+  /** Elementos extras à direita do campo, antes do botão de enviar */
+  rightSection?: () => VNodeChild;
 }
 
 /** Campo de mensagem: Enter envia, Shift+Enter quebra linha, anexos opcionais. */
@@ -53,6 +67,11 @@ export const ChatComposer = defineComponent({
     maxRows: { type: Number, default: 5 },
     leftSection: nodeProp,
     sendLabel: { type: String, default: 'Enviar' },
+    rightSection: nodeProp,
+    loading: { type: Boolean, default: false },
+    stopLabel: { type: String, default: 'Interromper' },
+    sendDisabled: { type: Boolean, default: false },
+    onStop: { type: Function as PropType<() => void>, default: undefined },
   },
   emits: {
     send: (_payload: ChatComposerSendPayload) => true,
@@ -66,7 +85,11 @@ export const ChatComposer = defineComponent({
       onChange: (value) => emit('update:modelValue', value),
     });
     const files = ref<File[]>([]);
-    const canSend = computed(() => !props.disabled && (text.value.trim().length > 0 || files.value.length > 0));
+    const canSend = computed(
+      () => !props.disabled && !props.sendDisabled && !props.loading && (text.value.trim().length > 0 || files.value.length > 0),
+    );
+    const hasLeft = () => props.leftSection != null || !!slots.leftSection;
+    const hasRight = () => props.rightSection != null || !!slots.rightSection;
 
     const send = () => {
       if (!canSend.value) return;
@@ -106,7 +129,7 @@ export const ChatComposer = defineComponent({
             )
           : null,
         h('div', { class: classes.composer }, [
-          resolveNode(props.leftSection, slots.leftSection),
+          hasLeft() ? h('div', { class: classes.composerSection }, [resolveNode(props.leftSection, slots.leftSection)]) : null,
           props.allowAttachments
             ? h(
                 FileButton as any,
@@ -136,11 +159,20 @@ export const ChatComposer = defineComponent({
             radius: 'lg',
             'aria-label': props.placeholder,
           }),
-          h(
-            ActionIcon as any,
-            { size: 44, radius: 'xl', variant: 'filled', onClick: send, disabled: !canSend.value, 'aria-label': props.sendLabel },
-            () => h(IconSend2, { size: 20 }),
-          ),
+          hasRight() ? h('div', { class: classes.composerSection }, [resolveNode(props.rightSection, slots.rightSection)]) : null,
+          props.loading && props.onStop
+            ? h(Tooltip as any, { label: props.stopLabel }, () =>
+                h(
+                  ActionIcon as any,
+                  { size: 44, radius: 'xl', variant: 'light', color: 'danger', onClick: () => props.onStop?.(), 'aria-label': props.stopLabel },
+                  () => h(IconPlayerStopFilled, { size: 18 }),
+                ),
+              )
+            : h(
+                ActionIcon as any,
+                { size: 44, radius: 'xl', variant: 'filled', onClick: send, disabled: !canSend.value, 'aria-label': props.sendLabel },
+                () => h(IconSend2, { size: 20 }),
+              ),
         ]),
       ]);
   },

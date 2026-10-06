@@ -57,6 +57,23 @@
 .message[data-own][data-position='first'] .bubble { border-bottom-right-radius: var(--bubble-tail); }
 .message[data-own][data-position='middle'] .bubble { border-top-right-radius: var(--bubble-tail); border-bottom-right-radius: var(--bubble-tail); }
 .message[data-own][data-position='last'] .bubble { border-top-right-radius: var(--bubble-tail); }
+/* variante plain: sem bolha, largura total (respostas longas com markdown/tabelas) */
+.message[data-variant='plain'] {
+  align-items: flex-start;
+}
+.message[data-variant='plain'] .bubbleColumn {
+  flex: 1;
+  max-width: 100%;
+}
+.message[data-variant='plain'] .bubble {
+  width: 100%;
+  padding: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
 .message[data-status='error'] .bubble {
   background: var(--ds-error-bg);
   color: var(--ds-error);
@@ -203,6 +220,12 @@
 .composerInput {
   flex: 1;
 }
+.composerSection {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  flex-shrink: 0;
+}
 .composerFiles {
   display: flex;
   flex-wrap: wrap;
@@ -223,28 +246,50 @@
   padding: var(--sp-12);
   border-bottom: 1px solid var(--ds-border-soft);
 }
+.conversationItem {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--ds-border-soft);
+  transition: background 0.15s;
+}
+.conversationItem:hover {
+  background: var(--ds-surface-2);
+}
+.conversationItem[data-active] {
+  background: var(--ds-primary-soft);
+  box-shadow: inset 3px 0 0 var(--ds-primary);
+}
 .conversation {
   all: unset;
   box-sizing: border-box;
   display: flex;
   gap: var(--sp-12);
   align-items: center;
-  width: 100%;
+  flex: 1;
+  min-width: 0;
   padding: var(--sp-12) var(--sp-16);
   cursor: pointer;
-  border-bottom: 1px solid var(--ds-border-soft);
-  transition: background 0.15s;
-}
-.conversation:hover {
-  background: var(--ds-surface-2);
-}
-.conversation[data-active] {
-  background: var(--ds-primary-soft);
-  box-shadow: inset 3px 0 0 var(--ds-primary);
 }
 .conversation:focus-visible {
   outline: 2px solid var(--ds-primary);
   outline-offset: -2px;
+}
+.conversationIcon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--ds-surface-2);
+  color: var(--ds-text-2);
+}
+.conversationItem[data-active] .conversationIcon {
+  background: var(--ds-surface);
+  color: var(--ds-primary);
+}
+.conversationActions {
+  flex-shrink: 0;
+  padding-right: var(--sp-8);
 }
 .conversationBody {
   flex: 1;
@@ -264,7 +309,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.conversation[data-unread] .conversationName {
+.conversationItem[data-unread] .conversationName {
   font-weight: 700;
 }
 .conversationTime {
@@ -286,7 +331,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.conversation[data-unread] .conversationPreview {
+.conversationItem[data-unread] .conversationPreview {
   color: var(--ds-text-2);
   font-weight: 500;
 }

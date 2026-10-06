@@ -118,6 +118,18 @@ export default function ChatMessagePage() {
               default: 'false',
               description: 'Mensagem de sistema centralizada.',
             },
+            {
+              name: 'variant',
+              type: "'bubble' | 'plain'",
+              default: "'bubble'",
+              description: 'plain = sem bolha e em largura total (respostas de assistente com markdown/tabelas).',
+            },
+            {
+              name: 'avatar',
+              type: 'ReactNode',
+              vueType: 'slot #avatar',
+              description: 'Avatar customizado; substitui o avatar do author.',
+            },
           ]}
         />
         <P>

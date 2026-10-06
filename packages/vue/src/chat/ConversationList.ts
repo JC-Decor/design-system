@@ -24,6 +24,10 @@ export type ConversationListEmits = {
 export interface ConversationListSlots {
   /** Conteúdo quando a lista (ou a busca) fica vazia */
   empty?: () => VNodeChild;
+  /** Ícone no lugar do avatar com iniciais (ex.: conversas com um assistente) */
+  icon?: (props: { conversation: Conversation }) => VNodeChild;
+  /** Ações por conversa (ex.: menu renomear/excluir), à direita do item */
+  actions?: (props: { conversation: Conversation }) => VNodeChild;
 }
 
 /** Lista de conversas com busca, não lidas, presença e última mensagem. */
@@ -52,15 +56,11 @@ export const ConversationList = defineComponent({
     const renderItem = (c: Conversation) => {
       const unread = c.unread ?? 0;
       const active = c.id === props.activeId;
-      return h(
+      const button = h(
         'button',
         {
-          key: c.id,
           type: 'button',
-          role: 'listitem',
           class: classes.conversation,
-          'data-active': active || undefined,
-          'data-unread': unread > 0 || undefined,
           'aria-current': active ? 'true' : undefined,
           onClick: () => emit('select', c),
         },
@@ -68,7 +68,10 @@ export const ConversationList = defineComponent({
           h(
             Indicator as any,
             { color: 'evergreen', position: 'bottom-end', offset: 5, size: 10, withBorder: true, disabled: !c.online },
-            () => h(Avatar as any, { src: c.avatar, name: initialsName(c.name), color: c.color ?? 'initials', size: 40 }),
+            () =>
+              slots.icon
+                ? h('span', { class: classes.conversationIcon }, slots.icon({ conversation: c }))
+                : h(Avatar as any, { src: c.avatar, name: initialsName(c.name), color: c.color ?? 'initials', size: 40 }),
           ),
           h('div', { class: classes.conversationBody }, [
             h('div', { class: classes.conversationTop }, [
@@ -90,6 +93,17 @@ export const ConversationList = defineComponent({
             c.tag ? h(Badge as any, { size: 'xs', color: 'obsidian', mt: 6 }, () => c.tag) : null,
           ]),
         ],
+      );
+      return h(
+        'div',
+        {
+          key: c.id,
+          role: 'listitem',
+          class: classes.conversationItem,
+          'data-active': active || undefined,
+          'data-unread': unread > 0 || undefined,
+        },
+        [button, slots.actions ? h('div', { class: classes.conversationActions }, slots.actions({ conversation: c })) : null],
       );
     };
 

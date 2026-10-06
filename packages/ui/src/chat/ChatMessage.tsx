@@ -19,6 +19,10 @@ export interface ChatMessageProps extends BoxProps, Omit<React.ComponentProps<'d
   position?: GroupPosition;
   /** Mensagem de sistema (centralizada) */
   system?: boolean;
+  /** `plain` = sem bolha e em largura total (respostas de assistente com markdown/tabelas) @default 'bubble' */
+  variant?: 'bubble' | 'plain';
+  /** Avatar customizado (ex.: ícone do assistente); substitui o avatar do `author` */
+  avatar?: React.ReactNode;
   children?: React.ReactNode;
 }
 
@@ -48,6 +52,8 @@ export function ChatMessage({
   attachments,
   position = 'single',
   system,
+  variant = 'bubble',
+  avatar,
   children,
   ...others
 }: ChatMessageProps) {
@@ -66,12 +72,14 @@ export function ChatMessage({
     : null;
 
   return (
-    <Box className={classes.message} mod={{ own, position, status }} {...others}>
+    <Box className={classes.message} mod={{ own, position, status, variant: variant === 'plain' ? 'plain' : undefined }} {...others}>
       {!own && (
         <div className={classes.avatarSlot}>
-          {showAvatar && isLast && author && (
-            <Avatar src={author.avatar} name={initialsName(author.name)} color={author.color ?? 'initials'} size={32} alt={author.name} />
-          )}
+          {showAvatar && (variant === 'plain' ? isFirst : isLast) &&
+            (avatar ??
+              (author && (
+                <Avatar src={author.avatar} name={initialsName(author.name)} color={author.color ?? 'initials'} size={32} alt={author.name} />
+              )))}
         </div>
       )}
       <div className={classes.bubbleColumn}>

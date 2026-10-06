@@ -122,6 +122,24 @@ export default function ChatThreadPage() {
               description: 'Conteúdo customizado de cada bolha; recebe { message }. Tem prioridade sobre renderContent.',
             },
             {
+              name: 'renderAvatar',
+              type: '(message: ChatMessageData) => ReactNode',
+              only: 'react',
+              description: 'Avatar customizado por mensagem (ex.: ícone do assistente).',
+            },
+            {
+              name: '#avatar',
+              type: 'slot',
+              only: 'vue',
+              description: 'Avatar customizado por mensagem; recebe { message }.',
+            },
+            {
+              name: 'footer',
+              type: 'ReactNode',
+              vueType: 'MantineNode | slot #footer',
+              description: 'Conteúdo ao fim da conversa, antes do "digitando" (ex.: status de uma resposta em andamento).',
+            },
+            {
               name: 'h',
               type: 'MantineStyleProp',
               default: "'100%'",
@@ -130,7 +148,9 @@ export default function ChatThreadPage() {
           ]}
         />
         <P>
-          Demais props são repassadas ao <code>ScrollArea</code> do Mantine.
+          Demais props são repassadas ao <code>ScrollArea</code> do Mantine. Use <code>variant: 'plain'</code> em uma
+          mensagem (<code>ChatMessageData</code>) para exibi-la sem bolha e em largura total — o formato indicado para
+          respostas de assistente com markdown, tabelas e código.
         </P>
       </Section>
     </DocPage>

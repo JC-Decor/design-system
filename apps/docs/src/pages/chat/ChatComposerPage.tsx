@@ -128,10 +128,40 @@ export default function ChatComposerPage() {
               description: 'Elementos à esquerda (respostas rápidas, emojis…).',
             },
             {
+              name: 'rightSection',
+              type: 'ReactNode',
+              vueType: 'MantineNode | slot #rightSection',
+              description: 'Elementos à direita do campo, antes do botão de enviar (ex.: biblioteca de prompts).',
+            },
+            {
               name: 'sendLabel',
               type: 'string',
               default: "'Enviar'",
               description: 'aria-label do botão de envio.',
+            },
+            {
+              name: 'loading',
+              type: 'boolean',
+              default: 'false',
+              description: 'Resposta em andamento: bloqueia o envio, mantém o texto digitado e o campo editável. Com onStop, o botão de enviar vira o de interromper.',
+            },
+            {
+              name: 'onStop',
+              type: '() => void',
+              vueType: '@stop',
+              description: 'Botão de interromper, visível enquanto loading.',
+            },
+            {
+              name: 'stopLabel',
+              type: 'string',
+              default: "'Interromper'",
+              description: 'aria-label/tooltip do botão de interromper.',
+            },
+            {
+              name: 'sendDisabled',
+              type: 'boolean',
+              default: 'false',
+              description: 'Bloqueia o envio (botão e Enter) sem desabilitar o campo.',
             },
           ]}
         />

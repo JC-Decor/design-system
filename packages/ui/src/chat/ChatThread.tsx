@@ -23,6 +23,10 @@ export interface ChatThreadProps extends Omit<ScrollAreaProps, 'children'> {
   empty?: React.ReactNode;
   /** Renderização customizada do conteúdo da bolha */
   renderContent?: (message: ChatMessageData) => React.ReactNode;
+  /** Avatar customizado por mensagem (ex.: ícone do assistente) */
+  renderAvatar?: (message: ChatMessageData) => React.ReactNode;
+  /** Conteúdo ao fim da conversa, antes do "digitando" (ex.: status de uma resposta em andamento) */
+  footer?: React.ReactNode;
 }
 
 /** Lista rolável de mensagens com separadores de data, agrupamento e auto-scroll. */
@@ -36,6 +40,8 @@ export function ChatThread({
   groupWindow,
   empty,
   renderContent,
+  renderAvatar,
+  footer,
   h = '100%',
   ...others
 }: ChatThreadProps) {
@@ -100,6 +106,8 @@ export function ChatThread({
               key={item.key}
               own={own}
               system={message.system}
+              variant={message.variant}
+              avatar={renderAvatar?.(message)}
               author={userMap[message.authorId]}
               showAuthor={showAuthors}
               createdAt={message.createdAt}
@@ -112,6 +120,7 @@ export function ChatThread({
             </ChatMessage>
           );
         })}
+        {footer}
         {typing && typing.length > 0 && <TypingIndicator names={typing} mt="sm" ml={40} />}
       </Box>
     </ScrollArea>

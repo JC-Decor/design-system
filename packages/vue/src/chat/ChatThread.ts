@@ -10,7 +10,7 @@ import {
   type SlotsType,
   type VNodeChild,
 } from 'vue';
-import { Box, ScrollArea, type MantineNode, type ScrollAreaProps } from '@mantine-vue/core';
+import { Box, ScrollArea, resolveNode, type MantineNode, type ScrollAreaProps } from '@mantine-vue/core';
 import { ChatMessage } from './ChatMessage';
 import { TypingIndicator } from './TypingIndicator';
 import { buildThread } from './utils';
@@ -35,6 +35,8 @@ export interface ChatThreadProps extends ScrollAreaProps {
   empty?: MantineNode;
   /** Renderização customizada do conteúdo da bolha. O slot `#content="{ message }"` tem prioridade. */
   renderContent?: (message: ChatMessageData) => VNodeChild;
+  /** Conteúdo ao fim da conversa, antes do "digitando" (ex.: status de uma resposta em andamento). O slot `#footer` tem prioridade. */
+  footer?: MantineNode;
   /** Altura da área rolável @default '100%' */
   h?: ScrollAreaProps['h'];
 }
@@ -44,6 +46,10 @@ export interface ChatThreadSlots {
   empty?: () => VNodeChild;
   /** Conteúdo customizado da bolha de cada mensagem */
   content?: (props: { message: ChatMessageData }) => VNodeChild;
+  /** Avatar customizado por mensagem (ex.: ícone do assistente) */
+  avatar?: (props: { message: ChatMessageData }) => VNodeChild;
+  /** Conteúdo ao fim da conversa, antes do "digitando" */
+  footer?: () => VNodeChild;
 }
 
 /** Distância (px) do fim abaixo da qual o usuário é considerado "no fim" da conversa. */
@@ -64,6 +70,7 @@ export const ChatThread = defineComponent({
     autoScroll: { type: Boolean, default: true },
     groupWindow: { type: Number, default: undefined },
     empty: nodeProp,
+    footer: nodeProp,
     renderContent: { type: Function as PropType<(message: ChatMessageData) => VNodeChild>, default: undefined },
     h: { type: [String, Number] as PropType<ScrollAreaProps['h']>, default: '100%' },
   },
@@ -166,6 +173,7 @@ export const ChatThread = defineComponent({
             key: item.key,
             own,
             system: message.system,
+            variant: message.variant,
             author: userMap.value[message.authorId],
             showAuthor: props.showAuthors,
             createdAt: message.createdAt,
@@ -174,7 +182,9 @@ export const ChatThread = defineComponent({
             position,
             'data-group-start': position === 'single' || position === 'first' ? true : undefined,
           },
-          { default: () => bubble },
+          slots.avatar
+            ? { default: () => bubble, avatar: () => slots.avatar!({ message }) }
+            : { default: () => bubble },
         );
       });
 
@@ -194,6 +204,7 @@ export const ChatThread = defineComponent({
             () => [
               emptyNode,
               ...children,
+              slots.footer || props.footer != null ? resolveNode(props.footer, slots.footer) : null,
               props.typing && props.typing.length > 0
                 ? h(TypingIndicator as any, { names: props.typing, mt: 'sm', ml: 40 })
                 : null,

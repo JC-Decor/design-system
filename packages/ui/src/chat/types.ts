@@ -26,6 +26,8 @@ export interface ChatMessageData {
   attachments?: ChatAttachment[];
   /** Mensagem de sistema (centralizada, sem bolha) */
   system?: boolean;
+  /** `plain` = sem bolha e em largura total (ex.: respostas longas de assistente com markdown/tabelas) @default 'bubble' */
+  variant?: 'bubble' | 'plain';
 }
 
 export interface Conversation {
