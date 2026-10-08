@@ -41,8 +41,12 @@
 .kicker {}
 .title {}
 .description {}
+/* Quebra em linhas quando os botões não cabem (3+ ações em telas de celular). */
 .actions {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--mantine-spacing-sm);
+  min-width: 0;
+  max-width: 100%;
 }

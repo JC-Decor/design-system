@@ -1,5 +1,5 @@
 import { h, nextTick } from 'vue';
-import { Autocomplete, Button, MultiSelect, NativeSelect, NumberInput, NumberFormatter, RollingNumber, Select, Table, TagsInput, Timeline, TimelineItem, TreeSelect, Tag, Kicker, Headline, jcTheme, useMantineColorScheme, COLOR_SCHEME_STORAGE_KEY, JcProvider } from '../src';
+import { Autocomplete, Button, Drawer, Modal, MultiSelect, NativeSelect, NumberInput, NumberFormatter, RollingNumber, Select, Table, TagsInput, Timeline, TimelineItem, TreeSelect, Tag, Kicker, Headline, jcTheme, useMantineColorScheme, COLOR_SCHEME_STORAGE_KEY, JcProvider } from '../src';
 import { render, screen } from './render';
 import { render as tlRender } from '@testing-library/vue';
 import { defineComponent } from 'vue';
@@ -167,5 +167,41 @@ describe('mais correções do Mantine Vue 3.5', () => {
     );
     const active = [...container.querySelectorAll('.mantine-Timeline-item')].map((el) => el.hasAttribute('data-active'));
     expect(active).toEqual([true, true, false]);
+  });
+});
+
+describe('Modal e Drawer', () => {
+  const mountWith = (theme: object, ui: () => any) =>
+    tlRender(defineComponent({ setup: () => () => h(JcProvider, { env: 'test', colorSchemeStorageKey: false, theme }, () => ui()) }));
+  const styleOf = (selector: string) => document.body.querySelector<HTMLElement>(selector)?.getAttribute('style') ?? '';
+
+  afterEach(() => {
+    document.body.innerHTML = '';
+  });
+
+  it.each([
+    ['Modal', Modal],
+    ['Drawer', Drawer],
+  ] as const)('%s respeita theme.components.%s.defaultProps.zIndex (conteúdo e fundo)', async (name, Comp) => {
+    mountWith({ components: { [name]: { defaultProps: { zIndex: 2500 } } } }, () =>
+      h(Comp as any, { opened: true, title: 'Título', onClose() {} }, () => 'Corpo'),
+    );
+    await nextTick();
+    expect(styleOf(`.mantine-${name}-root`)).toContain('--mb-z-index: 2500');
+    expect(styleOf(`.mantine-${name}-overlay`)).toContain('--overlay-z-index: 2500');
+  });
+
+  it('a prop zIndex vence o tema', async () => {
+    mountWith({ components: { Modal: { defaultProps: { zIndex: 2500 } } } }, () =>
+      h(Modal, { opened: true, zIndex: 9000, title: 'Título', onClose() {} }, () => 'Corpo'),
+    );
+    await nextTick();
+    expect(styleOf('.mantine-Modal-root')).toContain('--mb-z-index: 9000');
+  });
+
+  it('radius do tema (md) vira variável CSS válida, como no React', async () => {
+    mountWith({}, () => h(Modal, { opened: true, title: 'Título', onClose() {} }, () => 'Corpo'));
+    await nextTick();
+    expect(styleOf('.mantine-Modal-root')).toContain('--modal-radius: var(--mantine-radius-md)');
   });
 });

@@ -1,5 +1,16 @@
 # @jcdecor/vue
 
+## 0.1.8
+
+### Overlays
+
+- `Modal` e `Drawer` agora respeitam `theme.components.Modal/Drawer.defaultProps` (como no React). O Mantine Vue 3.5 fixava `zIndex: 200` no componente, então `defaultProps.zIndex` não chegava nem ao conteúdo nem ao fundo escurecido; os padrões do próprio DS (sombra `lg`, fundo com blur, raio `md`) também não eram aplicados. A prop continua vencendo o tema.
+- `Modal`/`Drawer`: raio nomeado (`radius="md"`) vira `var(--mantine-radius-md)`; o Mantine Vue gravava `--modal-radius: md` (CSS inválido, cantos retos).
+
+### Cabeçalhos
+
+- `PageHeader`: as ações quebram em linhas quando não cabem (3+ botões em telas de celular), em vez de vazar para fora da tela.
+
 ## 0.1.7
 
 ### Navegação

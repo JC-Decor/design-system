@@ -5,8 +5,10 @@ import {
   Cascader as MCascader,
   CheckboxIndicator as MCheckboxIndicator,
   Combobox as MCombobox,
+  Drawer as MDrawer,
   FileInput as MFileInput,
   FloatingWindow as MFloatingWindow,
+  Modal as MModal,
   MultiSelect as MMultiSelect,
   NumberFormatter as MNumberFormatter,
   NativeSelect as MNativeSelect,
@@ -19,6 +21,7 @@ import {
   Table as MTable,
   Tooltip as MTooltip,
   TreeSelect as MTreeSelect,
+  getRadius,
   useMantineTheme,
 } from '@mantine-vue/core';
 
@@ -61,6 +64,19 @@ export const Cascader: typeof MCascader = withThemeDefaults(MCascader, 'Cascader
 export const CheckboxIndicator: typeof MCheckboxIndicator = withThemeDefaults(MCheckboxIndicator, 'CheckboxIndicator');
 export const Combobox: typeof MCombobox = withThemeDefaults(MCombobox, 'Combobox');
 export const FileInput: typeof MFileInput = withThemeDefaults(MFileInput, 'FileInput');
+/**
+ * O Mantine Vue grava o `radius` do Modal/Drawer com `rem()`, então um nome do tema ('md') vira `--modal-radius: md`
+ * (CSS inválido: cantos retos). O React usa `getRadius`. Traduzimos nomes para `var(--mantine-radius-*)`.
+ */
+const radiusVar = (radius: unknown) =>
+  typeof radius === 'string' && /^(xs|sm|md|lg|xl)$/.test(radius) ? { radius: getRadius(radius) } : {};
+
+/**
+ * Modal e Drawer: o Mantine Vue 3.5 fixa `zIndex` (200) no `withDefaults`, então `theme.components.Modal/Drawer
+ * .defaultProps.zIndex` não chegava ao conteúdo nem ao fundo escurecido. Popover, Menu, Combobox e Tooltip já respeitam.
+ */
+export const Modal: typeof MModal = withThemeDefaults(MModal, 'Modal', (props) => radiusVar(props.radius));
+export const Drawer: typeof MDrawer = withThemeDefaults(MDrawer, 'Drawer', (props) => radiusVar(props.radius));
 export const FloatingWindow: typeof MFloatingWindow = withThemeDefaults(MFloatingWindow, 'FloatingWindow');
 export const MultiSelect: typeof MMultiSelect = withThemeDefaults(MMultiSelect, 'MultiSelect');
 export const NumberFormatter: typeof MNumberFormatter = withThemeDefaults(MNumberFormatter, 'NumberFormatter', (props) => {

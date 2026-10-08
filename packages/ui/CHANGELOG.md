@@ -1,5 +1,11 @@
 # @jcdecor/ui
 
+## 0.1.8
+
+### Cabeçalhos
+
+- `PageHeader`: as ações quebram em linhas quando não cabem (3+ botões em telas de celular), em vez de vazar para fora da tela.
+
 ## 0.1.7
 
 ### Navegação
