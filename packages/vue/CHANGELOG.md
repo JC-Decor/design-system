@@ -1,5 +1,16 @@
 # @jcdecor/vue
 
+## 0.1.9
+
+### Compilador
+
+- Novo `@jcdecor/vue/compiler` com `mantineNumericProps`, um transform do compilador de templates. No Mantine Vue 3.5 um número em texto não ganha unidade: `<Avatar size="64">` gravava `--avatar-size: 64` e `<Group gap="4">`, `w="70"`, `p="16"` geravam CSS inválido que o navegador ignora (avatar do tamanho do card, espaçamentos e larguras perdidos). No React o Mantine converte para rem. O transform troca o atributo estático por um bind numérico (`size="64"` → `:size="64"`) só em componentes do Mantine e só em props de tamanho (style props de espaçamento, tamanho, fonte e raio; `size`, `radius`, `gap`, `spacing`…). Valores com unidade, nomes do tema (`md`), `lh`, componentes do app e do Vuetify ficam como estão.
+
+  ```js
+  import { mantineNumericProps } from '@jcdecor/vue/compiler'
+  vue({ template: { compilerOptions: { nodeTransforms: [mantineNumericProps] } } })
+  ```
+
 ## 0.1.8
 
 ### Overlays

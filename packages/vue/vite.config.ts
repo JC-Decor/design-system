@@ -26,6 +26,7 @@ export default defineConfig({
         charts: resolve(import.meta.dirname, 'src/charts.ts'),
         brand: resolve(import.meta.dirname, 'src/brand.ts'),
         tokens: resolve(import.meta.dirname, 'src/tokens.ts'),
+        compiler: resolve(import.meta.dirname, 'src/compiler.ts'),
       },
       formats: ['es'],
       cssFileName: 'styles',

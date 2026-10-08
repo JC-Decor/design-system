@@ -1,6 +1,6 @@
 {
   "name": "@jcdecor/vue",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Design System JC Decor — tema, tokens e componentes Vue 3 sobre Mantine Vue.",
   "license": "MIT",
   "repository": {
@@ -39,6 +39,10 @@
     "./tokens": {
       "types": "./dist/tokens.d.ts",
       "import": "./dist/tokens.js"
+    },
+    "./compiler": {
+      "types": "./dist/compiler.d.ts",
+      "import": "./dist/compiler.js"
     },
     "./styles.css": "./dist/styles.css",
     "./package.json": "./package.json"

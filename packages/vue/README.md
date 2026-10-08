@@ -31,6 +31,13 @@ import '@mantine-vue/core/styles.css';
 import '@jcdecor/vue/styles.css'; // sempre por último
 ```
 
+```ts
+// vite.config.ts: números em texto (`gap="4"`, `size="64"`, `w="70"`) viram números, como no React
+import { mantineNumericProps } from '@jcdecor/vue/compiler';
+
+vue({ template: { compilerOptions: { nodeTransforms: [mantineNumericProps] } } });
+```
+
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue';
@@ -56,6 +63,7 @@ const favorite = ref(false);
 | `@jcdecor/vue/charts` | `LineChart`, `AreaChart`, `BarChart`, `DonutChart`, `PieChart`, `Sparkline`, `ChartCard`… |
 | `@jcdecor/vue/brand` | `JcLogo`, `JcLogoAlt`, `SpartanHelmet`, `GreekFrame`, `Collaborator` |
 | `@jcdecor/vue/tokens` | tokens crus (`brand`, `ramps`, `semantic`, `typography`…) |
+| `@jcdecor/vue/compiler` | `mantineNumericProps` (transform do compilador de templates, usado no `vite.config`) |
 | `@jcdecor/vue/styles.css` | CSS dos componentes JC e overrides do tema |
 
 ## Diferenças em relação ao React
