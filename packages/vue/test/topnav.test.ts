@@ -103,4 +103,31 @@ describe('TopNav', () => {
     expect((container.querySelector('header a[href="/"]') as HTMLElement).style.opacity).toBe('0.5');
     expect(TopNav.classes.root).toBeTruthy();
   });
+
+  it('hambúrguer expõe aria-expanded/aria-controls e Esc fecha o menu devolvendo o foco', async () => {
+    render(() => [h(TopNav, { links }), h('button', { type: 'button' }, 'Fora')]);
+    const burger = screen.getByRole('button', { name: 'Abrir menu' });
+    expect(burger).toHaveAttribute('aria-expanded', 'false');
+    await userEvent.click(burger);
+    await nextTick();
+    expect(burger).toHaveAttribute('aria-expanded', 'true');
+    const mobile = await waitFor(() => screen.getByRole('navigation', { name: 'Principal (mobile)' }));
+    expect(mobile.id).toBe(burger.getAttribute('aria-controls'));
+
+    // foco dentro do menu: Esc fecha e devolve o foco ao hambúrguer
+    within(mobile).getByRole('link', { name: 'Clientes' }).focus();
+    await userEvent.keyboard('{Escape}');
+    await nextTick();
+    expect(burger).toHaveAttribute('aria-expanded', 'false');
+    expect(burger).toHaveFocus();
+
+    // foco fora da barra: Esc fecha sem roubar o foco
+    await userEvent.click(burger);
+    await nextTick();
+    screen.getByRole('button', { name: 'Fora' }).focus();
+    await userEvent.keyboard('{Escape}');
+    await nextTick();
+    expect(burger).toHaveAttribute('aria-expanded', 'false');
+    expect(screen.getByRole('button', { name: 'Fora' })).toHaveFocus();
+  });
 });

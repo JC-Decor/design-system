@@ -89,7 +89,9 @@ export default function TopNavPage() {
       <Section title="Mobile">
         <P>
           Abaixo de 640px os links são escondidos e um <code>Burger</code> abre a lista em um <code>Collapse</code> logo abaixo da barra;
-          clicar em um link fecha o menu. Desative com <OnlyFor framework="react"><code>collapseOnMobile={'{false}'}</code></OnlyFor><OnlyFor framework="vue"><code>:collapse-on-mobile="false"</code></OnlyFor>.
+          clicar em um link fecha o menu. O hambúrguer informa <code>aria-expanded</code> e aponta para o menu com{' '}
+          <code>aria-controls</code>; <kbd>Esc</kbd> fecha o menu aberto e, se o foco estava na barra ou no menu, devolve o foco ao
+          hambúrguer. Desative com <OnlyFor framework="react"><code>collapseOnMobile={'{false}'}</code></OnlyFor><OnlyFor framework="vue"><code>:collapse-on-mobile="false"</code></OnlyFor>.
         </P>
       </Section>
 

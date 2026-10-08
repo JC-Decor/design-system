@@ -1,5 +1,11 @@
 # @jcdecor/vue
 
+## 0.1.7
+
+### Navegação
+
+- `TopNav`: menu mobile acessível pelo teclado. O hambúrguer agora informa `aria-expanded` e aponta para o menu com `aria-controls`; Esc fecha o menu aberto e, se o foco estava na barra ou no menu, devolve o foco ao hambúrguer (foco em outro lugar da página não é movido).
+
 ## 0.1.6
 
 ### Cabeçalhos

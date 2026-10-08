@@ -10,7 +10,8 @@ import {
   type Factory,
   type StylesApiProps,
 } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import { useEffect, useRef } from 'react';
+import { useDisclosure, useId } from '@mantine/hooks';
 import { JcLogo } from '../../brand/Brand';
 import classes from './TopNav.module.css';
 
@@ -59,6 +60,22 @@ export const TopNav = factory<TopNavFactory>((_props) => {
     brand, brandHref, links, linkComponent: LinkComponent = 'a', rightSection, collapseOnMobile, ...others
   } = props;
   const [opened, { toggle, close }] = useDisclosure(false);
+  const mobileId = useId();
+  const headerRef = useRef<HTMLElement>(null);
+  const burgerRef = useRef<HTMLButtonElement>(null);
+
+  // Esc fecha o menu mobile; o foco volta ao hambúrguer se estava dentro da barra/menu
+  useEffect(() => {
+    if (!opened) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      const focusInside = headerRef.current?.contains(document.activeElement);
+      close();
+      if (focusInside) burgerRef.current?.focus();
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [opened, close]);
 
   const getStyles = useStyles<TopNavFactory>({
     name: 'TopNav',
@@ -114,7 +131,7 @@ export const TopNav = factory<TopNavFactory>((_props) => {
   const brandProps = brandHref === null ? {} : LinkComponent === 'a' ? { href: brandHref } : { to: brandHref, href: brandHref };
 
   return (
-    <header>
+    <header ref={headerRef}>
       <Box {...getStyles('root')} mod={{ collapse: collapseOnMobile }} {...others}>
         <BrandComponent {...brandProps} {...getStyles('brand')}>
           {brand}
@@ -125,13 +142,22 @@ export const TopNav = factory<TopNavFactory>((_props) => {
         <div {...getStyles('right')}>
           {rightSection}
           {collapseOnMobile && links!.length > 0 && (
-            <Burger opened={opened} onClick={toggle} size="sm" aria-label="Abrir menu" {...getStyles('burger')} />
+            <Burger
+              ref={burgerRef}
+              opened={opened}
+              onClick={toggle}
+              size="sm"
+              aria-label="Abrir menu"
+              aria-expanded={opened}
+              aria-controls={mobileId}
+              {...getStyles('burger')}
+            />
           )}
         </div>
       </Box>
       {collapseOnMobile && links!.length > 0 && (
         <Collapse expanded={opened}>
-          <nav {...getStyles('mobileLinks')} aria-label="Principal (mobile)">
+          <nav {...getStyles('mobileLinks')} id={mobileId} aria-label="Principal (mobile)">
             {renderLinks(close)}
           </nav>
         </Collapse>

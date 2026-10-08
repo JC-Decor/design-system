@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, h, useAttrs, useSlots, type Component, type VNodeChild } from 'vue';
+import { computed, h, ref, useAttrs, useSlots, type Component, type VNodeChild } from 'vue';
 import { Box, Burger, Collapse, resolveNode, useProps, useStyles, type MantineNode } from '@mantine-vue/core';
-import { useDisclosure } from '@mantine-vue/hooks';
+import { useDisclosure, useId, useWindowEvent } from '@mantine-vue/hooks';
 import { JcLogo } from '../../brand/Brand';
 import type { TopNavFactory, TopNavLink, TopNavOwnProps, TopNavSlots } from './TopNav.types';
 import classes from './TopNav.module.css';
@@ -39,6 +39,17 @@ const props = useProps(
 );
 
 const [opened, { toggle, close }] = useDisclosure(false);
+const mobileId = useId();
+const headerEl = ref<HTMLElement | null>(null);
+
+// Esc fecha o menu mobile; o foco volta ao hambúrguer se estava dentro da barra/menu
+useWindowEvent('keydown', (event: KeyboardEvent) => {
+  if (event.key !== 'Escape' || !opened.value) return;
+  const header = headerEl.value;
+  const focusInside = !!header?.contains(document.activeElement);
+  close();
+  if (focusInside) header?.querySelector<HTMLElement>(`[aria-controls="${mobileId.value}"]`)?.focus();
+});
 
 // Getters: classNames/styles/class/style continuam reativos depois do setup
 const getStyles = useStyles<TopNavFactory>({
@@ -120,7 +131,7 @@ const rootMod = computed(() => [{ collapse: props.collapseOnMobile }, (attrs as 
 </script>
 
 <template>
-  <header>
+  <header ref="headerEl">
     <Box v-bind="{ ...attrs, ...getStyles('root') }" :mod="rootMod">
       <component :is="brandComponent" v-bind="{ ...brandProps, ...getStyles('brand') }">
         <RenderNode :node="brandNode" />
@@ -135,13 +146,15 @@ const rootMod = computed(() => [{ collapse: props.collapseOnMobile }, (attrs as 
           :opened="opened"
           size="sm"
           aria-label="Abrir menu"
+          :aria-expanded="opened"
+          :aria-controls="mobileId"
           v-bind="getStyles('burger')"
           @click="toggle"
         />
       </div>
     </Box>
     <Collapse v-if="withBurger" :expanded="opened">
-      <nav v-bind="getStyles('mobileLinks')" aria-label="Principal (mobile)">
+      <nav v-bind="getStyles('mobileLinks')" :id="mobileId" aria-label="Principal (mobile)">
         <RenderNode :node="renderLinks(close)" />
       </nav>
     </Collapse>
