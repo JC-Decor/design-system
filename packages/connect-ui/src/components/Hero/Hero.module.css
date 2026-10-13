@@ -1,0 +1,196 @@
+/* .hero */
+.hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 32px;
+  padding: 30px 32px;
+  overflow: hidden;
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border-soft);
+  border-radius: var(--ds-radius-lg);
+  box-shadow: var(--ds-shadow-md);
+}
+.bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 100% at 100% 0%, var(--cn-tone-lavender-soft), transparent 65%),
+    radial-gradient(40% 100% at 0% 100%, var(--cn-tone-blue-soft), transparent 70%);
+}
+.left {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  padding: 6px 0;
+  min-width: 0;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  padding: 5px 11px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ds-primary);
+  background: var(--cn-tone-lavender-soft);
+  border: 1px solid var(--ds-primary-soft);
+  border-radius: 999px;
+}
+.title {
+  margin: 0;
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--ds-text);
+}
+.sub {
+  margin: 0;
+  max-width: 50ch;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ds-text-2);
+  text-wrap: pretty;
+}
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
+}
+.meta {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--ds-border-soft);
+}
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--ds-text-2);
+}
+.metaRow b {
+  font-weight: 700;
+  color: var(--ds-text);
+}
+.right {
+  position: relative;
+  min-height: 300px;
+}
+
+/* Compacto */
+.hero[data-compact] {
+  padding: 24px 28px;
+}
+.hero[data-compact] .title {
+  font-size: 30px;
+}
+.hero[data-compact] .right,
+.hero[data-compact] .art,
+.hero[data-compact] .illustrationWrap {
+  min-height: 220px;
+}
+
+/* HERO ART */
+.art {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+}
+.artBg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: cnFloatBg 10s ease-in-out infinite;
+}
+.artDot {
+  fill: var(--ds-primary);
+  opacity: 0.18;
+}
+.artBubble {
+  fill: var(--ds-surface);
+}
+.people {
+  position: absolute;
+  inset: 0;
+}
+.person {
+  position: absolute;
+  animation: cnFloatP 6s ease-in-out infinite;
+}
+.person[data-slot='1'] { top: 32%; left: 18%; animation-delay: -1s; }
+.person[data-slot='2'] { top: 24%; left: 38%; animation-delay: -2.5s; }
+.person[data-slot='3'] { top: 52%; left: 60%; animation-delay: -1.8s; }
+.person[data-slot='4'] { top: 18%; left: 64%; animation-delay: -3.2s; }
+.person[data-slot='5'] { top: 64%; left: 30%; animation-delay: -4s; }
+.tag {
+  position: absolute;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--ds-text);
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border-soft);
+  border-radius: 10px;
+  box-shadow: var(--ds-shadow-md);
+}
+.tag[data-slot='1'] { top: 6%; left: 6%; animation: cnFloatP 8s ease-in-out infinite; }
+.tag[data-slot='2'] { bottom: 8%; right: 6%; animation: cnFloatP 9s ease-in-out -3s infinite; }
+.tagDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+.illustrationWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  padding: 6px;
+}
+.illustration {
+  width: min(100%, 420px);
+  max-width: none;
+  max-height: 300px;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 26px rgba(7, 1, 107, 0.1));
+  animation: cnFloatP 8s ease-in-out infinite;
+}
+@keyframes cnFloatBg {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-4px, -4px); }
+}
+@keyframes cnFloatP {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(0, -6px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .artBg, .person, .tag, .illustration { animation: none !important; }
+}
+
+/* Telas estreitas: empilha, arte abaixo e mais baixa */
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; padding: 24px 20px; }
+  .title { font-size: 30px; }
+  .right { min-height: 240px; }
+  .art, .illustrationWrap { min-height: 240px; }
+}

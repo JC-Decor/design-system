@@ -1,0 +1,39 @@
+/* .tag do Connect */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  color: var(--ds-text-2);
+  background: var(--ds-surface-2);
+  border-radius: 6px;
+  white-space: nowrap;
+}
+.tag:not([data-tone='neutral']) {
+  background: var(--tone-bg);
+  color: var(--tone-fg);
+}
+
+/* .pill / .pill-on do Connect */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--ds-text-2);
+  background: var(--ds-surface-2);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.pill[data-active] {
+  background: var(--ds-primary-soft);
+  color: var(--ds-primary);
+  font-weight: 600;
+}

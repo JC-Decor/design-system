@@ -1,0 +1,10 @@
+/* .empty-error-technical */
+.technical {
+  margin: 8px 0 0;
+  color: var(--ds-text-3);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: 0.85;
+  word-break: break-word;
+}

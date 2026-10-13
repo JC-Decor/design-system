@@ -1,0 +1,100 @@
+/* toast.css do Connect */
+.viewport {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 10px;
+  width: min(380px, calc(100vw - 32px));
+  pointer-events: none;
+}
+@media (max-width: 560px) {
+  .viewport {
+    right: 16px;
+    bottom: 16px;
+  }
+}
+
+/* Tons: success = verde, error = coral, info = azul (fundo soft/bg do tom, texto fg; trocam no escuro) */
+.toast {
+  --toast-bg: var(--cn-tone-blue-bg);
+  --toast-fg: var(--cn-tone-blue-fg);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: var(--ds-radius-sm);
+  background: var(--toast-bg);
+  color: var(--toast-fg);
+  border: 1px solid color-mix(in srgb, var(--toast-fg) 16%, transparent);
+  box-shadow: var(--ds-shadow-lg);
+  pointer-events: auto;
+  animation: toastEnter 240ms var(--cn-ease-emphasis, cubic-bezier(0.16, 1, 0.3, 1));
+}
+.toast:where([data-tone='success']) {
+  --toast-bg: var(--cn-tone-green-soft);
+  --toast-fg: var(--cn-tone-green-fg);
+}
+.toast:where([data-tone='error']) {
+  --toast-bg: var(--cn-tone-coral-soft);
+  --toast-fg: var(--cn-tone-coral-fg);
+}
+/* No escuro os tons são translúcidos: assenta sobre a superfície para não sumir sobre o conteúdo */
+:where([data-mantine-color-scheme='dark']) .toast {
+  background: linear-gradient(var(--toast-bg), var(--toast-bg)), var(--ds-surface);
+}
+
+.icon {
+  flex-shrink: 0;
+  margin-top: 1px;
+  display: flex;
+}
+
+.message {
+  flex: 1;
+  margin: 0;
+  font-size: var(--type-subheadline-rg);
+  line-height: 1.45;
+  min-width: 0;
+}
+
+.dismiss {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  margin: -2px -4px -2px 0;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  opacity: 0.7;
+  cursor: pointer;
+  transition: opacity var(--cn-t), background-color var(--cn-t);
+}
+.dismiss:hover,
+.dismiss:focus-visible {
+  opacity: 1;
+  background: color-mix(in srgb, currentColor 10%, transparent);
+}
+
+@keyframes toastEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    animation: none;
+  }
+}

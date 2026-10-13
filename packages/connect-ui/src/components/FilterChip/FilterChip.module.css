@@ -1,0 +1,47 @@
+/* .chip do Connect */
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--ds-text-2);
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border-soft);
+  border-radius: 999px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background var(--cn-t), color var(--cn-t), border-color var(--cn-t);
+}
+@media (hover: hover) {
+  .root:where(:not([data-active], :disabled, [aria-disabled='true'])):hover {
+    background: var(--ds-surface-2);
+    color: var(--ds-text);
+  }
+}
+.root[data-active] {
+  background: var(--tone-bg);
+  color: var(--tone-fg);
+  border-color: transparent;
+  font-weight: 600;
+}
+.root:focus-visible {
+  outline: none;
+  box-shadow: var(--ds-focus-ring);
+}
+.root:disabled,
+.root[aria-disabled='true'] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.count {
+  font-size: 10.5px;
+  font-weight: 600;
+  background: color-mix(in srgb, currentColor 10%, transparent);
+  color: inherit;
+  padding: 1px 6px;
+  border-radius: 999px;
+  font-variant-numeric: tabular-nums;
+}

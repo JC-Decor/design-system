@@ -1,0 +1,15 @@
+/* .badge do Connect: pílula 10,5px/600, sem caixa alta */
+.root {
+  text-transform: none;
+  flex: none;
+}
+.root :global(.mantine-Badge-section) {
+  margin-inline-end: 5px;
+}
+.dot {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex: none;
+}

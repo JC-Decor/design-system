@@ -1,0 +1,43 @@
+/* .ava do Connect: iniciais 700 sobre gradiente 140° do tom (bg → soft) */
+.root {
+  flex-shrink: 0;
+  overflow: visible;
+}
+.root .placeholder {
+  background: linear-gradient(140deg, var(--tone-bg), var(--tone-soft));
+  color: var(--tone-fg);
+  border: 0;
+  font-size: var(--pa-fz);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.root img {
+  border-radius: 50%;
+}
+.root[data-ring='lg'] {
+  box-shadow: 0 0 0 2.5px var(--ds-surface), 0 0 0 4px var(--ds-primary-tint);
+}
+.root[data-ring='sm'] {
+  box-shadow: 0 0 0 2px var(--ds-surface);
+}
+
+/* .ava-group: sobreposição de 6px, anel da superfície */
+.stack {
+  display: flex;
+  align-items: center;
+}
+.stack > * + * {
+  margin-left: -6px;
+}
+.extra {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--ds-surface-2);
+  color: var(--ds-text-3);
+  font-weight: 600;
+  box-shadow: 0 0 0 2px var(--ds-surface);
+  user-select: none;
+}

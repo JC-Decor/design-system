@@ -1,0 +1,227 @@
+/* HEADER do Connect (.hd-*): translúcido com blur, fixo no topo da área principal */
+.root {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 22px;
+  padding: 18px 32px 14px;
+  border-bottom: 1px solid var(--ds-border-soft);
+  background: var(--cn-header-bg);
+  backdrop-filter: saturate(120%) blur(6px);
+  -webkit-backdrop-filter: saturate(120%) blur(6px);
+}
+
+.menuButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  order: -1;
+  padding: 0;
+  border-radius: 8px;
+  border: 1px solid var(--ds-border-soft);
+  background: var(--ds-surface);
+  color: var(--ds-text-2);
+  cursor: pointer;
+  transition: background-color var(--cn-t), color var(--cn-t);
+}
+.menuButton:hover {
+  background: var(--ds-surface-2);
+  color: var(--ds-text);
+}
+
+.titleBlock {
+  min-width: 0;
+}
+.crumbs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 4px;
+  font-family: var(--font-mono);
+  font-size: var(--type-disclaimer);
+  color: var(--ds-text-3);
+}
+.crumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.crumb [data-current] {
+  color: var(--ds-text-2);
+  font-weight: 500;
+}
+.title {
+  margin: 0;
+  font-size: var(--type-display-sm);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ds-text);
+}
+.subtitle {
+  margin: 2px 0 0;
+  font-family: var(--font-mono);
+  font-size: var(--type-subheadline-sm);
+  color: var(--ds-text-3);
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+/* Botões de ícone (.hd-icon) — mesmo visual do ThemeToggle */
+.icon {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  padding: 0;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  color: var(--ds-text-2);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color var(--cn-t), color var(--cn-t), border-color var(--cn-t);
+}
+.icon:hover,
+.icon[aria-expanded='true'] {
+  background: var(--ds-surface-2);
+  color: var(--ds-text);
+  border-color: var(--ds-border-soft);
+}
+.icon:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--ds-primary) 35%, transparent);
+  outline-offset: 2px;
+}
+.badge {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 8px;
+  background: var(--cn-coral-500);
+  color: #fff;
+  font-size: 9.5px;
+  font-weight: 700;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 2px var(--ds-surface);
+  font-variant-numeric: tabular-nums;
+}
+
+.searchToggle {
+  margin-left: auto;
+}
+
+.sep {
+  width: 1px;
+  height: 24px;
+  margin: 0 4px;
+  background: var(--ds-border-soft);
+}
+
+/* Chip do usuário */
+.user {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 12px 5px 5px;
+  margin: 0;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--cn-t), border-color var(--cn-t);
+}
+.user[data-static] {
+  cursor: default;
+}
+.user:not([data-static]):hover,
+.user[aria-expanded='true'] {
+  background: var(--ds-surface);
+  border-color: var(--ds-border-soft);
+}
+.avatar {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.userMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.1;
+}
+.userName {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ds-text);
+}
+.userRole {
+  margin-top: 1px;
+  font-size: 11px;
+  color: var(--ds-text-3);
+}
+.userChevron {
+  color: var(--ds-text-3);
+}
+
+.extra {
+  flex: 1 1 100%;
+}
+
+@media (max-width: 1024px) {
+  .root {
+    align-items: flex-start;
+    padding: max(14px, env(safe-area-inset-top)) max(22px, env(safe-area-inset-right)) 14px max(22px, env(safe-area-inset-left));
+  }
+  .titleBlock {
+    flex: 1 1 280px;
+  }
+  .title {
+    font-size: 22px;
+  }
+}
+@media (max-width: 768px) {
+  .icon,
+  .menuButton {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+@media (max-width: 560px) {
+  .root {
+    padding: 12px;
+    gap: 10px;
+  }
+  .title {
+    font-size: 20px;
+  }
+  .right {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .crumbs {
+    display: none;
+  }
+}

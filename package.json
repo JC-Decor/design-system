@@ -9,13 +9,15 @@
   ],
   "scripts": {
     "dev": "npm run dev -w docs",
-    "build": "npm run build:ui && npm run build:vue && npm run build -w docs",
+    "dev:connect": "npm run dev -w connect-docs",
+    "build": "npm run build:ui && npm run build:vue && npm run build:connect && npm run build -w docs && npm run build -w connect-docs",
     "build:ui": "npm run build -w @jcdecor/ui",
     "build:vue": "npm run build -w @jcdecor/vue",
-    "test": "npm run test -w @jcdecor/ui && npm run test -w @jcdecor/vue",
+    "build:connect": "npm run build -w @jcdecor/connect-ui",
+    "test": "npm run test -w @jcdecor/ui && npm run test -w @jcdecor/vue && npm run test -w @jcdecor/connect-ui",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "changeset": "changeset",
-    "release": "npm run build:ui && npm run build:vue && changeset publish"
+    "release": "npm run build:ui && npm run build:vue && npm run build:connect && changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.0",

@@ -1,0 +1,48 @@
+/* .card-pad-x + .bulk-actions-bar do Connect */
+.padded {
+  padding: 16px 22px;
+}
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 10px 14px;
+  border: 1px solid var(--ds-border-soft);
+  border-radius: var(--ds-radius-sm);
+  background: var(--ds-surface-2);
+}
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.count {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ds-text);
+}
+.link {
+  align-self: flex-start;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: var(--type-subheadline-sm);
+  font-weight: 600;
+  color: var(--ds-link);
+  text-align: left;
+  cursor: pointer;
+}
+.link:hover {
+  text-decoration: underline;
+}
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}

@@ -1,0 +1,232 @@
+/* APP SELECT — dropdown customizado do Connect (.sel-*) */
+.wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: var(--type-subheadline-sm);
+  font-weight: 600;
+  color: var(--ds-text-2);
+}
+.req {
+  color: var(--cn-tone-coral-fg);
+}
+
+/* Gatilho */
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  padding: 9px 12px;
+  margin: 0;
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border-soft);
+  border-radius: var(--ds-radius-sm);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--ds-text);
+  text-align: left;
+  outline: none;
+  transition: border-color var(--cn-t), box-shadow var(--cn-t), background-color var(--cn-t), color var(--cn-t);
+}
+.trigger:hover:not(:disabled):not([data-open]) {
+  border-color: var(--ds-border);
+  background: var(--ds-surface-tint);
+}
+.trigger:focus-visible {
+  border-color: color-mix(in srgb, var(--ds-primary) 45%, transparent);
+  box-shadow: 0 0 0 3px var(--ds-primary-soft);
+}
+/* Aberto: anel de foco e cantos de baixo retos, emendando na lista */
+.trigger[data-open] {
+  border-color: color-mix(in srgb, var(--ds-primary) 35%, transparent);
+  box-shadow: 0 0 0 3px var(--ds-primary-soft);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.trigger[data-error] {
+  border-color: var(--ds-error);
+}
+.trigger[data-error]:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ds-error) 16%, transparent);
+}
+.trigger:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  background: var(--ds-surface-2);
+}
+.trigger[aria-busy] {
+  cursor: progress;
+}
+/* Opção selecionada com tom: o gatilho assume fundo/texto do tom */
+.trigger[data-tone] {
+  background: var(--sel-tone-bg);
+  color: var(--sel-tone-fg);
+  border-color: color-mix(in srgb, var(--sel-tone-fg) 19%, transparent);
+}
+
+.value {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.placeholder {
+  color: var(--ds-text-3);
+  font-weight: 400;
+}
+.icon {
+  display: flex;
+  align-items: center;
+  flex: none;
+}
+
+.chevron {
+  display: flex;
+  align-items: center;
+  flex: none;
+  color: var(--ds-text-4);
+  transition: transform var(--cn-t), color var(--cn-t);
+}
+.trigger:hover:not(:disabled) .chevron {
+  color: var(--ds-text-3);
+}
+.chevron[data-open] {
+  transform: rotate(180deg);
+}
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--ds-border);
+  border-top-color: var(--ds-primary);
+  animation: selSpin 0.65s linear infinite;
+  flex: none;
+}
+@keyframes selSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Lista (classe dobrada para vencer o override de tema do Combobox): emenda no gatilho (borda navy suave, topo em --line, só os cantos de baixo arredondados) */
+.menu.menu {
+  padding: 4px;
+  background: var(--ds-surface);
+  border: 1px solid color-mix(in srgb, var(--ds-primary) 22%, transparent);
+  border-top-color: var(--ds-border-soft);
+  border-radius: 0 0 var(--ds-radius-sm) var(--ds-radius-sm);
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--cn-navy) 13%, transparent), 0 2px 6px rgba(0, 0, 0, 0.05);
+  max-height: 260px;
+  overflow-y: auto;
+  animation: selOpen 0.13s cubic-bezier(0.2, 0.7, 0.2, 1);
+  scrollbar-width: thin;
+  scrollbar-color: var(--ds-border) transparent;
+}
+:where([data-mantine-color-scheme='dark']) .menu.menu {
+  box-shadow: var(--ds-shadow-lg);
+}
+@keyframes selOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.menu .option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ds-text-2);
+  user-select: none;
+  transition: background-color var(--cn-t), color var(--cn-t);
+}
+.menu .option:where([data-tone]) {
+  color: var(--sel-tone-fg);
+}
+.menu .option:where(:hover, [data-combobox-selected]):where(:not([data-combobox-active])) {
+  background: var(--ds-surface-2);
+  color: var(--ds-text);
+}
+.menu .option:where([data-tone]):where(:hover, [data-combobox-selected]):where(:not([data-combobox-active])) {
+  color: var(--sel-tone-fg);
+}
+.menu .option:where([data-combobox-active]),
+.menu .option:where([data-combobox-active]):hover {
+  background: var(--ds-primary-soft);
+  color: var(--ds-primary);
+  font-weight: 600;
+}
+.menu .option:where([data-combobox-active][data-combobox-selected]) {
+  background: var(--ds-primary-tint);
+}
+.menu .option:where([data-tone][data-combobox-active]) {
+  background: var(--sel-tone-bg);
+  color: var(--sel-tone-fg);
+}
+.menu .option:where([data-combobox-disabled]) {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.menu .optionLabel {
+  flex: 1;
+}
+.check {
+  display: flex;
+  align-items: center;
+  flex: none;
+  color: var(--ds-primary);
+}
+.menu .option:where([data-tone]) .check {
+  color: inherit;
+}
+
+.helper,
+.error {
+  margin: 0;
+  font-size: var(--type-disclaimer);
+}
+.helper {
+  color: var(--ds-text-3);
+}
+.error {
+  color: var(--ds-error);
+}
+
+@media (max-width: 768px) {
+  .trigger {
+    font-size: 16px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu,
+  .spinner {
+    animation: none;
+  }
+}

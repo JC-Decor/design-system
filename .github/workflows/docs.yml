@@ -28,7 +28,7 @@ jobs:
 
       - run: npm ci
 
-      - name: Testes das bibliotecas (React e Vue)
+      - name: Testes das bibliotecas (React, Vue e Connect)
         run: npm test
 
       - name: Typecheck
@@ -38,6 +38,14 @@ jobs:
         run: npm run build -w docs
         env:
           BASE_PATH: /${{ github.event.repository.name }}/
+
+      - name: Build do docs do Connect (em /connect/)
+        run: npm run build -w connect-docs
+        env:
+          BASE_PATH: /${{ github.event.repository.name }}/connect/
+
+      - name: Junta os dois sites
+        run: node scripts/merge-connect-docs.mjs
 
       - uses: actions/upload-pages-artifact@v3
         with:

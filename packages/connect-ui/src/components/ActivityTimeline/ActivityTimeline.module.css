@@ -1,0 +1,50 @@
+/* .timeline / .tl-* */
+.root {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.row {
+  display: flex;
+  gap: 14px;
+}
+.side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.line {
+  width: 2px;
+  flex: 1;
+  background: var(--ds-border-soft);
+  margin-top: 4px;
+}
+.row:last-child .line {
+  display: none;
+}
+.body {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 0 16px;
+}
+.text {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ds-text-2);
+}
+.text b {
+  font-weight: 600;
+  color: var(--ds-text);
+}
+.badge {
+  margin-left: 4px;
+  vertical-align: baseline;
+}
+.meta {
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ds-text-3);
+}

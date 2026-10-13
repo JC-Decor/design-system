@@ -1,0 +1,60 @@
+/* Base global do DS Connect JC (equivalente ao bloco base do globals.css do Connect). */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+::selection {
+  background: rgba(7, 1, 107, 0.18);
+}
+body {
+  text-rendering: optimizeLegibility;
+}
+/* Barra de rolagem fina do Connect */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ds-text-4) transparent;
+}
+:focus-visible {
+  outline-color: var(--ds-primary);
+}
+
+/* Grid do painel: desktop 12col/20/28 · tablet (<1100) 8col/20/22 · mobile (<768) 4col/16/16.
+   :root:root vence a especificidade das variáveis injetadas pelo MantineProvider. */
+@media (max-width: 1099.98px) {
+  :root:root { --grid-margin: 22px; }
+}
+@media (max-width: 767.98px) {
+  :root:root { --grid-margin: 16px; --grid-gap: 16px; }
+}
+
+/* Densidade (`.density-*` do Connect): ajusta --cn-pad usado por cards e seções */
+.cn-density-compact { --cn-pad: 16px; }
+.cn-density-regular { --cn-pad: 22px; }
+.cn-density-comfy { --cn-pad: 28px; }
+
+/* Utilitários de container/grid do Connect (opcionais) */
+.ds-container {
+  max-width: var(--grid-max);
+  margin-inline: auto;
+  padding-inline: var(--grid-margin);
+  box-sizing: content-box;
+}
+.ds-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--grid-gap);
+}
+@media (max-width: 1099.98px) {
+  .ds-grid { grid-template-columns: repeat(8, 1fr); }
+}
+@media (max-width: 767.98px) {
+  .ds-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Tooltip dos gráficos (@mantine/charts) sobre a superfície do tema */
+.mantine-ChartTooltip-tooltip {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border-soft);
+  box-shadow: var(--ds-shadow-md);
+  border-radius: var(--ds-radius-sm);
+}

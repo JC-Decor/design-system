@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["vite/client"],
+    "noUnusedLocals": false,
+    "paths": {
+      "@jcdecor/connect-ui": ["../../packages/connect-ui/src/index.ts"],
+      "@jcdecor/connect-ui/tokens": ["../../packages/connect-ui/src/tokens.ts"]
+    }
+  },
+  "include": ["src", "vite.config.ts", "../../packages/connect-ui/src/css-modules.d.ts"]
+}

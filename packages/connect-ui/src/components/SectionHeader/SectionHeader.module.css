@@ -1,0 +1,61 @@
+/* .section-header (motion.css) */
+.root {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+.copy {
+  flex: 1;
+  min-width: 0;
+}
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--ds-text);
+}
+.root[data-compact] .title {
+  font-size: 17px;
+}
+.description {
+  margin: 5px 0 0;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--ds-text-3);
+}
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+.illustration {
+  flex: none;
+  max-height: 78px;
+  object-fit: contain;
+}
+.root[data-compact] .illustration {
+  max-height: 54px;
+}
+@media (max-width: 760px) {
+  .root {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .actions {
+    width: 100%;
+    justify-content: flex-start;
+    margin-left: 0;
+  }
+  .illustration {
+    display: none;
+  }
+}

@@ -1,0 +1,88 @@
+/* SHELL do Connect (.screen/.main/.content + gaveta mobile) */
+.root {
+  background: var(--ds-bg);
+  color: var(--ds-text);
+}
+
+.navbar {
+  border: 0;
+  background: var(--cn-navy);
+  overflow: hidden;
+}
+/* Gaveta: largura limitada (não 100% como no Mantine) e sombra ao abrir */
+.root[data-drawer] .navbar {
+  --app-shell-navbar-width: min(280px, 88vw);
+  width: min(280px, 88vw);
+  z-index: 300;
+  transition: transform 0.24s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.24s ease;
+}
+.root[data-nav-open] .navbar {
+  box-shadow: 6px 0 40px rgba(0, 0, 0, 0.28);
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 299;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: var(--ds-overlay);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  opacity: 0;
+  pointer-events: none;
+  cursor: pointer;
+  transition: opacity var(--cn-t);
+}
+.root[data-nav-open] .backdrop {
+  opacity: 1;
+  pointer-events: auto;
+}
+/* Em mode="static" (prévia dentro de uma caixa) a gaveta e o fundo ficam presos à caixa */
+.root[data-mode='static'] .backdrop,
+.root[data-mode='static'][data-drawer] .navbar {
+  position: absolute;
+}
+.root[data-mode='static'][data-drawer] .navbar {
+  top: 0;
+  bottom: 0;
+  height: 100%;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--ds-bg);
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 24px 32px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+@media (max-width: 1024px) {
+  .content {
+    padding: 20px 22px 30px;
+    gap: 18px;
+  }
+}
+@media (max-width: 640px) {
+  .content {
+    padding: 16px 12px 24px;
+    gap: 14px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .root[data-drawer] .navbar,
+  .backdrop {
+    transition: none;
+  }
+}

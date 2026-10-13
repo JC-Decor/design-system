@@ -1,0 +1,51 @@
+/* .dd-menu do Connect: superfície, borda --line, raio 10, sombra 2, padding 4 */
+.dropdown {
+  min-width: 180px;
+  padding: 4px;
+  border-radius: var(--ds-radius-sm);
+  background-color: var(--ds-surface);
+  border-color: var(--ds-border-soft);
+  box-shadow: var(--ds-shadow-md);
+}
+
+/* .dd-item: 8px 10px, 13px/500, ink-2, raio 8; hover/foco em --bg-2 */
+.item {
+  gap: 8px;
+  padding: 8px 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ds-text-2);
+  border-radius: 8px;
+  transition: background-color 100ms;
+}
+.item:where([data-hovered]) {
+  background-color: var(--ds-surface-2);
+  color: var(--ds-text);
+}
+.item:where([data-disabled]) {
+  opacity: 0.48;
+}
+/* .dd-item-danger: coral; hover no tom coral */
+.item:where([data-tone='danger']) {
+  color: var(--cn-tone-coral-fg);
+}
+.item:where([data-tone='danger'][data-hovered]) {
+  background-color: var(--cn-tone-coral-bg);
+  color: var(--cn-tone-coral-fg);
+}
+.section {
+  margin: 0;
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.separator {
+  margin: 4px 0;
+  border-color: var(--ds-border-soft);
+}

@@ -1,0 +1,124 @@
+/* .empty — estado vazio simples */
+.simple {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 36px;
+  gap: 8px;
+}
+.simpleIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: var(--cn-tone-lavender-soft);
+  color: var(--ds-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+.simpleTitle {
+  font-size: var(--type-headline-sm);
+  font-weight: 700;
+  color: var(--ds-text);
+}
+.simpleDesc {
+  font-size: 13px;
+  color: var(--ds-text-3);
+  max-width: 40ch;
+  text-wrap: pretty;
+}
+.simple .actions {
+  justify-content: center;
+  margin-top: 8px;
+}
+
+/* .empty-illustrated (motion.css) */
+.illustrated {
+  display: grid;
+  grid-template-columns: clamp(64px, 30%, 180px) minmax(0, 1fr);
+  align-items: center;
+  gap: 22px;
+  width: 100%;
+  padding: 26px;
+  border-radius: var(--ds-radius);
+}
+.illustrated[data-variant='card'] {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border-soft);
+  box-shadow: var(--ds-shadow-sm);
+}
+.illustrated[data-variant='full'] {
+  min-height: 360px;
+  place-content: center;
+  justify-items: center;
+  text-align: center;
+  grid-template-columns: minmax(0, 420px);
+}
+.illustrated[data-variant='compact'] {
+  grid-template-columns: clamp(48px, 22%, 76px) minmax(0, 1fr);
+  gap: 14px;
+  padding: 16px;
+}
+.art {
+  width: 100%;
+  max-height: 190px;
+  object-fit: contain;
+  justify-self: center;
+}
+.illustrated[data-variant='compact'] .art { max-height: 76px; }
+.illustrated[data-variant='full'] .art { max-height: 220px; }
+
+/* Sem ilustração: ícone do módulo num bloco tonal no lugar da arte */
+.artIcon {
+  justify-self: center;
+  display: grid;
+  place-items: center;
+  width: min(100%, 120px);
+  aspect-ratio: 1;
+  border-radius: 28px;
+  background: linear-gradient(140deg, var(--cn-tone-lavender-bg), var(--cn-tone-blue-soft));
+  color: var(--ds-primary);
+}
+.illustrated[data-variant='compact'] .artIcon {
+  width: min(100%, 64px);
+  border-radius: 18px;
+}
+.copyTitle {
+  margin: 0;
+  color: var(--ds-text);
+  font-size: var(--type-headline-md);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.illustrated[data-variant='compact'] .copyTitle {
+  font-size: 15px;
+}
+.copyDesc {
+  margin: 7px 0 0;
+  color: var(--ds-text-3);
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+.illustrated[data-variant='full'] .actions {
+  justify-content: center;
+}
+@media (max-width: 760px) {
+  .illustrated,
+  .illustrated[data-variant='compact'] {
+    grid-template-columns: 1fr;
+    text-align: center;
+    justify-items: center;
+  }
+  .art { max-height: 150px; }
+  .actions { justify-content: center; }
+}

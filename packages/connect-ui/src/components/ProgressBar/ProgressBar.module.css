@@ -1,0 +1,35 @@
+/* .pbar: trilho --bg-2 sem contorno */
+:root[data-mantine-color-scheme] .bar.bar {
+  background-color: var(--ds-surface-2);
+  box-shadow: none;
+}
+.fill {
+  transition: width var(--cn-t-slow);
+}
+
+/* .ring */
+.ring {
+  flex: none;
+}
+.ringLabel {
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* .pillbar */
+.segments {
+  display: flex;
+  gap: 2px;
+  width: 100%;
+}
+.segment {
+  height: 100%;
+  min-width: 4px;
+  border-radius: 4px;
+  transition: transform var(--cn-t);
+}
+@media (hover: hover) {
+  .segment:hover {
+    transform: scaleY(1.4);
+  }
+}

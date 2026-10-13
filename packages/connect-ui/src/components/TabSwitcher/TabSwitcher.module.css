@@ -1,0 +1,13 @@
+/* .ptb-chips */
+.root {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.root[data-size='sm'] {
+  gap: 6px;
+}
+.root[data-size='sm'] .tab {
+  padding: 5px 10px;
+  font-size: 12px;
+}

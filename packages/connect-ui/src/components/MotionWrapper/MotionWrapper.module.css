@@ -1,0 +1,57 @@
+/* .motion (motion.css do Connect) */
+.motion {
+  animation-duration: var(--motion-duration, 180ms);
+  animation-delay: var(--motion-delay, 0ms);
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.motion[data-motion='fade'] { animation-name: cnMotionFade; }
+.motion[data-motion='slideUp'] { animation-name: cnMotionSlideUp; }
+.motion[data-motion='scale'] {
+  animation-name: cnMotionScale;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+.motion[data-motion='expand'] {
+  overflow: hidden;
+  transform-origin: top;
+  animation-name: cnMotionExpand;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes cnMotionFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes cnMotionSlideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes cnMotionScale {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes cnMotionExpand {
+  from { opacity: 0; transform: scaleY(0.97); }
+  to { opacity: 1; transform: scaleY(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .motion { animation: none !important; }
+}
+
+/* .animated-section */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.body {
+  min-width: 0;
+}
+.illustration {
+  align-self: flex-end;
+  max-height: 96px;
+}

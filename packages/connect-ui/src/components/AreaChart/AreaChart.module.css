@@ -1,0 +1,139 @@
+/* .chart-wrap / .chart */
+.wrap {
+  position: relative;
+  width: 100%;
+}
+.chart {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+  touch-action: manipulation;
+  font-family: var(--font-body);
+}
+.grid {
+  stroke: var(--ds-border-soft);
+}
+.axisY {
+  font-size: 10px;
+  fill: var(--ds-text-4);
+}
+.axisX {
+  font-size: 11px;
+  fill: var(--ds-text-3);
+}
+.mainLine {
+  stroke: var(--ac-primary);
+}
+.mainDot {
+  fill: var(--ds-surface);
+  stroke: var(--ac-primary);
+  transition: r var(--cn-t);
+}
+.secLine {
+  stroke: var(--ac-secondary);
+  stroke-opacity: 0.7;
+}
+.secDot {
+  fill: var(--ds-surface);
+  stroke: var(--ac-secondary);
+  opacity: 0.85;
+}
+.crosshair {
+  stroke: var(--ac-primary);
+  stroke-opacity: 0.25;
+}
+
+/* .chart-tip */
+.tip {
+  position: absolute;
+  top: 8px;
+  transform: translateX(-50%);
+  min-width: 180px;
+  padding: 9px 11px;
+  font-size: 11.5px;
+  color: var(--ds-text-2);
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border-soft);
+  border-radius: 10px;
+  box-shadow: var(--ds-shadow-lg);
+  pointer-events: none;
+  animation: tipIn 0.12s ease-out;
+}
+@keyframes tipIn {
+  from { opacity: 0; transform: translate(-50%, -2px); }
+  to { opacity: 1; transform: translateX(-50%); }
+}
+.tipTitle {
+  margin-bottom: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ds-text-3);
+}
+.tipRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 1px 0;
+}
+.tipRow b {
+  color: var(--ds-text);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.tipRow[data-muted] {
+  color: var(--ds-text-3);
+  margin-top: 3px;
+  padding-top: 5px;
+  border-top: 1px dashed var(--ds-border-soft);
+}
+
+/* .legend / .lg-dot */
+.legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--ds-text-2);
+}
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 6px;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+.dot[data-series='main'] {
+  background: var(--ac-primary, var(--ds-primary));
+}
+.dot[data-series='sec'] {
+  background: transparent;
+  border: 1.5px dashed var(--ac-secondary, var(--cn-tone-coral-fg));
+}
+
+/* .select (seletor de período do MoveChart) */
+.period {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 11px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ds-text-2);
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border-soft);
+  border-radius: 9px;
+  transition: background var(--cn-t), color var(--cn-t);
+}
+@media (hover: hover) {
+  .period:hover {
+    background: var(--ds-surface-2);
+    color: var(--ds-text);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tip { animation: none; }
+}

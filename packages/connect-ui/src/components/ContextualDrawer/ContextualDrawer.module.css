@@ -1,0 +1,89 @@
+/*
+ * Painel lateral flutuante do Connect (.drawer-panel, motion.css): ocupa a tela quase inteira e deixa
+ * uma folga (--cn-overlay-gap) para a página de trás continuar visível. Os três tokens abaixo
+ * (--overlay-gap/-w/-h do tokens.css) são o único ponto de ajuste do tamanho.
+ */
+.root {
+  --cn-overlay-gap: min(4vw, 48px);
+  --cn-overlay-w: calc(100dvw - 2 * var(--cn-overlay-gap));
+  --cn-overlay-h: calc(100dvh - 2 * var(--cn-overlay-gap));
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--ds-surface);
+  border: 1px solid var(--ds-border-soft);
+  border-radius: var(--ds-radius-lg);
+  box-shadow: 0 20px 60px rgba(20, 24, 60, 0.18);
+}
+:where([data-mantine-color-scheme='dark']) .content {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 22px 16px;
+  border-bottom: 1px solid var(--ds-border-soft);
+}
+.title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--ds-text);
+}
+.description {
+  margin: 5px 0 0;
+  max-width: 80ch;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--ds-text-3);
+}
+.close {
+  flex: none;
+}
+
+.body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  overflow-anchor: none;
+  padding: 20px 22px;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 22px;
+  border-top: 1px solid var(--ds-border-soft);
+  background-color: var(--ds-surface-tint);
+}
+
+@media (max-width: 760px) {
+  .content {
+    border-radius: 16px;
+  }
+  .header,
+  .body,
+  .footer {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .footer {
+    flex-direction: column-reverse;
+  }
+  .footer > * {
+    width: 100%;
+  }
+  .close {
+    width: 44px;
+    height: 44px;
+  }
+}

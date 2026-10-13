@@ -1,0 +1,388 @@
+/*
+ * SIDEBAR do Connect (.sb-*): sempre navy (também no tema escuro), texto branco translúcido.
+ * --sb-bg aceita cor ou gradiente (prop `primary`).
+ */
+.root {
+  --sb-bg: var(--cn-navy);
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: none;
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 100%;
+  padding: 22px 14px 18px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  color: #fff;
+  background: var(--sb-bg);
+  font-family: var(--font-body);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+}
+.item,
+.child,
+.close,
+.personaButton {
+  font: inherit;
+  background: none;
+  border: 0;
+  margin: 0;
+  cursor: pointer;
+}
+.root button:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 1px;
+}
+
+/* Textura: dois brilhos radiais sobre o navy */
+.grain {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 60% at 100% 0%, rgba(255, 255, 255, 0.06), transparent 60%),
+    radial-gradient(80% 40% at 0% 100%, rgba(255, 255, 255, 0.04), transparent 70%);
+}
+
+/* Marca */
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 8px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.brandDefault {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.mark {
+  width: 38px;
+  height: 38px;
+  flex: none;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.06));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+.brandName {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+  line-height: 1.1;
+}
+.brandNameStrong {
+  margin-top: 3px;
+  font-size: 15px;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+}
+.close {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.85);
+  transition: background-color var(--cn-t);
+}
+.close:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Pílula da perspectiva */
+.persona {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 8px;
+  padding: 6px 11px;
+  width: fit-content;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  font-size: var(--type-disclaimer);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.92);
+}
+.personaButton {
+  width: 100%;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.92);
+  text-align: left;
+  transition: background-color 0.15s;
+}
+.personaButton:hover,
+.personaButton[data-open] {
+  background: rgba(255, 255, 255, 0.16);
+}
+.personaDot {
+  width: 7px;
+  height: 7px;
+  flex: none;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.18);
+}
+.personaLabel {
+  flex: 1;
+}
+.personaChevron {
+  opacity: 0.65;
+  transition: transform 0.2s;
+}
+.personaChevron[data-expanded] {
+  transform: rotate(180deg);
+}
+
+/* Seletor de perspectiva (menu claro sobre a sidebar) */
+.switchWrap {
+  position: relative;
+  padding: 0 8px;
+}
+.switchMenu {
+  padding: 4px;
+  border-radius: 14px;
+  background: var(--ds-surface);
+  border: 0;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+:where([data-mantine-color-scheme='dark']) .switchMenu {
+  box-shadow: var(--ds-shadow-lg), 0 0 0 1px var(--ds-border-soft);
+}
+.switchOption {
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: var(--ds-radius-sm);
+  font-size: var(--type-subheadline-sm);
+  font-weight: 500;
+  color: var(--ds-text-2);
+}
+.switchOption:where([data-hovered]) {
+  background: var(--ds-surface-2);
+}
+.switchOption:where([data-active]) {
+  color: var(--ds-primary);
+  font-weight: 700;
+  background: var(--cn-tone-lavender-soft);
+}
+.switchAvatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.switchCheck {
+  color: var(--ds-primary);
+}
+
+/* Navegação */
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 0 4px;
+}
+.divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 12px 8px;
+}
+
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--ds-radius-sm);
+  color: rgba(255, 255, 255, 0.72);
+  font-size: var(--type-subheadline-rg);
+  font-weight: 500;
+  text-align: left;
+  transition: background-color var(--cn-t), color var(--cn-t);
+}
+.item:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+}
+.item[data-active] {
+  background: rgba(255, 255, 255, 0.13);
+  color: #fff;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+.item[data-active-soft] {
+  color: rgba(255, 255, 255, 0.92);
+}
+/* Indicador branco à esquerda do item ativo */
+.indicator {
+  position: absolute;
+  left: -14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  border-radius: 0 3px 3px 0;
+  background: #fff;
+  transition: height var(--cn-t-slow);
+}
+.item[data-active] .indicator {
+  height: 18px;
+}
+.itemLabel {
+  flex: 1;
+  min-width: 0;
+}
+.groupChevron {
+  margin-left: auto;
+  opacity: 0.55;
+  transition: transform 0.2s;
+}
+.groupChevron[data-expanded] {
+  transform: rotate(180deg);
+}
+
+.children {
+  display: flex;
+  flex-direction: column;
+  padding: 2px 0 4px 14px;
+  margin-left: 18px;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  animation: sbChildren 0.2s ease-out;
+}
+@keyframes sbChildren {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.child {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 10px;
+  font-size: var(--type-subheadline-sm);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  text-align: left;
+  transition: background-color var(--cn-t), color var(--cn-t);
+}
+.child:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+.child[data-active] {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+.childDot {
+  width: 5px;
+  height: 5px;
+  flex: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+}
+.child[data-active] .childDot {
+  background: #fff;
+}
+
+/* Selo/contador à direita do item */
+.badge {
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--cn-coral-500);
+  color: #fff;
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Rodapé com arte de círculos */
+.foot {
+  margin-top: auto;
+  position: relative;
+  padding: 14px 10px 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+.footArt {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 80px;
+  pointer-events: none;
+}
+.footLabel {
+  font-size: var(--type-disclaimer);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.01em;
+}
+.footCopy {
+  font-size: 10.5px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 3px;
+  font-family: var(--font-mono);
+}
+
+/* Gaveta (mobile) */
+.root[data-drawer] {
+  width: 100%;
+  padding: max(12px, env(safe-area-inset-top)) 10px max(12px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left));
+}
+.root[data-drawer] .children {
+  margin-left: 18px;
+  padding-left: 14px;
+}
+
+@media (max-width: 768px) {
+  .item,
+  .child {
+    min-height: 44px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .children {
+    animation: none;
+  }
+}

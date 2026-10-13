@@ -1,0 +1,49 @@
+/* .skeleton-block e variantes (motion.css do Connect) */
+.root {
+  width: 100%;
+}
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+.inner:where([data-variant='card'], [data-variant='table'], [data-variant='profile'], [data-variant='chart']) {
+  padding: 18px;
+  border: 1px solid var(--ds-border-soft);
+  border-radius: var(--ds-radius);
+  background: var(--ds-surface);
+}
+.inner[data-variant='table'] {
+  padding: 16px;
+}
+.inner[data-variant='profile'] {
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+.inner[data-variant='chart'] {
+  min-height: 220px;
+  padding: 22px;
+}
+.lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.bars {
+  height: 176px;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+.bar {
+  flex: 1;
+  min-height: 28px;
+}
+.bar,
+.bar::before,
+.bar::after {
+  border-radius: 10px 10px 4px 4px;
+}
