@@ -42,7 +42,7 @@ export const ramps: Record<RampName, Ramp> = {
 export const darkNeutrals = ['#F1F5F9', '#E2E8F0', '#B0BCC9', '#94A3B8', '#334155', '#2D3748', '#1E293B', '#0B1120', '#080D19', '#04070F'] as const;
 
 /** Tons do Connect (avatares, chips, ícones de KPI, badges). `bg` = fundo, `fg` = texto/ícone, `soft` = fundo mais claro. */
-export type ToneName = 'blue' | 'lavender' | 'green' | 'yellow' | 'coral' | 'ink';
+export type ToneName = 'navy' | 'blue' | 'lavender' | 'green' | 'yellow' | 'coral' | 'ink';
 export interface ToneValue {
   bg: string;
   fg: string;
@@ -51,6 +51,8 @@ export interface ToneValue {
   color: RampName;
 }
 export const tones: Record<ToneName, ToneValue> = {
+  /** Primária (chips/tags ativos no navy suave do Connect) */
+  navy: { bg: '#E6E5F4', fg: '#07016B', soft: '#F3F2FA', color: 'navy' },
   blue: { bg: '#E4ECFB', fg: '#1E3A8A', soft: '#F1F5FE', color: 'blue' },
   lavender: { bg: '#EAE5FB', fg: '#4B3DB8', soft: '#F4F1FE', color: 'lavender' },
   green: { bg: '#DDEFE2', fg: '#216A3E', soft: '#EEF7F0', color: 'green' },
@@ -149,6 +151,7 @@ export const semantic = {
 
 /** Tons no tema escuro (fundos translúcidos do dark-overrides.css + texto claro do tom). */
 export const darkTones: Record<ToneName, { bg: string; fg: string; soft: string }> = {
+  navy: { bg: 'rgba(129,140,248,.20)', fg: '#C7D2FE', soft: 'rgba(129,140,248,.10)' },
   blue: { bg: 'rgba(96,165,250,.18)', fg: '#93C5FD', soft: 'rgba(96,165,250,.10)' },
   lavender: { bg: 'rgba(155,147,245,.22)', fg: '#C4B5FD', soft: 'rgba(155,147,245,.12)' },
   green: { bg: 'rgba(52,211,153,.16)', fg: '#6EE7B7', soft: 'rgba(52,211,153,.08)' },

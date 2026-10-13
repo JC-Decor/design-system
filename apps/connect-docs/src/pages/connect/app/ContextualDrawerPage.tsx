@@ -66,10 +66,13 @@ export default function ContextualDrawerPage() {
             { name: 'header', type: 'ReactNode', description: 'Substitui o cabeçalho padrão.' },
             { name: 'children', type: 'ReactNode', required: true, description: 'Corpo rolável (padding 20/22).' },
             { name: 'footer', type: 'ReactNode', description: 'Rodapé fixo com as ações.' },
-            { name: 'size', type: "'sm' | 'md' | 'lg' | 'xl'", default: "'md'", description: 'sm = até 360px; demais = --cn-overlay-w.' },
+            { name: 'size', type: "'sm' | 'md' | 'lg' | 'xl' | number | string", default: "'md'", description: 'sm = até 360px; demais = --cn-overlay-w.' },
             { name: 'side', type: "'right' | 'left'", default: "'right'", description: 'Lado de entrada.' },
             { name: 'className / bodyClassName', type: 'string', description: 'Classes do painel e do corpo.' },
             { name: 'closeLabel', type: 'string', default: "'Fechar painel'", description: 'aria-label do botão de fechar.' },
+            { name: 'withCloseButton', type: 'boolean', default: 'true sem header · false com header', description: 'Mostra o fechar; com header próprio ele flutua no canto superior direito.' },
+            { name: 'bodyPadding', type: 'number | string', description: 'Padding do corpo; 0 remove.' },
+            { name: 'footerClassName', type: 'string', description: 'Classe extra do rodapé.' },
             { name: '...DrawerRootProps', type: 'DrawerRootProps', description: 'Demais props do Drawer.Root (zIndex, trapFocus, returnFocus…).' },
           ]}
         />

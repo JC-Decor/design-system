@@ -2,6 +2,7 @@ import { Avatar, Box, type AvatarProps, type BoxProps, type ElementProps } from 
 import clsx from 'clsx';
 import type { ToneName } from '../../theme/tokens';
 import { resolveTone, toneStyle } from '../../utils/tone';
+import { useAvatarSrc } from '../../utils/avatar';
 import classes from './PersonAvatar.module.css';
 
 export interface PersonAvatarProps extends Omit<AvatarProps, 'size' | 'color' | 'variant' | 'children'>, Omit<ElementProps<'div'>, 'color'> {
@@ -22,9 +23,10 @@ export interface PersonAvatarProps extends Omit<AvatarProps, 'size' | 'color' | 
 /** Avatar do Connect: iniciais sobre gradiente do tom (ou foto), com anel opcional. Avatar do Mantine por baixo. */
 export function PersonAvatar({ size = 36, seed = 'A', tone = 'blue', ring = false, src, alt, className, style, ...others }: PersonAvatarProps) {
   const t = resolveTone(tone);
+  const resolvedSrc = useAvatarSrc(src);
   return (
     <Avatar
-      src={src || null}
+      src={resolvedSrc}
       alt={alt ?? seed}
       size={size}
       radius="xl"

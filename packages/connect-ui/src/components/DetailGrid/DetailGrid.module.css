@@ -1,0 +1,31 @@
+/* .wf-preview-grid do Connect */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(var(--dg-min, 240px), 100%), 1fr));
+  gap: 12px;
+  min-width: 0;
+}
+.item {
+  min-width: 0;
+}
+.item[data-span='full'] {
+  grid-column: 1 / -1;
+}
+.label {
+  display: block;
+  color: var(--ds-text-3);
+  font-size: 12px;
+}
+.value {
+  display: block;
+  margin-top: 3px;
+  color: var(--ds-text);
+  font-size: 14px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.hint {
+  display: block;
+  color: var(--ds-text-3);
+  font-size: 12px;
+}

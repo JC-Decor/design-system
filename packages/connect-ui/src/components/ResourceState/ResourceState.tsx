@@ -1,4 +1,4 @@
-import { Button, Card, type CardProps } from '@mantine/core';
+import { Button, Card, useMantineTheme, type CardProps } from '@mantine/core';
 import { IconRefresh } from '@tabler/icons-react';
 import { EmptyStatePanel } from '../EmptyStatePanel';
 import { SkeletonBlock, type SkeletonBlockVariant } from '../SkeletonBlock';
@@ -72,7 +72,7 @@ export interface ResourceStateProps<T> {
   emptyTitle?: string;
   /** @default 'Quando houver dados disponíveis, eles aparecerão aqui.' */
   emptyDescription?: string;
-  /** Converte o erro em textos pt-BR @default describeResourceError */
+  /** Converte o erro em textos pt-BR @default theme.other.formatResourceError ?? describeResourceError */
   formatError?: (error: unknown) => ResourceErrorInfo;
   /** Props do Card que envolve o esqueleto */
   loadingCardProps?: CardProps;
@@ -91,10 +91,11 @@ export function ResourceState<T>({
   loadingRows = 3,
   emptyTitle = 'Nenhum dado encontrado',
   emptyDescription = 'Quando houver dados disponíveis, eles aparecerão aqui.',
-  formatError = describeResourceError,
+  formatError,
   loadingCardProps,
   children,
 }: ResourceStateProps<T>) {
+  const theme = useMantineTheme();
   if (isLoading) {
     return (
       <Card {...loadingCardProps}>
@@ -104,7 +105,7 @@ export function ResourceState<T>({
   }
 
   if (error) {
-    const info = formatError(error);
+    const info = (formatError ?? theme.other.formatResourceError ?? describeResourceError)(error);
     return (
       <EmptyStatePanel
         variant={info.blocked ? 'permission' : 'error'}

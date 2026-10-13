@@ -17,6 +17,7 @@ import { DropdownMenu, type DropdownMenuEntry } from '../DropdownMenu';
 import type { GlobalSearchBoxProps } from '../GlobalSearchBox';
 import { Icon } from '../Icon';
 import { ThemeToggle } from '../ThemeToggle';
+import { useAvatarSrc } from '../../utils/avatar';
 import classes from './AppHeader.module.css';
 
 export interface HeaderActionProps extends Omit<ComponentPropsWithRef<'button'>, 'children'> {
@@ -82,12 +83,13 @@ export interface AppHeaderProps {
 
 function UserChipContent({ user, withMenu }: { user?: UserConfig; withMenu: boolean }) {
   const tone = user?.tone ?? 'lavender';
+  const src = useAvatarSrc(user?.picture);
   return (
     <>
       <Avatar
         size={36}
         radius="xl"
-        src={user?.picture}
+        src={src}
         alt={user?.name ?? 'Usuário'}
         variant="light"
         color={tones[tone].color}

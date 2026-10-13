@@ -59,13 +59,14 @@ export function ConfirmDialog({
       centered
       closeOnClickOutside={!loading}
       closeOnEscape={!loading}
+      classNames={{ content: clsx(classes.content, className) }}
       {...others}
     >
       <Modal.Overlay />
-      <Modal.Content className={clsx(classes.content, className)}>
+      <Modal.Content>
         <Modal.Body className={classes.body}>
           <Modal.Title className={classes.title}>{title}</Modal.Title>
-          {description && <p className={classes.desc}>{description}</p>}
+          {description && <div className={classes.desc}>{description}</div>}
           {children}
           <div className={classes.footer}>
             <Button variant="outline" onClick={() => onOpenChange(false)} disabled={loading} data-autofocus>

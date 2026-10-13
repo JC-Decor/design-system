@@ -2,6 +2,7 @@ import type { CSSProperties, ReactNode } from 'react';
 import { Avatar } from '@mantine/core';
 import clsx from 'clsx';
 import { tones, type ToneName } from '../../theme/tokens';
+import { useAvatarSrc } from '../../utils/avatar';
 import { Icon } from '../Icon';
 import classes from './DataTable.module.css';
 
@@ -23,9 +24,10 @@ export interface CellPersonProps {
 
 /** Célula de pessoa (`.cell-person`): avatar + nome + cargo. */
 export function CellPerson({ name, role, seed, tone = 'lavender', src, avatarSize = 32, className, style }: CellPersonProps) {
+  const resolvedSrc = useAvatarSrc(src);
   return (
     <div className={clsx(classes.cellPerson, className)} style={style}>
-      <Avatar size={avatarSize} radius="xl" src={src} variant="light" color={tones[tone].color} className={classes.cellAvatar}>
+      <Avatar size={avatarSize} radius="xl" src={resolvedSrc} variant="light" color={tones[tone].color} className={classes.cellAvatar}>
         {seed}
       </Avatar>
       <div className={classes.cellText}>

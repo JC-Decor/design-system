@@ -1,15 +1,11 @@
 /*
  * Painel lateral flutuante do Connect (.drawer-panel, motion.css): ocupa a tela quase inteira e deixa
- * uma folga (--cn-overlay-gap) para a página de trás continuar visível. Os três tokens abaixo
- * (--overlay-gap/-w/-h do tokens.css) são o único ponto de ajuste do tamanho.
+ * uma folga (--cn-overlay-gap) para a página de trás continuar visível. O tamanho vem dos tokens globais
+ * --cn-overlay-gap/-w/-h (cssVariablesResolver), compartilhados com o FormModal.
  */
-.root {
-  --cn-overlay-gap: min(4vw, 48px);
-  --cn-overlay-w: calc(100dvw - 2 * var(--cn-overlay-gap));
-  --cn-overlay-h: calc(100dvh - 2 * var(--cn-overlay-gap));
-}
 
 .content {
+  position: relative;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -47,6 +43,12 @@
 }
 .close {
   flex: none;
+}
+.floatingClose {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 1;
 }
 
 .body {

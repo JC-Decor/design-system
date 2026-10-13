@@ -1,0 +1,30 @@
+/*
+ * .wf-form-grid / .scl-modal-body do Connect. Por padrão tudo ocupa a linha inteira (títulos de seção,
+ * listas, dicas); só os campos simples (InputWrapper do Mantine) se distribuem em colunas, e campos de
+ * texto longo voltam a ocupar a linha inteira.
+ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(var(--fg-min, 240px), 100%), 1fr));
+  align-content: start;
+  gap: var(--fg-gap, 12px);
+  min-width: 0;
+}
+.grid > * {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+.grid > :global(.mantine-InputWrapper-root),
+.grid > :global(.mantine-Checkbox-root),
+.grid > :global(.mantine-Switch-root) {
+  grid-column: auto;
+}
+.grid > :global(.mantine-InputWrapper-root):has(textarea, [contenteditable]) {
+  grid-column: 1 / -1;
+}
+.grid > [data-span='auto'] {
+  grid-column: auto;
+}
+.grid > [data-span='full'] {
+  grid-column: 1 / -1;
+}

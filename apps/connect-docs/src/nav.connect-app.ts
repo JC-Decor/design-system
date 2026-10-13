@@ -16,6 +16,8 @@ export const connectAppPages: NavItem[] = [
   p('/componentes/confirm-dialog', 'ConfirmDialog', () => import('./pages/connect/app/ConfirmDialogPage'), ['confirmação', 'modal', 'diálogo']),
   p('/componentes/prompt-dialog', 'PromptDialog', () => import('./pages/connect/app/PromptDialogPage'), ['prompt', 'renomear', 'diálogo']),
   p('/componentes/contextual-drawer', 'ContextualDrawer', () => import('./pages/connect/app/ContextualDrawerPage'), ['drawer', 'painel lateral', 'gaveta']),
+  p('/componentes/form-modal', 'FormModal', () => import('./pages/connect/app/FormModalPage'), ['modal', 'formulário', 'scl-modal', 'diálogo']),
+  p('/componentes/form-grid', 'FormGrid', () => import('./pages/connect/app/FormGridPage'), ['grade', 'formulário', 'wf-form-grid', 'campos']),
   p('/componentes/app-select', 'AppSelect', () => import('./pages/connect/app/AppSelectPage'), ['select', 'combobox', 'formulário']),
   p('/componentes/toast', 'Toast', () => import('./pages/connect/app/ToastPage'), ['notificação', 'aviso', 'toast']),
 ];

@@ -27,6 +27,10 @@
   border-color: transparent;
   font-weight: 600;
 }
+.root[data-active][data-variant='filled'] {
+  background: var(--tone-fg);
+  color: var(--ds-surface);
+}
 .root:focus-visible {
   outline: none;
   box-shadow: var(--ds-focus-ring);

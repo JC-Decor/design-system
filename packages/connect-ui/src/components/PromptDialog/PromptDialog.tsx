@@ -56,9 +56,16 @@ export function PromptDialog({
   }
 
   return (
-    <Modal.Root opened={open} onClose={() => onOpenChange(false)} size={size} centered {...others}>
+    <Modal.Root
+      opened={open}
+      onClose={() => onOpenChange(false)}
+      size={size}
+      centered
+      classNames={{ content: clsx(classes.content, className) }}
+      {...others}
+    >
       <Modal.Overlay />
-      <Modal.Content className={clsx(classes.content, className)}>
+      <Modal.Content>
         <Modal.Body className={classes.body}>
           <Modal.Title className={classes.title}>{title}</Modal.Title>
           {description && <p className={classes.desc}>{description}</p>}

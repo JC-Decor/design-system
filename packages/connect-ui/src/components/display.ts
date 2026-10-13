@@ -21,3 +21,5 @@ export * from './MetricRevealCard';
 export * from './SectionHeader';
 export * from './Hero';
 export * from './MotionWrapper';
+export * from './InlineNotice';
+export * from './DetailGrid';

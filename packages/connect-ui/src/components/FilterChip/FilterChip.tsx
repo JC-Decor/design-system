@@ -15,15 +15,18 @@ export interface FilterChipProps extends UnstyledButtonProps, Omit<ElementProps<
   icon?: string;
   /** Contador à direita (ex.: total de registros do filtro) */
   count?: number;
+  /** Visual quando ativo: `light` = fundo suave do tom · `filled` = fundo cheio (texto do tom) e texto claro @default 'light' */
+  variant?: 'light' | 'filled';
 }
 
 /** Chip de filtro do Connect (antigo `<Chip>`): botão pílula com ícone e contador; ativo assume o tom. */
-export function FilterChip({ children, tone = 'ink', active = false, icon, count, className, style, ...others }: FilterChipProps) {
+export function FilterChip({ children, tone = 'ink', active = false, icon, count, variant = 'light', className, style, ...others }: FilterChipProps) {
   const t = resolveTone(tone, 'ink');
   return (
     <UnstyledButton
       className={clsx(classes.root, className)}
       data-active={active || undefined}
+      data-variant={variant}
       aria-pressed={others.role ? undefined : active}
       style={[toneStyle(t), style]}
       {...others}

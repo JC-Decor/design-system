@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import {
   ActivityTimeline,
+  ConnectProvider,
   AlertsCard,
   AnimatedSection,
   AreaChart,
@@ -229,6 +230,18 @@ describe('ResourceState', () => {
     );
     expect(screen.getByText('Acesso restrito')).toBeInTheDocument();
     expect(screen.queryByText(/Tentar novamente/)).toBeNull();
+  });
+
+  it('usa o formatador de erro do tema quando não há formatError', () => {
+    render(
+      <ConnectProvider env="test" theme={{ other: { formatResourceError: () => ({ title: 'Erro do app', description: 'Texto do app' }) } }}>
+        <ResourceState isLoading={false} error={new Error('x')} data={undefined}>
+          {() => null}
+        </ResourceState>
+      </ConnectProvider>,
+    );
+    expect(screen.getByText('Erro do app')).toBeInTheDocument();
+    expect(screen.getByText('Texto do app')).toBeInTheDocument();
   });
 
   it('renderiza os dados', () => {

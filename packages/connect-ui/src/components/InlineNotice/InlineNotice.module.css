@@ -1,0 +1,51 @@
+/* .wf-notice do Connect */
+.root {
+  --notice-fg: var(--ds-primary);
+  --notice-bg: var(--ds-primary-tint);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 12px;
+  border: 1px solid color-mix(in srgb, var(--notice-fg) 14%, var(--ds-border-soft));
+  border-radius: var(--ds-radius-xs, 8px);
+  background: var(--notice-bg);
+  color: var(--notice-fg);
+  font-size: 13px;
+}
+.root[data-tone='success'] {
+  --notice-fg: var(--cn-tone-green-fg);
+  --notice-bg: var(--cn-tone-green-soft);
+}
+.root[data-tone='warning'] {
+  --notice-fg: var(--cn-tone-yellow-fg);
+  --notice-bg: var(--cn-tone-yellow-soft);
+}
+.root[data-tone='danger'] {
+  --notice-fg: var(--cn-tone-coral-fg);
+  --notice-bg: var(--cn-tone-coral-soft);
+}
+.root[data-tone='neutral'] {
+  --notice-fg: var(--ds-text-2);
+  --notice-bg: var(--ds-surface-2);
+}
+.icon {
+  flex: none;
+  margin-top: 1px;
+}
+.body {
+  min-width: 0;
+}
+.title {
+  display: block;
+  font-weight: 700;
+}
+.text {
+  color: var(--ds-text);
+  line-height: 1.45;
+}
+.title + .text {
+  margin-top: 4px;
+}
+.text > p {
+  margin: 0;
+}

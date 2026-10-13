@@ -100,6 +100,37 @@ import { connectTheme, connectCssVariablesResolver } from '@jcdecor/connect-ui';
 <MantineProvider theme={connectTheme} cssVariablesResolver={connectCssVariablesResolver}>…</MantineProvider>
 ```
 
+### Ajustes do app pelo tema (`theme.other`)
+
+```tsx
+<ConnectProvider
+  theme={{
+    other: {
+      // Textos de erro do app em todos os ResourceState
+      formatResourceError: (error) => ({ title, description, technical, blocked }),
+      // Foto dos avatares (PersonAvatar, CellPerson, AppHeader…) passando pelo proxy de mídia do app
+      resolveAvatarSrc: (src) => (src ? `/api/media/${src}` : null),
+      // Ilustrações servidas pelo próprio app
+      illustrationBaseUrl: '/illustrations/',
+    },
+  }}
+>
+```
+
+### Formulários e avisos
+
+```tsx
+<FormModal open={open} onOpenChange={setOpen} title="Novo setor" description="Dados do setor" onSubmit={salvar}
+  footer={<><Button variant="outline" onClick={() => setOpen(false)}>Cancelar</Button><Button type="submit">Salvar</Button></>}>
+  <TextInput label="Nome" withAsterisk />   {/* campos simples dividem colunas */}
+  <Textarea label="Descrição" />            {/* textos longos ocupam a linha */}
+</FormModal>
+
+<FormGrid>…</FormGrid>                                      {/* a mesma grade fora de um modal */}
+<InlineNotice tone="warning" title="Prazo próximo">Vence em 3 dias.</InlineNotice>
+<DetailGrid items={[{ label: 'Período', value: '04/11 a 18/11' }, { label: 'Motivo', value: 'Viagem', span: 'full' }]} />
+```
+
 ## Ilustrações
 
 As ilustrações do Connect (unDraw — uso livre, inclusive comercial, sem atribuição obrigatória) vêm no pacote e são usadas pelo nome,

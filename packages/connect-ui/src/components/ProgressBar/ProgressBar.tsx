@@ -12,6 +12,8 @@ export interface ProgressBarProps extends Omit<ProgressRootProps, 'size' | 'chil
   max?: number;
   /** Tom do preenchimento (usa o texto do tom) @default 'blue' */
   tone?: ToneName;
+  /** Cor CSS livre do preenchimento (ex.: `var(--ds-text-3)`); tem prioridade sobre `tone` */
+  color?: string;
   /** Altura em px @default 6 */
   size?: number;
   /** Rótulo acessível @default 'Progresso' */
@@ -19,12 +21,12 @@ export interface ProgressBarProps extends Omit<ProgressRootProps, 'size' | 'chil
 }
 
 /** Barra de progresso fina do Connect (`.pbar`): trilho surface-2 e preenchimento na cor do tom. Progress do Mantine por baixo. */
-export function ProgressBar({ value, max = 100, tone = 'blue', size = 6, className, 'aria-label': ariaLabel = 'Progresso', ...others }: ProgressBarProps) {
+export function ProgressBar({ value, max = 100, tone = 'blue', color, size = 6, className, 'aria-label': ariaLabel = 'Progresso', ...others }: ProgressBarProps) {
   const t = resolveTone(tone);
   const pct = pctOf(value, max);
   return (
     <Progress.Root size={size} radius="xl" className={clsx(classes.bar, className)} {...others}>
-      <Progress.Section value={pct} color={`var(--cn-tone-${t}-fg)`} aria-label={ariaLabel} className={classes.fill} />
+      <Progress.Section value={pct} color={color ?? `var(--cn-tone-${t}-fg)`} aria-label={ariaLabel} className={classes.fill} />
     </Progress.Root>
   );
 }

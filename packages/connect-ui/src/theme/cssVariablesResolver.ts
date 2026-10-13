@@ -59,6 +59,10 @@ function staticVars() {
     '--cn-t': `${motion.normal} ${motion.easeStandard}`,
     '--cn-t-slow': `${motion.slow} ${motion.easeStandard}`,
     '--cn-ease-emphasis': motion.easeEmphasis,
+    // Tamanho dos painéis/modais grandes (ContextualDrawer, FormModal): folga em volta e área útil
+    '--cn-overlay-gap': 'min(4vw, 48px)',
+    '--cn-overlay-w': 'calc(100dvw - 2 * var(--cn-overlay-gap))',
+    '--cn-overlay-h': 'calc(100dvh - 2 * var(--cn-overlay-gap))',
   };
   (Object.keys(brand) as (keyof typeof brand)[]).forEach((name) => {
     vars[`--cn-${name}`] = brand[name];
