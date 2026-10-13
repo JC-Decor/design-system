@@ -1,5 +1,4 @@
 import { Hero } from '@jcdecor/connect-ui';
-import ferias from '../cn-illustration/assets/ferias.svg';
 import type { DemoMeta } from '../../kit/demos';
 
 export const meta: DemoMeta = { background: 'page' };
@@ -12,7 +11,7 @@ export default function Demo() {
       title="21 dias disponíveis"
       sub="Seu período aquisitivo vence em março. Que tal já planejar?"
       ctaPrimary="Solicitar férias"
-      illustration={ferias}
+      illustration="dayOff"
     />
   );
 }

@@ -1,5 +1,4 @@
 import { Button, SectionHeader, Stack, Tag } from '@jcdecor/connect-ui';
-import equipe from '../cn-illustration/assets/equipe.svg';
 import type { DemoMeta } from '../../kit/demos';
 
 export default function Demo() {
@@ -14,10 +13,10 @@ export default function Demo() {
       <SectionHeader
         title="Minha equipe"
         description="12 pessoas · Comercial"
-        illustration={equipe}
+        illustration="meetTeam"
         actions={<Button variant="ghost">Ver organograma</Button>}
       />
-      <SectionHeader compact title="Documentos recentes" illustration={equipe} />
+      <SectionHeader compact title="Documentos recentes" illustration="document" />
     </Stack>
   );
 }

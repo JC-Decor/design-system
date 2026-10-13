@@ -33,11 +33,11 @@ export default function EmptyStatePanelPage() {
         <Demo id="cn-empty-state-panel/actions" />
       </Section>
       <Section title="Por módulo">
-        <P>Com <code>module</code> (ou <code>illustration</code>) usa o layout ilustrado em card; sem imagem, mostra o ícone do módulo num bloco tonal. <code>compact</code> reduz a arte.</P>
+        <P>Com <code>variant</code>, <code>module</code> ou <code>illustration</code> usa o layout ilustrado em card, com a arte padrão de cada variante/módulo (mesmo mapa do connect-jc). <code>illustration={'{false}'}</code> volta ao layout simples com ícone; <code>compact</code> reduz a arte.</P>
         <Demo id="cn-empty-state-panel/modules" />
       </Section>
       <Section title="EmptyStateIllustration">
-        <P>Layouts <code>default</code>, <code>card</code>, <code>compact</code> e <code>full</code>. Passe a URL da ilustração em <code>illustration</code> (no app: <code>import arte from './undraw_….svg'</code>).</P>
+        <P>Layouts <code>default</code>, <code>card</code>, <code>compact</code> e <code>full</code>. Passe um nome do catálogo (ver Illustration) ou uma URL em <code>illustration</code>.</P>
         <Demo id="cn-empty-state-panel/illustrated" />
       </Section>
       <Section title="Props">
@@ -51,8 +51,8 @@ export default function EmptyStatePanelPage() {
             { name: 'action', type: 'ReactNode', description: 'Nó livre abaixo do texto.' },
             { name: 'actionLabel / onAction', type: 'string / () => void', description: 'Botão principal.' },
             { name: 'secondaryActionLabel / onSecondaryAction', type: 'string / () => void', description: 'Botão outline.' },
-            { name: 'illustration', type: 'string', description: 'URL — ativa o layout ilustrado.' },
-            { name: 'module', type: 'EmptyStateModule', description: 'Ícone do módulo — ativa o layout ilustrado.' },
+            { name: 'illustration', type: 'IllustrationName | string | false', description: 'Nome ou URL — ativa o layout ilustrado. Padrão: arte da variante; false = layout simples.' },
+            { name: 'module', type: 'EmptyStateModule', description: 'Arte do módulo — ativa o layout ilustrado.' },
             { name: 'compact', type: 'boolean', description: 'Layout ilustrado compacto.' },
           ]}
         />
@@ -60,8 +60,8 @@ export default function EmptyStatePanelPage() {
         <PropsTable
           rows={[
             { name: 'variant', type: "'default' | 'card' | 'compact' | 'full'", default: "'default'", description: 'Layout.' },
-            { name: 'illustration / illustrationAlt', type: 'string', description: 'Arte e texto alternativo.' },
-            { name: 'module', type: 'EmptyStateModule', default: "'generic'", description: 'Ícone quando não há arte.' },
+            { name: 'illustration / illustrationAlt', type: 'IllustrationName | string | false / string', description: 'Arte (padrão: a do módulo; false = ícone) e texto alternativo.' },
+            { name: 'module', type: 'EmptyStateModule', default: "'generic'", description: 'Arte padrão (e ícone com illustration={false}).' },
             { name: 'children', type: 'ReactNode', description: 'Conteúdo extra.' },
           ]}
         />
@@ -69,8 +69,8 @@ export default function EmptyStatePanelPage() {
       <Section title="Migrando do connect-jc">
         <ul>
           <li><code>&lt;EmptyState&gt;</code> → <code>&lt;EmptyStatePanel&gt;</code> (o <code>EmptyState</code> do pacote é o do Mantine); <code>variant</code>, <code>desc/description</code>, <code>action</code>, <code>module</code> e <code>compact</code> continuam.</li>
-          <li><code>illustration="questions"</code> (nome) → <code>{'illustration={questions}'}</code> com o SVG importado no app.</li>
-          <li><code>&lt;EmptyStateIllustration&gt;</code> mantém as props; <code>illustration</code> agora é URL.</li>
+          <li><code>illustration="questions"</code> continua igual: os nomes do catálogo são os mesmos.</li>
+          <li><code>&lt;EmptyStateIllustration&gt;</code> mantém as props; <code>illustration</code> aceita nome ou URL.</li>
         </ul>
       </Section>
     </DocPage>

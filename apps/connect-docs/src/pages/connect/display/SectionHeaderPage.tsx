@@ -36,7 +36,7 @@ export default function SectionHeaderPage() {
             { name: 'description', type: 'ReactNode', description: 'Descrição.' },
             { name: 'badge', type: 'ReactNode', description: 'Selo ao lado do título.' },
             { name: 'actions', type: 'ReactNode', description: 'Ações.' },
-            { name: 'illustration', type: 'string', description: 'URL da arte.' },
+            { name: 'illustration', type: 'IllustrationName | string', description: 'Nome do catálogo ou URL da arte.' },
             { name: 'compact', type: 'boolean', description: 'Título 17px, arte menor.' },
             { name: 'order', type: '2 | 3 | 4', default: '2', description: 'Nível do título.' },
           ]}
@@ -44,7 +44,7 @@ export default function SectionHeaderPage() {
       </Section>
       <Section title="Migrando do connect-jc">
         <ul>
-          <li>Mesmas props; <code>illustration</code> agora é URL em vez do nome da ilustração.</li>
+          <li>Mesmas props; <code>illustration</code> aceita os mesmos nomes de antes (ou uma URL).</li>
         </ul>
       </Section>
     </DocPage>

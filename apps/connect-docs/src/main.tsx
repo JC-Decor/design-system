@@ -21,7 +21,7 @@ const shikiAdapter = createShikiAdapter(loadShiki);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ConnectProvider>
+    <ConnectProvider theme={{ other: { illustrationBaseUrl: `${import.meta.env.BASE_URL}illustrations/` } }}>
       <CodeHighlightAdapterProvider adapter={shikiAdapter}>
         <Notifications position="top-right" />
         <RouterProvider router={router} />

@@ -33,7 +33,7 @@ export default function MotionWrapperPage() {
         <PropsTable
           rows={[
             { name: 'title / description / actions', type: 'ReactNode', description: 'Cabeçalho.' },
-            { name: 'illustration', type: 'string', description: 'URL da arte.' },
+            { name: 'illustration', type: 'IllustrationName | string', description: 'Nome do catálogo ou URL da arte.' },
             { name: 'delay', type: 'number', description: 'Atraso da entrada.' },
           ]}
         />
@@ -41,7 +41,7 @@ export default function MotionWrapperPage() {
       <Section title="Migrando do connect-jc">
         <ul>
           <li>Mesmas props; não depende mais do pacote <code>motion</code> nem do hook <code>useReducedMotion</code> do app (usa o do <code>@mantine/hooks</code>).</li>
-          <li><code>illustration</code> do AnimatedSection agora é URL.</li>
+          <li><code>illustration</code> do AnimatedSection continua aceitando o nome (ou uma URL).</li>
         </ul>
       </Section>
     </DocPage>

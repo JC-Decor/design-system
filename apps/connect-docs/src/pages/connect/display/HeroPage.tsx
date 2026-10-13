@@ -35,7 +35,7 @@ export default function HeroPage() {
             { name: 'primary', type: 'string', description: 'Cor do botão principal (cor Mantine ou CSS).' },
             { name: 'footMeta', type: 'ReactNode', description: 'Rodapé tracejado.' },
             { name: 'compact', type: 'boolean', description: 'Versão baixa.' },
-            { name: 'illustration / illustrationAlt', type: 'string', description: 'Imagem à direita.' },
+            { name: 'illustration / illustrationAlt', type: 'IllustrationName | string / string', description: 'Imagem à direita: nome do catálogo ou URL.' },
             { name: 'art', type: 'ReactNode', description: 'Arte própria.' },
           ]}
         />
@@ -50,7 +50,7 @@ export default function HeroPage() {
       <Section title="Migrando do connect-jc">
         <ul>
           <li>Mesmas props de texto. Os CTAs ganharam <code>onCtaPrimary</code>/<code>onCtaSecondary</code> (antes não tinham ação).</li>
-          <li><code>illustration</code> agora é URL; <code>slotId</code>/<code>useImage</code> saíram (use <code>art</code>).</li>
+          <li><code>illustration</code> aceita o nome do catálogo (como antes) ou uma URL; <code>slotId</code>/<code>useImage</code> saíram (use <code>art</code>).</li>
           <li>Avatares e etiquetas do HeroArt agora são configuráveis por <code>people</code>/<code>tags</code>.</li>
         </ul>
       </Section>
