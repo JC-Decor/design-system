@@ -1,14 +1,20 @@
-import { EmptyStatePanel, SimpleGrid } from '@jcdecor/connect-ui';
-import type { DemoMeta } from '../../kit/demos';
+import { EmptyStatePanel, SimpleGrid, Stack } from '@jcdecor/connect-ui';
 
 const variants = ['empty', 'no-results', 'error', 'permission', 'building'] as const;
 
 export default function Demo() {
   return (
-    <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }}>
-      {variants.map((variant) => (
-        <EmptyStatePanel key={variant} variant={variant} />
-      ))}
-    </SimpleGrid>
+    <Stack gap="lg">
+      <SimpleGrid type="container" cols={{ base: 1, '640px': 2 }}>
+        {variants.map((variant) => (
+          <EmptyStatePanel key={variant} variant={variant} compact />
+        ))}
+      </SimpleGrid>
+      {/* Layout simples: ícone da variante, sem ilustração */}
+      <SimpleGrid type="container" cols={{ base: 1, '640px': 2 }}>
+        <EmptyStatePanel variant="no-results" illustration={false} />
+        <EmptyStatePanel variant="permission" illustration={false} />
+      </SimpleGrid>
+    </Stack>
   );
 }

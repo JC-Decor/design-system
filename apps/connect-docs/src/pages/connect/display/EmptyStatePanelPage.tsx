@@ -11,7 +11,7 @@ export default function EmptyStatePanelPage() {
       title="EmptyStatePanel"
       source="connect"
       sourcePath="packages/connect-ui/src/components/EmptyStatePanel"
-      description="Estados vazios do Connect: o simples (ícone em bloco lavanda + título + descrição) e o ilustrado, com arte à esquerda e até duas ações. As ilustrações são suas — o pacote não embute arte de terceiros."
+      description="Estados vazios do Connect: o simples (ícone em bloco lavanda + título + descrição) e o ilustrado, com arte à esquerda e até duas ações. Cada variante e módulo já vem com a ilustração do Connect."
       importCode={`import { EmptyStatePanel, EmptyStateIllustration } from '@jcdecor/connect-ui';`}
     >
       <Section title="Playground">
@@ -20,13 +20,14 @@ export default function EmptyStatePanelPage() {
           name="EmptyStatePanel"
           controls={[
             { prop: 'variant', type: 'select', data: ['empty', 'no-results', 'error', 'permission', 'building'], initialValue: 'empty' },
-            { prop: 'icon', type: 'select', data: ['folder', 'search', 'palm', 'megaphone', 'doc', 'users', 'target'], initialValue: 'megaphone' },
+            { prop: 'illustration', type: 'select', data: ['questions', 'news', 'dayOff', 'document', 'meetTeam', 'teamSpirit', 'confirmed'], initialValue: 'news' },
+            { prop: 'compact', type: 'boolean', initialValue: false },
             { prop: 'title', type: 'string', initialValue: 'Nenhum comunicado' },
           ]}
         />
       </Section>
       <Section title="Variantes semânticas">
-        <P><code>variant</code> define o ícone e os textos padrão; <code>title</code> e <code>description</code> sobrescrevem.</P>
+        <P><code>variant</code> define a ilustração e os textos padrão (os mesmos do connect-jc); <code>title</code>, <code>description</code> e <code>illustration</code> sobrescrevem. Com <code>illustration={'{false}'}</code> fica o layout simples, com o ícone da variante em bloco lavanda.</P>
         <Demo id="cn-empty-state-panel/variants" />
       </Section>
       <Section title="Com ação">

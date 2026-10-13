@@ -66,6 +66,7 @@ export function App() {
 | `@jcdecor/connect-ui` | `ConnectProvider`, `connectTheme`, `connectCssVariablesResolver`, todo o `@mantine/core`, componentes Connect, `tones`/`priorities`/`statuses`, formatadores pt-BR (`formatNumber`, `formatPercent`, `formatDate`…) |
 | `@jcdecor/connect-ui/tokens` | Tokens crus em JS (`brand`, `ramps`, `semantic`, `tones`, `typography`, `spacing`, `radius`, `motion`…), sem React/Mantine |
 | `@jcdecor/connect-ui/styles.css` | CSS dos overrides de componentes e utilitários (`.ds-container`, `.ds-grid`, `.cn-density-*`) |
+| `@jcdecor/connect-ui/illustrations/*.svg` | As 23 ilustrações do Connect (unDraw) como arquivos SVG |
 
 ### Cores
 
@@ -98,6 +99,26 @@ O `--muted` original do Connect (`#7A7E92`, 4,0:1 sobre branco) foi escurecido p
 import { connectTheme, connectCssVariablesResolver } from '@jcdecor/connect-ui';
 <MantineProvider theme={connectTheme} cssVariablesResolver={connectCssVariablesResolver}>…</MantineProvider>
 ```
+
+## Ilustrações
+
+As ilustrações do Connect (unDraw — uso livre, inclusive comercial, sem atribuição obrigatória) vêm no pacote e são usadas pelo nome,
+com os mesmos nomes do `ILLUSTRATIONS` do connect-jc:
+
+```tsx
+<Illustration name="dayOff" size="lg" />
+<EmptyStatePanel variant="error" />            {/* arte padrão da variante */}
+<EmptyStatePanel module="documents" title="…" /> {/* arte padrão do módulo */}
+```
+
+Os SVGs não entram no JavaScript: por padrão a URL aponta para o jsDelivr na mesma versão do pacote. Para servir do próprio app,
+copie `node_modules/@jcdecor/connect-ui/illustrations` para a pasta pública e informe a base:
+
+```tsx
+<ConnectProvider theme={{ other: { illustrationBaseUrl: '/illustrations/' } }}>
+```
+
+Fora de componentes: `illustrationUrl('dayOff', baseUrl?)`; lista de nomes em `illustrationNames`.
 
 ## Migrando do connect-jc (`components/ui` + `styles/*.css`)
 
