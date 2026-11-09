@@ -8,13 +8,16 @@
   color: #fff;
 }
 
-/* Guirlanda "pendurada" do tema de Natal: pinheiro + enfeites na borda inferior da barra navy. */
+/* Guirlanda "pendurada" do tema de Natal: pinheiro + enfeites na borda inferior da barra navy.
+   Camada única de background-image: combinar um gradiente com url(svg) na mesma lista faz alguns
+   motores de renderização não pintarem a 2ª camada — por isso a cor vai em background-color. */
 :root:root[data-theme-flavor='christmas'] .header {
   box-shadow: inset 0 -3px 0 var(--dc-electric);
-  background-image: linear-gradient(var(--dc-obsidian), var(--dc-obsidian)), url('/decorations/garland.svg') !important;
-  background-repeat: no-repeat, repeat-x !important;
-  background-position: 0 0, bottom left !important;
-  background-size: auto, 56px 20px !important;
+  background-color: var(--dc-obsidian) !important;
+  background-image: url('/decorations/garland.svg') !important;
+  background-repeat: repeat-x !important;
+  background-position: bottom left !important;
+  background-size: 56px 20px !important;
 }
 .brand {
   display: inline-flex;
