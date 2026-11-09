@@ -1,5 +1,11 @@
 # @jcdecor/ui
 
+## 0.2.0
+
+### Minor Changes
+
+- 527f7a2: Add an opt-in "Christmas" theme flavor: `defaultThemeFlavor="christmas"` on `JcProvider`/`ConnectProvider`, a new `useThemeFlavor()` hook, and a `<ThemeFlavorToggle />` component. Swaps primary/accent/link colors to a festive green/red palette (reusing existing AA-validated ramps) and adds a garland decoration to the top header bar.
+
 ## 0.1.8
 
 ### Cabeçalhos
