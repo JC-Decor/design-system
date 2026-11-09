@@ -87,6 +87,27 @@ export default function Theming() {
         </P>
       </Section>
 
+      <Section title="Tema de Natal">
+        <P>
+          Flavor sazonal opcional: troca <code>--ds-primary</code>/<code>--ds-accent</code>/<code>--ds-link</code> (e o{' '}
+          <code>primaryColor</code> padrão do Mantine) do navy para o verde/coral já validados em AA (<code>ramps.green</code>/
+          <code>ramps.coral</code>), e desenha uma guirlanda na borda inferior da barra superior e do <code>AppHeader</code>. Ative com{' '}
+          <code>{'<ThemeFlavorToggle />'}</code> (mesmo padrão do <code>ThemeToggle</code>) ou com o hook <code>useThemeFlavor()</code>; a
+          escolha fica em <code>localStorage</code>.
+        </P>
+        <CodeBlock
+          code={`import { ConnectProvider, ThemeFlavorToggle, useThemeFlavor } from '@jcdecor/connect-ui';
+
+<ConnectProvider defaultThemeFlavor="christmas">
+  <ThemeFlavorToggle />
+  <App />
+</ConnectProvider>
+
+// em qualquer componente dentro do ConnectProvider:
+const { flavor, setFlavor } = useThemeFlavor();`}
+        />
+      </Section>
+
       <Section title="Usando sem o ConnectProvider">
         <P>Se o projeto já tem um MantineProvider, passe o tema e o resolver diretamente:</P>
         <CodeBlock

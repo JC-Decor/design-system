@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { Link, NavLink as RouterNavLink, Outlet, useLocation, useNavigate, useNavigation } from 'react-router-dom';
-import { ActionIcon, AppShell, Burger, SegmentedControl, Center, Collapse, Group, Loader, NavLink, ScrollArea, TableOfContents, ThemeToggle, Tooltip, Progress, UnstyledButton } from '@jcdecor/ui';
+import { ActionIcon, AppShell, Burger, SegmentedControl, Center, Collapse, Group, Loader, NavLink, ScrollArea, TableOfContents, ThemeFlavorToggle, ThemeToggle, Tooltip, Progress, UnstyledButton } from '@jcdecor/ui';
 import { Spotlight, spotlight, type SpotlightActionGroupData } from '@mantine/spotlight';
 import { useDisclosure, useHotkeys } from '@mantine/hooks';
 import { IconBrandGithub, IconBrandNpm, IconBrandReact, IconBrandVue, IconChevronRight, IconSearch } from '@tabler/icons-react';
@@ -109,6 +109,7 @@ export function DocsShell() {
               <IconBrandGithub size={20} />
             </ActionIcon>
           </Tooltip>
+          <ThemeFlavorToggle className={classes.headerIcon} />
           <ThemeToggle className={classes.headerIcon} />
         </Group>
       </AppShell.Header>

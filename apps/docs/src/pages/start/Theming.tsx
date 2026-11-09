@@ -100,6 +100,47 @@ const theme = {
         </P>
       </Section>
 
+      <Section title="Tema de Natal">
+        <P>
+          Flavor sazonal opcional: troca <code>--ds-primary</code>/<code>--ds-accent</code>/<code>--ds-link</code> (e o{' '}
+          <code>primaryColor</code> padrão do Mantine) do azul da marca para o verde/vermelho já validados em AA (
+          <code>ramps.evergreen</code>/<code>ramps.danger</code>), e desenha uma guirlanda na barra superior do shell de docs. Ative com{' '}
+          <code>{'<ThemeFlavorToggle />'}</code> (mesmo padrão do <code>ThemeToggle</code>) ou com o hook{' '}
+          <code>useThemeFlavor()</code>; a escolha fica em <code>localStorage</code>.
+        </P>
+        <OnlyFor framework="vue">
+          <CodeBlock
+            language="vue"
+            code={`<script setup lang="ts">
+import { ThemeFlavorToggle, useThemeFlavor } from '@jcdecor/vue';
+
+const { flavor, setFlavor } = useThemeFlavor();
+</script>
+
+<template>
+  <ThemeFlavorToggle />
+  <!-- ou, no onboarding de um app: -->
+  <JcProvider default-theme-flavor="christmas">
+    <RouterView />
+  </JcProvider>
+</template>`}
+          />
+        </OnlyFor>
+        <OnlyFor framework="react">
+          <CodeBlock
+            code={`import { JcProvider, ThemeFlavorToggle, useThemeFlavor } from '@jcdecor/ui';
+
+<JcProvider defaultThemeFlavor="christmas">
+  <ThemeFlavorToggle />
+  <App />
+</JcProvider>
+
+// em qualquer componente dentro do JcProvider:
+const { flavor, setFlavor } = useThemeFlavor();`}
+          />
+        </OnlyFor>
+      </Section>
+
       <Section title="Usando sem o JcProvider">
         <P>Se o projeto já tem um MantineProvider, passe o tema e o resolver diretamente:</P>
         <OnlyFor framework="vue">

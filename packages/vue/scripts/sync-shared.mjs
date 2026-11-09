@@ -20,6 +20,7 @@ export const SHARED_FILES = [
   'theme/tokens.ts',
   'utils/format.ts',
   'styles/global.css',
+  'styles/christmas.css',
   'theme/components/buttons.module.css',
   'theme/components/combobox.module.css',
   'theme/components/dataDisplay.module.css',

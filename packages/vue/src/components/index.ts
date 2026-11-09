@@ -6,6 +6,7 @@ export * from './KpiCard';
 export * from './PageHeader';
 export * from './DataTable';
 export * from './ThemeToggle';
+export * from './ThemeFlavorToggle';
 export * from './TokenSwatch';
 export * from './PriceTag';
 export * from './ProductCard';

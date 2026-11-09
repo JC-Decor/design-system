@@ -1,0 +1,60 @@
+/* @generated sincronizado de packages/ui/src/styles/christmas.css — edite lá e rode `npm run sync -w @jcdecor/vue` */
+/**
+ * Tema sazonal "Natal" — ativado via `data-theme-flavor="christmas"` em <html>
+ * (gerenciado por `JcProvider` + `useThemeFlavor()`/`<ThemeFlavorToggle />`).
+ *
+ * Reaproveita rampas já validadas em AA (nenhuma cor nova): verde `ramps.evergreen`
+ * como primária, vermelho `ramps.danger` como destaque, dourado `--dc-electric` já
+ * existente na marca. `:root:root` vence a especificidade das variáveis injetadas
+ * pelo MantineProvider, igual ao truque usado em `global.css`.
+ *
+ * `--mantine-primary-color-*` é reescrita (não só `--ds-primary`) porque é o que os
+ * componentes do Mantine (Button, ActionIcon, Badge…) de fato consomem por padrão
+ * (`primaryColor: 'horizon'` no tema) — sem isso só os poucos lugares que leem
+ * `var(--ds-primary)` diretamente mudariam de cor.
+ */
+:root:root[data-theme-flavor='christmas'] {
+  /* Rampa 0–9 do Mantine: mesma, claro ou escuro (a troca de tom vem de primaryShade). */
+  --mantine-primary-color-0: var(--dc-evergreen-50);
+  --mantine-primary-color-1: var(--dc-evergreen-100);
+  --mantine-primary-color-2: var(--dc-evergreen-200);
+  --mantine-primary-color-3: var(--dc-evergreen-300);
+  --mantine-primary-color-4: var(--dc-evergreen-400);
+  --mantine-primary-color-5: var(--dc-evergreen-500);
+  --mantine-primary-color-6: var(--dc-evergreen-600);
+  --mantine-primary-color-7: var(--dc-evergreen-700);
+  --mantine-primary-color-8: var(--dc-evergreen-800);
+  --mantine-primary-color-9: var(--dc-evergreen-900);
+}
+
+:root:root[data-theme-flavor='christmas'] {
+  --ds-primary: var(--dc-evergreen-600);
+  --ds-primary-hover: var(--dc-evergreen-700);
+  --ds-primary-soft: var(--dc-evergreen-50);
+  --ds-link: var(--dc-evergreen-700);
+  --ds-accent: var(--dc-danger-600);
+
+  --mantine-primary-color-filled: var(--dc-evergreen-600);
+  --mantine-primary-color-filled-hover: var(--dc-evergreen-700);
+  --mantine-primary-color-light: var(--ds-tag-success-bg);
+  --mantine-primary-color-light-hover: var(--ds-tag-success-hover);
+  --mantine-primary-color-light-color: var(--ds-tag-success-color);
+  --mantine-color-anchor: var(--dc-evergreen-700);
+  --mantine-primary-color-contrast: #ffffff;
+}
+
+:root:root[data-theme-flavor='christmas'][data-mantine-color-scheme='dark'] {
+  --ds-primary: var(--dc-evergreen-300);
+  --ds-primary-hover: var(--dc-evergreen-200);
+  --ds-primary-soft: rgba(97, 184, 117, 0.16);
+  --ds-link: var(--dc-evergreen-300);
+  --ds-accent: var(--dc-danger-300);
+
+  --mantine-primary-color-filled: var(--dc-evergreen-400);
+  --mantine-primary-color-filled-hover: var(--dc-evergreen-300);
+  --mantine-primary-color-light: var(--ds-tag-success-bg);
+  --mantine-primary-color-light-hover: var(--ds-tag-success-hover);
+  --mantine-primary-color-light-color: var(--ds-tag-success-color);
+  --mantine-color-anchor: var(--dc-evergreen-300);
+  --mantine-primary-color-contrast: var(--dc-obsidian);
+}

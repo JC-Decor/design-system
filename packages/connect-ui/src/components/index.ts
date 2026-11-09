@@ -1,5 +1,6 @@
 export * from './Typography';
 export * from './ThemeToggle';
+export * from './ThemeFlavorToggle';
 export * from './TokenSwatch';
 export * from './Icon';
 export * from './display';

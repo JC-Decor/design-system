@@ -1,4 +1,6 @@
 /* @generated sincronizado de packages/ui/src/styles/global.css — edite lá e rode `npm run sync -w @jcdecor/vue` */
+@import './christmas.css';
+
 /* Base global do DS JC Decor (equivalente ao bloco "Base" do ds.css). */
 body {
   -webkit-font-smoothing: antialiased;

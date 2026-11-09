@@ -1,3 +1,5 @@
+@import './christmas.css';
+
 /* Base global do DS Connect JC (equivalente ao bloco base do globals.css do Connect). */
 body {
   -webkit-font-smoothing: antialiased;

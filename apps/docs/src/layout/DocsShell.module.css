@@ -7,6 +7,15 @@
   padding-inline: var(--sp-16) var(--sp-16);
   color: #fff;
 }
+
+/* Guirlanda "pendurada" do tema de Natal: pinheiro + enfeites na borda inferior da barra navy. */
+:root:root[data-theme-flavor='christmas'] .header {
+  box-shadow: inset 0 -3px 0 var(--dc-electric);
+  background-image: linear-gradient(var(--dc-obsidian), var(--dc-obsidian)), url('/decorations/garland.svg') !important;
+  background-repeat: no-repeat, repeat-x !important;
+  background-position: 0 0, bottom left !important;
+  background-size: auto, 56px 20px !important;
+}
 .brand {
   display: inline-flex;
   align-items: center;
