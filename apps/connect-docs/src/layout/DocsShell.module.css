@@ -21,12 +21,12 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -14px;
-  height: 20px;
+  bottom: -18px;
+  height: 24px;
   background-image: url('/decorations/garland.svg') !important;
   background-repeat: repeat-x !important;
   background-position: top left !important;
-  background-size: 56px 20px !important;
+  background-size: 48px 24px !important;
   pointer-events: none;
   z-index: 5;
 }
