@@ -80,7 +80,7 @@ export function DocsShell() {
         <Link to="/" className={classes.brand}>
           <JcLogo variant="dark" size={30} />
           <span className={classes.dsLabel}>Design System</span>
-          <span className={classes.version}>v0.1</span>
+          <span className={classes.version}>v2.1</span>
         </Link>
         <button type="button" className={classes.search} onClick={() => spotlight.open()}>
           <IconSearch size={16} />

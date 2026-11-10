@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Box, ConnectShell, GlobalSearchBox, HeaderAction, Paper, Text, type Perspective } from '@jcdecor/connect-ui';
 import type { DemoMeta } from '../../kit/demos';
 
-export const meta: DemoMeta = { withoutPadding: true, background: 'page' };
+export const meta: DemoMeta = { withoutPadding: true, background: 'page', overflowVisible: true };
 
 const perspective: Perspective = {
   key: 'gestor',

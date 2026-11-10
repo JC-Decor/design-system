@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { TopNav, ThemeToggle, Avatar } from '@jcdecor/ui';
 import type { DemoMeta } from '../../kit/demos';
 
-export const meta: DemoMeta = { withoutPadding: true };
+export const meta: DemoMeta = { withoutPadding: true, overflowVisible: true };
 
 const pages = ['Painéis', 'Pedidos', 'Design System'];
 

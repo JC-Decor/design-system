@@ -15,6 +15,8 @@ export interface DemoMeta {
   /** Fundo da prévia: superfície (padrão) ou fundo da página */
   background?: 'surface' | 'page';
   maxWidth?: number;
+  /** Permite que a prévia estoure a caixa (ex.: a guirlanda do tema de Natal pendurada abaixo do header) */
+  overflowVisible?: boolean;
 }
 
 export interface DemoEntry {

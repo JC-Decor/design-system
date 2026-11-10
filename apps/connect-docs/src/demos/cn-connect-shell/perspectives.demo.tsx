@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { ConnectShell, Paper, PerspectiveSwitcherContext, Text, type Perspective } from '@jcdecor/connect-ui';
 import type { DemoMeta } from '../../kit/demos';
 
-export const meta: DemoMeta = { withoutPadding: true };
+export const meta: DemoMeta = { withoutPadding: true, overflowVisible: true };
 
 const perspectives: Record<string, Perspective> = {
   rh: {

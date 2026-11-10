@@ -78,7 +78,7 @@ export function DocsShell() {
           <span className={classes.logo} aria-hidden>CJ</span>
           <span>Connect JC</span>
           <span className={classes.dsLabel}>Design System</span>
-          <span className={classes.version}>v0.1</span>
+          <span className={classes.version}>v2.1</span>
         </Link>
         <button type="button" className={classes.search} onClick={() => spotlight.open()}>
           <IconSearch size={16} />

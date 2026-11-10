@@ -57,7 +57,7 @@ export function Demo({ id, title, description, defaultView = 'preview' }: DemoPr
           )}
         </Box>
       )}
-      <Paper withBorder radius="md" className={classes.demo}>
+      <Paper withBorder radius="md" className={classes.demo} data-overflow-visible={meta.overflowVisible || undefined}>
         <Box
           className={classes.preview}
           data-centered={meta.centered || undefined}

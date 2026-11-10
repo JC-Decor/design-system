@@ -14,7 +14,7 @@ import {
 } from '@jcdecor/connect-ui';
 import type { DemoMeta } from '../../kit/demos';
 
-export const meta: DemoMeta = { withoutPadding: true };
+export const meta: DemoMeta = { withoutPadding: true, overflowVisible: true };
 
 const perspective: Perspective = {
   key: 'rh',

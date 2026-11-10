@@ -1,7 +1,7 @@
 import { Group, HeaderAction, Popover, Stack, Text, ThemeToggle } from '@jcdecor/connect-ui';
 import type { DemoMeta } from '../../kit/demos';
 
-export const meta: DemoMeta = { centered: true };
+export const meta: DemoMeta = { centered: true, overflowVisible: true };
 
 const notificacoes = [
   { id: 1, titulo: 'Bruno Lima pediu 10 dias de férias', quando: 'há 5 min' },

@@ -1,11 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="48" height="24" viewBox="0 0 48 24">
-  <!-- Guirlanda de pinheiro "pendurada" na barra do topo: faixa preenchida e contínua (tileable a cada 48px),
-       em vez de um traço fino, para não deixar vãos brancos entre as repetições. -->
-  <path d="M0 2 L48 2 L48 5 C40 5 40 14 24 14 C8 14 8 5 0 5 Z" fill="#1E8540" />
-  <path d="M0 2 L48 2 L48 4 C40 4 40 7 24 7 C8 7 8 4 0 4 Z" fill="#2EA352" opacity="0.55" />
-  <circle cx="10" cy="6" r="1" fill="#F7D759" />
-  <circle cx="38" cy="6" r="1" fill="#F7D759" />
-  <line x1="24" y1="14" x2="24" y2="18" stroke="#F7D759" stroke-width="1" />
-  <circle cx="24" cy="20.5" r="2.8" fill="#D92D20" stroke="#8D0300" stroke-width="0.5" />
-  <circle cx="23" cy="19.3" r="0.6" fill="#FFF4F2" opacity="0.8" />
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="48" viewBox="0 0 96 48">
+  <!-- Guirlanda de pinheiro "pendurada": faixa preenchida e contínua (tileable a cada 96px), com a
+       linha dourada do "fio" já embutida no topo do tile (evita depender de box-shadow/border no
+       contêiner, que cortava a decoração em caixas com overflow:hidden). -->
+  <rect x="0" y="0" width="96" height="3" fill="#D49C0B" />
+  <path d="M0 3 L96 3 L96 10 C80 10 80 28 48 28 C16 28 16 10 0 10 Z" fill="#216A3E" />
+  <path d="M0 3 L96 3 L96 8 C80 8 80 14 48 14 C16 14 16 8 0 8 Z" fill="#2E8A52" opacity="0.55" />
+  <circle cx="20" cy="12" r="2" fill="#D49C0B" />
+  <circle cx="76" cy="12" r="2" fill="#D49C0B" />
+  <line x1="48" y1="28" x2="48" y2="36" stroke="#D49C0B" stroke-width="2" />
+  <circle cx="48" cy="41" r="5.6" fill="#C03B2A" stroke="#8A2A1E" stroke-width="1" />
+  <circle cx="46" cy="38.6" r="1.2" fill="#FFF4F2" opacity="0.8" />
 </svg>

@@ -2,7 +2,7 @@ import { TopNav, Tag, Button } from '@jcdecor/ui';
 import { IconLayoutDashboard } from '@tabler/icons-react';
 import type { DemoMeta } from '../../kit/demos';
 
-export const meta: DemoMeta = { withoutPadding: true };
+export const meta: DemoMeta = { withoutPadding: true, overflowVisible: true };
 
 export default function Demo() {
   return (

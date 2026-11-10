@@ -1,7 +1,7 @@
 import { AppHeader, Stack } from '@jcdecor/connect-ui';
 import type { DemoMeta } from '../../kit/demos';
 
-export const meta: DemoMeta = { withoutPadding: true, background: 'page' };
+export const meta: DemoMeta = { withoutPadding: true, background: 'page', overflowVisible: true };
 
 export default function Demo() {
   return (

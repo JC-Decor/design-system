@@ -27,6 +27,11 @@
   overflow: hidden;
   background: var(--ds-surface);
 }
+/* Prévias que precisam deixar algo estourar a caixa (ex.: a guirlanda do tema de Natal pendurada
+   abaixo do header) pedem overflowVisible no DemoMeta em vez de recortar. */
+.demo[data-overflow-visible] {
+  overflow: visible;
+}
 .preview {
   display: flex;
   flex-wrap: wrap;
