@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="48" height="24" viewBox="0 0 48 24" xmlns="http://www.w3.org/2000/svg">
+<!-- Independencia: miniatura da bandeira (losango verde + diamante amarelo + globo azul com o
+     arco do "Ordem e Progresso" e estrelas) repetida, ligada por uma faixa dourada. Tileable a cada 48px. -->
+<rect x="0" y="10" width="48" height="2.4" fill="#D5A700" />
+<g>
+<path d="M12 4.5 L19.5 12 L12 19.5 L4.5 12 Z" fill="#1E8540" stroke="#D5A700" stroke-width="0.3" />
+<path d="M12 7.2 L16.3 12 L12 16.8 L7.7 12 Z" fill="#D5A700" />
+<circle cx="12" cy="12" r="2.6" fill="#2663EB" />
+<path d="M9.8 12 A2.2 2.2 0 0 1 14.2 12" fill="none" stroke="#FFFFFF" stroke-width="0.35" />
+<circle cx="11" cy="10.7" r="0.25" fill="#FFFFFF" />
+<circle cx="13" cy="11.1" r="0.25" fill="#FFFFFF" />
+<circle cx="12" cy="13.3" r="0.25" fill="#FFFFFF" />
+</g>
+<g transform="translate(24 0)">
+<path d="M12 4.5 L19.5 12 L12 19.5 L4.5 12 Z" fill="#1E8540" stroke="#D5A700" stroke-width="0.3" />
+<path d="M12 7.2 L16.3 12 L12 16.8 L7.7 12 Z" fill="#D5A700" />
+<circle cx="12" cy="12" r="2.6" fill="#2663EB" />
+<path d="M9.8 12 A2.2 2.2 0 0 1 14.2 12" fill="none" stroke="#FFFFFF" stroke-width="0.35" />
+<circle cx="11" cy="10.7" r="0.25" fill="#FFFFFF" />
+<circle cx="13" cy="11.1" r="0.25" fill="#FFFFFF" />
+<circle cx="12" cy="13.3" r="0.25" fill="#FFFFFF" />
+</g>
+</svg>

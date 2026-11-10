@@ -1,0 +1,50 @@
+/**
+ * Tema sazonal "Independência do Brasil" — ativado via `data-theme-flavor="independencia"`
+ * em <html> (gerenciado por `ConnectProvider` + `useThemeFlavor()`/`<ThemeFlavorToggle />`,
+ * ver `theme/holidays.ts`). Reaproveita rampas já validadas em AA: verde `ramps.green` como
+ * primária, amarelo `ramps.yellow` como destaque — a dupla verde/amarelo da bandeira.
+ */
+:root:root[data-theme-flavor='independencia'] {
+  --mantine-primary-color-0: var(--cn-green-50);
+  --mantine-primary-color-1: var(--cn-green-100);
+  --mantine-primary-color-2: var(--cn-green-200);
+  --mantine-primary-color-3: var(--cn-green-300);
+  --mantine-primary-color-4: var(--cn-green-400);
+  --mantine-primary-color-5: var(--cn-green-500);
+  --mantine-primary-color-6: var(--cn-green-600);
+  --mantine-primary-color-7: var(--cn-green-700);
+  --mantine-primary-color-8: var(--cn-green-800);
+  --mantine-primary-color-9: var(--cn-green-900);
+}
+
+:root:root[data-theme-flavor='independencia'] {
+  --ds-primary: var(--cn-green-600);
+  --ds-primary-hover: var(--cn-green-700);
+  --ds-primary-soft: var(--cn-green-50);
+  --ds-link: var(--cn-green-700);
+  --ds-accent: var(--cn-yellow-400);
+
+  --mantine-primary-color-filled: var(--cn-green-600);
+  --mantine-primary-color-filled-hover: var(--cn-green-700);
+  --mantine-primary-color-light: var(--ds-tag-success-bg);
+  --mantine-primary-color-light-hover: var(--ds-tag-success-hover);
+  --mantine-primary-color-light-color: var(--ds-tag-success-color);
+  --mantine-color-anchor: var(--cn-green-700);
+  --mantine-primary-color-contrast: #ffffff;
+}
+
+:root:root[data-theme-flavor='independencia'][data-mantine-color-scheme='dark'] {
+  --ds-primary: var(--cn-green-300);
+  --ds-primary-hover: var(--cn-green-200);
+  --ds-primary-soft: rgba(52, 211, 153, 0.16);
+  --ds-link: var(--cn-green-300);
+  --ds-accent: var(--cn-yellow-200);
+
+  --mantine-primary-color-filled: var(--cn-green-300);
+  --mantine-primary-color-filled-hover: var(--cn-green-200);
+  --mantine-primary-color-light: var(--ds-tag-success-bg);
+  --mantine-primary-color-light-hover: var(--ds-tag-success-hover);
+  --mantine-primary-color-light-color: var(--ds-tag-success-color);
+  --mantine-color-anchor: var(--cn-green-300);
+  --mantine-primary-color-contrast: var(--cn-navy-700);
+}

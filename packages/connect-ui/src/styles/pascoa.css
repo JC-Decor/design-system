@@ -1,0 +1,19 @@
+/**
+ * Tema sazonal "Páscoa" — ativado via `data-theme-flavor="pascoa"` em <html> (gerenciado por
+ * `ConnectProvider` + `useThemeFlavor()`/`<ThemeFlavorToggle />`, ver `theme/holidays.ts`).
+ *
+ * Diferente dos demais flavors, não troca a cor primária (navy do Connect permanece): a
+ * identidade de Páscoa é a faixa de ovos pastel no header + um destaque suavizado —
+ * reaproveita `ramps.green` (tom claro) só para o accent/link.
+ */
+:root:root[data-theme-flavor='pascoa'] {
+  --ds-accent: var(--cn-green-300);
+  --ds-link: var(--cn-green-700);
+  --mantine-color-anchor: var(--cn-green-700);
+}
+
+:root:root[data-theme-flavor='pascoa'][data-mantine-color-scheme='dark'] {
+  --ds-accent: var(--cn-green-200);
+  --ds-link: var(--cn-green-300);
+  --mantine-color-anchor: var(--cn-green-300);
+}

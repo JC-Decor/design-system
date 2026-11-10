@@ -100,13 +100,33 @@ const theme = {
         </P>
       </Section>
 
-      <Section title="Tema de Natal">
+      <Section title="Temas festivos">
         <P>
-          Flavor sazonal opcional: troca <code>--ds-primary</code>/<code>--ds-accent</code>/<code>--ds-link</code> (e o{' '}
-          <code>primaryColor</code> padrão do Mantine) do azul da marca para o verde/vermelho já validados em AA (
-          <code>ramps.evergreen</code>/<code>ramps.danger</code>), e desenha uma guirlanda na barra superior do shell de docs. Ative com{' '}
-          <code>{'<ThemeFlavorToggle />'}</code> (mesmo padrão do <code>ThemeToggle</code>) ou com o hook{' '}
-          <code>useThemeFlavor()</code>; a escolha fica em <code>localStorage</code>.
+          O DS reconhece automaticamente as principais datas comemorativas brasileiras (ver <code>theme/holidays.ts</code>) — no máximo uma fica
+          "na janela" por vez. Quando uma janela está ativa, o flavor correspondente troca <code>--ds-primary</code>/<code>--ds-accent</code>/
+          <code>--ds-link</code> (e o <code>primaryColor</code> padrão do Mantine) reaproveitando rampas já validadas em AA, e desenha uma faixa
+          decorativa na barra superior do shell de docs. Não há um seletor manual entre feriados: <code>{'<ThemeFlavorToggle />'}</code> só
+          liga/desliga o flavor da janela atual, e só aparece enquanto ela estiver ativa.
+        </P>
+        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14, marginBottom: 16 }}>
+          <thead>
+            <tr style={{ textAlign: 'left' }}>
+              <th style={{ padding: '6px 12px 6px 0' }}>Feriado</th>
+              <th style={{ padding: '6px 12px' }}>Flavor</th>
+              <th style={{ padding: '6px 12px' }}>Janela</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style={{ padding: '6px 12px 6px 0' }}>Carnaval</td><td style={{ padding: '6px 12px' }}><code>carnaval</code></td><td style={{ padding: '6px 12px' }}>Sexta-feira antes da Quarta-feira de Cinzas até ela (móvel, derivado da Páscoa)</td></tr>
+            <tr><td style={{ padding: '6px 12px 6px 0' }}>Páscoa</td><td style={{ padding: '6px 12px' }}><code>pascoa</code></td><td style={{ padding: '6px 12px' }}>Domingo de Ramos até o Domingo de Páscoa (móvel)</td></tr>
+            <tr><td style={{ padding: '6px 12px 6px 0' }}>Festa Junina</td><td style={{ padding: '6px 12px' }}><code>festaJunina</code></td><td style={{ padding: '6px 12px' }}>1–30 de junho</td></tr>
+            <tr><td style={{ padding: '6px 12px 6px 0' }}>Independência do Brasil</td><td style={{ padding: '6px 12px' }}><code>independencia</code></td><td style={{ padding: '6px 12px' }}>1–7 de setembro</td></tr>
+            <tr><td style={{ padding: '6px 12px 6px 0' }}>Natal</td><td style={{ padding: '6px 12px' }}><code>christmas</code></td><td style={{ padding: '6px 12px' }}>1–25 de dezembro</td></tr>
+          </tbody>
+        </table>
+        <P>
+          Para pré-visualizar um flavor fora da janela real (demos, screenshots, testes), force-o com <code>forceThemeFlavor</code> — ele
+          ignora a data atual e a preferência salva, e some o <code>{'<ThemeFlavorToggle />'}</code> nesse modo (não há o que ligar/desligar).
         </P>
         <OnlyFor framework="vue">
           <CodeBlock
@@ -114,13 +134,13 @@ const theme = {
             code={`<script setup lang="ts">
 import { ThemeFlavorToggle, useThemeFlavor } from '@jcdecor/vue';
 
-const { flavor, setFlavor } = useThemeFlavor();
+const { flavor, activeHoliday, festiveEnabled, setFestiveEnabled } = useThemeFlavor();
 </script>
 
 <template>
   <ThemeFlavorToggle />
-  <!-- ou, no onboarding de um app: -->
-  <JcProvider default-theme-flavor="christmas">
+  <!-- pré-visualizar Carnaval fora da janela real, ex.: nos docs -->
+  <JcProvider force-theme-flavor="carnaval">
     <RouterView />
   </JcProvider>
 </template>`}
@@ -130,13 +150,18 @@ const { flavor, setFlavor } = useThemeFlavor();
           <CodeBlock
             code={`import { JcProvider, ThemeFlavorToggle, useThemeFlavor } from '@jcdecor/ui';
 
-<JcProvider defaultThemeFlavor="christmas">
+<JcProvider>
   <ThemeFlavorToggle />
   <App />
 </JcProvider>
 
+// pré-visualizar Carnaval fora da janela real, ex.: nos docs:
+<JcProvider forceThemeFlavor="carnaval">
+  <App />
+</JcProvider>
+
 // em qualquer componente dentro do JcProvider:
-const { flavor, setFlavor } = useThemeFlavor();`}
+const { flavor, activeHoliday, festiveEnabled, setFestiveEnabled } = useThemeFlavor();`}
           />
         </OnlyFor>
       </Section>

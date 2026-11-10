@@ -1,0 +1,51 @@
+/**
+ * Tema sazonal "Festa Junina" — ativado via `data-theme-flavor="festaJunina"` em <html>
+ * (gerenciado por `ConnectProvider` + `useThemeFlavor()`/`<ThemeFlavorToggle />`, ver
+ * `theme/holidays.ts`). Reaproveita rampas já validadas em AA: amarelo `ramps.yellow`
+ * (tom 700, mais escuro, para manter contraste com texto branco) como primária, vermelho
+ * `ramps.coral` (bandeirinhas) como destaque.
+ */
+:root:root[data-theme-flavor='festaJunina'] {
+  --mantine-primary-color-0: var(--cn-yellow-50);
+  --mantine-primary-color-1: var(--cn-yellow-100);
+  --mantine-primary-color-2: var(--cn-yellow-200);
+  --mantine-primary-color-3: var(--cn-yellow-300);
+  --mantine-primary-color-4: var(--cn-yellow-400);
+  --mantine-primary-color-5: var(--cn-yellow-500);
+  --mantine-primary-color-6: var(--cn-yellow-600);
+  --mantine-primary-color-7: var(--cn-yellow-700);
+  --mantine-primary-color-8: var(--cn-yellow-800);
+  --mantine-primary-color-9: var(--cn-yellow-900);
+}
+
+:root:root[data-theme-flavor='festaJunina'] {
+  --ds-primary: var(--cn-yellow-700);
+  --ds-primary-hover: var(--cn-yellow-800);
+  --ds-primary-soft: var(--cn-yellow-50);
+  --ds-link: var(--cn-yellow-800);
+  --ds-accent: var(--cn-coral-600);
+
+  --mantine-primary-color-filled: var(--cn-yellow-700);
+  --mantine-primary-color-filled-hover: var(--cn-yellow-800);
+  --mantine-primary-color-light: var(--ds-tag-warn-bg);
+  --mantine-primary-color-light-hover: var(--ds-tag-warn-hover);
+  --mantine-primary-color-light-color: var(--ds-tag-warn-color);
+  --mantine-color-anchor: var(--cn-yellow-800);
+  --mantine-primary-color-contrast: #ffffff;
+}
+
+:root:root[data-theme-flavor='festaJunina'][data-mantine-color-scheme='dark'] {
+  --ds-primary: var(--cn-yellow-300);
+  --ds-primary-hover: var(--cn-yellow-200);
+  --ds-primary-soft: rgba(212, 156, 11, 0.16);
+  --ds-link: var(--cn-yellow-300);
+  --ds-accent: var(--cn-coral-300);
+
+  --mantine-primary-color-filled: var(--cn-yellow-400);
+  --mantine-primary-color-filled-hover: var(--cn-yellow-300);
+  --mantine-primary-color-light: var(--ds-tag-warn-bg);
+  --mantine-primary-color-light-hover: var(--ds-tag-warn-hover);
+  --mantine-primary-color-light-color: var(--ds-tag-warn-color);
+  --mantine-color-anchor: var(--cn-yellow-300);
+  --mantine-primary-color-contrast: var(--cn-navy-700);
+}

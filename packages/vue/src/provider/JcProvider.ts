@@ -9,17 +9,17 @@ import {
 import { deepMerge } from '@mantine-vue/utils';
 import { jcCssVariablesResolver } from '../theme/cssVariablesResolver';
 import { jcTheme } from '../theme/theme';
+import { getActiveHolidayFlavor, type HolidayFlavor, type ThemeFlavor } from '../theme/holidays';
+
+export type { HolidayFlavor, ThemeFlavor } from '../theme/holidays';
 
 /** Mesma chave do `localStorageColorSchemeManager` do Mantine React: o tema escolhido vale nas duas libs. */
 export const COLOR_SCHEME_STORAGE_KEY = 'mantine-color-scheme-value';
-
-export type ThemeFlavor = 'default' | 'christmas';
 
 /** Mesma chave usada pelo `JcProvider` do React (`@jcdecor/ui`). */
 export const THEME_FLAVOR_STORAGE_KEY = 'jc-theme-flavor';
 
 const isScheme = (value: unknown): value is MantineColorScheme => value === 'light' || value === 'dark' || value === 'auto';
-const isFlavor = (value: unknown): value is ThemeFlavor => value === 'default' || value === 'christmas';
 
 function readStoredScheme(key: string): MantineColorScheme | undefined {
   try {
@@ -30,10 +30,13 @@ function readStoredScheme(key: string): MantineColorScheme | undefined {
   }
 }
 
-function readStoredFlavor(key: string, fallback: ThemeFlavor): ThemeFlavor {
+function readStoredFestiveEnabled(fallback: boolean): boolean {
   try {
-    const value = typeof window !== 'undefined' ? window.localStorage.getItem(key) : null;
-    return isFlavor(value) ? value : fallback;
+    const value = typeof window !== 'undefined' ? window.localStorage.getItem(THEME_FLAVOR_STORAGE_KEY) : null;
+    if (value === 'true' || value === 'false') return value === 'true';
+    // Compatibilidade com o formato anterior ('default' | 'christmas'): qualquer feriado salvo vale "ligado".
+    if (value) return value !== 'default';
+    return fallback;
   } catch {
     return fallback;
   }
@@ -81,8 +84,11 @@ export interface JcProviderProps {
   cssVariablesResolver?: CSSVariablesResolver;
   /** Chave do localStorage onde o tema claro/escuro é lembrado; `false` desliga @default 'mantine-color-scheme-value' */
   colorSchemeStorageKey?: string | false;
-  /** Tema sazonal inicial (persistido em localStorage a partir da primeira troca) @default 'default' */
-  defaultThemeFlavor?: ThemeFlavor;
+  /**
+   * Força um flavor específico, ignorando a data atual e a preferência salva. Útil para
+   * pré-visualizar/testar um feriado fora da janela real (ex.: nos docs).
+   */
+  forceThemeFlavor?: ThemeFlavor;
 }
 
 /**
@@ -107,14 +113,16 @@ export const JcProvider = defineComponent({
     forceColorScheme: { type: String as PropType<'light' | 'dark'>, default: undefined },
     cssVariablesResolver: { type: Function as PropType<CSSVariablesResolver>, default: undefined },
     colorSchemeStorageKey: { type: [String, Boolean] as PropType<string | false>, default: COLOR_SCHEME_STORAGE_KEY },
-    defaultThemeFlavor: { type: String as PropType<ThemeFlavor>, default: 'default' },
+    forceThemeFlavor: { type: String as PropType<ThemeFlavor>, default: undefined },
   },
   setup(props, { attrs, slots }) {
     const theme = computed(() => (props.theme ? deepMerge(jcTheme, props.theme) : jcTheme));
     // Lido uma vez: o MantineProvider só usa o esquema inicial na montagem.
     const stored = props.colorSchemeStorageKey ? readStoredScheme(props.colorSchemeStorageKey) : undefined;
-    const flavor = ref<ThemeFlavor>(readStoredFlavor(THEME_FLAVOR_STORAGE_KEY, props.defaultThemeFlavor));
-    provideThemeFlavor(flavor);
+    const activeHoliday = getActiveHolidayFlavor(new Date());
+    const festiveEnabled = ref<boolean>(readStoredFestiveEnabled(true));
+    const flavor = computed<ThemeFlavor>(() => props.forceThemeFlavor ?? (festiveEnabled.value && activeHoliday ? activeHoliday : 'default'));
+    provideThemeFlavor(flavor, activeHoliday, festiveEnabled);
 
     return () =>
       h(
@@ -137,24 +145,29 @@ export const JcProvider = defineComponent({
 
 interface ThemeFlavorApi {
   flavor: Ref<ThemeFlavor>;
-  setFlavor: (next: ThemeFlavor) => void;
+  activeHoliday: HolidayFlavor | null;
+  festiveEnabled: Ref<boolean>;
+  setFestiveEnabled: (enabled: boolean) => void;
 }
 
 const ThemeFlavorKey: InjectionKey<ThemeFlavorApi> = Symbol('jc-theme-flavor');
 
-function provideThemeFlavor(flavor: Ref<ThemeFlavor>) {
-  const setFlavor = (next: ThemeFlavor) => {
-    flavor.value = next;
+function provideThemeFlavor(flavor: Ref<ThemeFlavor>, activeHoliday: HolidayFlavor | null, festiveEnabled: Ref<boolean>) {
+  const setFestiveEnabled = (next: boolean) => {
+    festiveEnabled.value = next;
     try {
-      window.localStorage.setItem(THEME_FLAVOR_STORAGE_KEY, next);
+      window.localStorage.setItem(THEME_FLAVOR_STORAGE_KEY, String(next));
     } catch {
       // sem localStorage: vale só nesta aba
     }
   };
-  provide(ThemeFlavorKey, { flavor, setFlavor });
+  provide(ThemeFlavorKey, { flavor, activeHoliday, festiveEnabled, setFestiveEnabled });
 }
 
-/** Lê/alterna o tema sazonal ativo (hoje: `'default' | 'christmas'`). Ver `<ThemeFlavorToggle />`. */
+/**
+ * Tema sazonal ativo: no máximo um feriado "na janela" por vez (`activeHoliday`, ver
+ * `theme/holidays.ts`), ligado/desligado pelo usuário via `festiveEnabled`/`<ThemeFlavorToggle />`.
+ */
 export function useThemeFlavor(): ThemeFlavorApi {
   const api = inject(ThemeFlavorKey);
   if (!api) throw new Error('useThemeFlavor() precisa ser usado dentro de <JcProvider>');

@@ -1,0 +1,52 @@
+/* @generated sincronizado de packages/ui/src/styles/carnaval.css — edite lá e rode `npm run sync -w @jcdecor/vue` */
+/**
+ * Tema sazonal "Carnaval" — ativado via `data-theme-flavor="carnaval"` em <html>
+ * (gerenciado por `JcProvider` + `useThemeFlavor()`/`<ThemeFlavorToggle />`, ver `theme/holidays.ts`).
+ *
+ * Reaproveita rampas já validadas em AA (nenhuma cor nova): vermelho `ramps.danger` como
+ * primária, dourado `ramps.electric` como destaque — mesma lógica de `christmas.css`.
+ */
+:root:root[data-theme-flavor='carnaval'] {
+  --mantine-primary-color-0: var(--dc-danger-50);
+  --mantine-primary-color-1: var(--dc-danger-100);
+  --mantine-primary-color-2: var(--dc-danger-200);
+  --mantine-primary-color-3: var(--dc-danger-300);
+  --mantine-primary-color-4: var(--dc-danger-400);
+  --mantine-primary-color-5: var(--dc-danger-500);
+  --mantine-primary-color-6: var(--dc-danger-600);
+  --mantine-primary-color-7: var(--dc-danger-700);
+  --mantine-primary-color-8: var(--dc-danger-800);
+  --mantine-primary-color-9: var(--dc-danger-900);
+}
+
+:root:root[data-theme-flavor='carnaval'] {
+  --ds-primary: var(--dc-danger-600);
+  --ds-primary-hover: var(--dc-danger-700);
+  --ds-primary-soft: var(--dc-danger-50);
+  --ds-link: var(--dc-danger-700);
+  --ds-accent: var(--dc-electric-400);
+
+  --mantine-primary-color-filled: var(--dc-danger-600);
+  --mantine-primary-color-filled-hover: var(--dc-danger-700);
+  --mantine-primary-color-light: var(--ds-tag-error-bg);
+  --mantine-primary-color-light-hover: var(--ds-tag-error-hover);
+  --mantine-primary-color-light-color: var(--ds-tag-error-color);
+  --mantine-color-anchor: var(--dc-danger-700);
+  --mantine-primary-color-contrast: #ffffff;
+}
+
+:root:root[data-theme-flavor='carnaval'][data-mantine-color-scheme='dark'] {
+  --ds-primary: var(--dc-danger-300);
+  --ds-primary-hover: var(--dc-danger-200);
+  --ds-primary-soft: rgba(255, 108, 90, 0.16);
+  --ds-link: var(--dc-danger-300);
+  --ds-accent: var(--dc-electric-200);
+
+  --mantine-primary-color-filled: var(--dc-danger-400);
+  --mantine-primary-color-filled-hover: var(--dc-danger-300);
+  --mantine-primary-color-light: var(--ds-tag-error-bg);
+  --mantine-primary-color-light-hover: var(--ds-tag-error-hover);
+  --mantine-primary-color-light-color: var(--ds-tag-error-color);
+  --mantine-color-anchor: var(--dc-danger-300);
+  --mantine-primary-color-contrast: var(--dc-obsidian);
+}

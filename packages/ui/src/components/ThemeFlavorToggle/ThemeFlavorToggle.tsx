@@ -1,6 +1,26 @@
 import { ActionIcon, Button, type ActionIconProps } from '@mantine/core';
-import { IconGift, IconSnowflake } from '@tabler/icons-react';
+import {
+  IconCampfireFilled,
+  IconConfettiFilled,
+  IconEgg,
+  IconEggFilled,
+  IconFlag2,
+  IconFlag2Filled,
+  IconFlame,
+  IconGift,
+  IconMask,
+  IconSnowflake,
+} from '@tabler/icons-react';
 import { useThemeFlavor } from '../../provider/JcProvider';
+import { HOLIDAY_LABELS, type HolidayFlavor } from '../../theme/holidays';
+
+const HOLIDAY_ICONS: Record<HolidayFlavor, { off: typeof IconGift; on: typeof IconGift }> = {
+  christmas: { off: IconGift, on: IconSnowflake },
+  carnaval: { off: IconMask, on: IconConfettiFilled },
+  pascoa: { off: IconEgg, on: IconEggFilled },
+  festaJunina: { off: IconFlame, on: IconCampfireFilled },
+  independencia: { off: IconFlag2, on: IconFlag2Filled },
+};
 
 export interface ThemeFlavorToggleProps extends Omit<ActionIconProps, 'children'> {
   /** `icon` = ActionIcon · `button` = botão (como no DS) @default 'icon' */
@@ -8,12 +28,18 @@ export interface ThemeFlavorToggleProps extends Omit<ActionIconProps, 'children'
   label?: string;
 }
 
-/** Alterna o tema sazonal "Natal" (persistido pelo `JcProvider` em localStorage). */
-export function ThemeFlavorToggle({ as = 'icon', label = 'Tema de Natal', variant, color, size, ...others }: ThemeFlavorToggleProps) {
-  const { flavor, setFlavor } = useThemeFlavor();
-  const isChristmas = flavor === 'christmas';
-  const toggle = () => setFlavor(isChristmas ? 'default' : 'christmas');
-  const Icon = isChristmas ? IconSnowflake : IconGift;
+/**
+ * Liga/desliga o tema festivo do feriado atual (ver `theme/holidays.ts`), persistido pelo
+ * `JcProvider` em localStorage. Só renderiza algo enquanto houver um feriado "na janela"
+ * (`activeHoliday`) — fora de temporada não há o que ligar/desligar.
+ */
+export function ThemeFlavorToggle({ as = 'icon', label, variant, color, size, ...others }: ThemeFlavorToggleProps) {
+  const { activeHoliday, festiveEnabled, setFestiveEnabled } = useThemeFlavor();
+  if (!activeHoliday) return null;
+
+  const toggle = () => setFestiveEnabled(!festiveEnabled);
+  const Icon = festiveEnabled ? HOLIDAY_ICONS[activeHoliday].on : HOLIDAY_ICONS[activeHoliday].off;
+  const resolvedLabel = label ?? `Tema de ${HOLIDAY_LABELS[activeHoliday]}`;
 
   if (as === 'button') {
     return (
@@ -25,7 +51,7 @@ export function ThemeFlavorToggle({ as = 'icon', label = 'Tema de Natal', varian
         onClick={toggle}
         {...(others as Record<string, unknown>)}
       >
-        {label}
+        {resolvedLabel}
       </Button>
     );
   }
@@ -36,9 +62,9 @@ export function ThemeFlavorToggle({ as = 'icon', label = 'Tema de Natal', varian
       color={color}
       size={size ?? 'lg'}
       onClick={toggle}
-      aria-label={label}
-      title={label}
-      aria-pressed={isChristmas}
+      aria-label={resolvedLabel}
+      title={resolvedLabel}
+      aria-pressed={festiveEnabled}
       {...others}
     >
       <Icon size={18} />

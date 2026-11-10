@@ -1,4 +1,8 @@
 /* @generated sincronizado de packages/ui/src/styles/global.css — edite lá e rode `npm run sync -w @jcdecor/vue` */
+@import './carnaval.css';
+@import './pascoa.css';
+@import './festaJunina.css';
+@import './independencia.css';
 @import './christmas.css';
 
 /* Base global do DS JC Decor (equivalente ao bloco "Base" do ds.css). */

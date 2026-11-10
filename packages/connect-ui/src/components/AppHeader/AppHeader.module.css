@@ -22,6 +22,62 @@
    dourada do "fio" já vem embutida no topo do tile SVG, então não precisa de border aqui. Onde isso
    estoura um contêiner com overflow:hidden (ex.: a prévia do ConnectShell nos docs), resolvemos lá
    (overflowVisible no DemoMeta), não engordando o componente real. */
+:root:root[data-theme-flavor='carnaval'] .root::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -36px;
+  height: 48px;
+  background-image: url('../../assets/decorations/carnaval.svg?no-inline');
+  background-repeat: repeat-x;
+  background-position: top left;
+  background-size: 96px 48px;
+  pointer-events: none;
+  z-index: 5;
+}
+:root:root[data-theme-flavor='pascoa'] .root::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -36px;
+  height: 48px;
+  background-image: url('../../assets/decorations/pascoa.svg?no-inline');
+  background-repeat: repeat-x;
+  background-position: top left;
+  background-size: 96px 48px;
+  pointer-events: none;
+  z-index: 5;
+}
+:root:root[data-theme-flavor='festaJunina'] .root::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -36px;
+  height: 48px;
+  background-image: url('../../assets/decorations/festaJunina.svg?no-inline');
+  background-repeat: repeat-x;
+  background-position: top left;
+  background-size: 96px 48px;
+  pointer-events: none;
+  z-index: 5;
+}
+:root:root[data-theme-flavor='independencia'] .root::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -36px;
+  height: 48px;
+  background-image: url('../../assets/decorations/independencia.svg?no-inline');
+  background-repeat: repeat-x;
+  background-position: top left;
+  background-size: 96px 48px;
+  pointer-events: none;
+  z-index: 5;
+}
 :root:root[data-theme-flavor='christmas'] .root::after {
   content: '';
   position: absolute;
@@ -29,7 +85,7 @@
   right: 0;
   bottom: -36px;
   height: 48px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='48' viewBox='0 0 96 48'%3E%3Crect x='0' y='0' width='96' height='3' fill='%23D49C0B'/%3E%3Cpath d='M0 3 L96 3 L96 10 C80 10 80 28 48 28 C16 28 16 10 0 10 Z' fill='%23216A3E'/%3E%3Cpath d='M0 3 L96 3 L96 8 C80 8 80 14 48 14 C16 14 16 8 0 8 Z' fill='%232E8A52' opacity='0.55'/%3E%3Ccircle cx='20' cy='12' r='2' fill='%23D49C0B'/%3E%3Ccircle cx='76' cy='12' r='2' fill='%23D49C0B'/%3E%3Cline x1='48' y1='28' x2='48' y2='36' stroke='%23D49C0B' stroke-width='2'/%3E%3Ccircle cx='48' cy='41' r='5.6' fill='%23C03B2A' stroke='%238A2A1E' stroke-width='1'/%3E%3Ccircle cx='46' cy='38.6' r='1.2' fill='%23FFF4F2' opacity='0.8'/%3E%3C/svg%3E");
+  background-image: url('../../assets/decorations/garland.svg?no-inline');
   background-repeat: repeat-x;
   background-position: top left;
   background-size: 96px 48px;

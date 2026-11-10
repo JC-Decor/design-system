@@ -16,8 +16,68 @@
    opaco (links, right) que cobririam o padrão e o deixariam "quebrado"; o ::after pinta por cima,
    contínuo. Onde isso estoura um contêiner com overflow:hidden (ex.: a prévia do ConnectShell nos
    docs), resolvemos lá (overflowVisible no DemoMeta), não engordando o componente real. */
+:root:root[data-theme-flavor='carnaval'] .root,
+:root:root[data-theme-flavor='pascoa'] .root,
+:root:root[data-theme-flavor='festaJunina'] .root,
+:root:root[data-theme-flavor='independencia'] .root,
 :root:root[data-theme-flavor='christmas'] .root {
   position: relative;
+}
+:root:root[data-theme-flavor='carnaval'] .root::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -36px;
+  height: 48px;
+  background-image: url('../../assets/decorations/carnaval.svg?no-inline');
+  background-repeat: repeat-x;
+  background-position: top left;
+  background-size: 96px 48px;
+  pointer-events: none;
+  z-index: 5;
+}
+:root:root[data-theme-flavor='pascoa'] .root::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -36px;
+  height: 48px;
+  background-image: url('../../assets/decorations/pascoa.svg?no-inline');
+  background-repeat: repeat-x;
+  background-position: top left;
+  background-size: 96px 48px;
+  pointer-events: none;
+  z-index: 5;
+}
+:root:root[data-theme-flavor='festaJunina'] .root::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -36px;
+  height: 48px;
+  background-image: url('../../assets/decorations/festaJunina.svg?no-inline');
+  background-repeat: repeat-x;
+  background-position: top left;
+  background-size: 96px 48px;
+  pointer-events: none;
+  z-index: 5;
+}
+:root:root[data-theme-flavor='independencia'] .root::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -36px;
+  height: 48px;
+  background-image: url('../../assets/decorations/independencia.svg?no-inline');
+  background-repeat: repeat-x;
+  background-position: top left;
+  background-size: 96px 48px;
+  pointer-events: none;
+  z-index: 5;
 }
 :root:root[data-theme-flavor='christmas'] .root::after {
   content: '';

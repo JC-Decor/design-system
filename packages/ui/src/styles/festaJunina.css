@@ -1,0 +1,52 @@
+/**
+ * Tema sazonal "Festa Junina" — ativado via `data-theme-flavor="festaJunina"` em <html>
+ * (gerenciado por `JcProvider` + `useThemeFlavor()`/`<ThemeFlavorToggle />`, ver `theme/holidays.ts`).
+ *
+ * Reaproveita rampas já validadas em AA: dourado `ramps.electric` (tom 700, mais escuro,
+ * para manter contraste 4,5:1 com texto branco em cima dele) como primária, vermelho
+ * `ramps.danger` (bandeirinhas) como destaque.
+ */
+:root:root[data-theme-flavor='festaJunina'] {
+  --mantine-primary-color-0: var(--dc-electric-50);
+  --mantine-primary-color-1: var(--dc-electric-100);
+  --mantine-primary-color-2: var(--dc-electric-200);
+  --mantine-primary-color-3: var(--dc-electric-300);
+  --mantine-primary-color-4: var(--dc-electric-400);
+  --mantine-primary-color-5: var(--dc-electric-500);
+  --mantine-primary-color-6: var(--dc-electric-600);
+  --mantine-primary-color-7: var(--dc-electric-700);
+  --mantine-primary-color-8: var(--dc-electric-800);
+  --mantine-primary-color-9: var(--dc-electric-900);
+}
+
+:root:root[data-theme-flavor='festaJunina'] {
+  --ds-primary: var(--dc-electric-700);
+  --ds-primary-hover: var(--dc-electric-800);
+  --ds-primary-soft: var(--dc-electric-50);
+  --ds-link: var(--dc-electric-800);
+  --ds-accent: var(--dc-danger-600);
+
+  --mantine-primary-color-filled: var(--dc-electric-700);
+  --mantine-primary-color-filled-hover: var(--dc-electric-800);
+  --mantine-primary-color-light: var(--ds-tag-warn-bg);
+  --mantine-primary-color-light-hover: var(--ds-tag-warn-hover);
+  --mantine-primary-color-light-color: var(--ds-tag-warn-color);
+  --mantine-color-anchor: var(--dc-electric-800);
+  --mantine-primary-color-contrast: #ffffff;
+}
+
+:root:root[data-theme-flavor='festaJunina'][data-mantine-color-scheme='dark'] {
+  --ds-primary: var(--dc-electric-300);
+  --ds-primary-hover: var(--dc-electric-200);
+  --ds-primary-soft: rgba(247, 215, 89, 0.16);
+  --ds-link: var(--dc-electric-300);
+  --ds-accent: var(--dc-danger-300);
+
+  --mantine-primary-color-filled: var(--dc-electric-400);
+  --mantine-primary-color-filled-hover: var(--dc-electric-300);
+  --mantine-primary-color-light: var(--ds-tag-warn-bg);
+  --mantine-primary-color-light-hover: var(--ds-tag-warn-hover);
+  --mantine-primary-color-light-color: var(--ds-tag-warn-color);
+  --mantine-color-anchor: var(--dc-electric-300);
+  --mantine-primary-color-contrast: var(--dc-obsidian);
+}

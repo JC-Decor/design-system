@@ -1,0 +1,19 @@
+/**
+ * Tema sazonal "Páscoa" — ativado via `data-theme-flavor="pascoa"` em <html> (gerenciado por
+ * `JcProvider` + `useThemeFlavor()`/`<ThemeFlavorToggle />`, ver `theme/holidays.ts`).
+ *
+ * Diferente dos demais flavors, não troca a cor primária (azul da marca permanece): a
+ * identidade de Páscoa é a faixa de ovos pastel no header + um destaque suavizado, não uma
+ * paleta de botões nova — reaproveita `ramps.evergreen` (tom claro) só para o accent/link.
+ */
+:root:root[data-theme-flavor='pascoa'] {
+  --ds-accent: var(--dc-evergreen-300);
+  --ds-link: var(--dc-evergreen-700);
+  --mantine-color-anchor: var(--dc-evergreen-700);
+}
+
+:root:root[data-theme-flavor='pascoa'][data-mantine-color-scheme='dark'] {
+  --ds-accent: var(--dc-evergreen-200);
+  --ds-link: var(--dc-evergreen-300);
+  --mantine-color-anchor: var(--dc-evergreen-300);
+}

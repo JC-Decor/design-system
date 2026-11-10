@@ -1,3 +1,7 @@
+@import './carnaval.css';
+@import './pascoa.css';
+@import './festaJunina.css';
+@import './independencia.css';
 @import './christmas.css';
 
 /* Base global do DS Connect JC (equivalente ao bloco base do globals.css do Connect). */
