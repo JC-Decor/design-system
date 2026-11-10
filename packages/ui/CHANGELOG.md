@@ -1,5 +1,11 @@
 # @jcdecor/ui
 
+## 0.2.3
+
+### Patch Changes
+
+- Fix the Christmas garland artwork being inlined as a ~180KB base64 data URI directly into `styles.css` (Vite always inlines CSS-referenced assets in library builds, regardless of `assetsInlineLimit`). It's now emitted as its own `garland.svg` file in `dist/`, referenced by a relative URL, so the main stylesheet stays its normal small size for every consumer regardless of whether the Christmas flavor is ever used.
+
 ## 0.2.2
 
 ### Patch Changes

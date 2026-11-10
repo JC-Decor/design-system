@@ -11,6 +11,12 @@ const external = [
 
 export default defineConfig({
   plugins: [react()],
+  experimental: {
+    // Assets referenciados em CSS (ex.: dist/garland.svg) precisam resolver relativo ao próprio
+    // styles.css dentro de node_modules — o caminho relativo padrão do Vite para lib assume uma
+    // subpasta que não existe aqui (styles.css e o asset ficam lado a lado na raiz do dist).
+    renderBuiltUrl: (filename) => `./${filename}`,
+  },
   css: {
     modules: {
       // Classes estáveis e legíveis: jc-KpiCard-value-x1y2
