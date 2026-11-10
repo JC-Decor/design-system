@@ -9,15 +9,26 @@
 }
 
 /* Guirlanda "pendurada" do tema de Natal: pinheiro + enfeites na borda inferior da barra navy.
-   Camada única de background-image: combinar um gradiente com url(svg) na mesma lista faz alguns
-   motores de renderização não pintarem a 2ª camada — por isso a cor vai em background-color. */
+   Vai num ::after absoluto (não no background do .header) porque o header tem filhos com fundo
+   opaco (search, version, ícones) que cobririam o padrão e o deixariam "quebrado"; o ::after pinta
+   por cima, contínuo, e pode pendurar abaixo da borda do header. .header já é posicionado (fixed)
+   pelo Mantine, então o ::after absoluto ancora nele sem precisar mexer em position. */
 :root:root[data-theme-flavor='christmas'] .header {
   box-shadow: inset 0 -3px 0 var(--cn-yellow-400);
-  background-color: var(--cn-navy) !important;
+}
+:root:root[data-theme-flavor='christmas'] .header::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -14px;
+  height: 20px;
   background-image: url('/decorations/garland.svg') !important;
   background-repeat: repeat-x !important;
-  background-position: bottom left !important;
+  background-position: top left !important;
   background-size: 56px 20px !important;
+  pointer-events: none;
+  z-index: 5;
 }
 .brand {
   display: inline-flex;
