@@ -39,6 +39,7 @@ export const SHARED_FILES = [
   'components/TokenSwatch/TokenSwatch.module.css',
   'components/PageHeader/PageHeader.module.css',
   'components/TopNav/TopNav.module.css',
+  'assets/decorations/garland.svg',
   'brand/paths.ts',
   'brand/Brand.module.css',
   'chat/Chat.module.css',
@@ -50,6 +51,8 @@ const notice = (file) => `sincronizado de packages/ui/src/${file} — edite lá 
 
 export function expected(file) {
   const source = readFileSync(resolve(uiSrc, file), 'utf8');
+  // SVG fica sem cabeçalho: "//" não é um comentário XML válido e quebraria o arquivo.
+  if (file.endsWith('.svg')) return source;
   const header = file.endsWith('.css') ? `/* @generated ${notice(file)} */\n` : `// @generated ${notice(file)}\n`;
   return header + source;
 }

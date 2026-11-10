@@ -1,5 +1,11 @@
 # @jcdecor/ui
 
+## 0.2.2
+
+### Patch Changes
+
+- Fix the Christmas theme's header garland getting broken up behind opaque header children (search box, version badge, icon buttons): it now paints as an absolutely-positioned overlay on top of the header instead of the header's own background-image. Redesigned the artwork as a continuous filled swag band (was a sparse stroked curve with gaps between tiles) and doubled its size with the gold "string" baked into the SVG. Headers previewed inside an `overflow: hidden` container (full-shell docs demos) no longer clip it.
+
 ## 0.2.1
 
 ### Patch Changes

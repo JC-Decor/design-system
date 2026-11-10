@@ -10,13 +10,12 @@
   box-sizing: border-box;
 }
 
-/* Guirlanda "pendurada" do tema de Natal: pinheiro + enfeites, pendurada por baixo da borda do
-   .root (não reserva espaço dentro da própria caixa — isso deixava a barra gigante). Vai num ::after
-   (não no background do .root) porque o .root tem filhos com fundo opaco (links, right) que
-   cobririam o padrão e o deixariam "quebrado"; o ::after pinta por cima, contínuo. A linha dourada do
-   "fio" já vem embutida no topo do tile SVG, então não precisa de box-shadow/border aqui. Onde isso
-   estoura um contêiner com overflow:hidden (ex.: a prévia do ConnectShell nos docs), resolvemos lá
-   (overflowVisible no DemoMeta), não engordando o componente real. */
+/* Guirlanda "pendurada" do tema de Natal: arte real (packages/ui/src/assets/decorations/garland.svg),
+   pendurada por baixo da borda do .root (não reserva espaço dentro da própria caixa — isso deixava a
+   barra gigante). Vai num ::after (não no background do .root) porque o .root tem filhos com fundo
+   opaco (links, right) que cobririam o padrão e o deixariam "quebrado"; o ::after pinta por cima,
+   contínuo. Onde isso estoura um contêiner com overflow:hidden (ex.: a prévia do ConnectShell nos
+   docs), resolvemos lá (overflowVisible no DemoMeta), não engordando o componente real. */
 :root:root[data-theme-flavor='christmas'] .root {
   position: relative;
 }
@@ -27,7 +26,7 @@
   right: 0;
   bottom: -36px;
   height: 48px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='48' viewBox='0 0 96 48'%3E%3Crect x='0' y='0' width='96' height='3' fill='%23F7D759'/%3E%3Cpath d='M0 3 L96 3 L96 10 C80 10 80 28 48 28 C16 28 16 10 0 10 Z' fill='%231E8540'/%3E%3Cpath d='M0 3 L96 3 L96 8 C80 8 80 14 48 14 C16 14 16 8 0 8 Z' fill='%232EA352' opacity='0.55'/%3E%3Ccircle cx='20' cy='12' r='2' fill='%23F7D759'/%3E%3Ccircle cx='76' cy='12' r='2' fill='%23F7D759'/%3E%3Cline x1='48' y1='28' x2='48' y2='36' stroke='%23F7D759' stroke-width='2'/%3E%3Ccircle cx='48' cy='41' r='5.6' fill='%23D92D20' stroke='%238D0300' stroke-width='1'/%3E%3Ccircle cx='46' cy='38.6' r='1.2' fill='%23FFF4F2' opacity='0.8'/%3E%3C/svg%3E");
+  background-image: url('../../assets/decorations/garland.svg');
   background-repeat: repeat-x;
   background-position: top left;
   background-size: 96px 48px;
